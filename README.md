@@ -8,7 +8,7 @@ Ansible Roles and Libraries
 
 2. Edit your ~/.ansible.cfg
 
-    - add `x-ansible/library` to your library path
+    - add `x-ansible` to your library path
     - set `x-ansible/roles` to your roles path
 
   eg
