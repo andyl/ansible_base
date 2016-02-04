@@ -1,0 +1,4 @@
+---
+collectd_cfgs: []
+influxdb_hostname: sigs
+collectd_version: 5.5.0

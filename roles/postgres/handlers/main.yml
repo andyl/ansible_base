@@ -1,0 +1,8 @@
+---
+- name: apt-cache update
+  apt:  update_cache=yes 
+  become: true
+
+- name: restart postgres
+  service: name=postgresql state=restarted
+  become: true

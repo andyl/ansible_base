@@ -1,0 +1,9 @@
+---
+
+# redis
+
+- name: install packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - redis-server

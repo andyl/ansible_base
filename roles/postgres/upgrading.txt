@@ -1,0 +1,10 @@
+
+How to Upgrade a Major Version - TLDR
+
+- sudo pg_dropcluster 9.4 main --stop
+- sudo pg_upgradecluster 9.3 main
+- sudo pg_dropcluster 9.3 main
+
+https://gist.github.com/dideler/60c9ce184198666e5ab4
+http://manpages.ubuntu.com/manpages/jaunty/man8/pg_upgradecluster.8.html
+

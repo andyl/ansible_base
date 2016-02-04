@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+abort "Usage: dotenv <argfile>" if (file = ARGV[0]).nil?
+
+file = ARGV[0]
+
+dotfile = if File.exist?(file)
+            File.read(file).split('=').last.gsub('"','').gsub(' ','')
+          else
+            abort("Needs dotfile (absolute path)")
+          end
+
+File.open("/tmp/dotenv.log", 'w') { |f| f.puts "DOTENV #{file.inspect}"}
+
+abort("Dotfile not found (#{dotfile})") unless File.exist?(dotfile)
+
+require 'json'
+
+env = {}
+
+File.readlines(dotfile).each do |line|
+  next unless line.include?("=")
+  key, val = line.split('=')
+  env[key.strip] = val.chomp.strip
+end
+
+puts JSON.dump({"ansible_facts" => env})
+

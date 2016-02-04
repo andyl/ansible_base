@@ -1,0 +1,16 @@
+---
+
+# virtual_box
+# see https://www.virtualbox.org/wiki/Linux_Downloads
+
+- name: add apt key
+  become: true
+  apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc state=present
+
+- name: add repository
+  become: true
+  apt_repository: repo='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib' state=present
+
+- name: install package
+  become: true
+  apt: pkg=virtualbox-5.0 state=latest

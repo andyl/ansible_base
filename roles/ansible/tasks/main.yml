@@ -1,0 +1,24 @@
+---
+
+# ansible install - see:
+# http://docs.ansible.com/intro_installation.html
+
+- name: install python dependencies
+  become: yes
+  pip: name={{item}}
+  with_items:
+    - paramiko
+    - PyYAML
+    - jinja2
+    - httplib2
+
+- name: add ansible PPA
+  apt_repository: repo='ppa:ansible/ansible' state=present
+
+- name: install ansible package
+  apt: 
+    pkg:   "ansible={{ansible_vsn}}*"
+    state: "present"
+
+# Notes:
+# 03-Dec-15 - Sadly, the ansible PPA only contains the latest releases of ansible, not old versions

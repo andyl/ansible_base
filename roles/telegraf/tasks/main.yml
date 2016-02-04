@@ -1,0 +1,26 @@
+---
+
+# telegraf
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get deb file
+  become: no
+  get_url:
+    url:  http://get.influxdb.org/telegraf/telegraf_{{telegraf_version}}_amd64.deb
+    dest: /home/{{rem_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
+    force: no
+
+- name: install package
+  apt: deb=/home/{{rem_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
+
+- name: install config
+  become: true
+  template: 
+    src:   telegraf.conf
+    dest:  /etc/telegraf/telegraf.conf 
+    owner: root 
+    group: root
+  notify: restart telegraf
+

@@ -1,0 +1,70 @@
+---
+
+# emacs
+# http://www.tuxarena.com/2014/10/emacs-24-4-ships-integrated-web-browser-ubuntu-installation/
+
+- name: remove Ubuntu emacs packages
+  become: yes
+  apt: pkg={{item}} state=absent 
+  with_items:
+    - emacs
+    - emacs24
+
+- name: remove emacs binary
+  become: yes
+  file: 
+    path: /usr/bin/emacs
+    state: absent
+
+- name: install build dependencies
+  apt: pkg=emacs24 state=build-dep
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url:  http://ftp.gnu.org/gnu/emacs/emacs-{{emacs_version}}.tar.gz
+    dest: /home/{{rem_user}}/.pkg/emacs-{{emacs_version}}.tar.gz
+    force: no
+
+- name: unzip package
+  become: no
+  shell: tar -xf emacs-{{emacs_version}}.tar.gz
+  args: 
+    chdir: /home/{{rem_user}}/.pkg 
+    creates: /home/{{rem_user}}/.pkg/emacs-{{emacs_version}}
+
+# installs to /usr/local/bin/emacs...
+- name: compile/install package
+  become: yes
+  shell: ./configure --with-jpeg=no && make && make install
+  args: 
+    chdir:   /home/{{rem_user}}/.pkg/emacs-{{emacs_version}}
+    creates: /home/{{rem_user}}/.pkg/emacs-{{emacs_version}}/src/emacs
+
+- name: remove old emacs config files
+  become: yes
+  file:
+    path: /home/{{rem_user}}/{{item}}
+    state: absent
+    force: yes
+  with_items:
+    - .emacs
+    - .spacemacs.d
+
+- name: setup spacemacs
+  git:
+    repo: https://github.com/syl20bnr/spacemacs
+    dest: /home/{{rem_user}}/.emacs.d
+    force: yes
+    update: yes
+
+- name: set config file ownership
+  file:
+    path: /home/{{rem_user}}/.emacs.d
+    owner: "{{rem_user}}"
+    group: "{{rem_user}}"
+    state: directory
+    recurse: yes

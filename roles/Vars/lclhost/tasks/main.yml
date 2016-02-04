@@ -1,0 +1,13 @@
+---
+ 
+# vars_lclhost
+
+- name: get local hostname
+  local_action: command hostname
+  register: hostname
+  changed_when: false
+
+- name: set lcl_hostname variable
+  set_fact: lcl_hostname="{{hostname.stdout}}"
+  changed_when: false
+

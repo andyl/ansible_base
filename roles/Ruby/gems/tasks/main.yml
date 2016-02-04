@@ -1,0 +1,25 @@
+---
+
+# ruby_gems
+
+- name: install base gems
+  become: no
+  chruby-gem: "{{item}}"
+  with_items:
+    - bundler
+    - ru
+    - pry
+    - hirb
+    - colored
+    - net-ssh
+    - net-sftp
+    - net-ping
+    - radix62
+    - octokit
+    - highline
+    - tmuxinator
+    - influxdb-cli
+    - faraday
+    - multipart-post
+    - ruby-wmctrl
+

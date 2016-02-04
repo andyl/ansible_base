@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd
+
+echo "`whoami`"
+echo "`pwd`"
+echo "`hostname`"
+echo "`ls`"
+
+echo "Running Init"
+util/base_util/init

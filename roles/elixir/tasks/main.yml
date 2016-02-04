@@ -1,0 +1,35 @@
+---
+
+# elixir
+# packages at https://github.com/elixir-lang/elixir/releases
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url:  https://github.com/elixir-lang/elixir/releases/download/v{{elixir_version}}/Precompiled.zip
+    dest: /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}.zip
+    force: no
+
+- name: unzip package
+  become: no
+  shell: unzip -d elixir-{{elixir_version}} elixir-{{elixir_version}}.zip 
+  args: 
+    chdir: /home/{{rem_user}}/.pkg 
+    creates: /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}
+
+- name: installation symlinks
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}/bin/{{item}} 
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - elixir
+    - elixirc
+    - iex
+    - mix
+        

@@ -1,0 +1,5 @@
+---
+telegraf_cfgs: []
+influxdb_hostname: sigs
+# telegraf_version: 0.2.4 2016-02-04
+telegraf_version: 0.10.1-1

@@ -1,0 +1,25 @@
+---
+
+# dnsmasq
+# see http://www.thekelleys.org.uk/dnsmasq/doc.html
+
+- name: install dnsmasq
+  become: true
+  apt:  pkg=dnsmasq state=present
+
+- name: install /etc/dnsmasq.conf   
+  become: true
+  template:
+    src: etc/dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+  notify: restart dnsmasq
+
+- name: install home-dir files
+  template:
+    src:  {{item}}
+    dest: /home/{{rem_user}}/{{item}}
+  notify: restart dnsmasq
+  with_items:
+    - dnsmasq.conf
+    - blocklist.conf
+

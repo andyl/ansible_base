@@ -1,0 +1,20 @@
+---
+
+# cli_util
+
+- name: set hostname
+  become: yes
+  hostname: name={{ansible_hostname}}
+
+- name: create a util directory
+  command: /bin/mkdir /home/{{rem_user}}/g creates=/home/{{rem_user}}/g
+
+- name: install base_util for target user
+  synchronize: src=/home/{{lcl_user}}/g/base_util dest=/home/{{rem_user}}/g
+  changed_when: false
+  when: lcl_hostname != ansible_hostname 
+ 
+- name: run init script 
+  become: false
+  shell: /home/{{rem_user}}/g/base_util/init creates=/home/{{rem_user}}/.hushlogin
+

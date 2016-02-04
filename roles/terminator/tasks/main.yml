@@ -1,0 +1,47 @@
+---
+
+# terminator
+#
+# Dec 03, 2015 - new terminator release - 0.98
+# - looks like the PPA is maintained again
+# - revert to PPA install method
+#
+# May 01, 2014 - more PPA troubles - solution: 
+# - capture the .deb file in the ansible repo
+# - download the .deb file at install time into ~/.pkg
+# - install from ~/.pkg
+# - add a version number
+#
+# Apr 29, 2014 - the PPA key is not working
+# see http://gnometerminator.blogspot.com/p/introduction.html
+#
+
+- name: add terminator PPA
+  apt_repository: repo='ppa:gnome-terminator'
+
+- name: install terminator
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - terminator
+
+#- name: cleanup invalid ppa
+#  become:  true
+#  shell: rm -f /etc/apt/sources.list.d/ppa_gnome_terminator*
+#
+#- name: create pkg dir
+#  file: 
+#    path: /home/{{rem_user}}/.pkg 
+#    state: directory 
+#    group: "{{rem_user}}"
+#    owner: "{{rem_user}}"
+#
+#- name: get deb file
+#  become: no
+#  copy:
+#    src:  terminator_0.97_all.deb
+#    dest: /home/{{rem_user}}/.pkg/terminator_0.97_all.deb
+#
+#- name: install terminator package
+#  apt: deb=/home/{{rem_user}}/.pkg/terminator_0.97_all.deb
+

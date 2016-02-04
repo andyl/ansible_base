@@ -1,0 +1,21 @@
+---
+
+# cli_pdev
+
+- name: create a util directory
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: install pdev_util for target user
+  synchronize: src=/home/{{lcl_user}}/g/pdev_util dest=/home/{{rem_user}}/g
+  changed_when: false 
+  when: lcl_hostname != ansible_hostname
+
+- name: run util init script
+  become: false
+  shell: /home/{{rem_user}}/g/base_util/init creates=/home/{{rem_user}}/.gitconfig
+  when: lcl_hostname != ansible_hostname
+
+# - name: github add_key
+#   become: false
+#   shell: bash -l -c add_key chdir=/home/{{rem_user}}
+#   changed_when: false

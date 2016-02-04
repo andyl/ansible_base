@@ -1,0 +1,30 @@
+---
+
+# chruby
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url:  https://github.com/postmodern/chruby/archive/v{{chruby_version}}.tar.gz
+    dest: /home/{{rem_user}}/.pkg/chruby-{{chruby_version}}.tar.gz
+    force: no
+
+- name: untar package
+  become: no
+  shell: tar -xzf /home/{{rem_user}}/.pkg/chruby-{{chruby_version}}.tar.gz chdir=/home/{{rem_user}}/.pkg creates=/home/{{rem_user}}/.pkg/chruby-{{chruby_version}}
+
+- name: get current version
+  shell:    chruby-exec --version
+  register: chruby_current_version
+  ignore_errors: true
+  no_log:        true
+  changed_when:  false
+
+- name: install
+  become: yes
+  command: make install chdir=/home/{{rem_user}}/.pkg/chruby-{{chruby_version}} 
+  when:    chruby_current_version.rc != 0 or chruby_current_version.stdout.split()[2] != chruby_version
+ 

@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby 
+
+abort "Usage: dotpwd <argfile>" if (file = ARGV[0]).nil?
+
+argfile = File.expand_path(ARGV[0])
+dotfile = File.expand_path(File.readlines(argfile)[0].chomp.strip.split('=').last).gsub('"','').gsub(' ','')
+dotfile = "/home/aleak/.ansible/playbooks/.pwd"
+
+puts "ARGFILE IS #{argfile}"
+puts "DOTFILE IS #{dotfile}"
+
+abort("Argfile not found (#{argfile})") unless File.exist?(argfile)
+abort("Dotfile not found (#{dotfile})") unless File.exist?(dotfile)
+
+require 'json'
+
+env = {}
+
+File.readlines(dotfile).each do |line|
+  next unless line.include?("=")
+  key, val = line.split('=')
+  env[key.strip] = val.chomp.strip
+end
+
+puts JSON.dump({"ansible_facts" => env})
+

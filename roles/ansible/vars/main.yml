@@ -1,0 +1,13 @@
+---
+# list of versions at https://github.com/ansible/ansible/releases
+# warning: don't use a version like '1.7.0' with a zero in minor release
+# ansible reports version as '1.7' instead of '1.7.0' which breaks the
+# install process (ironically)
+# ansible_vsn: 1.6.10
+# ansible_vsn: 1.7.1
+# ansible_vsn: 1.8.4
+# ansible_vsn: 1.9.1     Aug 29, 2015
+# ansible_vsn: 1.9.2     Sep 08, 2015
+# ansible_vsn: 1.9.3     Dec 03, 2015
+ansible_vsn: 1.9.4   
+

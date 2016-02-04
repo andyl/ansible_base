@@ -1,0 +1,17 @@
+---
+
+# ntpd
+
+- name: install support packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - ntp            # Main ntpd server
+  
+- name: install ntpd conf file
+  become: true
+  copy: 
+    src: ntp.conf
+    dest: /etc/ntp.conf
+    mode: "a+rx"
+

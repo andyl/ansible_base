@@ -1,0 +1,13 @@
+---
+
+# tmux
+
+- name: add PPA
+  become: true
+  apt_repository: repo=ppa:pi-rho/dev 
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - tmux

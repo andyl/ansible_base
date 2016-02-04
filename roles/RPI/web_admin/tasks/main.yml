@@ -1,0 +1,123 @@
+---
+
+# web_admin
+
+- name: show the git branch
+  debug: msg="GIT BRANCH IS {{git_branch}}"
+    
+- name: install support software
+  become: true
+  apt:  pkg={{item}} state=present install_recommends=no
+  with_items:
+    - ruby              # interpreter for ruby language
+    - ruby-dev
+    - bundler
+    - ruby-sinatra
+    - thin
+    - ruby-ffi
+    - ruby-rb-inotify
+
+- name: setup gemrc 
+  become: true
+  template:
+    src: gemrc
+    dest: /root/.gemrc
+
+- name: install ruby gems
+  become: true
+  gem: name={{item}} state=latest
+  with_items:
+    - rerun
+    - celluloid
+    - listen
+    - timers
+    # - hitimer      didn't install on RPi
+    # - rb-inotif    didn't install on RPi
+    - ffi
+    - thin 
+    - sinatra
+
+- name: create data directories
+  file:
+    path:  "/home/{{deploy_user}}/{{item}}"
+    state: directory
+  with_items:
+    - pids/web_admin
+    - pids/web_chat
+    - logs/web_admin
+    - logs/web_chat
+    
+- name: check for previous service installation
+  stat: path=/home/{{deploy_user}}/apps/web_admin
+  register: web_admin
+
+- name: stop the service
+  become: true
+  command: bin/stop
+  args:
+    chdir:   /home/{{deploy_user}}/apps/web_admin
+    removes: /home/{{deploy_user}}/pids/web_admin/thin.pid
+  when: web_admin.stat.exists
+
+- name: remove old repo
+  file:
+    path: "/home/{{deploy_user}}/apps"
+    state: absent
+
+- name: install github repo
+  command: "/usr/bin/git clone --depth 1 -b {{git_branch}} {{git_repo}} /home/{{deploy_user}}/apps"
+
+- name: remove extra files
+  become: true
+  file:
+    path: "/home/{{deploy_user}}/apps/{{item}}"
+    state: absent
+  with_items:
+    - "README.md"
+    - "NOTES.md"
+    - "bin"
+    - "playbooks"
+  changed_when: false
+
+- name: create tmp directory
+  file:
+    path:  "/home/{{deploy_user}}/apps/web_admin/tmp"
+    state: directory
+
+- name: create symlinks
+  file:
+    src:   "/home/{{deploy_user}}/{{item.src}}"
+    path:  "/home/{{deploy_user}}/apps/web_admin/{{item.dest}}"
+    state: link 
+  with_items:
+    - {src: "logs/web_admin", dest: "log"}
+    - {src: "pids/web_admin", dest: "tmp/pids"}
+
+- name: set file ownership
+  file:
+    state: directory
+    path:  "/home/{{deploy_user}}/apps"
+    owner: "{{deploy_user}}"
+    group: "{{deploy_user}}"
+    recurse: true
+
+- name: setup init script
+  template: 
+    src:  web_admin_d
+    dest: /etc/init.d
+    mode: a+rx
+
+- name: configure log rotation
+  become: true
+  template:
+    src: logrotate
+    dest: /etc/logrotate.d/web_admin
+
+- name: auto-start the server on reboot
+  become: true
+  shell: "update-rc.d web_admin_d defaults"
+
+- name: start the server
+  become: true
+  service: name=web_admin_d state=started
+

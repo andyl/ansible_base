@@ -1,0 +1,31 @@
+---
+
+# gui_cfg_xfce
+
+- name: create a config directory
+  file: path=/home/{{rem_user}}/.config state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: rsync .config/xfce4
+  synchronize: src=/home/{{lcl_user}}/.config/xfce4 dest=/home/{{rem_user}}/.config
+  changed_when: false
+  when: lcl_hostname != ansible_hostname
+
+- name: rsync .config/terminator
+  synchronize: src=/home/{{lcl_user}}/.config/terminator dest=/home/{{rem_user}}/.config
+  when: lcl_hostname != ansible_hostname
+
+- name: rsync .config/user-dirs.dirs
+  synchronize: src=/home/{{lcl_user}}/.config/user-dirs.dirs dest=/home/{{rem_user}}/.config
+  when: lcl_hostname != ansible_hostname
+
+- name: rsync .local/share/applications
+  synchronize: src=/home/{{lcl_user}}/.local/share/applications dest=/home/{{rem_user}}/.local/share
+  when: lcl_hostname != ansible_hostname
+
+- name: add hostname to panel
+  lineinfile: dest=/home/{{rem_user}}/.config/xfce4/panel/whiskermenu-1.rc regexp="^button-title=" line="button-title={{ansible_hostname}}"
+  changed_when: false
+
+# relevant tools
+# 1. xfconf-query 
+# 2. xfce4-manager-editor

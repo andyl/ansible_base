@@ -1,0 +1,56 @@
+---
+
+# erlang
+
+# FOR UBUNTU
+# see http://www.erlang-solutions.com/downloads/download-erlang-otp
+- name: ubuntu apt_key
+  apt_key: 
+    url: http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+  when: is_ubuntu
+
+- name: ubuntu repository
+  apt_repository: 
+    repo:  'deb http://packages.erlang-solutions.com/ubuntu trusty contrib' 
+    state: present
+  when: is_ubuntu
+
+- name: ubuntu remove non-compliant
+  apt: pkg={{item}} state=absent
+  with_items:
+    - erlang
+    - erlang-doc
+    - erlang-manpages
+  when: is_ubuntu
+
+- name: ubuntu package
+  apt: pkg={{item}} state=latest 
+  with_items:
+    - esl-erlang
+  when: is_ubuntu
+
+# FOR RASPBIAN
+# - compile script at 'files/raspbian/build.sh'
+# - precompile an erlang directory on an RPi
+# - save the precompile in ~/data/packages
+- name: copy raspbian tarfile
+  copy:
+    src:  /home/{{lookup('env', 'USER')}}/data/releases/erl18rasp.tar.gz
+    dest: /home/pi/erl18rasp.tar.gz
+  when: is_rpi
+
+- name:  expand raspbian tarfile
+  shell: tar xf erl18rasp.tar.gz
+  args:
+    chdir:   /home/pi
+    creates: /home/pi/erl18rasp
+  when: is_rpi
+
+- name:  install raspbian erlang
+  become:  yes
+  shell: cp -R usr/* /usr
+  args:
+    chdir:   /home/pi/erl18rasp
+    creates: /usr/local/bin/erl
+  when: is_rpi
+

@@ -1,0 +1,9 @@
+---
+
+# gui_util
+
+- name: rsync config directory
+  synchronize: src=/home/{{lcl_user}}/c dest=/home/{{rem_user}}
+  changed_when: false
+  when: lcl_hostname != ansible_hostname
+

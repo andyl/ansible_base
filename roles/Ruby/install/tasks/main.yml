@@ -1,0 +1,49 @@
+---
+
+# ruby-install
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url: https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
+    dest: /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
+    force: no
+
+- name: untar package
+  become: no
+  shell: tar -xzf /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz chdir=/home/{{rem_user}}/.pkg creates=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}
+
+- name: get current version
+  shell: ruby-install --version
+  register: rinst_current_version
+  ignore_errors: True
+  no_log: true
+  changed_when: false 
+
+- name: install script
+  become: yes
+  command: make install chdir=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}} 
+  when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
+
+- name: build rubies
+  become: no
+  shell: /usr/local/bin/ruby-install ruby {{item}} creates=~/.rubies/ruby-{{item}}
+  with_items: chruby_rubies
+
+- name: set global ruby
+  become: no
+  shell: echo {{chruby_global}} > ~/.ruby-version
+  changed_when: false
+
+- name: remove src directory
+  become: yes
+  shell: rm -r src chdir=/home/{{rem_user}} removes=/home/{{rem_user}}/src
+
+# - name: setup rbenv symlink directory
+#   file: path=/home/{{rem_user}}/.rbenv state=directory
+# 
+# - name: create rbenv symlink
+#   file: src=/home/{{rem_user}}/.rubies dest=/home/{{rem_user}}/.rbenv/versions state=link 

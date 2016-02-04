@@ -1,0 +1,52 @@
+---
+
+# postgres for RPi
+
+- name: install dependencies
+  become: true
+  apt:  pkg=apt-transport-https state=latest force=yes
+
+- name: postgres support
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes force=yes
+  with_items:
+    - libpq-dev 
+    - python-psycopg2
+
+- name: install postgres packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes force=yes
+  with_items:
+    - postgresql-9.1
+  environment:
+    LC_ALL: en_US.UTF-8
+  ignore_errors: yes
+
+- name: fix postgres ssl-key bug
+  become: yes
+  file:
+    path: /etc/ssl/private/ssl-cert-snakeoil.key
+    group: postgres
+    owner: postgres
+
+- name: start postgres
+  become: yes
+  service: name=postgresql state=started enabled=yes
+
+# - name: create template_base database
+#   sudo_user: postgres
+#   postgresql_db: 
+#     name:       template_base 
+#     encoding:   UTF8 
+#     lc_collate: en_US.UTF-8 
+#     lc_ctype:   en_US.UTF-8 
+#     template:   template0
+
+- name: create a postgres user for elixir dev
+  #sudo_user: postgres
+  postgresql_user: 
+    user:     postgres 
+    password: postgres 
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+
+

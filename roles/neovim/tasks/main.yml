@@ -1,0 +1,17 @@
+---
+
+# neovim
+
+- name: remove old PPA
+  become: true
+  apt_repository: repo=ppa:rudenko/neovim state=absent
+
+- name: add PPA
+  become: true
+  apt_repository: repo=ppa:neovim-ppa/unstable
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - neovim

@@ -1,0 +1,39 @@
+---
+
+# nodejs for RPi
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url:  https://nodejs.org/dist/latest/node-v{{node_rpi_version}}-linux-armv7l.tar.gz
+    dest: /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l.tar.gz
+    force: no
+
+- name: untar package
+  become: no
+  shell: tar -xf node-v{{node_rpi_version}}-linux-armv7l.tar.gz
+  args:
+    chdir:   /home/{{rem_user}}/.pkg 
+    creates: /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l
+
+- name: install symlinks
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l/{{item.src}}
+    dest:  /usr/local/bin/{{item.tgt}} 
+    state: link
+  with_items:
+    - {src: "bin/node"                            , tgt: "node" }
+    - {src: "lib/node_modules/npm/bin/npm-cli.js" , tgt: "npm"  }
+
+- name: npm packages
+  become: yes
+  npm: name={{item}} state=latest global=yes
+  with_items:
+    - bower
+    - coffee-script
+    - brunch
+

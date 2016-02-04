@@ -1,0 +1,40 @@
+---
+
+# grafana
+#
+# see:
+# - http://docs.grafana.org/installation/debian
+
+- name: install support software
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - adduser
+    - libfontconfig
+  changed_when: false
+    
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg 
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: get deb file
+  become: no
+  get_url: 
+    url:  https://grafanarel.s3.amazonaws.com/builds/grafana_{{grafana_version}}_amd64.deb
+    dest: /home/{{rem_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+
+- name: install package
+  apt: deb=/home/{{rem_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+
+- name: install config file
+  become: true
+  template: 
+    src: grafana.ini
+    dest: /etc/grafana/grafana.ini
+    owner: root 
+    group: root
+  notify: restart grafana
+

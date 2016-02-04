@@ -1,0 +1,34 @@
+---
+
+# gui_cfg_lxde
+# to config the 'lightdm' window manager on Raspberry PI
+
+- name: set gui user
+  become: true
+  lineinfile: 
+    dest:   "/etc/lightdm/lightdm.conf"
+    line:   "autologin-user={{rem_user}}"
+    regexp: "^autologin-user"
+
+- name: create LXDE config directories
+  file:
+    dest:  "{{item}}"
+    state: directory
+  with_items:
+    - /home/{{rem_user}}/.config/lxpanel/LXDE-pi/panels
+    - /home/{{rem_user}}/.config/openbox
+
+- name: setup LXDE panels
+  copy: 
+    src: panel
+    dest: /home/{{rem_user}}/.config/lxpanel/LXDE-pi/panels/panel
+    owner: "{{rem_user}}"
+    group: "{{rem_user}}"
+
+- name: setup LXDE desktops
+  copy: 
+    src: lxde-pi-rc.xml
+    dest: /home/{{rem_user}}/.config/openbox/lxde-pi-rc.xml
+    owner: "{{rem_user}}"
+    group: "{{rem_user}}"
+

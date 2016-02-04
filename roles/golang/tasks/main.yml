@@ -1,0 +1,10 @@
+---
+
+# golang 
+
+- name: install latest
+  become: true
+  apt:  pkg={{item}} state=latest 
+  with_items:
+    - golang
+

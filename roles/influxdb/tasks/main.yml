@@ -1,0 +1,46 @@
+---
+
+# influxdb
+# see:
+# - http://influxdb.com/download/
+# - http://influxdb.com/docs/v0.9/introduction/installation.html
+
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg 
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: get deb file
+  become: no
+  get_url: 
+    url: http://influxdb.s3.amazonaws.com/influxdb_{{influx_version}}_amd64.deb
+    dest: /home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+
+- name: install package
+  apt: deb=/home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+
+- name: setup logrotate
+  become: true
+  template:
+    src: logrotate
+    dest: /etc/logrotate.d/influxdb
+
+- name: install config file
+  become: true
+  template: 
+    src: influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+    owner: root 
+    group: root
+  notify: restart influxdb
+
+# - name: setup databases
+#   command: curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name":"{{item}}"}'
+#   register: db_create
+#   changed_when: '"exists" not in db_create.stdout' 
+#   with_items:
+#     - test
+#     - grafana
+#   when: ansible_distribution_version == "14.04"

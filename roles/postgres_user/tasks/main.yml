@@ -1,0 +1,25 @@
+---
+
+# postgres_user
+
+- name: create a postgres user
+  become: true
+  postgresql_user: 
+    user: "{{pg_user}}" 
+    password: "{{pg_pass}}" 
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+
+- name: create a postgres user for bnet
+  become: true
+  postgresql_user: 
+    user: "bnet" 
+    password: "simple" 
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+
+- name: create a postgres user for elixir dev
+  become: true
+  postgresql_user: 
+    user: "postgres" 
+    password: "postgres" 
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+

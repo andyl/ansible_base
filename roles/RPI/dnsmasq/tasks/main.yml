@@ -1,0 +1,15 @@
+---
+
+# dnsmasq
+# see http://www.thekelleys.org.uk/dnsmasq/doc.html
+
+- name: Install DnsMasq
+  become: true
+  apt:  pkg=dnsmasq state=present
+
+- name: Configure DnsMasq
+  template: 
+    src:    dnsmasq.conf
+    dest: /etc/dnsmasq.d/dnsmasq.conf
+  notify: [ 'Test and restart DnsMasq' ]
+

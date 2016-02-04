@@ -1,0 +1,65 @@
+---
+
+# cli_base
+
+- name: install base packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - python-software-properties # required by apt-get
+    - python-pip                 # required by ansible
+    - python-dev                 # required by ansible
+    - build-essential            # compile tools
+    - dnsutils                   # dnsutils
+    - git-core                   # git
+    - cmake                      # required by libgit2/rugged
+    - libicu-dev                 # development lib
+    - libmagickcore-dev          # image processing
+    - libmagickwand-dev          # image processing
+    - imagemagick                # image processing
+    - graphviz                   # diagram generation
+    - htop                       # monitoring utility
+    - atop                       # monitoring utility
+    - ncdu                       # monitoring utility
+    - nmon                       # monitoring utility
+    - iftop                      # monitoring utility
+    - dstat                      # monitoring utility
+    - iotop                      # monitoring utility
+    - nload                      # monitoring utility
+    - sysstat                    # monitoring utility
+    - ncdu                       # monitoring utility
+    - speedtest-cli              # network performance testing
+    - libsqlite3-dev             # sqlite database
+    - libcurl4-openssl-dev       # development lib
+    - libevent-dev               # development lib
+    - libncurses5-dev            # development lib
+    - libxml2-dev                # development lib
+    - libreadline-dev            # development lib
+    - libssl-dev                 # development lib
+    - libxslt1-dev               # development lib
+    - zlib1g-dev                 # development lib
+    - wkhtmltopdf                # pdf generation
+    - multitail                  # log file monitoring
+    - unison                     # file sync
+    - encfs                      # file system encryption
+    - sshfs                      # file system encryption
+    - xvfb                       # X-windows utility tool
+    - tree                       # cli utility
+    - curl                       # cli utility
+    - wget                       # cli utility
+    - unzip                      # cli utility
+    - zip                        # cli utility
+    - debian-archive-keyring     # ssh util
+    - exuberant-ctags            # vim file navigation
+    - vim-gnome                  # vim!
+
+- name: remove packages
+  become: true
+  apt: pkg={{item}} state=absent
+  with_items:
+    - whoopsie        # ubuntu bug reporter
+
+- name: upload lang.sh
+  copy: src=lang.sh dest=/etc/profile.d/lang.sh
+  become: true
+  when: lcl_hostname != ansible_hostname

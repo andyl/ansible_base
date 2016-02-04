@@ -1,0 +1,10 @@
+---
+
+- name: Test and restart DnsMasq
+  command: dnsmasq --test
+  notify: [ 'Restart DnsMasq' ]
+
+- name: Restart DnsMasq
+  service:
+    name:  'dnsmasq'
+    state: 'restarted'

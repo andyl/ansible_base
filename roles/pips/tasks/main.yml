@@ -1,0 +1,15 @@
+---
+
+# pips - install pip modules
+
+- name: remove apt modules
+  apt: name="{{item}}" state=absent purge=true force=true
+  with_items:
+    - httpie
+  
+- name: install pip modules
+  become: true
+  pip: name="{{item}}" state=latest
+  with_items:
+    - httpie
+

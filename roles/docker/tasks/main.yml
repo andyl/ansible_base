@@ -1,0 +1,31 @@
+---
+ 
+# docker
+# see http://docs.docker.io/en/latest/installation/ubuntulinux/
+
+- name: remove old docker
+  apt:  pkg={{item}} state=absent purge=true
+  with_items:
+    - docker.io
+    - lxc-docker
+
+- name: add repository key
+  apt_key:
+    keyserver: 'hkp://pgp.mit.edu:80'
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    update_cache: yes
+
+- name: install docker
+  apt: pkg={{item}} state=latest
+  with_items:
+    - docker-engine
+
+- name: install docker compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'a+rx'

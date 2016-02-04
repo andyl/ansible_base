@@ -1,0 +1,12 @@
+---
+
+# chrome
+
+- name: apt_key
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+- name: repository
+  apt_repository: repo='deb http://dl.google.com/linux/chrome/deb/ stable main' state=present
+
+- name: package
+  apt: pkg=google-chrome-stable state=latest 

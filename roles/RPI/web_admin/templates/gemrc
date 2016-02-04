@@ -1,0 +1,4 @@
+# {{ansible_managed}}
+# {{template_path}}
+---
+gem: --bindir /usr/local/sbin --no-ri --no-rdoc

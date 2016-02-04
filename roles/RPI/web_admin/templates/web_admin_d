@@ -1,0 +1,76 @@
+#!/bin/bash
+# /etc/init.d/web_admin_d
+
+# {{ansible_managed}}
+# {{template_path}}
+
+### BEGIN INIT INFO
+# Provides:          web_admin_d
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: web admin demon
+# Description:       used to manage server 
+### END INIT INFO
+
+LOGFILE="/home/{{deploy_user}}/logs/web_admin/production.log"
+
+divider () {
+  echo "---------------------------------------------" >> $LOGFILE
+}
+
+header () {
+  divider
+  echo $1 >> $LOGFILE
+  date    >> $LOGFILE
+}
+
+set_env () {
+  export GEM_PATH=/root/.gem/ruby/1.9.1:/var/lib/gems/1.9.1
+  cd /home/{{deploy_user}}/apps/web_admin
+}
+
+show_env () {
+  divider
+  whoami     >> $LOGFILE
+  echo $PATH >> $LOGFILE
+  which ruby >> $LOGFILE
+  which thin >> $LOGFILE
+  which gem  >> $LOGFILE
+  gem env    >> $LOGFILE
+}
+
+start_service () {
+  set_env
+  header "Starting web_admin_d" 
+  show_env
+  divider
+  RACK_ENV=production bin/start >> $LOGFILE 2>&1 & 
+}
+
+stop_service () {
+  set_env
+  header "Stopping web_admin_d" 
+  RACK_ENV=production bin/stop >> $LOGFILE 2>&1 
+}
+
+case "$1" in 
+  start) 
+    start_service
+    ;;
+  stop) 
+    stop_service
+    ;;
+  restart)
+    stop_service
+    start_service
+    ;;
+  *)
+    echo "Usage: /etc/init.d/web_admin_d start|stop|restart"
+    exit 1
+    ;;
+esac
+
+exit 0
+

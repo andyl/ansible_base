@@ -1,0 +1,32 @@
+---
+
+# sysruby
+
+- name: install support software
+  apt:  pkg={{item}} state=latest 
+  with_items:
+    - build-essential
+    - libssl-dev
+
+- name: install system Ruby and RubyGems (12.04, 14.04)
+  become: true
+  apt:  pkg={{item}} state=latest 
+  with_items:
+    - ruby1.9.1
+    - rubygems1.9.1
+  when: ansible_distribution_version in ["12.04", "14.04"]
+
+- name: install system Ruby and RubyGems (15.10)
+  become: true
+  apt:  pkg={{item}} state=latest 
+  with_items:
+    - ruby2.2
+  when: ansible_distribution_version == "15.10"
+
+- name: create Ruby symlinks (newer Ubuntu)
+  become: true
+  file: src=/usr/bin/{{ item.src }} dest=/usr/bin/{{ item.dest }} state=link
+  with_items:
+    - { src: 'ruby2.2', dest: 'ruby' }
+    - { src: 'gem2.2' , dest: 'gem'  }
+  when: ansible_distribution_version == "15.10"

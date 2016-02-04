@@ -1,0 +1,46 @@
+---
+
+# cli_user
+#
+# invoke using:
+# - {role: cli_user, rem_user: "<username>"}
+
+- name: create user {{rem_user}}
+  become: true
+  user: 
+    name: "{{rem_user}}" 
+    shell: /bin/bash 
+    password: $6$5WhqbRWhmf$k5xvagkoif0j3y6jggZ.La.YZuE1.VCSP2f3KXzTCmNeD0VSZo/srlkYm0HxA8kP3HW75yltrom5sHdOL5jbz.
+    update_password: on_create
+    generate_ssh_key: yes 
+
+- name: config ssh timeout for {{rem_user}}
+  become: true
+  lineinfile: 
+    dest: /home/{{rem_user}}/.ssh/config 
+    state: present 
+    regexp: "ServerAliveInterval" 
+    line: "ServerAliveInterval 20" 
+    create: yes
+
+- name: test for sudoers
+  stat: path=/etc/sudoers.d/{{rem_user}}
+  register: sudoer_file
+
+- name: config sudoers for {{rem_user}}
+  become: true
+  template:
+    src: sudoer_line.j2
+    dest: /etc/sudoers.d/{{rem_user}}
+    validate: 'visudo -cf %s'
+  when: not sudoer_file.stat.exists
+
+- name: set permissions for sudoers file
+  file:
+    dest: /etc/sudoers.d/{{rem_user}}
+    mode: 0440
+
+- name: ssh keys for {{rem_user}}
+  authorized_key:
+    user: "{{rem_user}}"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

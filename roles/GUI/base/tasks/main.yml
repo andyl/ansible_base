@@ -1,0 +1,53 @@
+---
+
+# gui_base
+
+- name: install Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - libqtwebkit-dev      # required by a testing gem
+    - gnome-system-monitor # monitor utility
+    - chromium-browser     # alternate browser
+    - vlc                  # remote screen viewer
+    - mpg123               # command-line music player
+    - a2ps                 # needed for vim printing
+    - html2ps              # needed for vim printing
+    - xclip                # cut/paste from tmux to Xwin
+    - xfce4-goodies        # xfce utilities
+    - wmctrl               # xfce window scripting
+    - xdotool              # xfce window scripting
+    - libgsl0-dev          # needed by 'rb-gsl' gem
+    - libxmu-dev           # needed by ruby-wmctrl
+    - libx11-dev           # needed by ruby-wmctrl
+    - libglib2.0-dev       # needed by ruby-wmctrl
+    - systemd-ui           # systemadm - gui for systemd
+
+- name: remove Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=absent
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - update-manager
+    - gmusicbrowser
+    - pidgin
+
+# every day at 2am
+- name: cron auto-update packages
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron: 
+    name: 'apt_update' 
+    hour: '2' 
+    job:  'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
+
+# every saturday at 5am
+- name: cron weekly reboot
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron: 
+    name:    'weekly_reboot' 
+    weekday: '6' 
+    hour:    '5' 
+    job:     '/sbin/shutdown -r +55'
