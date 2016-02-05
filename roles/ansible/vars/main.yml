@@ -9,5 +9,6 @@
 # ansible_vsn: 1.9.1     Aug 29, 2015
 # ansible_vsn: 1.9.2     Sep 08, 2015
 # ansible_vsn: 1.9.3     Dec 03, 2015
-ansible_vsn: 1.9.4   
+# ansible_vsn: 1.9.4     Feb 05, 2016
+ansible_vsn: 2.0.0.2
 
