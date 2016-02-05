@@ -16,6 +16,7 @@
 
 - name: test for sudoers
   stat: path=/etc/sudoers.d/{{rem_user}}
+  become: true
   register: sudoer_file
 
 - name: config sudoers for {{rem_user}}

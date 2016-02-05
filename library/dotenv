@@ -2,10 +2,10 @@
 
 abort "Usage: dotenv <argfile>" if (file = ARGV[0]).nil?
 
-file = ARGV[0]
+file = ARGV[0].chomp
 
 dotfile = if File.exist?(file)
-            File.read(file).split('=').last.gsub('"','').gsub(' ','')
+            File.read(file).split('=').last.gsub('"','').gsub(' ','').chomp
           else
             abort("Needs dotfile (absolute path)")
           end
