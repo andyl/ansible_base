@@ -4,10 +4,9 @@
 
 - name: install base gems
   become: no
-  chruby-gem: "{{item}}"
+  gem: name="{{item}}"
   with_items:
     - bundler
-    - ru
     - pry
     - hirb
     - colored
@@ -21,5 +20,4 @@
     - influxdb-cli
     - faraday
     - multipart-post
-    - ruby-wmctrl
 
