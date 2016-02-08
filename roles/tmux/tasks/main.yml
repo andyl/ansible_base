@@ -11,3 +11,29 @@
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - tmux
+
+# wemux
+
+- name: install wemux github repo
+  become: true
+  git:
+    repo:   "https://github.com/zolrath/wemux.git"
+    dest:   "/usr/local/share/wemux"
+    depth:  1
+    force:  true
+    update: true
+
+- name: create wemux symlink to executable
+  become: true
+  file: 
+    src: /usr/local/share/wemux/wemux
+    dest: /usr/local/bin/wemux
+    mode: "a+rx"
+    state: link 
+
+- name: install wemux.conf
+  template:
+    src: wemux.conf
+    dest: /usr/local/etc/wemux.conf
+
+
