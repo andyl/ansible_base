@@ -1,0 +1,12 @@
+---
+ 
+# predicates
+
+- name: set predicates
+  set_fact:
+    # is_ubuntu:      "'{{ansible_distribution}}' == 'Ubuntu'"
+    is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
+    is_ubuntu_1204: "'{{ansible_distribution_version}}' == '12.04' and {{is_ubuntu|bool}}"
+    is_ubuntu_1404: "'{{ansible_distribution_version}}' == '14.04' and {{is_ubuntu|bool}}"
+    is_rpi:         "'{{ansible_architecture}}' == 'armv7l'"
+
