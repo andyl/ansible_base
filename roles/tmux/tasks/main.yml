@@ -6,11 +6,17 @@
   become: true
   apt_repository: repo=ppa:pi-rho/dev 
 
-- name: install 
+- name: install TMUX
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - tmux
+
+- name: install tmux.conf
+  become: false
+  template:
+    src:  tmux.conf
+    dest: /home/{{rem_user}}/.tmux.conf
 
 # wemux
 
@@ -32,8 +38,8 @@
     state: link 
 
 - name: install wemux.conf
+  become: false
   template:
-    src: wemux.conf
+    src:  wemux.conf
     dest: /usr/local/etc/wemux.conf
-
 
