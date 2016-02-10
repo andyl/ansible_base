@@ -9,6 +9,6 @@
     - fontconfig
     - libfontconfig
 
-- name: install  phantomjs
-  copy: src=phantomjs211 dest=/usr/local/bin/phantomjs
+- name: install phantomjs
+  copy: src=phantomjs211 dest=/usr/local/bin/phantomjs mode="a+rx"
   become: true
