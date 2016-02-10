@@ -38,7 +38,7 @@
     state: link 
 
 - name: install wemux.conf
-  become: false
+  become: true
   template:
     src:  wemux.conf
     dest: /usr/local/etc/wemux.conf
