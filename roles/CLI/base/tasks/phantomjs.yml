@@ -4,7 +4,7 @@
 
 - name: install dependencies
   become: true
-  apt:  pkg={{item}} state=latest install_recommends=no
+  apt:  pkg={{item}} install_recommends=no
   with_items:
     - fontconfig
     - libfontconfig
