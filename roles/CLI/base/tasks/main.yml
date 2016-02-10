@@ -63,3 +63,6 @@
   copy: src=lang.sh dest=/etc/profile.d/lang.sh
   become: true
   when: lcl_hostname != ansible_hostname
+
+- include: phantomjs
+  when: is_ubuntu

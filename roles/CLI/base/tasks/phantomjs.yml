@@ -1,0 +1,14 @@
+---
+
+# phantomjs
+
+- name: install dependencies
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - fontconfig
+    - libfontconfig
+
+- name: install  phantomjs
+  copy: src=phantomjs211 dest=/usr/local/bin/phantomjs
+  become: true
