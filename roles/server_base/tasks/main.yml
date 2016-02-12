@@ -18,21 +18,3 @@
     hour: '1' 
     job:  'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
 
-# every day at 0300
-- name: lan resync
-  become: true
-  cron: 
-    name:   "lan resync"
-    hour:   "3" 
-    user:   "aleak"
-    job:    "yg ; allgui 'yg;yi;yd' ; allgui 'yg;yi;yd' ; yg"
-
-# every day at 0500
-- name: offsite backup
-  become: true
-  cron: 
-    name:   "offsite backup" 
-    hour:   "5" 
-    user:   "aleak"
-    job:    "offsite_backup"
-
