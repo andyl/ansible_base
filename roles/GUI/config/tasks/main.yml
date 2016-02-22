@@ -6,19 +6,23 @@
   file: path=/home/{{rem_user}}/.config state=directory group={{rem_user}} owner={{rem_user}}
 
 - name: rsync .config/xfce4
+  become: false
   synchronize: src=/home/{{lcl_user}}/.config/xfce4 dest=/home/{{rem_user}}/.config
   changed_when: false
   when: lcl_hostname != ansible_hostname
 
 - name: rsync .config/terminator
+  become: false
   synchronize: src=/home/{{lcl_user}}/.config/terminator dest=/home/{{rem_user}}/.config
   when: lcl_hostname != ansible_hostname
 
 - name: rsync .config/user-dirs.dirs
+  become: false
   synchronize: src=/home/{{lcl_user}}/.config/user-dirs.dirs dest=/home/{{rem_user}}/.config
   when: lcl_hostname != ansible_hostname
 
 - name: rsync .local/share/applications
+  become: false
   synchronize: src=/home/{{lcl_user}}/.local/share/applications dest=/home/{{rem_user}}/.local/share
   when: lcl_hostname != ansible_hostname
 
