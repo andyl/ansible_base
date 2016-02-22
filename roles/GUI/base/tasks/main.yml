@@ -32,6 +32,7 @@
     - update-manager
     - gmusicbrowser
     - pidgin
+    - bluez
 
 # every day at 2am
 - name: cron auto-update packages
