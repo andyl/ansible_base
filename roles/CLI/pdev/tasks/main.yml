@@ -18,7 +18,7 @@
   shell: /home/{{rem_user}}/g/base_util/init creates=/home/{{rem_user}}/.gitconfig
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" and ansible_bios_version != "VirtualBox"
 
- - name: github add_key
-   become: false
-   shell: bash -l -c add_key chdir=/home/{{rem_user}}
-   changed_when: false
+ #- name: github add_key
+ #  become: false
+ #  shell: bash -l -c add_key chdir=/home/{{rem_user}}
+ #  changed_when: false
