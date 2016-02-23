@@ -17,11 +17,14 @@
 
 - name: create sync directory
   file: 
-    path:  /home/{{rem_user}}/b/.sync
+    path:  "{{item}}"
     owner: "{{rem_user}}"
     group: "{{rem_user}}"
     state: directory
     recurse: yes
+  with_items:
+    - /home/{{rem_user}}/.sync
+    - /home/{{rem_user}}/b/.sync
 
 - name: install executable
   become: true
@@ -31,28 +34,6 @@
     mode: "a+rx"
   notify: restart btsync
 
-#- name: remove old pid directory
-#  become: true
-#  file: path=/var/run/btsync state=absent
-#
-#- name: set /run permissions
-#  become: true
-#  file:
-#    path: "{{item}}"
-#    mode: "a+rwx"
-#    state: directory
-#  with_items:
-#    - /run
-#
-#- name: touch pid file
-#  become: true
-#  file:
-#    path: /var/run/btsync.pid
-#    owner: "{{rem_user}}"
-#    group: "{{rem_user}}"
-#    mode:  "a+rw"
-#    state: touch
-#
 - name: create support directories
   become: true
   file:
