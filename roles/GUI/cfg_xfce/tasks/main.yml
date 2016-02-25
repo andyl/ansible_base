@@ -8,7 +8,6 @@
 - name: rsync .config/xfce4
   become: false
   synchronize: src=/home/{{lcl_user}}/.config/xfce4 dest=/home/{{rem_user}}/.config 
-  #command: /usr/bin/rsync -a --delete /home/{{lcl_user}}/.config/xfce4 {{rem_user}}@:.config
   changed_when: false
   when: lcl_hostname != ansible_hostname
 
