@@ -2,5 +2,6 @@
 # note: ONLY UPDATE MAJOR VERSIONS (two levels),
 # NOT POINT RELEASES (three levels)
 #
-# node_version: 0.12  # 25 Sep 201
-node_version: 4.x
+# node_version: 0.12  # 25 Sep 2015
+# node_version: 4.x   # 28 Feb 2016
+node_version: 5.x
