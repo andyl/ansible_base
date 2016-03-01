@@ -23,6 +23,7 @@
     - libx11-dev           # needed by ruby-wmctrl
     - libglib2.0-dev       # needed by ruby-wmctrl
     - systemd-ui           # systemadm - gui for systemd
+    - ntpdate              # ntp date update
 
 - name: remove Ubuntu packages
   become: true
@@ -33,6 +34,16 @@
     - gmusicbrowser
     - pidgin
     - bluez
+
+# every day at midnight
+- name: update system time
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron:
+    name:   'ntp_update'
+    hour:   0
+    minute: 0
+    job:    '/usr/sbin/ntpdate -s ntp.ubuntu.com'
 
 # every day at 1am
 - name: cron auto-update packages

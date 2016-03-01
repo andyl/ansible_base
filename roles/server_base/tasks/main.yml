@@ -2,6 +2,12 @@
 
 # server_base
 
+- name: add Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=latest
+  with_items:
+    - ntpdate
+
 - name: remove Ubuntu packages
   become: true
   apt:  pkg={{item}} state=absent
@@ -9,6 +15,16 @@
     - update-manager
     - gmusicbrowser
     - pidgin
+
+# every day at midnight
+- name: update system time
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron:
+    name:   'ntp_update'
+    hour:   0
+    minute: 0
+    job:    '/usr/sbin/ntpdate -s ntp.ubuntu.com'
 
 # every day at 0030
 - name: cron auto-update packages
