@@ -10,11 +10,12 @@
     - gmusicbrowser
     - pidgin
 
-# every day at 0100
+# every day at 0030
 - name: cron auto-update packages
   become: true
   cron: 
-    name: 'apt_update' 
-    hour: '1' 
-    job:  'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
+    name:   'apt_update' 
+    minute: '30' 
+    hour:   '0' 
+    job:    'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
 

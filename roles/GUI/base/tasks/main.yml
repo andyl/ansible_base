@@ -1,6 +1,6 @@
 ---
 
-# gui_base
+# GUI/base
 
 - name: install Ubuntu packages
   become: true
@@ -34,14 +34,15 @@
     - pidgin
     - bluez
 
-# every day at 2am
+# every day at 1am
 - name: cron auto-update packages
   become: true
   when: ansible_distribution == "Ubuntu"
   cron: 
-    name: 'apt_update' 
-    hour: '2' 
-    job:  'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
+    name:   'apt_update' 
+    hour:   '1' 
+    minute: '0' 
+    job:    'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
 
 # every saturday at 5am
 - name: cron weekly reboot
@@ -49,6 +50,7 @@
   when: ansible_distribution == "Ubuntu"
   cron: 
     name:    'weekly_reboot' 
-    weekday: '6' 
     hour:    '5' 
+    minute:  '0' 
+    weekday: '6' 
     job:     '/sbin/shutdown -r +55'
