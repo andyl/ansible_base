@@ -1,8 +1,9 @@
 ---
-# influx_version: 0.9.0      2015-06-01
-# influx_version: 0.9.1      2015-07-03
-# influx_version: 0.9.2      2015-08-18
-# influx_version: 0.9.3      2015-11-19
-# influx_version: 0.9.4      2015-11-23
-# influx_version: 0.9.5      2016-02-04
-influx_version: 0.10.0-1
+# influx_version: 0.9.0      superseded on 2015-06-01
+# influx_version: 0.9.1      superseded on 2015-07-03
+# influx_version: 0.9.2      superseded on 2015-08-18
+# influx_version: 0.9.3      superseded on 2015-11-19
+# influx_version: 0.9.4      superseded on 2015-11-23
+# influx_version: 0.9.5      superseded on 2016-02-04
+# influx_version: 0.10.0-1   superseded on 2016-03-23
+influx_version: 0.11.0
