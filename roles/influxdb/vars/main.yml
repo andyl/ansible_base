@@ -6,4 +6,5 @@
 # influx_version: 0.9.4      superseded on 2015-11-23
 # influx_version: 0.9.5      superseded on 2016-02-04
 # influx_version: 0.10.0-1   superseded on 2016-03-23
-influx_version: 0.11.0-1
+# influx_version: 0.11.0-1   superseded on 2016-04-02
+influx_version: 0.11.1-1 
