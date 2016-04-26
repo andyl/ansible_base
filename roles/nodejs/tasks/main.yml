@@ -28,6 +28,7 @@
   npm: name={{item}} state=latest global=yes
   with_items:
     - bower
-    - coffee-script
     - brunch
+    - coffee-script
+    - webpack
 
