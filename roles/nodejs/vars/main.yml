@@ -4,4 +4,5 @@
 #
 # node_version: 0.12  # superseded on 25 Sep 2015
 # node_version: 4.x   # superseded on 28 Feb 2016
-node_version: 5.x
+# node_version: 5.x   # superseded on 26 Apr 2016
+node_version: 6.x
