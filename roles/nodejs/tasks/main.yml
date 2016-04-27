@@ -28,7 +28,7 @@
     state: present
     update_cache: yes
   with_items:
-    - 6
+    - 5
 
 - name: add nodejs and npm
   apt: pkg={{item}} state=latest force=yes
