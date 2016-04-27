@@ -13,10 +13,22 @@
     url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
     state: present
 
+- name: remove old repositories
+  apt_repository:
+    repo: 'deb https://deb.nodesource.com/node_{{item}}.x {{ansible_distribution_release}} main'
+    state: absent
+    update_cache: yes
+  with_items:
+    - 4
+    - 6
+
 - name: add repository
   apt_repository:
-    repo: 'deb https://deb.nodesource.com/node_{{node_version}} {{ansible_distribution_release}} main'
+    repo: 'deb https://deb.nodesource.com/node_{{item}}.x {{ansible_distribution_release}} main'
+    state: present
     update_cache: yes
+  with_items:
+    - 6
 
 - name: add nodejs and npm
   apt: pkg={{item}} state=latest force=yes
@@ -31,4 +43,5 @@
     - brunch
     - coffee-script
     - webpack
+    - webpack-dev
 
