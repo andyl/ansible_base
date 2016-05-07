@@ -1,5 +1,5 @@
 ---
-# elixir_version: 1.1.0    25 Sep 2015
-# elixir_version: 1.1.1    29 Sep 2015
-# 01 Jan 2015
-elixir_version: 1.2.0
+# elixir_version: 1.1.0    superseded 29 Sep 2015
+# elixir_version: 1.1.1    superseded 01 Jan 2016
+# elixir_version: 1.2.0    superseded 07 May 2016
+elixir_version: 1.2.5
