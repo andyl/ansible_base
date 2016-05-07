@@ -26,7 +26,7 @@
 - name: remove old postgres versions
   become: true
   apt: pkg={{item}} state=absent purge=yes
-  with_items: old_postgres_versions
+  with_items: '{{old_postgres_versions}}'
 
 - name: remove old postgres config directories
   become: true
