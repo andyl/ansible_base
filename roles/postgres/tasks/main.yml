@@ -31,7 +31,7 @@
 - name: remove old postgres config directories
   become: true
   file: path=/etc/postgresql/{{item}} state=absent
-  with_items: old_postgres_versions
+  with_items: '{{old_postgres_versions}}'
 
 - name: flush all outstanding handlers
   meta: flush_handlers

@@ -1,5 +1,5 @@
 ---
-# postgres_version: 9.4    07 Jan 2016
+# postgres_version: 9.4    superseded 07 Jan 2016
 postgres_version: 9.5
 old_postgres_versions:
   - 9.1
