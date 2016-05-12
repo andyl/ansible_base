@@ -3,4 +3,5 @@ telegraf_cfgs: []
 influxdb_hostname: sigs
 # telegraf_version: 0.2.4     superseded on 2016-02-04
 # telegraf_version: 0.10.1-1  superseded on 2016-05-12
-telegraf_version: 0.12.1
+# telegraf_version: 0.12.1
+telegraf_version: 0.10.1-1
