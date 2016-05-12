@@ -36,5 +36,6 @@
     dest: /etc/grafana/grafana.ini
     owner: root 
     group: root
+    mode:  "a+r"
   notify: restart grafana
 
