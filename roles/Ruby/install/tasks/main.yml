@@ -31,7 +31,7 @@
 - name: build rubies
   become: no
   shell: /usr/local/bin/ruby-install ruby {{item}} creates=~/.rubies/ruby-{{item}}
-  with_items: chruby_rubies
+  with_items: '{{chruby_rubies}}'
 
 - name: set global ruby
   become: no
