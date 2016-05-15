@@ -17,7 +17,6 @@
     - octokit
     - highline
     - tmuxinator
-    - influxdb-cli
     - faraday
     - multipart-post
 

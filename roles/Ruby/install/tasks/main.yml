@@ -40,7 +40,9 @@
 
 - name: remove src directory
   become: yes
-  shell: rm -r src chdir=/home/{{rem_user}} removes=/home/{{rem_user}}/src
+  file:
+    path: /home/{{rem_user}}/src
+    state: absent
 
 # - name: setup rbenv symlink directory
 #   file: path=/home/{{rem_user}}/.rbenv state=directory
