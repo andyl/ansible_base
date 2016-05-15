@@ -2,18 +2,18 @@
 
 # erlang
 
-# FOR UBUNTU
+# FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
 # see http://www.erlang-solutions.com/downloads/download-erlang-otp
 - name: ubuntu apt_key
   apt_key: 
     url: http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
-  when: is_ubuntu
+  when: is_x86_64
 
 - name: ubuntu repository
   apt_repository: 
     repo:  'deb http://packages.erlang-solutions.com/ubuntu trusty contrib' 
     state: present
-  when: is_ubuntu
+  when: is_x86_64
 
 - name: ubuntu remove non-compliant
   apt: pkg={{item}} state=absent
@@ -21,15 +21,15 @@
     - erlang
     - erlang-doc
     - erlang-manpages
-  when: is_ubuntu
+  when: is_x86_64
 
 - name: ubuntu package
   apt: pkg={{item}} state=latest 
   with_items:
     - esl-erlang
-  when: is_ubuntu
+  when: is_x86_64
 
-# FOR RASPBIAN
+# FOR ARMV7L (32 bit RPi/Raspbian and Odroid-XU4)
 # - compile script at 'files/raspbian/build.sh'
 # - precompile an erlang directory on an RPi
 # - save the precompile in ~/data/packages
@@ -37,14 +37,14 @@
   copy:
     src:  /home/{{lookup('env', 'USER')}}/data/releases/erl18rasp.tar.gz
     dest: /home/pi/erl18rasp.tar.gz
-  when: is_rpi
+  when: is_armv7l
 
 - name:  expand raspbian tarfile
   shell: tar xf erl18rasp.tar.gz
   args:
     chdir:   /home/pi
     creates: /home/pi/erl18rasp
-  when: is_rpi
+  when: is_armv7l
 
 - name:  install raspbian erlang
   become:  yes
@@ -52,5 +52,5 @@
   args:
     chdir:   /home/pi/erl18rasp
     creates: /usr/local/bin/erl
-  when: is_rpi
+  when: is_armv7l
 

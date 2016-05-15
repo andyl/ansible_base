@@ -8,6 +8,8 @@
     is_rpi:         "'{{ansible_architecture}}' == 'armv7l'"
     is_armv7l:      "'{{ansible_architecture}}' == 'armv7l'"
     not_armv7l:     "'{{ansible_architecture}}' != 'armv7l'"
+    is_x86_64:      "'{{ansible_architecture}}' == 'x86_64'"
+    not_x86_64:     "'{{ansible_architecture}}' != 'x86_64'"
 
 - name: set dependent predicates
   set_fact:
