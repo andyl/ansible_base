@@ -30,27 +30,27 @@
   when: is_x86_64
 
 # FOR ARMV7L (32 bit RPi/Raspbian and Odroid-XU4)
-# - compile script at 'files/raspbian/build.sh'
-# - precompile an erlang directory on an RPi
-# - save the precompile in ~/data/packages
-- name: copy raspbian tarfile
+# - compile script at 'files/armv7l/build.sh'
+# - precompile erlang directory on an armv7l device
+# - save the precompile in x-ansible/roles/erlang/files/armv7l/<release>
+- name: copy release tarfile
   copy:
-    src:  /home/{{lookup('env', 'USER')}}/data/releases/erl18rasp.tar.gz
-    dest: /home/pi/erl18rasp.tar.gz
+    src:  armv7l/erl_{{erlang_armv7l_version}}.tar.gz
+    dest: /home/{{rem_user}}/erl_{{erlang_armv7l_version}}.tar.gz
   when: is_armv7l
 
-- name:  expand raspbian tarfile
-  shell: tar xf erl18rasp.tar.gz
+- name:  expand release tarfile
+  shell: tar xf erl_{{erlang_armv7l_version}}.tar.gz
   args:
-    chdir:   /home/pi
-    creates: /home/pi/erl18rasp
+    chdir:   /home/{{rem_user}}
+    creates: /home/{{rem_user}}/erl_{{erlang_armv7l_version}}
   when: is_armv7l
 
-- name:  install raspbian erlang
+- name:  install armv7l erlang
   become:  yes
   shell: cp -R usr/* /usr
   args:
-    chdir:   /home/pi/erl18rasp
+    chdir:   /home/{{rem_user}}/erl_{{erlang_armv7l_version}}
     creates: /usr/local/bin/erl
   when: is_armv7l
 
