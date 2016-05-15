@@ -16,12 +16,12 @@
     - rubygems1.9.1
   when: ansible_distribution_version in ["12.04", "14.04"]
 
-- name: install system Ruby and RubyGems (15.10)
+- name: install system Ruby and RubyGems (newer Ubuntu)
   become: true
   apt:  pkg={{item}} state=latest 
   with_items:
     - ruby2.2
-  when: ansible_distribution_version == "15.10"
+  when: ansible_distribution_version in ["15.10", "16.04"]
 
 - name: create Ruby symlinks (newer Ubuntu)
   become: true
@@ -29,4 +29,4 @@
   with_items:
     - { src: 'ruby2.2', dest: 'ruby' }
     - { src: 'gem2.2' , dest: 'gem'  }
-  when: ansible_distribution_version == "15.10"
+  when: ansible_distribution_version in ["15.10", "16.04"]
