@@ -29,7 +29,6 @@
     - sysstat                    # monitoring utility
     - ncdu                       # monitoring utility
     - iperf                      # network performance testing
-    - speedtest-cli              # network performance testing
     - libsqlite3-dev             # sqlite database
     - libcurl4-openssl-dev       # development lib
     - libevent-dev               # development lib
@@ -54,6 +53,13 @@
     - exuberant-ctags            # vim file navigation
     - vim-gnome                  # vim!
 
+- name: install extended packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  when: not_xu4
+  with_items:
+    - speedtest-cli              # network performance testing
+
 - name: remove packages
   become: true
   apt: pkg={{item}} state=absent
@@ -66,4 +72,4 @@
   when: lcl_hostname != ansible_hostname
 
 - include: phantomjs.yml
-  when: is_ubuntu
+  when: is_ubuntu 

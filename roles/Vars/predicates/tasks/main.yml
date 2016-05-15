@@ -7,9 +7,11 @@
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
     is_rpi:         "'{{ansible_architecture}}' == 'armv7l'"
     is_armv7l:      "'{{ansible_architecture}}' == 'armv7l'"
+    not_armv7l:     "'{{ansible_architecture}}' != 'armv7l'"
 
 - name: set dependent predicates
   set_fact:
     is_ubuntu_1204: "'{{ansible_distribution_version}}' == '12.04' and {{is_ubuntu|bool}}"
     is_ubuntu_1404: "'{{ansible_distribution_version}}' == '14.04' and {{is_ubuntu|bool}}"
     is_xu4:         "'{{ansible_processor_count}}'      == '8'     and {{is_armv7l|bool}}"
+    not_xu4:        "'{{ansible_processor_count}}'      != '8'     or  {{not_armv7l|bool}}"
