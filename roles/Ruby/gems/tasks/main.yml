@@ -10,7 +10,7 @@
     - pry
     - hirb
     - colored
-    - net-ssh
+    #- net-ssh
     - net-sftp
     - net-ping
     - radix62
