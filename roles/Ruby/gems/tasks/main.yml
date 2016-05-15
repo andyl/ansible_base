@@ -11,7 +11,7 @@
     - hirb
     - colored
     #- net-ssh
-    - net-sftp
+    #- net-sftp
     - net-ping
     - radix62
     - octokit
