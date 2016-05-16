@@ -35,7 +35,7 @@
 # - save the precompile in x-ansible/roles/erlang/files/armv7l/<release>
 - name: copy release tarfile
   copy:
-    src:  armv7l/erl_{{erlang_armv7l_version}}.tar.gz
+    src:  erl_{{erlang_armv7l_version}}.tar.gz
     dest: /home/{{rem_user}}/erl_{{erlang_armv7l_version}}.tar.gz
   when: is_armv7l
 
