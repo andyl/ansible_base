@@ -1,6 +1,6 @@
 ---
 
-# nodejs for RPi
+# nodejs for arm7
 
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
@@ -8,8 +8,8 @@
 - name: get package
   become: no
   get_url:
-    url:  https://nodejs.org/dist/latest/node-v{{node_rpi_version}}-linux-armv7l.tar.gz
-    dest: /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l.tar.gz
+    url:  https://nodejs.org/dist/node-v{{node_arm7_version}}-linux-armv7l.tar.gz
+    dest: /home/{{rem_user}}/.pkg/node-v{{node_arm7_version}}-linux-armv7l.tar.gz
     force: no
 
 - name: untar package

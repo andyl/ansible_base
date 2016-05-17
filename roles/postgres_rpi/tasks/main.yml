@@ -42,10 +42,10 @@
 #     lc_ctype:   en_US.UTF-8 
 #     template:   template0
 
-- name: create a postgres user for elixir dev
-  #sudo_user: postgres
-  postgresql_user: 
-    user:     postgres 
-    password: postgres 
-    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+#- name: create a postgres user for elixir dev
+#  become: true
+#  postgresql_user: 
+#    user:     postgres 
+#    password: postgres 
+#    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
 
