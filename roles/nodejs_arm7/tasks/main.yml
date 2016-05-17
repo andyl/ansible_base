@@ -8,21 +8,21 @@
 - name: get package
   become: no
   get_url:
-    url:  https://nodejs.org/dist/node-v{{node_arm7_version}}-linux-armv7l.tar.gz
+    url:  https://nodejs.org/dist/v{{node_arm7_version}}/node-v{{node_arm7_version}}-linux-armv7l.tar.gz
     dest: /home/{{rem_user}}/.pkg/node-v{{node_arm7_version}}-linux-armv7l.tar.gz
     force: no
 
 - name: untar package
   become: no
-  shell: tar -xf node-v{{node_rpi_version}}-linux-armv7l.tar.gz
+  shell: tar -xf node-v{{node_arm7_version}}-linux-armv7l.tar.gz
   args:
     chdir:   /home/{{rem_user}}/.pkg 
-    creates: /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l
+    creates: /home/{{rem_user}}/.pkg/node-v{{node_arm7_version}}-linux-armv7l
 
 - name: install symlinks
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/node-v{{node_rpi_version}}-linux-armv7l/{{item.src}}
+    src:   /home/{{rem_user}}/.pkg/node-v{{node_arm7_version}}-linux-armv7l/{{item.src}}
     dest:  /usr/local/bin/{{item.tgt}} 
     state: link
   with_items:
