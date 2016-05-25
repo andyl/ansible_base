@@ -2,15 +2,21 @@
 
 abort "Usage: dotenv <argfile>" if (file = ARGV[0]).nil?
 
-file = ARGV[0].chomp
+argfile = ARGV[0].chomp # argfile is written by ansible into a tmp directory
 
+puts "ARGFILE: #{argfile}"
+
+# extract the dotfile path from the argfile
+# extract `file="<path>"` from the argfile...
 dotfile = if File.exist?(file)
-            File.read(file).split('=').last.gsub('"','').gsub(' ','').chomp
+            args = File.read(argfile).split(' ')
+            arg  = args.select {|s| s.match(/file\=\"/)}
+            arg.first.gsub('\\','').split('=').last.gsub('"','').gsub(' ','').chomp
           else
-            abort("Needs dotfile (absolute path)")
+            abort("Needs argfile (absolute path)")
           end
 
-File.open("/tmp/dotenv.log", 'w') { |f| f.puts "DOTENV #{file.inspect}"}
+File.open("/tmp/dotenv.log", 'w') { |f| f.puts "DOTENV #{dotfile.inspect}"}
 
 abort("Dotfile not found (#{dotfile})") unless File.exist?(dotfile)
 

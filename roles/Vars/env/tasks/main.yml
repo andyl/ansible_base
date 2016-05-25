@@ -2,9 +2,11 @@
  
 # vars_env
 
-#- name: load dotenv variables
-#  become: false
-#  local_action: dotenv file={{dotenv}}
+- debug: msg="{{dotenv_file}}"
+
+- name: load dotenv variables
+  become: false
+  local_action: dotenv file={{dotenv_file}}
 
 #- name: load dotpwd variables
 #  become: false

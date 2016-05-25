@@ -2,32 +2,51 @@
 
 # erlang
 
+# save this
+# https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_18.3-1~ubuntu~precise_amd64.deb
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
 # FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
 # see http://www.erlang-solutions.com/downloads/download-erlang-otp
-- name: ubuntu apt_key
-  apt_key: 
-    url: http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
-  when: is_x86_64
+
+#- name: ubuntu apt_key
+#  apt_key: 
+#    url: http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+#  when: is_x86_64
 
 - name: ubuntu repository
   apt_repository: 
     repo:  'deb http://packages.erlang-solutions.com/ubuntu trusty contrib' 
-    state: present
+    state: absent
   when: is_x86_64
 
-- name: ubuntu remove non-compliant
-  apt: pkg={{item}} state=absent
-  with_items:
-    - erlang
-    - erlang-doc
-    - erlang-manpages
+#- name: ubuntu remove non-compliant
+#  apt: pkg={{item}} state=absent
+#  with_items:
+#    - erlang
+#    - erlang-doc
+#    - erlang-manpages
+#  when: is_x86_64
+
+- name: get deb file
+  become: no
+  get_url: 
+    url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
+    url:  https://erlangrel.s3.amazonaws.com/builds/erlang_{{erlang_version}}_amd64.deb
+    dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
-- name: ubuntu package
-  apt: pkg={{item}} state=latest 
-  with_items:
-    - esl-erlang
+- name: install package
+  apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
+
+#- name: ubuntu package
+#  apt: pkg={{item}} state=latest 
+#  with_items:
+#    - esl-erlang
+#  when: is_x86_64
 
 # FOR ARM7 (32 bit RPi/Raspbian and Odroid-XU4)
 # - compile script at 'files/arm7/build.sh'
