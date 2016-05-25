@@ -12,9 +12,7 @@ After=network-online.target
 Type=idle
 User=aleak
 Group=aleak
-# TimeoutSec=0
-StandardInput=tty
-ExecStart=/home/aleak/g/pdev_util/bin/bootlog > /tmp/bootlog.log 2>&1
+ExecStart=/home/aleak/g/pdev_util/bin/bootlog 
  
 [Install]
 WantedBy=multi-user.target
