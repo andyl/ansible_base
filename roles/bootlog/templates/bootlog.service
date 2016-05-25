@@ -4,12 +4,13 @@
 
 [Unit]
 Description=Write boot event to InfluxDB
-After=network.target
+# After=network.target
+After=multi-user.target
  
 [Service]
-Type=oneshot
-# User=aleak
-# Group=aleak
+Type=idle
+User=aleak
+Group=aleak
 # TimeoutSec=0
 # StandardInput=tty
 ExecStart=/home/aleak/g/pdev_util/bin/bootlog > /tmp/bootlog.log 2>&1
