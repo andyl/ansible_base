@@ -1,0 +1,22 @@
+---
+
+# bootlog - log reboot events into InfluxDB
+
+- name: create the bootlog database
+  command: /usr/bin/influx -username '{{influxdb_username}}' -password '{{influxdb_password}}' -execute 'CREATE DATABASE bootlog'
+  ignore_errors: yes
+  when: ansible_hostname == influxdb_hostname
+
+- name: install unit file
+  become: true
+  template: 
+    src:   bootlog.service
+    dest:  /etc/systemd/system/bootlog.service
+    owner: root 
+    group: root
+    force: yes
+    mode: "a+rx"
+  notify: 
+    - reload systemd
+  when: ansible_distribution_version == "15.10"
+

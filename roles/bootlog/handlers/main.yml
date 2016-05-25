@@ -1,0 +1,6 @@
+---
+- name: reload systemd
+  become: yes
+  command: systemctl daemon-reload
+  when: ansible_distribution_version == "15.10"
+
