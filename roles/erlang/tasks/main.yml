@@ -6,7 +6,11 @@
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
 
 # FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
-# see http://www.erlang-solutions.com/downloads/download-erlang-otp
+# see http://www.erlang-solutions.com/resources/download.html
+
+# 24-May-2016: BUG with `:observer.start` in the 64-bit erlang.  
+# workaround is to use the 32-bit version.
+# to recover: change `i386` to `amd64`
 
 - name: get deb file
   become: no
