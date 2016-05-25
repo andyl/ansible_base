@@ -12,7 +12,7 @@ User=aleak
 Group=aleak
 TimeoutSec=0
 StandardInput=tty
-ExecStart=/home/aleak/g/pdev_util/bin/bootlog
+ExecStart=/home/aleak/g/pdev_util/bin/bootlog > /tmp/bootlog.log 2>&1
  
 [Install]
 WantedBy=multi-user.target
