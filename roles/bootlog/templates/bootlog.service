@@ -5,14 +5,15 @@
 [Unit]
 Description=Write boot event to InfluxDB
 # After=network.target
-After=multi-user.target
+# After=multi-user.target
+After=network-online.target
  
 [Service]
 Type=idle
 User=aleak
 Group=aleak
 # TimeoutSec=0
-# StandardInput=tty
+StandardInput=tty
 ExecStart=/home/aleak/g/pdev_util/bin/bootlog > /tmp/bootlog.log 2>&1
  
 [Install]
