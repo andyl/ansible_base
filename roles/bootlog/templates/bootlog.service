@@ -3,15 +3,15 @@
 #
 
 [Unit]
-Description=bootlog - record boot event into InfluxDB
+Description=Write boot event to InfluxDB
 After=network.target
  
 [Service]
 Type=oneshot
-User=aleak
-Group=aleak
-TimeoutSec=0
-StandardInput=tty
+# User=aleak
+# Group=aleak
+# TimeoutSec=0
+# StandardInput=tty
 ExecStart=/home/aleak/g/pdev_util/bin/bootlog > /tmp/bootlog.log 2>&1
  
 [Install]
