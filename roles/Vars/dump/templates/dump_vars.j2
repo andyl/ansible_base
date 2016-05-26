@@ -16,10 +16,10 @@ Environment Variables ("environment"):
 HOST Variables ("hostvars"):
 --------------------------------
 Broken on Ansible 2...
-{{ hostvars | to_nice_json }} 
+{ hostvars | to_nice_json } 
 
 Module Variables ("vars"):
 --------------------------------
 Broken on Ansible 2...
-{ vars | to_nice_json }
+{{ vars | to_nice_json }}
 
