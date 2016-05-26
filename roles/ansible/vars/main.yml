@@ -11,5 +11,6 @@
 # ansible_vsn: 1.9.3     superseded Dec 03, 2015
 # ansible_vsn: 1.9.4     superseded Feb 05, 2016
 # ansible_vsn: 2.0.0.2   superseded May 24, 2016
-ansible_vsn: 2.0.2.0-1
+# ansible_vsn: 2.0.2.0-1 superseded May 26, 2016
+ansible_vsn: 2.1.0.0-1
 
