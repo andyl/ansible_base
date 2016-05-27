@@ -2,6 +2,10 @@
 
 # crystal-lang
 
+# TODO:
+# - specify crystal version
+# apt: pkg=crystal={{crystal_version}} state=present force=yes
+
 - name: add repository key
   apt_key: 
     id:        09617FD37CC06B54
@@ -14,7 +18,5 @@
     update_cache: yes
 
 - name: add crystal
-  apt: pkg={{item}} state=latest force=yes
-  with_items:
-    - crystal
+  apt: pkg=crystal state=present force=yes
 
