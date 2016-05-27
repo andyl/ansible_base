@@ -18,5 +18,5 @@
     update_cache: yes
 
 - name: add crystal
-  apt: pkg=crystal state=present force=yes
+  apt: pkg=crystal={{crystal_version}} state=present force=yes
 
