@@ -8,25 +8,23 @@
     - build-essential
     - libssl-dev
 
-- name: install system Ruby and RubyGems (12.04, 14.04)
+- name: set ruby version (15.10)
+  set_fact: ruby_version="2.2"
+  when: ansible_distribution_version in ["15.10"]
+
+- name: set ruby version (16.04)
+  set_fact: ruby_version="2.3"
+  when: ansible_distribution_version in ["16.04"]
+
+- name: install system Ruby and RubyGems 
   become: true
   apt:  pkg={{item}} state=latest 
   with_items:
-    - ruby1.9.1
-    - rubygems1.9.1
-  when: ansible_distribution_version in ["12.04", "14.04"]
+    - ruby{{ruby_version}}
 
-- name: install system Ruby and RubyGems (newer Ubuntu)
-  become: true
-  apt:  pkg={{item}} state=latest 
-  with_items:
-    - ruby2.2
-  when: ansible_distribution_version in ["15.10", "16.04"]
-
-- name: create Ruby symlinks (newer Ubuntu)
+- name: create Ruby symlinks 
   become: true
   file: src=/usr/bin/{{ item.src }} dest=/usr/bin/{{ item.dest }} state=link
   with_items:
-    - { src: 'ruby2.2', dest: 'ruby' }
-    - { src: 'gem2.2' , dest: 'gem'  }
-  when: ansible_distribution_version in ["15.10", "16.04"]
+    - { src: 'ruby{{ruby_version}}', dest: 'ruby' }
+    - { src: 'gem{{ruby_version}}' , dest: 'gem'  }
