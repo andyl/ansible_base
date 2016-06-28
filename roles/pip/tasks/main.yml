@@ -8,6 +8,10 @@
     - httpie
     - pip
   
+- name: install setuptools
+  become: true
+  apt: name=python-setuptools state=latest
+
 - name: install pip
   become: true
   easy_install: name=pip state=latest
