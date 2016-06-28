@@ -2,13 +2,6 @@
 
 # gui_util
 
-#- name: kill firefox
-#  become: true
-#  command: /usr/bin/killall firefox
-#  changed_when: false
-#  ignore_errors: true
-#  when: lcl_hostname != ansible_hostname
-
 - name: rsync config directory
   become: false
   synchronize: src=/home/{{lcl_user}}/c dest=/home/{{rem_user}} delete=yes
