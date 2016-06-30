@@ -40,7 +40,6 @@
     - zlib1g-dev                 # development lib
     - wkhtmltopdf                # pdf generation
     - multitail                  # log file monitoring
-    - unison                     # file sync
     - encfs                      # file system encryption
     - sshfs                      # file system encryption
     - xvfb                       # X-windows utility tool
