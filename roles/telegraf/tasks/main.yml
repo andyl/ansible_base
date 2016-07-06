@@ -8,7 +8,7 @@
 - name: get deb file
   become: no
   get_url:
-    url:  http://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_version}}_amd64.deb
+    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_version}}_amd64.deb
     dest: /home/{{rem_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
     force: no
 
