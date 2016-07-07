@@ -2,10 +2,8 @@
 - name: reload systemd
   become: yes
   command: systemctl daemon-reload
-  when: ansible_distribution_version == "15.10"
 
 - name: enable bootlog
   become: yes
   command: systemctl enable bootlog.service
-  when: ansible_distribution_version == "15.10"
 
