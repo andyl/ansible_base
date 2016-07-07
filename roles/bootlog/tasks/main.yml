@@ -19,5 +19,4 @@
   notify: 
     - reload systemd
     - enable bootlog
-  when: ansible_distribution_version == "15.10"
 
