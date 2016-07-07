@@ -3,7 +3,7 @@
 #
 
 [Unit]
-Description=Write boot event to InfluxDB
+Description=Write boot event to InfluxDB Database
 After=network-online.target
  
 [Service]
