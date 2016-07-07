@@ -77,6 +77,5 @@
     mode: "a+rx"
   notify: 
     - reload systemd
-    - enable btsync
     - restart btsync
 
