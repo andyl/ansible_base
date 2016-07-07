@@ -78,22 +78,4 @@
   notify: 
     - reload systemd
     - restart btsync
-  when: ansible_distribution_version == "15.10"
 
-- name: install init script
-  become: true
-  template: 
-    src: btsync
-    dest: /etc/init.d/btsync
-    owner: root
-    group: root
-    force: yes
-    mode:  "a+rx"
-  notify:
-    - restart btsync
-  when: ansible_distribution_version == "12.04"
-
-- name: setup service
-  become: true
-  command: update-rc.d btsync enable
-  when: ansible_distribution_version == "12.04"
