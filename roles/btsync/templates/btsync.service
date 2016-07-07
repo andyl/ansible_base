@@ -4,9 +4,10 @@
 # Reference:
 # https://blog.hqcodeshop.fi/archives/93-Handling-varrun-with-systemd.html
 
+
 [Unit]
 Description=btsync
-After=network.target
+After=network.target network-online.target
  
 [Service]
 User=aleak

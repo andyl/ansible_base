@@ -4,5 +4,5 @@
   command: systemctl daemon-reload
 
 - name: restart btsync
-  service: name=btsync state=restarted
+  service: name=btsync enabled=yes state=restarted
   become: true
