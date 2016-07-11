@@ -7,10 +7,11 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
-    - hostapd      # access point demon
-    - bmon         # in-console bandwidth monitor
     - iw           # wifi configurator
+    - bmon         # in-console bandwidth monitor
+    - hostapd      # access point demon
     - bridge-utils # bridge-utils
+    - wireless-tools
     - iptables-persistent
 
 - name: revert hostapd config if ansible has already been run
