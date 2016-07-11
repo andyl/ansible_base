@@ -5,6 +5,7 @@
 - name: add PPA
   become: true
   apt_repository: repo=ppa:pi-rho/dev 
+  when: is_x86_64
 
 - name: install TMUX
   become: true
