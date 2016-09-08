@@ -1,0 +1,11 @@
+---
+
+# qtox
+
+- name: repository
+  apt_repository: 
+    repo: 'deb http://download.opensuse.org/repositories/home:/antonbatenev:/tox/xUbuntu_16.04/ /' 
+    state: present
+
+- name: package
+  apt: pkg=qtox state=latest 
