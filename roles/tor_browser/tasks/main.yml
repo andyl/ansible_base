@@ -16,16 +16,9 @@
     url:  https://www.torproject.org/dist/torbrowser/{{tor_browser_version}}/tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz
     dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
 
-#- name: extract tar file
-#  become: no
-#  unarchive:
-#    src:  /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
-#    dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
-#    remote_src: yes
-
 - name: extract tar file
   become: no
-  command: tar -xf -C tor-browser-linux64-{{tor_browser_version}} tor-browser-linux64-{{tor_browser_version}}.tar.xz
+  command: mkdir -p tor-browser-linux64-{{tor_browser_version}} && tar -xf -C tor-browser-linux64-{{tor_browser_version}} tor-browser-linux64-{{tor_browser_version}}.tar.xz --strip-components=1
   args:
       chdir: /home/{{rem_user}}/.pkg
       creates: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
