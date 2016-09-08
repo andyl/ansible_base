@@ -1,9 +1,9 @@
 ---
 
 # tor_browser
-#
 
 - name: create pkg dir
+  become: no
   file: 
     path: /home/{{rem_user}}/.pkg 
     state: directory 
@@ -12,19 +12,21 @@
 
 - name: get tar file
   become: no
-  copy:
-    src:  tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz 
-    dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz
+  get_url: 
+    url:  https://www.torproject.org/dist/torbrowser/{{tor_browser_version}}/tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz
+    dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
 
 - name: extract tar file
+  become: no
   unarchive:
-    src: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz
-    dest: /home/{{rem_user}}/.pkg/tor-{{tor_browser_version}}
-    remove_src: yes
+    src:  /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
+    dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
+    remote_src: yes
 
 - name: create symlink
+  become: no
   file:
-    src: /home/{{rem_user}}/.pkg/tor-browser-{{tor_browser_version}}
-    dest: /home/aleak/.pkg/tor-base
+    src:  /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
+    dest: /home/{{rem_user}}/.pkg/tor-base
     state: link 
 
