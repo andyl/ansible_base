@@ -2,7 +2,12 @@
 
 # qtox
 
-- name: repository
+- name: add repo key
+  apt_key: 
+    url: http://download.opensuse.org/repositories/home:antonbatenev:tox/xUbuntu_16.04/Release.key
+    state: present
+
+- name: add repo
   apt_repository: 
     repo: 'deb http://download.opensuse.org/repositories/home:/antonbatenev:/tox/xUbuntu_16.04/ /' 
     state: present
