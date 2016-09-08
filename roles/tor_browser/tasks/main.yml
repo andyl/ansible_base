@@ -18,7 +18,7 @@
 
 - name: extract tar file
   become: no
-  command: mkdir -p tor-browser-linux64-{{tor_browser_version}} && tar -xf -C tor-browser-linux64-{{tor_browser_version}} tor-browser-linux64-{{tor_browser_version}}.tar.xz --strip-components=1
+  shell: mkdir -p tor-browser-linux64-{{tor_browser_version}} && tar -xf tor-browser-linux64-{{tor_browser_version}}.tar.xz -C tor-browser-linux64-{{tor_browser_version}} --strip-components=1
   args:
       chdir: /home/{{rem_user}}/.pkg
       creates: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
