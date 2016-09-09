@@ -42,15 +42,14 @@
     line: "i386"
     create: yes
 
--name: install support packages
- become: yes
- apt:
-    name: {{item}}
+- name: install support packages
+  become: yes
+  apt:
+    name: "{{item}}"
     state: present
- with_items:
-   - gtk2-engines
-   - gtk2-engines-*
-   - libgtkmm-2.4-1c2
-   - gtk2-engines-murrine:i386
-   - gtk2-engines-pixbuf:i386
- when: is_x86_64 
+  with_items:
+    - gtk2-engines
+    - gtk2-engines-*
+    - gtk2-engines-murrine:i386
+    - gtk2-engines-pixbuf:i386
+  when: is_x86_64 
