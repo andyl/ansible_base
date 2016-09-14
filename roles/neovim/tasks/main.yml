@@ -25,6 +25,7 @@
   file:
     src:  /home/{{rem_user}}/{{item.src}}
     dest: /home/{{rem_user}}/{{item.dest}}
+    state: link 
   with_items:
     - { src: '.vim'  , dest: '.config/nvim' }
     - { src: '.vimrc', dest: '.config/nvim/init.vim' }
