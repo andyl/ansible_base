@@ -31,4 +31,5 @@
     - { src: '.vimrc', dest: '.config/nvim/init.vim' }
 
 - name: install neovim gem
+  become: no
   gem: name=neovim state=latest
