@@ -18,5 +18,14 @@
 
 - name: create config directory
   file:
+    path: /home/{{rem_user}}/.config
+    state: directory
 
+- name: create config symlinks
+  file:
+    src:  /home/{{rem_user}}/{{item.src}}
+    dest: /home/{{rem_user}}/{{item.dest}}
+  with_items:
+    - { src: '.vim'  , dest: '.config/nvim' }
+    - { src: '.vimrc', dest: '.config/nvim/init.vim' }
 
