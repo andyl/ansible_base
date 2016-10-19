@@ -82,3 +82,13 @@
     state: link 
   when: is_x86_64
 
+- name: tweak IEx configuration
+  become: true
+  copy:
+    src:  {{item}}
+    dest: /usr/local/bin/{{item}}
+    mode: "a+rx"
+  when: is_x86_64
+  with_items:
+    - iex
+    - iex_original
