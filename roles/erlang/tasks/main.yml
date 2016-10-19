@@ -52,3 +52,31 @@
     creates: /usr/local/bin/erl
   when: is_arm7
 
+# GET OTP SOURCE FOR DOCCO AND CODE LOOKUPS
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.beam_src state=directory group={{rem_user}} owner={{rem_user}}
+  when: is_x86_64
+
+- name: download OTP tar file
+  become: no
+  get_url: 
+    url:  https://github.com/erlang/otp/archive/OTP-{{otp_version}}.tar.gz
+    dest: /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+  when: is_x86_64
+
+- name: expand OTP tar file
+  unarchive:
+    src:  /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    dest: /home/{{rem_user}}/.beam_src
+    remote_src: true
+  when: is_x86_64
+
+- name: create symlink to OTP source dir
+  file: 
+    src:  /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}
+    dest: /home/{{rem_user}}/.beam_src/otp
+    mode: "a+rx"
+    state: link 
+  when: is_x86_64
+
