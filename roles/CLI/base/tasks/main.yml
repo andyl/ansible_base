@@ -48,6 +48,7 @@
     - wget                       # cli utility
     - unzip                      # cli utility
     - zip                        # cli utility
+    - silversearcher-ag          # search utility
     - debian-archive-keyring     # ssh util
     - exuberant-ctags            # vim file navigation
     - vim-gnome                  # vim!
