@@ -8,5 +8,7 @@
 # grafana_version: 3.0.3            superseded on 2016-07-12
 # grafana_version: 3.1.0-1468321182 superseded on 2016-11-09
 # grafana_version: 3.1.1-1470047149 superseded on 2016-11-22
-grafana_version: 4.0.0-1479719016beta2
+# grafana_version: 4.0.B-1479719016 superseded on 2016-11-29
+# grafana_version: 4.0.0-1479719016beta2
 
+grafana_version: 4.0.0-1480439068
