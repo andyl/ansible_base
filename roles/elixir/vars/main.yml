@@ -7,4 +7,5 @@
 # elixir_version: 1.3.0    superseded 09 Sep 2016
 # elixir_version: 1.3.2    superseded 19 Sep 2016
 # elixir_version: 1.3.3    superseded 18 Oct 2016
-elixir_version: 1.3.4
+# elixir_version: 1.3.4    superseded 04 Jan 2016
+elixir_version: 1.4.0
