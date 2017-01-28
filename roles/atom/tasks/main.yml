@@ -17,5 +17,5 @@
 - name: rsync .atom
   become: no
   connection: local
-  command: "rsync -a --delete /home/{{lcl_user}}/.atom {{ansible_hostname}}:" warn=no
+  command: rsync -a --delete /home/{{lcl_user}}/.atom "{{ansible_hostname}}:" warn=false
   when: lcl_hostname != ansible_hostname
