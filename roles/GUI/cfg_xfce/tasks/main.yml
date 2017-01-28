@@ -16,11 +16,6 @@
   synchronize: src=/home/{{lcl_user}}/.config/terminator dest=/home/{{rem_user}}/.config
   when: lcl_hostname != ansible_hostname
 
-- name: rsync .atom
-  become: false
-  synchronize: src=/home/{{lcl_user}}/.atom dest=/home/{{rem_user}}/.atom
-  when: lcl_hostname != ansible_hostname
-
 - name: rsync .config/user-dirs.dirs
   become: false
   synchronize: src=/home/{{lcl_user}}/.config/user-dirs.dirs dest=/home/{{rem_user}}/.config

@@ -13,3 +13,9 @@
 
 - name: install package
   apt: deb=/home/{{rem_user}}/.pkg/atom.deb
+
+- name: rsync .atom
+  become: no
+  connection: local
+  command: "rsync -a --delete /home/{{lcl_user}}/.atom {{ansible_hostname}}:"
+  when: lcl_hostname != ansible_hostname
