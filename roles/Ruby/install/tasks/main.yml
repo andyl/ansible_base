@@ -24,14 +24,14 @@
   changed_when: false 
 
 - name: install script
- become: yes
- command: make install chdir=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}} 
- when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
+  become: yes
+  command: make install chdir=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}} 
+  when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
 
 - name: build rubies
- become: no
- shell: /usr/local/bin/ruby-install ruby {{item}} creates=~/.rubies/ruby-{{item}}
- with_items: '{{chruby_rubies}}'
+  become: no
+  shell: /usr/local/bin/ruby-install ruby {{item}} creates=~/.rubies/ruby-{{item}}
+  with_items: '{{chruby_rubies}}'
 
 - name: set global ruby
   become: no
