@@ -39,9 +39,6 @@
   become: yes
   npm: name={{item}} state=latest global=yes
   with_items:
-    - bower
     - brunch
     - coffee-script
-    - webpack
-    - webpack-dev
 
