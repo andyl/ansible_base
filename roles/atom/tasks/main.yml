@@ -9,10 +9,10 @@
   become: no
   get_url: 
     url: https://atom.io/download/deb
-    dest: /home/{{rem_user}}/.pkg/atom.deb
+    dest: /home/{{rem_user}}/.pkg/atom_{{atom_version}}.deb
 
 - name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/atom.deb
+  apt: deb=/home/{{rem_user}}/.pkg/atom_{{atom_version}}.deb
 
 - name: rsync .atom
   become: no
