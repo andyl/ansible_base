@@ -10,9 +10,7 @@ puts "ARGFILE: #{argfile}"
 # extract `file="<path>"` from the argfile...
 dotfile = if File.exist?(file)
             args = File.read(argfile).split(' ')
-            puts args
             arg  = args.select {|s| s.match(/file\=\"/)}
-            puts arg
             arg.first.gsub('\\','').split('=').last.gsub('"','').gsub(' ','').chomp
           else
             abort("Needs argfile (absolute path)")
