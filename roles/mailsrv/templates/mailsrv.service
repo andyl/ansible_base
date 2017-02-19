@@ -17,7 +17,7 @@ PIDFile=/tmp/mailsrv.pid
 
 WorkingDirectory=/home/aleak/g/pdev_util/bin
 
-ExecStart=chruby-exec 2.4.0 -- mailsrv
+ExecStart=/usr/local/bin/chruby-exec 2.4.0 -- /home/aleak/g/pdev_util/bin/mailsrv
  
 [Install]
 WantedBy=multi-user.target
