@@ -10,10 +10,7 @@ After=network.target network-online.target
 User=aleak
 Group=aleak
 
-Type=forking
-Restart=on-abort
-
-TimeoutStartSec=infinity
+Type=oneshot
 
 PIDFile=/tmp/mailsrv.pid
 
