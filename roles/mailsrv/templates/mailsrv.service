@@ -13,6 +13,8 @@ Group=aleak
 Type=forking
 Restart=on-abort
 
+TimeoutStartSec=infinity
+
 PIDFile=/tmp/mailsrv.pid
 
 WorkingDirectory=/home/aleak/g/pdev_util/bin
