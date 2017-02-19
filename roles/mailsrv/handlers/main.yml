@@ -1,0 +1,9 @@
+---
+- name: reload systemd
+  become: yes
+  command: systemctl daemon-reload
+
+- name: enable mailsrv
+  become: yes
+  command: systemctl enable mailsrv.service
+

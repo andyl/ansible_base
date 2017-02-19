@@ -1,0 +1,19 @@
+# {{ansible_managed}}
+# {{template_path}}  
+#
+
+[Unit]
+Description=Lightweigt mail-handling server
+After=network.target network-online.target
+ 
+[Service]
+User=aleak
+Group=aleak
+
+Type=forking
+Restart=on-abort
+
+ExecStart=/home/aleak/g/pdev_util/bin/mailsrv
+ 
+[Install]
+WantedBy=multi-user.target
