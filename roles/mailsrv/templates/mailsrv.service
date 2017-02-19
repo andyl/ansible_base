@@ -13,6 +13,7 @@ Group=aleak
 Type=forking
 Restart=on-abort
 
+PIDFile=/tmp/mailsrv.pid
 ExecStart=/home/aleak/g/pdev_util/bin/mailsrv
  
 [Install]
