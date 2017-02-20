@@ -4,18 +4,14 @@
 
 [Unit]
 Description=Lightweigt mail-handling server
-After=network.target network-online.target
  
 [Service]
 User=aleak
 Group=aleak
-
-Type=oneshot
-
+Type=simple
+TimeoutSec=infinity
 PIDFile=/tmp/mailsrv.pid
-
 WorkingDirectory=/home/aleak/g/pdev_util/bin
-
 ExecStart=/usr/local/bin/chruby-exec 2.4.0 -- /home/aleak/g/pdev_util/bin/mailsrv
  
 [Install]
