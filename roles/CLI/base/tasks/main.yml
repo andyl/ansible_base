@@ -52,6 +52,7 @@
     - debian-archive-keyring     # ssh util
     - exuberant-ctags            # vim file navigation
     - vim-gnome                  # vim!
+    - jq                         # command-line JSON processing
 
 - name: install extended packages
   become: true
