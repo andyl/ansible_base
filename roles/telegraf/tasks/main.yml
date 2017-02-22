@@ -25,7 +25,7 @@
     dest: /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
     force: no
     validate_certs: no
-  when: is_xu4
+  when: is_arm7
 
 - name: untar armhf executable
   become: no
@@ -33,7 +33,7 @@
     src:  /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
     dest: /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}
     remote_src: True
-  when: is_xu4
+  when: is_arm7
 
 - name: create symlink
   become: yes
@@ -41,7 +41,7 @@
     src:  /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}/usr/bin/telegraf
     dest: /usr/bin/telegraf
     state: link 
-  when: is_xu4
+  when: is_arm7
 
 - name: install service file
   become: true
@@ -52,7 +52,7 @@
     group: root
     mode:  "a+r"
   notify: restart telegraf
-  when: is_xu4
+  when: is_arm7
 
 - name: install config
   become: true
