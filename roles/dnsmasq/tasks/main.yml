@@ -14,6 +14,23 @@
     dest: /etc/dnsmasq.conf
   notify: restart dnsmasq
 
+- name: install /etc/systemd/system/dnsmasq.service
+  become: true
+  template:
+    src:  dnsmasq.service
+    dest: /etc/systemd/system/dnsmasq.service
+  notify: restart dnsmasq
+
+- name: remove unused files and directories
+  become: true
+  file:
+    path:  "{{item}}"
+    state: absent
+  notify: restart dnsmasq
+  with_items:
+    - /etc/init.d/dnsmasq
+    - /etc/dnsmasq.d
+
 - name: install home-dir files
   template:
     src:  "{{item}}"
