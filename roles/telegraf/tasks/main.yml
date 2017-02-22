@@ -26,3 +26,5 @@
     mode:  "a+r"
   notify: restart telegraf
 
+# wget https://dl.influxdata.com/telegraf/releases/telegraf-1.2.1_linux_armhf.tar.gz
+# tar xvfz telegraf-1.2.1_linux_armhf.tar.gz

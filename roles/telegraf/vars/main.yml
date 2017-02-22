@@ -5,7 +5,8 @@
 telegraf_cfgs: []
 
 # telegraf_version: 0.2.4     superseded on 2016-02-04
-# telegraf_version: 0.10.1-1  superseded on 2016-05-12
-# telegraf_version: 0.11.1-1  superseded on 2016-05-12
+# telegraf_version: 0.10.1-1  superseded on 2016-03-12
+# telegraf_version: 0.11.1-1  superseded on 2016-04-17
 # telegraf_version: 0.12.1-1  superseded on 2016-05-12 
-telegraf_version: 0.13.0 
+# telegraf_version: 0.13.0    superseded on 2017-02-22
+telegraf_version: 1.2.1
