@@ -2,15 +2,15 @@
 
 # apt_update
 
-- name: update the repository 
-  apt:  update_cache=yes cache_valid_time=3600   # 3600 seconds = 1 hour
-  become: true
-  
-- name: install aptitude
-  apt:  pkg=aptitude state=latest
-  become: true
-
-- name: upgrade packages
-  apt:  upgrade=yes
-  become: true
+# - name: update the repository 
+#   apt:  update_cache=yes cache_valid_time=3600   # 3600 seconds = 1 hour
+#   become: true
+#   
+# - name: install aptitude
+#   apt:  pkg=aptitude state=latest
+#   become: true
+#
+# - name: upgrade packages
+#   apt:  upgrade=yes
+#   become: true
 
