@@ -16,7 +16,7 @@
 
 - name: install home-dir files
   template:
-    src:  {{item}}
+    src:  "{{item}}"
     dest: /home/{{rem_user}}/{{item}}
   notify: restart dnsmasq
   with_items:
