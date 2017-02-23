@@ -43,5 +43,5 @@
   become: true
   blockinfile:
     block: "{{ lookup('file', '/home/aleak/g/pdev_util/inc/ansible/grafana_s3.inc') }}"
-    path:  /etc/grafana/grafana.ini
+    dest:  /etc/grafana/grafana.ini
 
