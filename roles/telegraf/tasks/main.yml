@@ -27,6 +27,14 @@
     validate_certs: no
   when: is_arm7
 
+- name: create executable directory
+  file: 
+    path:  /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}} 
+    state: directory 
+    group: "{{rem_user}}" 
+    owner: "{{rem_user}}"
+  when: is_arm7
+
 - name: untar armhf executable
   become: no
   unarchive:
@@ -38,7 +46,7 @@
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}/usr/bin/telegraf
+    src:  /home/{{rem_user}}/.pkg/telegraf-{{telegraf_version}}/telegraf/usr/bin/telegraf
     dest: /usr/bin/telegraf
     state: link 
   when: is_arm7
@@ -52,6 +60,13 @@
     group: root
     mode:  "a+r"
   notify: restart telegraf
+  when: is_arm7
+
+- name: create config directory
+  become: true
+  file: 
+    path:  /etc/telegraf
+    state: directory 
   when: is_arm7
 
 - name: install config
