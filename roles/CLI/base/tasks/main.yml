@@ -53,6 +53,7 @@
     - exuberant-ctags            # vim file navigation
     - vim-gnome                  # vim!
     - jq                         # command-line JSON processing
+    - rsync                      # file sync
 
 - name: install extended packages
   become: true
