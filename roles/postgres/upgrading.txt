@@ -1,10 +1,15 @@
+How to Upgrade a Major Version 
 
-How to Upgrade a Major Version - TLDR
+27 Feb 2017
 
-- sudo pg_dropcluster 9.4 main --stop
-- sudo pg_upgradecluster 9.3 main
-- sudo pg_dropcluster 9.3 main
+Lessons Learned:
+- forget using PG upgrade utilities 
+- wipe out all old data
+- re-install from backups
 
-https://gist.github.com/dideler/60c9ce184198666e5ab4
-http://manpages.ubuntu.com/manpages/jaunty/man8/pg_upgradecluster.8.html
+Rationale:
+- PG upgrade utilities are complicated 
+- PG upgrade utilities take a long time to learn
+- upgrade utilities are rare / one-off 
+- backup & restore should be a normal/everyday operation
 

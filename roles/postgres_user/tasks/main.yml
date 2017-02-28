@@ -2,11 +2,11 @@
 
 # postgres_user
 
-- name: create a postgres user
+- name: create a postgres user for x440
   become: true
   postgresql_user: 
-    user: "{{pg_user}}" 
-    password: "{{pg_pass}}" 
+    user: "x440" 
+    password: "simple" 
     role_attr_flags: CREATEDB,LOGIN,SUPERUSER
 
 - name: create a postgres user for bnet

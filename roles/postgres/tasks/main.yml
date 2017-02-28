@@ -46,6 +46,15 @@
     - postgresql-contrib-{{postgres_version}}
     - pgadmin3
 
+- name: force port 5432
+  lineinfile:
+    dest:   /etc/postgresql/{{postgres_version}}/main/postgresql.conf
+    line:   "port = 5432"
+    regexp: "^port ="
+  become: true
+  notify:
+    - restart postgres 
+
 - name: security settings for user creation
   lineinfile: 
     state:  present 

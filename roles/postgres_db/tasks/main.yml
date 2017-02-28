@@ -2,7 +2,7 @@
 
 # postgres_db
 
-# - name: postgres_db | create 
-#   become: true
-#   postgresql_db: name={{item}} template=template_base owner={{pg_user}}
-#   with_items: pg_dbs
+- name: postgres_db | create 
+  become: true
+  postgresql_db: name={{item}} template=template_base owner={{pg_user}}
+  with_items: pg_dbs
