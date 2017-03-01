@@ -2,7 +2,8 @@
 
 # NOTE: `influxdb_hostname` defined in group_vars...
 
-telegraf_cfgs: []
+# over-ride in inventory file for host-specific config
+telegraf_plugins: []
 
 # telegraf_version: 0.2.4     superseded on 2016-02-04
 # telegraf_version: 0.10.1-1  superseded on 2016-03-12

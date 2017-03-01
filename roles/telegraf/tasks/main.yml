@@ -69,7 +69,7 @@
     state: directory 
   when: is_arm7
 
-- name: install config
+- name: install base config
   become: true
   template: 
     src:   telegraf.conf
@@ -78,4 +78,15 @@
     group: root
     mode:  "a+r"
   notify: restart telegraf
+
+- name: install plugin configs
+  become: true
+  template: 
+    src:   telegraf_{{item}}.conf
+    dest:  /etc/telegraf.d/telegraf_{{item}}.conf 
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
+  with_items: telegraf_plugins
 
