@@ -79,6 +79,9 @@
     mode:  "a+r"
   notify: restart telegraf
 
+- debug:
+    msg: "bing {{ telegraf_plugins }} bong"
+
 - name: install plugin configs
   become: true
   template: 
@@ -88,5 +91,5 @@
     group: root
     mode:  "a+r"
   notify: restart telegraf
-  with_items: telegraf_plugins
+  with_items: "{{ telegraf_plugins|split(',') }}"
 
