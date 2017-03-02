@@ -1,29 +1,31 @@
 ---
 
-# ruby-install
+# ruby-install - install a ruby version with ruby-install
 
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
 
-- name: get package
+  - name: get ruby_install package
   become: no
   get_url:
-    url: https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
-    dest: /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
+    url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
+    dest:  /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
     force: no
 
-- name: untar package
+- name: untar ruby_install package
   become: no
-  shell: tar -xzf /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz chdir=/home/{{rem_user}}/.pkg creates=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}
+  shell: tar -xzf /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
+    chdir: /home/{{rem_user}}/.pkg 
+    creates: /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}
 
-- name: get current version
+- name: get current version of ruby_install
   shell: ruby-install --version
   register: rinst_current_version
   ignore_errors: True
   no_log: true
   changed_when: false 
 
-- name: install script
+- name: install ruby_install script
   become: yes
   command: make install chdir=/home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}} 
   when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
