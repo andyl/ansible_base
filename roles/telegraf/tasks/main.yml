@@ -79,10 +79,6 @@
     mode:  "a+r"
   notify: restart telegraf
 
-- debug:
-    msg: "bing {{item}} bong"
-  with_items: "{{ telegraf_plugins.split(',') }}"
-
 - name: install plugin configs
   become: true
   template: 
