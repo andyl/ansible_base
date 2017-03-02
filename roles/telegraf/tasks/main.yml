@@ -80,16 +80,18 @@
   notify: restart telegraf
 
 - debug:
-    msg: "bing {{ telegraf_plugins }} bong"
+    msg: "bing {{item}} bong"
+  with_items: "{{ telegraf_plugins.split(',') }}"
 
 - name: install plugin configs
   become: true
   template: 
     src:   telegraf_{{item}}.conf
-    dest:  /etc/telegraf.d/telegraf_{{item}}.conf 
+    dest:  /etc/telegraf/telegraf.d/telegraf_{{item}}.conf 
     owner: root 
     group: root
     mode:  "a+r"
   notify: restart telegraf
-  with_items: "{{ telegraf_plugins|split(',') }}"
+  with_items: "{{ telegraf_plugins.split(',') }}"
+  when: telegraf_plugins != ""
 
