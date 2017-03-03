@@ -1,0 +1,6 @@
+---
+
+lcl_root:     "/home/{{lcl_user}}/lr/X440"       
+dotenv_file:  "/home/aleak/lr/X440/.env"
+dotpwd:       "/home/{{lcl_user}}/.ansible/playbooks/.pwd"
+
