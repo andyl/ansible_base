@@ -5,7 +5,7 @@
 
 - name: add apt key
   become: true
-  apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc state=present
+  apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc state=present
 
 - name: add repository
   become: true
