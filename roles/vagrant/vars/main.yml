@@ -1,4 +1,5 @@
 ---
-# vagrant_version: 1.7.2    07 Dec 2015
-# vagrant_version: 1.7.4    01 Jan 2015
-vagrant_version: 1.8.0
+# vagrant_version: 1.7.2    superseded 07 Dec 2015
+# vagrant_version: 1.7.4    superseded 01 Jan 2015
+# vagrant_version: 1.8.0    superseded 10 Mar 2017
+vagrant_version: 1.9.2
