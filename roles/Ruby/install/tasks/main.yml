@@ -5,7 +5,7 @@
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
 
-  - name: get ruby_install package
+- name: get ruby_install package
   become: no
   get_url:
     url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
@@ -15,6 +15,7 @@
 - name: untar ruby_install package
   become: no
   shell: tar -xzf /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
+  args:
     chdir: /home/{{rem_user}}/.pkg 
     creates: /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}
 

@@ -15,12 +15,15 @@
 - name: get deb file
   become: no
   get_url: 
-    url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_i386.deb
-    dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
+    # url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_i386.deb
+    url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
+    # dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
+    dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
 - name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
+  # apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
+  apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
 # FOR ARM7 (32 bit RPi/Raspbian and Odroid-XU4)
