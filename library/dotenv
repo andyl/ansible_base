@@ -13,9 +13,7 @@ puts "ARGFILE: #{argfile}"
 # extract `file="<path>"` from the argfile...
 dotfile = if File.exist?(file)
             args = File.read(argfile).split(' ')
-            # puts "AAA", args
             arg  = args.select {|s| s.match(/^file/)}
-            puts "BBB", arg
             arg.first.gsub('\\','').split('=').last.gsub('"','').gsub(' ','').chomp
           else
             abort("Needs argfile (absolute path)")
