@@ -1,23 +1,22 @@
 #!/usr/bin/env ruby
 
-puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-abort "Usage: dotenv <argfile>" if (file = ARGV[0]).nil?
+def args
+  @lcl_args ||= begin 
+    require 'json'
+    abort "Usage: dotenv <argfile>"    if (file = ARGV[0]).nil?
+    argfile = file.chomp               # argfile is written by ansible into a tmp directory
+    abort "Missing arg file (ARGV[0])" unless File.exist?(argfile)
+    `cp #{argfile} /tmp/argfile.txt`   # for backup and debugging
+    args = File.read(argfile).split(' ')
+    hash = args.reduce({}) do |ele, acc|
+      first, last = ele.split("=")
+      acc[first] = last
+      acc 
+    end
+  end
+end
 
-argfile = ARGV[0].chomp # argfile is written by ansible into a tmp directory
-
-puts "ARGFILE: #{argfile}"
-
-`cp #{argfile} /tmp/argfile.txt`
-
-# extract the dotfile path from the argfile
-# extract `file="<path>"` from the argfile...
-dotfile = if File.exist?(file)
-            args = File.read(argfile).split(' ')
-            arg  = args.select {|s| s.match(/^file/)}
-            arg.first.gsub('\\','').split('=').last.gsub('"','').gsub(' ','').chomp
-          else
-            abort("Needs argfile (absolute path)")
-          end
+abort("Needs argfile (absolute path)") unless dotfile = args["file"]
 
 File.open("/tmp/dotenv.log", 'w') { |f| f.puts "DOTENV #{dotfile.inspect}"}
 
