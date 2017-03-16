@@ -15,7 +15,7 @@
     - debug: var=uptime
 
     - name: Show params
-      module_master:
+      base_module:
         param1: bing
         param2: bong
         param3:

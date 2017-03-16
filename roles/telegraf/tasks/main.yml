@@ -79,19 +79,18 @@
     mode:  "a+r"
   notify: restart telegraf
 
-- name: install plugin configs
-  become: true
-  template: 
-    src:   telegraf_{{item}}.conf
-    dest:  /etc/telegraf/telegraf.d/telegraf_{{item}}.conf 
-    owner: root 
-    group: root
-    mode:  "a+r"
-  notify: restart telegraf
-  with_items: "{{ telegraf_plugins.split(',') }}"
-  when: telegraf_plugins != ""
+- name: generate process list
+  live_demons:
+    candidates:
+      - postgres
+      - redis
+      - nginx
+      - memcached
+      - influx
+      - grafana
+  register: live_procs
 
-- name: install procstat configs
+- name: install procstat configs 
   become: true
   template: 
     src:   telegraf_procstat.conf
@@ -100,7 +99,18 @@
     group: root
     mode:  "a+r"
   notify: restart telegraf
-  with_items: 
-    - postgres
-  # when: telegraf_plugins != ""
+  with_items: "{{ live_procs.list }}"
+
+- name: install demon configs
+  become: true
+  template: 
+    src:   telegraf_{{item}}.conf
+    dest:  /etc/telegraf/telegraf.d/telegraf_{{item}}.conf 
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
+  with_items:    "{{ live_procs.list }}"
+  failed_when:   false
+  ignore_errors: true
 
