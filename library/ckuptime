@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Check for system uptime of the target machine.
+
+uptime=`cat /proc/uptime`
+uptime=${uptime%%.*}
+days=$(( uptime/60/60/24 ))
+hours=$(( uptime/60/60%24 ))
+uptime="$days days $hours hours"
+
+hostname=`hostname`
+
+echo -e "{\"hostname\":\"$hostname\",\"uptime\":\"$uptime\"}"
+

@@ -1,0 +1,28 @@
+---
+- hosts: gui64 
+  user:  aleak
+  tasks:
+    - name: Check uptime local
+      local_action: ckuptime
+      register: uptime_local
+
+    - debug: var=uptime_local
+
+    - name: Check uptime remote
+      action: ckuptime
+      register: uptime
+
+    - debug: var=uptime
+
+    - name: Show params
+      module_master:
+        param1: bing
+        param2: bong
+        param3:
+          - one
+          - two
+          - three
+      register: params
+
+    - debug: var=params
+
