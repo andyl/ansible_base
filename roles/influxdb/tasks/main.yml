@@ -47,10 +47,10 @@
 
 - name: create database
   influxdb_database:
-    hostname: "{{ TBD }}"
     username: "admin"
     password: "admin"
-    database_name: "localhost"
+    hostname: "localhost"
+    database_name: "{{ item }}"
     state: present
   with_items:
     - test

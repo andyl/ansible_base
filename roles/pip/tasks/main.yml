@@ -21,4 +21,5 @@
   pip: name="{{item}}" state=latest
   with_items:
     - httpie
+    - influxdb
 
