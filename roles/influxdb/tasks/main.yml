@@ -44,3 +44,18 @@
 #     - test
 #     - grafana
 #   when: ansible_distribution_version == "14.04"
+
+- name: create database
+  influxdb_database:
+    hostname: "{{ TBD }}"
+    username: "admin"
+    password: "admin"
+    database_name: "localhost"
+    state: present
+  with_items:
+    - test
+    - telegraf
+    - weather
+    - bootlog
+    - backups
+    - stocks
