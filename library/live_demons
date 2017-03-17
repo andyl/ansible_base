@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+# generates a list of live demons on the target machine
+# list of demons is comma-separated `args["candidates"]`
+
+require 'json'
+
+def args
+  @lcl_args ||= begin 
+    abort "Usage: dotenv <argfile>"    if (file = ARGV[0]).nil?
+    argfile = file.chomp               # argfile is written by ansible into a tmp directory
+    abort "Missing arg file (ARGV[0])" unless File.exist?(argfile)
+    `cp #{argfile} /tmp/argfile.txt`   # for backup and debugging
+    args = File.read(argfile).gsub(", ", ",").split(' ')
+    hash = args.reduce({}) do |acc, ele|
+      first, last = ele.split("=")
+      acc[first] = last && last.gsub("[u","").gsub(",u",",").gsub(/[\'\"\[\]]/,"")
+      acc 
+    end
+  end
+end
+
+def is_live?(procname)
+  `pgrep #{procname}`.length > 0
+end
+
+results = args["candidates"].split(",").select {|ele| is_live?(ele)}
+
+puts JSON.dump(list: results)
+
