@@ -36,14 +36,9 @@
     group: root
   notify: restart influxdb
 
-# - name: setup databases
-#   command: curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name":"{{item}}"}'
-#   register: db_create
-#   changed_when: '"exists" not in db_create.stdout' 
-#   with_items:
-#     - test
-#     - grafana
-#   when: ansible_distribution_version == "14.04"
+- name: setup admin user
+  command: /opt/influxdb/influx -execute "create user admin with password 'admin' with all privileges"
+  ignore_errors: true
 
 - name: create database
   influxdb_database:
