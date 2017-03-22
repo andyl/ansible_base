@@ -1,14 +1,14 @@
 ---
-# grafana_version: 2.0.2            superseded on 2015-08-18
-# grafana_version: 2.1.1            superseded on 2015-10-28
-# grafana_version: 2.5.0            superseded on 2015-12-14
-# grafana_version: 2.6.0            superseded on 2016-04-02
-# grafana_version: 3.0.0            superseded on 2016-05-12
-# grafana_version: 3.0.1            superseded on 2016-05-23
-# grafana_version: 3.0.3            superseded on 2016-07-12
-# grafana_version: 3.1.0-1468321182 superseded on 2016-11-09
-# grafana_version: 3.1.1-1470047149 superseded on 2016-11-22
-# grafana_version: 4.0.B-1479719016 superseded on 2016-11-29
-# grafana_version: 4.0.0-1480439068 superseded on 2016-12-08
-# grafana_version: 4.0.2-1481203731 superseded on 2017-03-22
+# grafana_version: 2.0.2 superseded 2015-08-18
+# grafana_version: 2.1.1 superseded 2015-10-28
+# grafana_version: 2.5.0 superseded 2015-12-14
+# grafana_version: 2.6.0 superseded 2016-04-02
+# grafana_version: 3.0.0 superseded 2016-05-12
+# grafana_version: 3.0.1 superseded 2016-05-23
+# grafana_version: 3.0.3 superseded 2016-07-12
+# grafana_version: 3.1.0 superseded 2016-11-09
+# grafana_version: 3.1.1 superseded 2016-11-22
+# grafana_version: 4.0.B superseded 2016-11-29
+# grafana_version: 4.0.0 superseded 2016-12-08
+# grafana_version: 4.0.2 superseded 2017-03-22
 grafana_version: 4.2.0
