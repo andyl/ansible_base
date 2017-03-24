@@ -84,10 +84,9 @@
     candidates:
       - postgres
       - redis
-      - nginx
-      - memcached
-      - influx
-      - grafana
+      # - nginx
+      # - memcached
+      # - grafana
   register: live_procs
 
 - name: install procstat configs 
