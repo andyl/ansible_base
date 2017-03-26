@@ -89,17 +89,6 @@
       # - grafana
   register: live_procs
 
-- name: install procstat configs 
-  become: true
-  template: 
-    src:   telegraf_procstat.conf
-    dest:  /etc/telegraf/telegraf.d/telegraf_procstat_{{item}}.conf 
-    owner: root 
-    group: root
-    mode:  "a+r"
-  notify: restart telegraf
-  with_items: "{{ live_procs.list }}"
-
 - name: install demon configs
   become: true
   template: 
