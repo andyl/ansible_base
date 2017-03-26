@@ -11,21 +11,25 @@
     state: directory 
     group: "{{rem_user}}"
     owner: "{{rem_user}}"
+  when: ansible_hostname == influxdb_hostname
 
 - name: get deb file
   become: no
   get_url: 
     url: http://dl.influxdata.com/influxdb/releases/influxdb_{{influx_version}}_amd64.deb
     dest: /home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+  when: ansible_hostname == influxdb_hostname
 
 - name: install package
   apt: deb=/home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+  when: ansible_hostname == influxdb_hostname
 
 - name: setup logrotate
   become: true
   template:
     src: logrotate
     dest: /etc/logrotate.d/influxdb
+  when: ansible_hostname == influxdb_hostname
 
 - name: install config file
   become: true
@@ -35,10 +39,12 @@
     owner: root 
     group: root
   notify: restart influxdb
+  when: ansible_hostname == influxdb_hostname
 
 - name: setup admin user
   command: /opt/influxdb/influx -execute "create user admin with password 'admin' with all privileges"
   ignore_errors: true
+  when: ansible_hostname == influxdb_hostname
 
 - name: create database
   influxdb_database:
@@ -48,9 +54,12 @@
     database_name: "{{ item }}"
     state: present
   with_items:
-    - test
     - telegraf
-    - weather
+    - stocks
+    - ping
+    - influx
+    - cronlog
     - bootlog
     - backups
-    - stocks
+    - weather
+  when: ansible_hostname == influxdb_hostname
