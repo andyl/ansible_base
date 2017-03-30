@@ -48,7 +48,7 @@
   when: ansible_hostname in influx_hosts
 
 - name: setup admin user
-  command: /opt/influxdb/influx -execute "create user admin with password 'admin' with all privileges"
+  command: influx -execute "create user admin with password 'admin' with all privileges"
   ignore_errors: true
   when: ansible_hostname in influx_hosts
 
