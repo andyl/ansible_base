@@ -1,0 +1,34 @@
+---
+
+# ethereum
+# https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu
+
+- name: add PPA
+  become: true
+  apt_repository: repo=ppa:ethereum/ethereum
+
+- name: install go-etherium
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - software-properties-common
+    - ethereum
+
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg 
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: get deb files
+  become: no
+  get_url: 
+    url: https://github.com/ethereum/mist/releases/download/v{{emist_version | replace("-",".")}}/{{item}}-linux64-{{emist_version}}.deb
+    dest: /home/{{rem_user}}/.pkg/Ethereum-{{item}}_{{emist_version}}.deb
+  with_items: {{emist_packages}}
+
+- name: install packages
+  apt: deb=/home/{{rem_user}}/.pkg/Ethereum-{{item}}_{{emist_version}}.deb
+  with_items: {{emist_packages}}
+
