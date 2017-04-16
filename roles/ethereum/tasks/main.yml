@@ -26,9 +26,9 @@
   get_url: 
     url: https://github.com/ethereum/mist/releases/download/v{{emist_version | replace("-",".")}}/{{item}}-linux64-{{emist_version}}.deb
     dest: /home/{{rem_user}}/.pkg/Ethereum-{{item}}_{{emist_version}}.deb
-  with_items: {{emist_packages}}
+  with_items: "{{emist_packages}}"
 
 - name: install packages
   apt: deb=/home/{{rem_user}}/.pkg/Ethereum-{{item}}_{{emist_version}}.deb
-  with_items: {{emist_packages}}
+  with_items: "{{emist_packages}}"
 
