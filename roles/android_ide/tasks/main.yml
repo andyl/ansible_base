@@ -12,6 +12,12 @@
     - libstdc++6:i386 
     - lib32z1 
     - libbz2-1.0:i386
+    - cpu-checker
+    - qemu-kvm 
+    - libvirt-bin 
+    - ubuntu-vm-builder 
+    - bridge-utils 
+    - ia32-libs-multiarch
 
 - name: create pkg dir
   file: 
