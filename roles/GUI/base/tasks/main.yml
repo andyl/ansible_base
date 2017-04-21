@@ -11,6 +11,7 @@
     - gnome-system-monitor # monitor utility
     - chromium-browser     # alternate browser
     - vlc                  # remote screen viewer
+    - eog                  # image viewer that prints
     - mpg123               # command-line music player
     - a2ps                 # needed for vim printing
     - html2ps              # needed for vim printing
