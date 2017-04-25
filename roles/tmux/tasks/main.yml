@@ -2,7 +2,7 @@
 
 # tmux
 
-- name: add PPA
+- name: add TMUX PPA
   become: true
   apt_repository: repo=ppa:pi-rho/dev 
   when: is_x86_64
@@ -45,3 +45,16 @@
     src:  wemux.conf
     dest: /usr/local/etc/wemux.conf
 
+# tmate - see tmate.io
+
+- name: add TMATE PPA
+  become: true
+  apt_repository: repo=ppa:tmate.io/archive
+  when: is_x86_64
+
+- name: install TMATE
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - tmate
+  when: is_x86_64
