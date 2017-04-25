@@ -12,14 +12,17 @@
 - name: get package
   become: no
   get_url:
-    #url:  https://github.com/phoenixframework/phoenix/releases/download/v{{phoenix_version}}/phoenix_new-{{phoenix_version}}.ez
-    url:  https://github.com/phoenixframework/archives/raw/master/phoenix_new-{{phoenix_version}}.ez
-    dest: /home/{{rem_user}}/.pkg/phoenix_new-{{phoenix_version}}.ez
+    # url:  https://github.com/phoenixframework/archives/raw/master/phoenix_new-{{phoenix_version}}.ez
+    url:  https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+    # dest: /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
+    dest: /home/{{rem_user}}/.pkg/phx_new.ez
     force: no
 
 - name: install package
   become: no
-  shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phoenix_new-{{phoenix_version}}.ez
+  # shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
+  shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phx_new.ez
   args:
-    creates: /home/{{rem_user}}/.mix/archives/phoenix_new-{{phoenix_version}}.ez
+    # creates: /home/{{rem_user}}/.mix/archives/phx_new-{{phoenix_version}}.ez
+    creates: /home/{{rem_user}}/.mix/archives/phx_new.ez
   

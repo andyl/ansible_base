@@ -4,4 +4,5 @@
 # phoenix_version: 1.1.0   superseded 08 Jan 2016
 # phoenix_version: 1.1.2   superseded 21 Feb 2016
 # phoenix_version: 1.1.4   superseded 23 Jun 2016
-phoenix_version: 1.2.0
+# phoenix_version: 1.2.0   superseded 25 Apr 2017
+phoenix_version: 1.3rc
