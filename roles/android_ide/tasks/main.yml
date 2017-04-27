@@ -35,23 +35,23 @@
 - name: create target directory
   become: no
   file: 
-    path:  /home/{{rem_user}}/.pkg/android_{{android_version}}
+    path:  /home/{{rem_user}}/d/studio/android_{{android_version}}
     state: directory
 
 - name: unzip package
   become: no
   unarchive:
     src:  /home/{{rem_user}}/.pkg/android_{{android_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/android_{{android_version}}
+    dest: /home/{{rem_user}}/.d/studio/android_{{android_version}}
     remote_src: true
 
-- name: installation symlinks
-  become: yes
-  file: 
-    src:   /home/{{rem_user}}/.pkg/android_{{android_version}}/android-studio/bin/{{item}} 
-    dest:  /usr/local/bin/{{item}} 
-    state: link
-    force: yes
-  with_items:
-    - studio.sh
-
+# - name: installation symlinks
+#   become: yes
+#   file: 
+#     src:   /home/{{rem_user}}/.pkg/android_{{android_version}}/android-studio/bin/{{item}} 
+#     dest:  /usr/local/bin/{{item}} 
+#     state: link
+#     force: yes
+#   with_items:
+#     - studio.sh
+#
