@@ -1,18 +1,5 @@
 ---
 
-# tmux - old style
-
-- name: remove TMUX PPA
-  become: true
-  apt_repository: repo=ppa:pi-rho/dev state=absent
-
-- name: remove TMUX
-  become: true
-  apt:  pkg={{item}} state=absent
-  with_items:
-    - tmux
-    - tmux-next
-
 # note: tmux.conf is in ~/g/base_util/cfg/_tmux.conf
 
 - name: install tmux executable
