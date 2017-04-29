@@ -19,7 +19,7 @@
 - name: install tmux executable
   become: true
   copy:
-    src: tmux-{{ansible_architecture}}-{{$tmux_version}}
+    src: tmux-{{ansible_architecture}}-{{tmux_version}}
     dest: /usr/bin/tmux
     mode: "a+rx"
 
