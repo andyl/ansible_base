@@ -16,8 +16,13 @@
 
 # note: tmux.conf is in ~/g/base_util/cfg/_tmux.conf
 
-- name: install TMUX for x86_64
+- name: install tmux executable
   become: true
+  copy:
+    src: tmux-{{ansible_architecture}}-{{$tmux_version}}
+    dest: /usr/bin/tmux
+    mode: "a+rx"
+  when: is_x86_64
 
 
 # tmate - see tmate.io
