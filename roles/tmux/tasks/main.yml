@@ -1,60 +1,33 @@
 ---
 
-# tmux
+# tmux - old style
 
-- name: add TMUX PPA
+- name: remove TMUX PPA
   become: true
-  apt_repository: repo=ppa:pi-rho/dev 
+  apt_repository: repo=ppa:pi-rho/dev state=absent
   when: is_x86_64
 
-- name: install TMUX
+- name: remove TMUX
   become: true
-  apt:  pkg={{item}} state=latest install_recommends=yes
+  apt:  pkg={{item}} state=absent
   with_items:
     - tmux
     - tmux-next
 
-- name: install tmux.conf
-  become: false
-  template:
-    src:  tmux.conf
-    dest: /home/{{rem_user}}/.tmux.conf
+# note: tmux.conf is in ~/g/base_util/cfg/_tmux.conf
 
-# wemux
-
-- name: install wemux github repo
+- name: install TMUX for x86_64
   become: true
-  git:
-    repo:   "https://github.com/zolrath/wemux.git"
-    dest:   "/usr/local/share/wemux"
-    depth:  1
-    force:  true
-    update: true
 
-- name: create wemux symlink to executable
-  become: true
-  file: 
-    src: /usr/local/share/wemux/wemux
-    dest: /usr/local/bin/wemux
-    mode: "a+rx"
-    state: link 
-
-- name: install wemux.conf
-  become: true
-  template:
-    src:  wemux.conf
-    dest: /usr/local/etc/wemux.conf
 
 # tmate - see tmate.io
 
 - name: add TMATE PPA
   become: true
-  apt_repository: repo=ppa:tmate.io/archive
-  when: is_x86_64
+  apt_repository: repo=ppa:tmate.io/archive 
 
 - name: install TMATE
   become: true
-  apt:  pkg={{item}} state=latest install_recommends=yes
+  apt:  pkg={{item}} state=latest
   with_items:
     - tmate
-  when: is_x86_64
