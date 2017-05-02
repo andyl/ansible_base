@@ -2,6 +2,14 @@
 
 # terminator
 #
+# May 02, 2017 - install terminator 1.9.1
+# - 1.9.1 fixes nvim cursor bugs
+# - the PPA still installs 0.98
+# - workaround:
+# -- save the 1.9.1 executable in the ansible repo
+# -- do the PPA install, to get the fonts and man files
+# -- overwrite the executable 
+#
 # Dec 03, 2015 - new terminator release - 0.98
 # - looks like the PPA is maintained again
 # - revert to PPA install method
@@ -24,6 +32,13 @@
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - terminator
+
+- name: install 1.9.1 executable
+  become: true
+  copy:
+    src: terminator_1.9.1
+    dest: /usr/bin/terminator
+    mode: "a+rx"
 
 #- name: cleanup invalid ppa
 #  become:  true
