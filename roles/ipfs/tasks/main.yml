@@ -13,22 +13,24 @@
 - name: get tar file
   become: no
   get_url: 
-    url:  https://dist.ipfs.io/{{item[0]}}/{{item[1]}}/{{item[0]}}_{{item[1]}}_linux_amd64.tar.gz
-    dest: /home/{{rem_user}}/.pkg/{{item[0]}}_{{item[1]}}.tar.gz
-  with_items: ipfs_vars
+    url:  https://dist.ipfs.io/{{item.pkg}}/{{item.vsn}}/{{item.pkg}}_{{item.vsn}}_linux-amd64.tar.gz
+    dest: /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}.tar.gz
+  with_items: "{{ipfs_vars}}"
 
-# - name: extract tar file
-#   become: no
-#   shell: mkdir -p {{item[0]}}_{{item[1]}} && tar -xf {{item[0]}}_{{item[1]}}.tar.gz -C tor-browser-linux64-{{tor_browser_version}} --strip-components=1
-#   args:
-#       chdir: /home/{{rem_user}}/.pkg
-#       creates: /home/{{rem_user}}/.pkg/{{item[0]}}_{{item[1]}}
-#   with_items: ipfs_vars
-#
-# - name: create symlink
-#   become: no
-#   file:
-#     src:  /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
-#     dest: /home/{{rem_user}}/.pkg/tor-base
-#     state: link 
-#
+- name: extract tar file
+  become: no
+  # shell: mkdir -p {{item.pkg}}_{{item.vsn}} && tar -xf {{item.pkg}}_{{item.vsn}}.tar.gz -C tor-browser-linux64-{{tor_browser_version}} --strip-components=1
+  shell: mkdir -p {{item.pkg}}_{{item.vsn}} && tar -xf {{item.pkg}}_{{item.vsn}}.tar.gz -C {{item.pkg}}_{{item.vsn}} 
+  args:
+      chdir: /home/{{rem_user}}/.pkg
+      creates: /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}
+  with_items: "{{ipfs_vars}}"
+
+- name: create symlink
+  become: yes
+  file:
+    src:  /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}/{{item.pkg}}/{{item.exe}}
+    dest: /usr/bin/{{item.exe}}
+    state: link 
+  with_items: "{{ipfs_vars}}"
+
