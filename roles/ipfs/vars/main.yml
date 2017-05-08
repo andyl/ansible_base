@@ -1,0 +1,8 @@
+---
+ipfs_vars:
+  - [ "go-ipfs_version"      , "v0.4.9-rc2"  ]
+  - [ "gx_version"           , "v0.11.0"     ]
+  - [ "ipfs-update_version"  , "v1.5.2"      ]
+  - [ "ipget_version"        , "v0.3.0"      ]
+  - [ "ipfs-see-all_version" , "v1.0.0"      ]
+  - [ "gx-go_version"        , "v1.4.0"      ]
