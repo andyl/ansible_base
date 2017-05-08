@@ -34,3 +34,11 @@
     state: link 
   with_items: "{{ipfs_vars}}"
 
+- name: create mount directories
+  become: yes
+  file:
+
+  with_items:
+    - /ipfs
+    - /ipns
+

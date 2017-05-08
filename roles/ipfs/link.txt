@@ -1,6 +1,0 @@
-https://dist.ipfs.io/go-ipfs/v0.4.9-rc2/go-ipfs_v0.4.9-rc2_linux-amd64.tar.gz
-https://dist.ipfs.io/gx/v0.11.0/gx_v0.11.0_linux-amd64.tar.gz
-https://dist.ipfs.io/ipfs-update/v1.5.2/ipfs-update_v1.5.2_linux-amd64.tar.gz
-https://dist.ipfs.io/ipget/v0.3.0/ipget_v0.3.0_linux-amd64.tar.gz
-https://dist.ipfs.io/ipfs-see-all/v1.0.0/ipfs-see-all_v1.0.0_linux-amd64.tar.gz
-https://dist.ipfs.io/gx-go/v1.4.0/gx-go_v1.4.0_linux-amd64.tar.gz
