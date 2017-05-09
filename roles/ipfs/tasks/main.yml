@@ -37,8 +37,22 @@
 - name: create mount directories
   become: yes
   file:
-
+    path:  "{{item}}"
+    state: directory
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
   with_items:
     - /ipfs
     - /ipns
+
+- name: install service file
+  become: true
+  template: 
+    src:   ipfs.service
+    dest:  /lib/systemd/system
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart ipfs
+
 
