@@ -1,6 +1,7 @@
 ---
-# ethereum_mist_version: 0-0-0 superseded 2017-03-22
-emist_version: 0-8-9
+# emist_version: 0-0-0 superseded 2017-03-22
+# emist_version: 0-8-9 superseded 2017-04-12
+emist_version: 0-8-10
 
 emist_packages:
   - Ethereum-Wallet
