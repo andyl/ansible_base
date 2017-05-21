@@ -7,6 +7,7 @@
   with_items:
     - httpie
     - pip
+    - mkdocs
   
 - name: install setuptools
   become: true
@@ -22,4 +23,6 @@
   with_items:
     - httpie
     - influxdb
+    - mkdocs
+    - mkdocs-material
 
