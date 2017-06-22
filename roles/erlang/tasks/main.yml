@@ -2,27 +2,28 @@
 
 # erlang
 
+- name: install support software
+  apt: 
+    name:  "{{item}}"
+    state: latest
+  when:    is_x86_64
+  with_items:
+    - libsctp1
+
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
 
 # FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
 # see http://www.erlang-solutions.com/resources/download.html
 
-# 24-May-2016: BUG with `:observer.start` in the 64-bit erlang.  
-# workaround is to use the 32-bit version.
-# to recover: change `i386` to `amd64`
-
 - name: get deb file
   become: no
   get_url: 
-    # url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_i386.deb
     url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
-    # dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
     dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
 - name: install package
-  # apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_i386.deb
   apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
