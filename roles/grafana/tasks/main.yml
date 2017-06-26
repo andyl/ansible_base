@@ -13,7 +13,7 @@
     - libfontconfig
   changed_when: false
     
-- name: create pkg dir
+- name: create sshchat dir
   file: 
     path: /home/{{rem_user}}/.pkg 
     state: directory 
@@ -23,7 +23,6 @@
 - name: get deb file
   become: no
   get_url: 
-    # url:  https://grafanarel.s3.amazonaws.com/builds/grafana_{{grafana_version}}_amd64.deb
     url:  https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{grafana_version}}_amd64.deb
     dest: /home/{{rem_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
 
