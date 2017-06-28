@@ -1,6 +1,7 @@
 ---
 
 # sshchat - see https://github.com/shazow/ssh-chat
+# to use: ssh <target_host> -p 2022
 
 - name: create pkg dir
   file: 
