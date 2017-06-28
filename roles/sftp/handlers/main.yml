@@ -1,0 +1,7 @@
+---
+- name: SFTP restart ssh
+  service:
+    name:  ssh
+    state: restarted
+  ignore_errors: Yes
+

@@ -1,0 +1,52 @@
+---
+
+# sftp config
+
+- name: create sftp group
+  become: yes
+  group:
+    name:  sftp_group
+    state: present
+
+- name: create sftp user
+  become: yes
+  user:
+    name:  sendfile
+    group: sftp_group
+    home:  /home/sendfile
+    # shell: /sbin/nologin
+    shell: /bin/bash
+    state: present
+    password: $6$Q1lz7yce1$/1JWew4XTjOXvc5eEcYps365h3k7QoUxX9ZA0S/ce2tpxX.6komZ5NHPG3/pjqQxDv48RqO9UimrBJBlcQol81
+    # `mkpasswd -m sha-512 <passwd>`
+  
+- name: set sftp directory permissions
+  file:
+    path:  /home/sendfile
+    owner: root
+    mode:  0750
+    group: sftp_group
+
+- name: alter sftp subsystem entry
+  become: yes
+  notify: SFTP restart ssh
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^Subsystem(\s+)sftp'
+    # line: "Subsystem sftp internal-sftp -f AUTH -l VERBOSE"
+    line: "Subsystem sftp internal-sftp"
+    state: present
+
+- name: add sshd_config block
+  notify: SFTP restart ssh
+  blockinfile:
+    dest: /etc/ssh/sshd_config
+    marker: '# {mark} SFTP-Server block'
+    block: |
+      Match Group sftp_group
+      ChrootDirectory %h
+      AllowTCPForwarding no
+      X11Forwarding no
+      ForceCommand internal-sftp 
+      PasswordAuthentication yes
+
