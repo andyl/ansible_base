@@ -21,8 +21,9 @@
   become: true
   pip: name="{{item}}" state=latest
   with_items:
-    - httpie
-    - influxdb
-    - mkdocs
-    - mkdocs-material
+    - httpie             # command-line http client
+    - influxdb           # python client for influxdb
+    - mkdocs             # static html documentation
+    - mkdocs-material    # CSS theme for mkdocs
+    - magic-wormhole     # file transfer tool for seed data
 
