@@ -9,13 +9,13 @@
 
 - name: install pdev_util for target user
   become: false
-  synchronize: src=/home/{{lcl_user}}/git/pdev_util dest=/home/{{rem_user}}/git
+  synchronize: src=/home/{{lcl_user}}/util/pdev_util dest=/home/{{rem_user}}/git
   changed_when: false 
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
 - name: run util init script
   become: false
-  shell: /home/{{rem_user}}/git/base_util/init creates=/home/{{rem_user}}/.gitconfig
+  shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.gitconfig
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
  #- name: github add_key

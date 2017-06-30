@@ -10,10 +10,10 @@
   become: false
   git:
     repo: https://github.com/andyl/base_util.git
-    dest: /home/{{rem_user}}/git/base_util
+    dest: /home/{{rem_user}}/util/base_util
   when: lcl_hostname != ansible_hostname 
 
 - name: run init script 
   become: false
-  shell: /home/{{rem_user}}/git/base_util/init creates=/home/{{rem_user}}/.hushlogin
+  shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.hushlogin
 
