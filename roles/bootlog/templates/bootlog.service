@@ -10,7 +10,7 @@ After=network-online.target
 Type=idle
 User=aleak
 Group=aleak
-ExecStart=/home/aleak/g/pdev_util/bin/bootlog 
+ExecStart=/home/aleak/git/pdev_util/bin/bootlog 
  
 [Install]
 WantedBy=multi-user.target

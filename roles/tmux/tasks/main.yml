@@ -1,6 +1,6 @@
 ---
 
-# note: tmux.conf is in ~/g/base_util/cfg/_tmux.conf
+# note: tmux.conf is in ~/git/base_util/cfg/_tmux.conf
 
 - name: install tmux executable
   become: true

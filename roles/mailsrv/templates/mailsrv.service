@@ -11,8 +11,8 @@ Group=aleak
 Type=simple
 TimeoutSec=infinity
 PIDFile=/tmp/mailsrv.pid
-WorkingDirectory=/home/aleak/g/pdev_util/bin
-ExecStart=/usr/local/bin/chruby-exec 2.4.0 -- /home/aleak/g/pdev_util/bin/mailsrv
+WorkingDirectory=/home/aleak/git/pdev_util/bin
+ExecStart=/usr/local/bin/chruby-exec 2.4.0 -- /home/aleak/git/pdev_util/bin/mailsrv
  
 [Install]
 WantedBy=multi-user.target

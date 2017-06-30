@@ -42,6 +42,6 @@
 - name: setup s3 configuration
   become: true
   blockinfile:
-    block: "{{ lookup('file', '/home/aleak/g/pdev_util/inc/ansible/grafana_s3.inc') }}"
+    block: "{{ lookup('file', '/home/aleak/git/pdev_util/inc/ansible/grafana_s3.inc') }}"
     dest:  /etc/grafana/grafana.ini
 
