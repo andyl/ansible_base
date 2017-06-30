@@ -21,6 +21,7 @@
   unarchive:
     src:  /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}.tgz
     dest: /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}
+    remote_src: true
 
 - name: create symlink
   become: yes
