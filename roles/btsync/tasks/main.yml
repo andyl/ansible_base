@@ -8,7 +8,7 @@
 - name: create user directory
   become: true
   file: 
-    path:  /home/{{rem_user}}/b
+    path:  /home/{{rem_user}}/lafs
     owner: "{{rem_user}}"
     group: "{{rem_user}}"
     mode:  0755
@@ -24,7 +24,7 @@
     recurse: yes
   with_items:
     - /home/{{rem_user}}/.sync
-    - /home/{{rem_user}}/b/.sync
+    - /home/{{rem_user}}/lafs/.sync
 
 - name: install executable
   become: true
