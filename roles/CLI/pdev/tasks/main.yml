@@ -4,12 +4,12 @@
 
 - name: create a util directory
   become: false
-  file: path=/home/{{rem_user}}/git state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{rem_user}}/util state=directory group={{rem_user}} owner={{rem_user}}
   when: lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
 - name: install pdev_util for target user
   become: false
-  synchronize: src=/home/{{lcl_user}}/util/pdev_util dest=/home/{{rem_user}}/git
+  synchronize: src=/home/{{lcl_user}}/util/pdev_util dest=/home/{{rem_user}}/util
   changed_when: false 
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
