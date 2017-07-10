@@ -41,11 +41,11 @@
   shell: echo {{chruby_global}} > ~/.ruby-version
   changed_when: false
 
-- name: remove src directory
-  become: yes
-  file:
-    path: /home/{{rem_user}}/src
-    state: absent
+# - name: remove src directory
+#   become: yes
+#   file:
+#     path: /home/{{rem_user}}/src
+#     state: absent
 
 - name: setup rbenv symlink directory
   file: path=/home/{{rem_user}}/.rbenv state=directory
