@@ -32,6 +32,6 @@
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 - name: adjust inotify watchers
   become: yes
-  path: /etc/sysctl.d
-  line: 'fs.inotify.max_user_watches=524288'
-  notify: Rerun Sysctl
+  sysctl:
+    name: fs.inotify.max_user_watches
+    value: 524288
