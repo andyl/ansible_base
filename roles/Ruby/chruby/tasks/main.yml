@@ -27,4 +27,11 @@
   become: yes
   command: make install chdir=/home/{{rem_user}}/.pkg/chruby-{{chruby_version}} 
   when:    chruby_current_version.rc != 0 or chruby_current_version.stdout.split()[2] != chruby_version
- 
+
+# required for rspec and rubymine
+# https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
+- name: adjust inotify watchers
+  become: yes
+  path: /etc/sysctl.d
+  line: 'fs.inotify.max_user_watches=524288'
+  notify: Rerun Sysctl
