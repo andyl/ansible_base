@@ -2,9 +2,22 @@
 
 # CLI/util
 
-- name: set hostname
-  become: yes
-  hostname: name={{ansible_hostname}}
+# - name: set hostname
+#   become: yes
+#   hostname: name={{ansible_hostname}}
 
-- include: setup.yml
-  when: lcl_user == "aleak"
+- name: create a util directory
+  become: false
+  file: path=/home/{{rem_user}}/util state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: install base_util for target user
+  become: false
+  git:
+    repo: https://github.com/andyl/base_util.git
+    dest: /home/{{rem_user}}/util/base_util
+  when: lcl_hostname != ansible_hostname 
+
+- name: run init script 
+  become: false
+  shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.hushlogin
+
