@@ -15,7 +15,7 @@
   git:
     repo: https://github.com/andyl/base_util.git
     dest: /home/{{rem_user}}/util/base_util
-  when: lcl_hostname != ansible_hostname
+  when: rem_user != "aleak"
 
 - name: run init script 
   become: false
