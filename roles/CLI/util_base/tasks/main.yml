@@ -20,3 +20,8 @@
   become: false
   shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.hushlogin
 
+- name: add 'source' directive to .bashrc
+  lineinfile:
+    path: /home/{{rem_user}}/.bashrc
+    line:   'source ~/.bashrc_base'
+
