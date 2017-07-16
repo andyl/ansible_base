@@ -20,6 +20,7 @@
 - name: run init script 
   become: false
   shell: /home/{{rem_user}}/util/base_util/init 
+  args:
     creates: /home/{{rem_user}}/.hushlogin
 
 - name: add 'source' directive to ~/.bashrc
@@ -27,4 +28,4 @@
     create: yes
     path: /home/{{rem_user}}/.bashrc
     block: |
-      [ -f "~/.bashrc_util" ] && source ~/.bashrc_util
+      [ -f ~/.bashrc_util ] && source ~/.bashrc_util
