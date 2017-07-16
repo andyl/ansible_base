@@ -13,9 +13,9 @@
 - name: install base_util for target user
   become: false
   git:
-    repo: https://github.com/andyl/base_util.git
-    dest: /home/{{rem_user}}/util/base_util
-  when: rem_user != "aleak"
+    repo:   https://github.com/andyl/base_util.git
+    dest:   /home/{{rem_user}}/util/base_util
+    update: no
 
 - name: run init script 
   become: false
