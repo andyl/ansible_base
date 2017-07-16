@@ -2,13 +2,13 @@
 
 # CLI/util
 
-# - name: set hostname
-#   become: yes
-#   hostname: name={{ansible_hostname}}
-
 - name: create a util directory
   become: false
-  file: path=/home/{{rem_user}}/util state=directory group={{rem_user}} owner={{rem_user}}
+  file: 
+    path: /home/{{rem_user}}/util 
+    state: directory 
+    group: "{{rem_user}}" 
+    owner: "{{rem_user}}"
 
 - name: install base_util for target user
   become: false
@@ -18,11 +18,12 @@
 
 - name: run init script 
   become: false
-  shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.hushlogin
+  shell: /home/{{rem_user}}/util/base_util/init 
+    creates: /home/{{rem_user}}/.hushlogin
 
 - name: add 'source' directive to ~/.bashrc
   blockinfile:
     create: yes
     path: /home/{{rem_user}}/.bashrc
     block: |
-      [ -f "~/.bashrc_base" ] && source ~/.bashrc_base
+      [ -f "~/.bashrc_util" ] && source ~/.bashrc_util
