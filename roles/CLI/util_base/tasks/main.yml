@@ -20,16 +20,9 @@
   become: false
   shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.hushlogin
 
-# - name: add 'source' directive to .bashrc
-#   lineinfile:
-#     create: yes
-#     path: /home/{{rem_user}}/.bashrc
-#     line: 'source ~/.bashrc_base'
-
 - name: add 'source' directive to ~/.bashrc
   blockinfile:
     create: yes
     path: /home/{{rem_user}}/.bashrc
     block: |
-      # added by ansible...
       [ -f "~/.bashrc_base" ] && source ~/.bashrc_base
