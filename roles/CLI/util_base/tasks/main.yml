@@ -22,6 +22,7 @@
 
 - name: add 'source' directive to .bashrc
   lineinfile:
+    create: yes
     path: /home/{{rem_user}}/.bashrc
-    line:   'source ~/.bashrc_base'
+    line: 'source ~/.bashrc_base'
 
