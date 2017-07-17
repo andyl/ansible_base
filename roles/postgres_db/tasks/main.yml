@@ -2,7 +2,7 @@
 
 # postgres_db
 
-- name: postgres_db | create 
+- name: create 
   become: true
   postgresql_db: 
     name:  "{{item}}" 
