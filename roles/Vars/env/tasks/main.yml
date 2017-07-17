@@ -3,9 +3,9 @@
 # vars_env
 
 - debug:
-    msg: "Printing {{dotenv_file}} Done"
+    msg: "DOTENV IS {{dotenv}} / Done"
 
 - name: load dotenv variables
   become: false
-  local_action: dotenv file={{dotenv_file}}
+  local_action: dotenv file={{dotenv}}
 
