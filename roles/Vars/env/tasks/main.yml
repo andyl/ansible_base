@@ -2,13 +2,10 @@
  
 # vars_env
 
-# - debug:
-#     msg: "Printing {{dotenv_file}} Done"
+- debug:
+    msg: "Printing {{dotenv_file}} Done"
 
 - name: load dotenv variables
   become: false
   local_action: dotenv file={{dotenv_file}}
 
-#- name: load dotpwd variables
-#  become: false
-#  local_action: dotpwd file={{dotpwd}}

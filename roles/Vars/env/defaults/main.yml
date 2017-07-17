@@ -1,6 +1,0 @@
----
-
-lcl_root:     "/home/{{lcl_user}}/src/lica"       
-dotenv_file:  "/home/aleak/src/lica/.env"
-dotpwd:       "/home/{{lcl_user}}/.ansible/playbooks/.pwd"
-
