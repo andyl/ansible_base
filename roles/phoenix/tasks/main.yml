@@ -12,7 +12,7 @@
 - name: get package
   become: no
   get_url:
-    url:  https://github.com/phoenixframework/archives/blob/master/phx_new-{{phoenix_version}}.ez
+    url:  https://github.com/phoenixframework/archives/raw/master/phx_new-{{phoenix_version}}.ez
     dest: /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
     force: no
 
