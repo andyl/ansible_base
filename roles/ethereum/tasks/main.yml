@@ -3,16 +3,16 @@
 # ethereum
 # https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu
 
-# - name: add PPA
-#   become: true
-#   apt_repository: repo=ppa:ethereum/ethereum
-#
-# - name: install go-etherium
-#   become: true
-#   apt:  pkg={{item}} state=latest install_recommends=yes
-#   with_items:
-#     - software-properties-common
-#     - ethereum
+- name: add PPA
+  become: true
+  apt_repository: repo=ppa:ethereum/ethereum
+
+- name: install go-etherium
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - software-properties-common
+    - ethereum
 
 - name: install npm packages
   npm:
