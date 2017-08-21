@@ -24,6 +24,7 @@
     group: root
     mode:  "a+r"
   notify: restart geth
+  when: ethservice == true
 
 - name: install npm packages
   npm:
