@@ -18,7 +18,7 @@
   become: true
   template: 
     src:   geth.service
-    dest:  /lib/systemd/geth
+    dest:  /lib/systemd/system
     owner: root 
     group: root
     mode:  "a+r"
