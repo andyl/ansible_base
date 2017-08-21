@@ -14,6 +14,16 @@
     - software-properties-common
     - ethereum
 
+- name: install service file
+  become: true
+  template: 
+    src:   geth.service
+    dest:  /lib/systemd/geth
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart geth
+
 - name: install npm packages
   npm:
     name: "{{item}}"

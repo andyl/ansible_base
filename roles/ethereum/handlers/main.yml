@@ -1,0 +1,7 @@
+---
+- name: restart geth
+  service: 
+    name:    geth 
+    state:   restarted 
+    enabled: yes
+  become: true
