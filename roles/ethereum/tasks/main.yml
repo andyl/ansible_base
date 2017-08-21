@@ -34,5 +34,6 @@
     - ethereumjs-testrpc
     - ethereumjs-util
     - truffle
+    - solgraph
     - coffee-script
 
