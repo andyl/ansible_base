@@ -10,7 +10,7 @@ Description=Ethereum/Geth
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/geth daemon
+ExecStart=/usr/bin/geth --rpc --ws --metrics daemon
 ExecStop=/usr/bin/pkill geth
 Restart=always
 User={{rem_user}}
