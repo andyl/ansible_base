@@ -13,6 +13,7 @@
   with_items:
     - software-properties-common
     - ethereum
+    - solc 
 
 - name: install service file
   become: true
