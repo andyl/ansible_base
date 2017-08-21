@@ -31,6 +31,8 @@
     global: yes
     state:  latest
   with_items:
+    - ethereumjs-testrpc
+    - ethereumjs-util
     - truffle
     - coffee-script
 
