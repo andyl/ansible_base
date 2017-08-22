@@ -36,5 +36,7 @@
     - ethereumjs-util
     - truffle
     - solgraph
+    - ethereum-console
     - coffee-script
+    - web3
 
