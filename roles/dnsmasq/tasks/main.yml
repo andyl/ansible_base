@@ -21,22 +21,22 @@
     dest: /etc/systemd/system/dnsmasq.service
   notify: restart dnsmasq
 
-- name: remove unused files and directories
-  become: true
-  file:
-    path:  "{{item}}"
-    state: absent
-  notify: restart dnsmasq
-  with_items:
-    - /etc/init.d/dnsmasq
-    - /etc/dnsmasq.d
-
-- name: install home-dir files
-  template:
-    src:  "{{item}}"
-    dest: /home/{{rem_user}}/{{item}}
-  notify: restart dnsmasq
-  with_items:
-    - dnsmasq.conf
-    - blocklist.conf
+# - name: remove unused files and directories
+#   become: true
+#   file:
+#     path:  "{{item}}"
+#     state: absent
+#   notify: restart dnsmasq
+#   with_items:
+#     - /etc/init.d/dnsmasq
+#     - /etc/dnsmasq.d
+#
+# - name: install home-dir files
+#   template:
+#     src:  "{{item}}"
+#     dest: /home/{{rem_user}}/{{item}}
+#   notify: restart dnsmasq
+#   with_items:
+#     - dnsmasq.conf
+#     - blocklist.conf
 
