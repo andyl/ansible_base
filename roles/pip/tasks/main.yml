@@ -17,7 +17,7 @@
   become: true
   easy_install: name=pip state=latest
 
-- name: install pip modules
+- name: install pip modules (all platforms)
   become: true
   pip: name="{{item}}" state=latest
   with_items:
@@ -25,5 +25,11 @@
     - influxdb           # python client for influxdb
     - mkdocs             # static html documentation
     - mkdocs-material    # CSS theme for mkdocs
+
+- name:  install pip modules (x86_64)
+  become: true
+  pip: name="{{item}}" state=latest
+  when:  is_x86_64
+  with_items:
     - magic-wormhole     # file transfer tool for seed data
 
