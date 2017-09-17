@@ -6,6 +6,7 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
+    - language-pack-en-base      # american time zones
     - python-software-properties # required by apt-get
     - python-pip                 # required by ansible
     - python-dev                 # required by ansible
