@@ -36,7 +36,7 @@
     - ethereumjs-util
     - truffle
     - ethereum-console
-    - coffee-script
+    - coffeescript
 
 # mist
 

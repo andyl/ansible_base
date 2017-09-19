@@ -41,5 +41,5 @@
   npm: name={{item}} state=latest global=yes
   with_items:
     - brunch
-    - coffee-script
+    - coffeescript
 
