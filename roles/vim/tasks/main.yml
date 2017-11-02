@@ -6,15 +6,16 @@
   apt:  pkg={{item}} state=absent
   with_items:
     - vim-gnome
+    - vim
 
-- name: add PPA
+- name: vim PPA
   become: true
-  apt_repository: repo=ppa:jonathonf/vim
+  apt_repository: repo=ppa:jonathonf/vim state=absent
 
 - name: install 
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
-    - vim                        # the vim program
+    - vim-nox                    # the vim program
     - exuberant-ctags            # vim file navigation
 
