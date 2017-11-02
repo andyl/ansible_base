@@ -1,0 +1,20 @@
+---
+
+# vim8
+
+- name: remove old vim
+  apt:  pkg={{item}} state=absent
+  with_items:
+    - vim-gnome
+
+- name: add PPA
+  become: true
+  apt_repository: repo=ppa:jonathonf/vim
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - vim                        # the vim program
+    - exuberant-ctags            # vim file navigation
+
