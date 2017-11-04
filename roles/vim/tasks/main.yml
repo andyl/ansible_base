@@ -5,7 +5,7 @@
 - name: remove old vim
   apt:  pkg={{item}} state=absent purge=yes
   with_items:
-    - vim-gnome
+    - vim 
     - vim-nox
 
 - name: vim PPA cleanup 
@@ -13,18 +13,18 @@
   apt_repository: repo={{item}} state=absent
   with_items:
     - ppa:jonathonf/vim
-    # - ppa:pi-rho/dev
-
-- name: vim PPA install
-  become: true
-  apt_repository: repo={{item}} 
-  with_items:
     - ppa:pi-rho/dev
+
+# - name: vim PPA install
+#   become: true
+#   apt_repository: repo={{item}} 
+#   with_items:
+#     - ppa:pi-rho/dev
 
 - name: install 
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
-    - vim 
+    - vim-gnome
     - exuberant-ctags            # vim file navigation
 
