@@ -4,11 +4,14 @@
 
 - name: remove old PPA
   become: true
-  apt_repository: repo=ppa:rudenko/neovim state=absent
+  apt_repository: repo={{item}} state=absent
+  with_items:
+    - ppa:rudenko/neovim
+    - ppa:neovim-ppa/unstable
 
 - name: add PPA
   become: true
-  apt_repository: repo=ppa:neovim-ppa/unstable
+  apt_repository: repo=ppa:neovim-ppa/stable
 
 - name: install 
   become: true
