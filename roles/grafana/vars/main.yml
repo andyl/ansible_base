@@ -13,4 +13,5 @@
 # grafana_version: 4.0.2 superseded 2017-03-22
 # grafana_version: 4.2.0 superseded 2017-05-24
 # grafana_version: 4.3.1 superseded 2017-11-02
-grafana_version: 4.6.1
+# grafana_version: 4.6.1 superseded 2017-11-16
+grafana_version: 4.6.2
