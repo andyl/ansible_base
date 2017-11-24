@@ -2,12 +2,12 @@
 
 # postgres_user
 
-- name: create a postgres user 
-  become: true
-  postgresql_user: 
-    user: "{{pg_user}}"
-    password: "{{pg_pass}}" 
-    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+# - name: create a postgres user 
+#   become: true
+#   postgresql_user: 
+#     user: "{{pg_user}}"
+#     password: "{{pg_pass}}" 
+#     role_attr_flags: CREATEDB,LOGIN,SUPERUSER
 
 - name: create a generic postgres user
   become: true
