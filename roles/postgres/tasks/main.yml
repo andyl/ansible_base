@@ -44,7 +44,6 @@
     - python-psycopg2
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
-    - pgadmin3
 
 - name: force port 5432
   lineinfile:
