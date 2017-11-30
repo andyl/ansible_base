@@ -68,7 +68,6 @@
     - bootlog
     - backups
     - weather
-    - bugm_events
-    - bugm_access
+    - bugm_log
     - bugm_stats
   when: ansible_hostname in influx_hosts
