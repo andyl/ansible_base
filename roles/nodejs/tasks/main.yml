@@ -22,6 +22,7 @@
     - 4
     - 5
     - 6
+    - 7
 
 - name: add repository
   apt_repository:
@@ -29,7 +30,7 @@
     state: present
     update_cache: yes
   with_items:
-    - 7
+    - 8
 
 - name: add nodejs and npm
   apt: pkg={{item}} state=latest force=yes
