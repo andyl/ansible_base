@@ -4,3 +4,4 @@ ruby_install_version: 0.6.1
 chruby_global: 2.5.0
 chruby_rubies:
   - 2.5.0
+  - 2.4.3
