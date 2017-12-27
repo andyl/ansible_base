@@ -17,6 +17,7 @@
     - tmuxinator
     - faraday
     - multipart-post
+    - did_you_mean
 
 - name: install extended gems
   become: no
