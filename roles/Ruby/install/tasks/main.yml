@@ -41,9 +41,13 @@
   shell: echo {{chruby_global}} > ~/.ruby-version
   changed_when: false
 
-- name: remove src directories
+- name: remove files and directories
   become: yes
-  shell: "/bin/rm -rf /home/{{rem_user}}/src/ruby-*"
+  shell: "/bin/rm -rf /home/{{rem_user}}/{{item}}"
+  with_items:
+    - src/ruby-*
+    - .rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/did_you_mean*
+    - .rubies/ruby-2.5.0/lib/ruby/specifications/did_you_mean*
 
 - name: setup rbenv symlink directory
   file: path=/home/{{rem_user}}/.rbenv state=directory
