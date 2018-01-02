@@ -43,6 +43,4 @@
 - name: install nerves package
   become: no
   shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/nerves_bootstrap.ez
-  # args:
-  #   creates: /home/{{rem_user}}/.mix/archives/phoenix_new-{{phoenix_version}}.ez
   
