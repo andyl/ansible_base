@@ -10,4 +10,4 @@
   blockinfile:
     path: /etc/hosts
     block: |
-      127.0.0.1 {{lcl_sysname}}
+      127.0.0.1 {{lcl_hostname}}
