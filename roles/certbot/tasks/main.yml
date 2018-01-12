@@ -1,6 +1,11 @@
 ---
 
-# lets_crypt
+# certbot
+
+# this just installs the lets_encrypt certbot client
+# 
+# after the application is installed and nginx is configured,
+# provision the SSL certs with the certbot command
 
 - name: install certbot ppa
   become: true
