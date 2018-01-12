@@ -4,10 +4,10 @@
 
 - name: set sysname
   hostname:
-    name: "{{ lcl_hostname }}"
+    name: "{{ tgt_sysname }}"
 
 - name: add 'source' directive to /etc/hosts
   blockinfile:
     path: /etc/hosts
     block: |
-      127.0.0.1 {{ lcl_hostname }}
+      127.0.0.1 {{ tgt_sysname }}

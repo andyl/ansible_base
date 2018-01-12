@@ -1,6 +1,6 @@
 ---
  
-# vars_lclhost
+# vars_hostname
 
 - name: get local hostname
   local_action: command hostname
@@ -12,9 +12,9 @@
     lcl_hostname: "{{ hostname.stdout }}"
   changed_when: false
 
-- name: set lcl_sysname variable
+- name: set tgt_sysname variable
   set_fact: 
-    lcl_sysname: "{{ '-'.join(lcl_hostname.split('.')[0:-1][::-1]) }}"
+    tgt_sys1: "{{ ansible_hostname }}"
+    tgt_sys2: "{{ '-'.join(ansible_hostname.split('.')[0:-1][::-1]) }}"
   changed_when: false
-
 
