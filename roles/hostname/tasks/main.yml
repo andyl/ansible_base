@@ -6,7 +6,7 @@
   hostname:
     name: "{{ tgt_sysname }}"
 
-- name: add 'source' directive to /etc/hosts
+- name: add sysname to /etc/hosts
   blockinfile:
     path: /etc/hosts
     block: |

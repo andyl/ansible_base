@@ -1,6 +1,6 @@
 ---
 
-# lets_encrypt
+# lets_crypt
 
 - name: install certbot ppa
   become: true
