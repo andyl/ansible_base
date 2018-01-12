@@ -29,4 +29,3 @@
     path: /home/{{rem_user}}/.bashrc
     block: |
       [ -f ~/.bashrc_util ] && source ~/.bashrc_util
-      [ -f ~/.fzf.bash ] && source ~/.fzf.bash

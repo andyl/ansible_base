@@ -8,6 +8,13 @@
   changed_when: false
 
 - name: set lcl_hostname variable
-  set_fact: lcl_hostname="{{hostname.stdout}}"
+  set_fact: 
+    lcl_hostname: "{{ hostname.stdout }}"
   changed_when: false
+
+- name: set lcl_sysname variable
+  set_fact: 
+    lcl_sysname: "{{ "-".join(lcl_hostname.split(".")[0:-1][::-1]) }}"
+  changed_when: false
+
 
