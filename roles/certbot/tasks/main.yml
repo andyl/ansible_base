@@ -20,3 +20,14 @@
     - software-properties-common
     - python-certbot-nginx
 
+- name: bingbing
+  become: true
+  cezbot:
+    bing: "asdf"
+    bong: "qwer"
+    boom: "{{item}}"
+  with_items:
+    - a
+    - b
+    - c
+
