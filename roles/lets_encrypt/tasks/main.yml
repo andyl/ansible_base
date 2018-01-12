@@ -1,0 +1,17 @@
+---
+
+# lets_encrypt
+
+- name: install certbot ppa
+  become: true
+  apt_repository: repo={{item}} 
+  with_items:
+    - ppa:certbot/certbot
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - software-properties-common
+    - python-certbot-nginx
+
