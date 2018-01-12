@@ -9,7 +9,7 @@
  
 - name: update timezone if necessary
   become: true
-  when: current_zone.stdout != "{{my_tzone}}"
+  when: "{{ current_zone.stdout }}" != "{{my_tzone}}"
   copy: 
     content: "{{my_tzone}}"
     dest:    /etc/timezone
