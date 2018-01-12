@@ -12,9 +12,14 @@
     lcl_hostname: "{{ hostname.stdout }}"
   changed_when: false
 
+- name: set tgt_sysname_base
+  set_fact:
+    tgt_basename: "{{ inventory_hostname.replace('.net', '').replace('.com', '').replace('.info', '').replace('.org', '') }}"
+  changed_when: false
+
 - name: set tgt_sysname variable
   set_fact: 
-    tgt_sys1: "{{ ansible_hostname }}"
-    tgt_sys2: "{{ '-'.join(ansible_hostname.split('.')[0:-1][::-1]) }}"
+    tgt_sysname: "{{ inventory_hostname.replace('.', '-') }}"
+    tgt_sysname_reverse: "{{ '-'.join(tgt_basename.split('.')[::-1]) }}"
   changed_when: false
 
