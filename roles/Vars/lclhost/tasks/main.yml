@@ -14,7 +14,7 @@
 
 - name: set lcl_sysname variable
   set_fact: 
-    lcl_sysname: "{{ "-".join(lcl_hostname.split(".")[0:-1][::-1]) }}"
+    lcl_sysname: "{{ '-'.join(lcl_hostname.split('.')[0:-1][::-1]) }}"
   changed_when: false
 
 
