@@ -20,14 +20,6 @@
     - software-properties-common
     - python-certbot-nginx
 
-- name: bingbing
-  become: true
-  cezbot:
-    bing: "asdf"
-    bong: "qwer"
-    boom: "{{item}}"
-  with_items:
-    - a
-    - b
-    - c
+- name: create SSL certs
+  shell: "/home/{{rem_user}}/util/pdev_util/bin/run_certbot {{inventory_hostname}} {{host_subdomains}}"
 
