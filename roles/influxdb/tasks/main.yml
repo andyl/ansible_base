@@ -11,7 +11,7 @@
     state: directory 
     group: "{{rem_user}}"
     owner: "{{rem_user}}"
-  when: ansible_hostname == influxdb_hostname
+  when: ansible_hostname in influx_hosts
 
 - name: get deb file
   become: no
