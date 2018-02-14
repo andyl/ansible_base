@@ -19,6 +19,7 @@
     - libmagickwand-dev          # image processing
     - imagemagick                # image processing
     - graphviz                   # diagram generation
+    - gnuplot                    # graph generation
     - htop                       # monitoring utility
     - atop                       # monitoring utility
     - ncdu                       # monitoring utility
