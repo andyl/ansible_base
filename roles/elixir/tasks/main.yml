@@ -12,6 +12,7 @@
     url:  https://github.com/elixir-lang/elixir/releases/download/v{{elixir_version}}/Precompiled.zip
     dest: /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}.zip
     force: no
+    validate_certs: no
 
 - name: create target directory
   become: no
@@ -71,6 +72,7 @@
   get_url: 
     url:  https://github.com/elixir-lang/elixir/archive/v{{elixir_version}}.tar.gz
     dest: /home/{{rem_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
+    validate_certs: no
   when: is_x86_64
 
 - name: expand Elixir tar file
