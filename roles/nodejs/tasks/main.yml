@@ -43,4 +43,5 @@
   with_items:
     - brunch
     - coffeescript
+    - fkill-cli 
 
