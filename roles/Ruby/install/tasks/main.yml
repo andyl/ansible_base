@@ -46,8 +46,8 @@
   shell: "/bin/rm -rf /home/{{rem_user}}/{{item}}"
   with_items:
     - src/ruby-*
-    - .rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/did_you_mean*
-    - .rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/specifications/did_you_mean*
+    # - .rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/did_you_mean*
+    # - .rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/specifications/did_you_mean*
 
 - name: setup rbenv symlink directory
   file: path=/home/{{rem_user}}/.rbenv state=directory
