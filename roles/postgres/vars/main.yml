@@ -3,12 +3,13 @@
 # postgres_version: 9.5    superseded 27 Feb 2017
 # postgres_version: 9.6    superseded 21 Nov 2017
 
-postgres_version: 10
+# postgres_version: 10
+postgres_version: 9.1
 old_postgres_versions:
-  - 9.1
   - 9.2
   - 9.3
   - 9.4
   - 9.5
   - 9.6
+  - 10
 
