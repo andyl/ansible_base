@@ -18,8 +18,8 @@
     - faraday
     - multipart-post
     - did_you_mean
-    - ruby-debug-ide     # used by vscode
-    - debase             # used by vscode
+    # - ruby-debug-ide     # used by vscode
+    # - debase             # used by vscode
 
 - name: install extended gems
   become: no
