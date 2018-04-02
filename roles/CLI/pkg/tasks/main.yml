@@ -55,12 +55,12 @@
     - jq                         # command-line JSON processing
     - rsync                      # file sync
 
-- name: install extended packages
-  become: true
-  apt:  pkg={{item}} state=latest install_recommends=no
-  when: not_xu4
-  with_items:
-    - speedtest-cli              # network performance testing
+# - name: install extended packages
+#   become: true
+#   apt:  pkg={{item}} state=latest install_recommends=no
+#   when: not_xu4
+#   with_items:
+    # - speedtest-cli              # network performance testing
 
 - name: remove packages
   become: true
