@@ -27,3 +27,12 @@
 - name: install neovim gem
   become: no
   gem: name=neovim state=latest
+
+- name: install neovim package for python
+  become: yes
+  pip: name=neovim state=latest
+
+- name: install neovim package for node
+  become: yes
+  npm: name=neovim state=latest global=yes
+
