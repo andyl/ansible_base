@@ -11,6 +11,7 @@
     url:  https://github.com/postmodern/chruby/archive/v{{chruby_version}}.tar.gz
     dest: /home/{{rem_user}}/.pkg/chruby-{{chruby_version}}.tar.gz
     force: no
+    validate_certs: false
 
 - name: untar package
   become: no
