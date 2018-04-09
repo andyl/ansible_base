@@ -10,6 +10,7 @@
   get_url:
     url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
     dest:  /home/{{rem_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
+    validate_certs: false
     force: no
 
 - name: untar ruby_install package
