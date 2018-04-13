@@ -14,6 +14,6 @@
 - name: install package
   become: true
   apt: 
-    pkg: virtualbox-5.1 
+    pkg: virtualbox-5.2 
     state: latest
     update_cache: yes
