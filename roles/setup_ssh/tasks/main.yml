@@ -21,7 +21,7 @@
     line:   "KeepAlive yes" 
     create: yes
 
-- name: ssh keys for {{rem_user}}
-  authorized_key:
-    user: "{{rem_user}}"
-    key: "{{ lookup('file', '/home/aleak/.ssh/id_rsa.pub') }}"
+# - name: ssh keys for {{rem_user}}
+#   authorized_key:
+#     user: "{{rem_user}}"
+#     key: "{{ lookup('file', '/home/aleak/.ssh/id_rsa.pub') }}"
