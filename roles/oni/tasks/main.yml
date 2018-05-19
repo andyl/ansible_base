@@ -14,6 +14,7 @@
   get_url: 
     url:  https://github.com/onivim/oni/releases/download/v{{oni_version}}/Oni-{{oni_version}}-amd64-linux.deb
     dest: /home/{{rem_user}}/.pkg/oni_{{oni_version}}.deb
+    validate_certs: false
   when: is_x86_64
 
 - name: install oni package
