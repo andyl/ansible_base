@@ -1,4 +1,6 @@
 ---
-tmux_version: 2.4
+# tmux_version: 2.4 superseded 19-May-2018
+
+tmux_version: 2.7
 
 tmate_version: 2.2.1
