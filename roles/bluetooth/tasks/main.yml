@@ -1,0 +1,11 @@
+---
+ 
+# bluetooth - for desktop machines
+
+- name: install bluetooth utilities
+  apt: pkg={{item}} state=latest
+  with_items:
+    - bluez               # bluetooth demon
+    - bluez-utils         # command-line client
+    - blueman             # xubuntu GUI client
+
