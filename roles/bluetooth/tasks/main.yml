@@ -8,4 +8,5 @@
     - bluez               # bluetooth demon
     - bluez-tools         # command-line client
     - blueman             # xubuntu GUI client
+    - pulseaudio-module-bluetooth
 
