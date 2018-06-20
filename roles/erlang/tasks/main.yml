@@ -59,7 +59,7 @@
 # GET OTP SOURCE FOR DOCCO AND CODE LOOKUPS
 
 - name: create package cache dir
-  file: path=/home/{{rem_user}}/.beam_src state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}} state=directory group={{rem_user}} owner={{rem_user}}
   when: is_x86_64
 
 - name: download OTP tar file
@@ -73,13 +73,13 @@
 - name: expand OTP tar file
   unarchive:
     src:  /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
-    dest: /home/{{rem_user}}/.beam_src
+    dest: /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}
     remote_src: true
   when: is_x86_64
 
 - name: create symlink to OTP source dir
   file: 
-    src:  /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}
+    src:  /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}/otp
     dest: /home/{{rem_user}}/.beam_src/otp
     mode: "a+rx"
     state: link 
