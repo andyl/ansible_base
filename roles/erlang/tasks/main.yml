@@ -65,7 +65,7 @@
 - name: download OTP tar file
   become: no
   get_url: 
-    url:  https://github.com/erlang/otp/archive/OTP-{{otp_version}}.tar.gz
+    url:  https://github.com/erlang/otp/releases/download/OTP-{{otp_version}}-bundle.tar.gz
     dest: /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
   when: is_x86_64
 
