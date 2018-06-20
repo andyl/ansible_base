@@ -67,6 +67,7 @@
   get_url: 
     url:  https://github.com/erlang/otp/releases/download/OTP-{{otp_version}}-bundle.tar.gz
     dest: /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    validate_certs: false
   when: is_x86_64
 
 - name: expand OTP tar file
