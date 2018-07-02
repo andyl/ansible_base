@@ -1,0 +1,15 @@
+---
+
+# vault
+
+- name: create pkg dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get deb file
+  become: no
+  get_url: 
+    url: https://releases.hashicorp.com/vault/{{vault_version}}/vault_{{vault_version}}_x86_64.deb
+    dest: /home/{{rem_user}}/.pkg/vault_{{vault_version}}.deb
+
+- name: install package
+  apt: deb=/home/{{rem_user}}/.pkg/vault_{{vault_version}}.deb
