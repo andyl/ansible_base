@@ -3,21 +3,33 @@
 # consul
 
 - name: create pkg dir
-  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+  file: 
+    path: /home/{{rem_user}}/.pkg/consul_{{consul_version}}
+    state: directory 
+    group: "{{rem_user}}" 
+    owner: "{{rem_user}}"
 
-- name: get deb file
+- name: get zip file
   become: no
   get_url: 
-    url: https://releases.hashicorp.com/consul/{{consul_version}}/consul_{{consul_version}}_x86_64.deb
-    dest: /home/{{rem_user}}/.pkg/consul_{{consul_version}}.deb
+    url:  https://releases.hashicorp.com/consul/{{consul_version}}/consul_{{consul_version}}_linux_amd64.zip
+    dest: /home/{{rem_user}}/.pkg/consul_{{consul_version}}.zip 
+    force: no
     validate_certs: false
 
-- name: unzip package
+- name: unzip file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/elixir-{{elixir_version}}
+    src:  /home/{{rem_user}}/.pkg/consul_{{consul_version}}.zip
+    dest: /home/{{rem_user}}/.pkg/consul_{{consul_version}}
     remote_src: true
 
-- name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/consul_{{consul_version}}.deb
+- name: installation symlinks
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/.pkg/consul_{{consul_version}}/{{item}} 
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - consul
