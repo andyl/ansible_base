@@ -105,16 +105,33 @@
   with_items:
     - nats
 
+# install config file
+
+- name: create config directory
+  become: true
+  file: 
+    path: /etc/nats
+    state: directory 
+
+- name: install config file
+  become: true
+  template: 
+    src:   nats.conf
+    dest:  /etc/nats
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart nats
+
 # install service file
 
 - name: install service file
   become: true
   template: 
-    src:   gnatsd.service
+    src:   nats.service
     dest:  /lib/systemd/system
     owner: root 
     group: root
     mode:  "a+r"
-  notify: restart gnatsd
-
+  notify: restart nats
 
