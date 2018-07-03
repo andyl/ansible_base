@@ -4,7 +4,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg 
+    path: /home/{{rem_user}}/.pkg/vault_{{vault_version}}
     state: directory 
     group: "{{rem_user}}" 
     owner: "{{rem_user}}"
@@ -24,5 +24,3 @@
     dest: /home/{{rem_user}}/.pkg/vault_{{vault_version}}
     remote_src: true
 
-- name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/vault_{{vault_version}}.deb
