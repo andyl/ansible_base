@@ -1,7 +1,7 @@
 ---
-- name: restart gnatsd
+- name: restart nats
   service: 
-    name:    gnatsd 
+    name:    nats 
     state:   restarted 
     enabled: yes
   become: true

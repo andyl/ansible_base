@@ -1,13 +1,13 @@
 # {{ansible_managed}}
 # {{template_path}}
 
-# gnatsd
+# nats streaming server
 
 [Unit]
-Description=NATS server
+Description=Nats Streaming Server
 
 [Service]
-ExecStart=/usr/local/bin/gnatsd
+ExecStart=/usr/local/bin/nats-streaming-server
 Restart=on-failure
 
 [Install]
