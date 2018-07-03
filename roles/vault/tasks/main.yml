@@ -12,7 +12,7 @@
 - name: get zip file
   become: no
   get_url: 
-    url:  https://releases.hashicorp.com/vault/vault_{{vault_version}}/vault_{{vault_version}}_linux_amd64.zip
+    url:  https://releases.hashicorp.com/vault/{{vault_version}}/vault_{{vault_version}}_linux_amd64.zip
     dest: /home/{{rem_user}}/.pkg/vault_{{vault_version}}.zip 
     force: no
     validate_certs: false
