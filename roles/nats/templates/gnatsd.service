@@ -1,0 +1,14 @@
+# {{ansible_managed}}
+# {{template_path}}
+
+# gnatsd
+
+[Unit]
+Description=NATS server
+
+[Service]
+ExecStart=/usr/local/bin/gnatsd
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

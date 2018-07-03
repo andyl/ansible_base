@@ -29,7 +29,7 @@
 - name: install gnatsd symlinks
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/nats/gnatsd-v{{gnatsd_version}}-linux-386/{{item}} 
+    src:   /home/{{rem_user}}/.pkg/nats/gnatsd-v{{gnatsd_version}}-linux-amd64/{{item}} 
     dest:  /usr/local/bin/{{item}} 
     state: link
     force: yes
@@ -104,3 +104,17 @@
   gem: name="{{item}}"
   with_items:
     - nats
+
+# install service file
+
+- name: install service file
+  become: true
+  template: 
+    src:   gnatsd.service
+    dest:  /lib/systemd/system
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart gnatsd
+
+
