@@ -20,8 +20,8 @@
 - name: unzip file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/vault-{{elixir_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/vault-{{elixir_version}}
+    src:  /home/{{rem_user}}/.pkg/vault_{{vault_version}}.zip
+    dest: /home/{{rem_user}}/.pkg/vault_{{vault_version}}
     remote_src: true
 
 - name: install package
