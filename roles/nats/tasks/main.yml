@@ -72,6 +72,13 @@
 
 # nats-streaming-server
 
+- name: create data dir
+  file: 
+    path: /home/{{rem_user}}/var/nats
+    state: directory 
+    group: "{{rem_user}}" 
+    owner: "{{rem_user}}"
+
 - name: get nats-ss zip file
   become: no
   get_url: 
@@ -101,9 +108,13 @@
 
 - name: install nats gems
   become: no
-  gem: name="{{item}}"
+  gem: 
+    name:  "{{item}}"
+    state: latest
   with_items:
     - nats
+    - nats-pure
+    - nats-streaming
 
 # install config file
 
