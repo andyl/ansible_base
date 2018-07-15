@@ -3,26 +3,41 @@
 # docker
 # see http://docs.docker.io/en/latest/installation/ubuntulinux/
 
+- name: install base packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - apt-transport-https 
+    - ca-certificates 
+
 - name: remove old docker
   apt:  pkg={{item}} state=absent purge=true
   with_items:
     - docker.io
     - lxc-docker
+    - docker
 
 - name: add repository key
   apt_key:
-    keyserver: 'hkp://pgp.mit.edu:80'
-    id: 58118E89F3A912897C070ADBF76221572C52609D
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    state: present
+
+- name: remove old repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    update_cache: yes
+    state: absent
 
 - name: add repository
   apt_repository:
-    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    repo: 'deb https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} main'
     update_cache: yes
 
 - name: install docker
   apt: pkg={{item}} state=latest
   with_items:
-    - docker-engine
+    # - docker-engine
+    - docker-ce
 
 - name: install docker compose
   get_url:
