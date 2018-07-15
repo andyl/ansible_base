@@ -36,7 +36,6 @@
 - name: install docker
   apt: pkg={{item}} state=latest
   with_items:
-    # - docker-engine
     - docker-ce
 
 - name: install docker compose
