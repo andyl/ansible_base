@@ -30,9 +30,12 @@
 
 - name: add user to docker group
   user:
-    name: "{{rem_user}}"
+    name: "{{item}}"
     groups: docker
     append: yes
+  with_items:
+    - aleak
+    - "{{rem_user}}"
 
 - name: add repository
   apt_repository:
