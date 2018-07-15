@@ -47,6 +47,13 @@
   with_items:
     - docker-ce
 
+- name: create auto-complete symlink for dkr alias
+  become: true
+  file: 
+    src:  /usr/share/bash-completion/completions/docker
+    dest: /usr/share/bash-completion/completions/dkr
+    state: link 
+
 - name: install docker compose
   get_url:
     url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
