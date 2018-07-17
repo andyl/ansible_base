@@ -1,5 +1,6 @@
 ---
-# atom_version: 1.13   superseded on 08-Feb-2017
-# atom_version: 1.14   superseded on 02-Jan-2018
-# atom_version: 1.23.1 superseded on 19-Mar-2018
-atom_version: 1.25.0
+# atom_version: 1.13   superseded on 2017-02-08
+# atom_version: 1.14   superseded on 2018-01-02
+# atom_version: 1.23.1 superseded on 2018-03-19
+# atom_version: 1.25.0 superseded on 2018-07-16
+atom_version: 1.28.2
