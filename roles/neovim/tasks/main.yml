@@ -8,21 +8,34 @@
   with_items:
     - ppa:rudenko/neovim
     - ppa:neovim-ppa/unstable
+    - ppa:neovim-ppa/stable
 
-- name: add PPA
-  become: true
-  apt_repository: repo=ppa:neovim-ppa/stable
-
-- name: install 
-  become: true
-  apt:  pkg={{item}} state=latest install_recommends=yes
+- name: create pkg dir
+  file: 
+    path:  "/home/{{rem_user}}/{{item}}"
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
   with_items:
-    - neovim
+    - ".pkg"
+    - ".config"
 
-- name: create config directory
-  file:
-    path: /home/{{rem_user}}/.config
-    state: directory
+- name: get executable file
+  become: no
+  get_url: 
+    url:  https://github.com/neovim/neovim/releases/download/v{{nvim_version}}/nvim.appimage
+    dest: /home/{{rem_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    validate_certs: false
+    mode: "a+rx"
+
+- name: installation symlink
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    dest:  /usr/local/bin/nvim
+    state: link
+    force: yes
+    mode:  "a+rx"
 
 - name: install neovim gem
   become: no
