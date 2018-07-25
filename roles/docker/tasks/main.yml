@@ -59,3 +59,12 @@
     url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: 'a+rx'
+
+- name: install docker-gen
+  become: true
+  copy:
+    src:  docker-gen
+    dest: /usr/local/bin/docker-gen
+    mode: "a+rx"
+
+
