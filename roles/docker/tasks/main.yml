@@ -54,11 +54,31 @@
     dest: /usr/share/bash-completion/completions/dkr
     state: link 
 
-- name: install docker compose
+# ----- docker compose -----
+
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg/docker
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: download docker_compose package
   get_url:
     url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
+    dest: /home/{{rem_user}}/.pkg/docker_compose_{{docker_compose_version}}
     mode: 'a+rx'
+    validate_certs: false
+
+- name: create symlink for docker-compose executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/docker-compose
+    src:   /home/{{rem_user}}/.pkg/docker_compose_{{docker_compose_version}}
+
+# ----- docker-gen -----
 
 - name: install docker-gen
   become: true
@@ -66,5 +86,4 @@
     src:  docker-gen
     dest: /usr/local/bin/docker-gen
     mode: "a+rx"
-
 
