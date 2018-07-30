@@ -20,6 +20,6 @@
     - software-properties-common
     - python-certbot-nginx
 
-- name: create SSL certs
-  shell: "/home/{{rem_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
+# - name: create SSL certs
+#   shell: "/home/{{rem_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
 
