@@ -16,6 +16,10 @@
   set_fact: ruby_version="2.3"
   when: ansible_distribution_version in ["16.04"]
 
+- name: set ruby version (18.04)
+  set_fact: ruby_version="2.5"
+  when: ansible_distribution_version in ["18.04"]
+
 - name: install system Ruby and RubyGems 
   become: true
   apt:  pkg={{item}} state=latest 
