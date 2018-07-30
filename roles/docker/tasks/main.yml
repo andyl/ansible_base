@@ -28,13 +28,19 @@
     update_cache: yes
     state: absent
 
+- name: create docker group
+  become: true
+  group:
+    name: docker
+    state: present
+
 - name: add user to docker group
+  become: true
   user:
     name: "{{item}}"
     groups: docker
     append: yes
   with_items:
-    - aleak
     - "{{rem_user}}"
 
 - name: add repository
