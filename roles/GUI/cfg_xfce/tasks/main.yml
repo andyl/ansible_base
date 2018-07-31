@@ -30,6 +30,14 @@
   lineinfile: dest=/home/{{rem_user}}/.config/xfce4/panel/whiskermenu-1.rc regexp="^button-title=" line="button-title={{ansible_hostname}}"
   changed_when: false
 
+- name: xftrun symlinks
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/util/code_util/bin/xftrun
+    dest:  /usr/local/bin/xftrun
+    state: link
+    force: yes
+
 # relevant tools
 # 1. xfconf-query 
 # 2. xfce4-manager-editor
