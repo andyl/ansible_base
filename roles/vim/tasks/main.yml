@@ -18,12 +18,11 @@
     - ppa:jonathonf/vim
     - ppa:pi-rho/dev
 
-- name: install utilities
-  become: true
-  apt:  pkg={{item}} state=latest install_recommends=yes
-  with_items:
-    - exuberant-ctags            # vim file navigation
-    - liblua5.2
+# - name: install utilities
+#   become: true
+#   apt:  pkg={{item}} state=latest install_recommends=yes
+#   with_items:
+#     - liblua5.2
 
 - name: create pkg dir
   file: 
