@@ -3,14 +3,16 @@
 # warning: don't use a version like '1.7.0' with a zero in minor release
 # ansible reports version as '1.7' instead of '1.7.0' which breaks the
 # install process (ironically)
+
 # ansible_vsn: 1.6.10
 # ansible_vsn: 1.7.1
 # ansible_vsn: 1.8.4
-# ansible_vsn: 1.9.1     superseded Aug 29, 2015
-# ansible_vsn: 1.9.2     superseded Sep 08, 2015
-# ansible_vsn: 1.9.3     superseded Dec 03, 2015
-# ansible_vsn: 1.9.4     superseded Feb 05, 2016
-# ansible_vsn: 2.0.0.2   superseded May 24, 2016
-# ansible_vsn: 2.0.2.0-1 superseded May 26, 2016
-ansible_vsn: 2.1.0.0-1
+# ansible_vsn: 1.9.1     superseded 2015 Aug 29 
+# ansible_vsn: 1.9.2     superseded 2015 Sep 08 
+# ansible_vsn: 1.9.3     superseded 2015 Dec 03 
+# ansible_vsn: 1.9.4     superseded 2016 Feb 05 
+# ansible_vsn: 2.0.0.2   superseded 2016 May 24 
+# ansible_vsn: 2.0.2.0-1 superseded 2016 May 26 
+# ansible_vsn: 2.1.0.0-1 superseded 2018 Jul 30 
+ansible_vsn: 2.6.2
 
