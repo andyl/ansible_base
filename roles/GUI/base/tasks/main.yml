@@ -23,7 +23,7 @@
     - libxmu-dev           # needed by ruby-wmctrl
     - libx11-dev           # needed by ruby-wmctrl
     - libglib2.0-dev       # needed by ruby-wmctrl
-    - systemd-ui           # systemadm - gui for systemd
+    # - systemd-ui           # systemadm - gui for systemd
     - ntpdate              # ntp date update
     - python-dbus          # dbus tools needed by terminator
 
