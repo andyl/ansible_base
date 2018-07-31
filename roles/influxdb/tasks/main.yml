@@ -24,11 +24,11 @@
   apt: deb=/home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
   when: ansible_hostname in influx_hosts
 
-# - name: install python dependencies
-#   become: yes
-#   pip: name={{item}}
-#   with_items:
-#     - influxdb
+- name: install python dependencies
+  become: yes
+  pip: name={{item}}
+  with_items:
+    - influxdb
 
 - name: setup logrotate
   become: true
