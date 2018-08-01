@@ -11,7 +11,7 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
-    - certbox
+    - certbot
 
 # - name: create SSL certs
 #   shell: "/home/{{rem_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
