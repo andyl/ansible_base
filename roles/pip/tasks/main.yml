@@ -1,13 +1,6 @@
 ---
 
 # pip
-
-# - name: remove apt modules
-#   apt: name="{{item}}" state=absent purge=true force=true
-#   with_items:
-#     - httpie
-#     - pip
-#     - mkdocs
   
 - name: install pip
   become: true
@@ -26,6 +19,8 @@
     - influxdb           # python client for influxdb
     - mkdocs             # static html documentation
     - seashells          # pipe CL to browser (http://seashells.io)
+    - ipython            # REPL(?)
+    - apache-airflow     # workflow manager
 
 - name:  install pip modules (x86_64)
   become: true
