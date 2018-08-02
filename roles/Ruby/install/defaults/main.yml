@@ -1,5 +1,5 @@
 ---
-# ruby_install_version: 0.6.1
+ruby_install_version: 0.6.1
 
 chruby_global: 2.5.0
 chruby_rubies:
