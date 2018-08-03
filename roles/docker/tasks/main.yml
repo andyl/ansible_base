@@ -53,11 +53,11 @@
   with_items:
     - docker-ce
 
-- name: create auto-complete symlink for dkr alias
+- name: create auto-complete symlink for dk alias
   become: true
   file: 
     src:  /usr/share/bash-completion/completions/docker
-    dest: /usr/share/bash-completion/completions/dkr
+    dest: /usr/share/bash-completion/completions/dk
     state: link 
 
 # ----- docker compose -----
