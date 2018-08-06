@@ -39,9 +39,9 @@
     mode:  "a+r"
   notify: restart grafana
 
-- name: setup s3 configuration
-  become: true
-  blockinfile:
-    block: "{{ lookup('file', '/home/aleak/util/code_util/inc/ansible/grafana_s3.inc') }}"
-    dest:  /etc/grafana/grafana.ini
+# - name: setup s3 configuration
+#   become: true
+#   blockinfile:
+#     block: "{{ lookup('file', '/home/aleak/util/code_util/inc/ansible/grafana_s3.inc') }}"
+#     dest:  /etc/grafana/grafana.ini
 
