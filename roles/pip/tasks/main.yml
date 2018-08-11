@@ -6,10 +6,6 @@
   become: true
   apt: name=python-pip state=latest
 
-# - name: install pip
-#   become: true
-#   easy_install: name=pip state=latest
-
 - name: install pip modules (all platforms)
   become: true
   pip: name="{{item}}" state=latest
@@ -20,7 +16,6 @@
     - mkdocs             # static html documentation
     - seashells          # pipe CL to browser (http://seashells.io)
     - ipython            # REPL(?)
-    - apache-airflow     # workflow manager
 
 - name:  install pip modules (x86_64)
   become: true

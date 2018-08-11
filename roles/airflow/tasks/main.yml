@@ -1,0 +1,14 @@
+---
+
+# airflow
+  
+- name: install pip
+  become: true
+  apt: name=python-pip state=latest
+
+- name: install pip modules (all platforms)
+  become: true
+  pip: name="{{item}}" state=latest
+  with_items:
+    - apache-airflow     # workflow manager
+
