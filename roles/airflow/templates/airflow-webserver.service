@@ -1,0 +1,21 @@
+# {{ansible_managed}}
+# {{template_path}}
+#
+# Remember to run `systemctl daemon-reload` after creating or editing this file.
+
+[Unit]
+Description=Airflow webserver daemon
+After=network.target 
+
+[Service]
+EnvironmentFile=/etc/sysconfig/airflow
+User={{rem_user}}
+Group={{rem_user}}
+Type=simple
+ExecStart=/bin/airflow webserver --pid /run/airflow/webserver.pid
+Restart=on-failure
+RestartSec=5s
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -10,5 +10,21 @@
   become: true
   pip: name="{{item}}" state=latest
   with_items:
-    - apache-airflow     # workflow manager
+    - apache-airflow     
+
+- name: install /etc/systemd/system/airflow-webserver.service
+  become: true
+  template:
+    src:  airflow-webserver.service
+    dest: /etc/systemd/system/airflow-webserver.service
+  notify: restart airflow-webserver
+  when: ansible_hostname in airflow_hosts
+
+- name: install /etc/systemd/system/airflow-scheduler.service
+  become: true
+  template:
+    src:  airflow-scheduler.service
+    dest: /etc/systemd/system/airflow-scheduler.service
+  notify: restart airflow-scheduler
+  when: ansible_hostname in airflow_hosts
 

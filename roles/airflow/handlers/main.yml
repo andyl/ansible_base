@@ -1,0 +1,7 @@
+---
+- name: restart airflow-scheduler
+  service: name=airflow-scheduler state=restarted
+  become: true
+- name: restart airflow-webserver
+  service: name=airflow-webserver state=restarted
+  become: true
