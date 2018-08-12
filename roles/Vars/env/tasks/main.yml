@@ -1,11 +1,17 @@
 ---
  
-# vars_env
+# Vars/env
 
 - debug:
-    msg: "DOTENV IS {{dotenv}} / Done"
+    msg: "RUNNING DOTENV"
+
+- name: convert dotenv variables
+  local_action: command whoami
+  # failed_when: no
+  # changed_when: no
 
 - name: load dotenv variables
   become: false
-  local_action: dotenv file={{dotenv}}
+  include_vars: 
+    file: /tmp/ansible_dotenv.yaml
 
