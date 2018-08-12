@@ -12,7 +12,7 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={{rem_user}}
 Group={{rem_user}}
 Type=simple
-ExecStart=/bin/airflow scheduler
+ExecStart=/usr/local/bin/airflow scheduler
 Restart=always
 RestartSec=5s
 
