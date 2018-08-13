@@ -15,7 +15,7 @@
     - influxdb           # python client for influxdb
     - mkdocs             # static html documentation
     - seashells          # pipe CL to browser (http://seashells.io)
-    - flask8             # syntasx checker
+    - flake8             # syntasx checker
     - ipython            # REPL(?)
 
 - name:  install pip modules (x86_64)
