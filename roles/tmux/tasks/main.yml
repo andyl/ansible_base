@@ -9,12 +9,15 @@
     dest: /usr/bin/tmux
     mode: "a+rx"
 
-# tmate - see tmate.io
+# tmate 
+# https://tmate.io
+# https://github.com/tmate-io/tmate
+# https://github.com/tmate-io/tmate/releases
 
 - name: install tmate executable
   become: true
   copy:
-    src: tmate_{{tmate_version}}
+    src: tmate-{{tmate_version}}
     dest: /usr/bin/tmate
     mode: "a+rx"
 
