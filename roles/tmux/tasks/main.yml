@@ -11,14 +11,14 @@
 
 # tmate - see tmate.io
 
-# - name: add TMATE PPA
-#   become: true
-#   apt_repository: repo=ppa:tmate.io/archive 
-#   when: is_x86_64
-#
-# - name: install TMATE
-#   become: true
-#   apt:  pkg={{item}} state=latest
-#   with_items:
-#     - tmate
-#   when: is_x86_64
+- name: add TMATE PPA
+  become: true
+  apt_repository: repo=ppa:tmate.io/archive 
+  when: is_x86_64
+
+- name: install TMATE
+  become: true
+  apt:  pkg={{item}} state=latest
+  with_items:
+    - tmate
+  when: is_x86_64
