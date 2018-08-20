@@ -11,14 +11,10 @@
 
 # tmate - see tmate.io
 
-- name: add TMATE PPA
+- name: install tmate executable
   become: true
-  apt_repository: repo=ppa:tmate.io/archive 
-  when: is_x86_64
+  copy:
+    src: tmate_{{tmate_version}}
+    dest: /usr/bin/tmate
+    mode: "a+rx"
 
-- name: install TMATE
-  become: true
-  apt:  pkg={{item}} state=latest
-  with_items:
-    - tmate
-  when: is_x86_64
