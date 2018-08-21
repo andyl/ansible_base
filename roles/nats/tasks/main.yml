@@ -146,3 +146,8 @@
     mode:  "a+r"
   notify: restart nats
 
+# liftbridge
+
+- name: install liftbridge
+  shell: "go get github.com/liftbridge-io/liftbridge"
+  changed_when: false
