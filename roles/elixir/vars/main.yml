@@ -20,4 +20,5 @@
 # elixir_version: 1.6.5  superseded 2018-06-20
 # elixir_version: 1.6.6  superseded 2018-07-25
 # elixir_version: 1.7.0  superseded 2018-07-27
-elixir_version: 1.7.1
+# elixir_version: 1.7.1  superseded 2018-08-24
+elixir_version: 1.7.2
