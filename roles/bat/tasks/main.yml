@@ -1,0 +1,19 @@
+---
+
+# bat
+
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg 
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: get bat deb file
+  become: no
+  get_url: 
+    url: https://github.com/sharkdp/bat/releases/download/v{{bat_version}}/bat_{{bat_version}}_amd64.deb
+    dest: /home/{{rem_user}}/.pkg/bat_{{bat_version}}.deb
+
+- name: install fwup
+  apt: deb=/home/{{rem_user}}/.pkg/bat_{{bat_version}}.deb
