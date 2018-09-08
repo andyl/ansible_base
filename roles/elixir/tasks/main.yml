@@ -39,27 +39,18 @@
     - elixirc
     - iex
     - mix
-        
-# support for `:observer.start()`
 
-# - name: add i386 architecture
-#   become: yes
-#   lineinfile:
-#     dest: /var/lib/dpkg/arch
-#     line: "i386"
-#     create: yes
-
-# - name: install support packages
-#   become: yes
-#   apt:
-#     name: "{{item}}"
-#     state: present
-#   with_items:
-#     - gtk2-engines
-#     - gtk2-engines-*
-#     - gtk2-engines-murrine:i386
-#     - gtk2-engines-pixbuf:i386
-#   when: is_x86_64 
+- name: install support packages
+  become: yes
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - glew
+    - libglew-dev
+    - libglfw3
+    - libglfw3-dev
+  when: is_x86_64 
 
 # GET elixir SOURCE FOR DOCCO AND CODE LOOKUPS
 
