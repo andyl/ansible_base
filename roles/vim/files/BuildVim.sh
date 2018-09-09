@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# also set the ansible 'vim_version'...
+VIM_VERSION=81b
+
 install() {
   [ -d vim ] || git clone https://github.com/vim/vim.git
   cd vim/src
@@ -23,7 +26,7 @@ pkg() {
     --install=no \
     --maintainer=andy@r210.com \
     --pkgname=vimal \
-    --pkgversion=81 \
+    --pkgversion=$VIM_VERSION \
     --pkgsource="." \
     --provides=vimal 
 }
