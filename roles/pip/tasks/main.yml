@@ -17,6 +17,7 @@
     - seashells          # pipe CL to browser (http://seashells.io)
     - flake8             # syntasx checker
     - ipython            # REPL(?)
+    - python-language-server[all]
 
 - name:  install pip modules (x86_64)
   become: true
