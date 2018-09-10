@@ -72,37 +72,37 @@
 
 # nats-streaming-server
 
-- name: create data dir
-  file: 
-    path: /home/{{rem_user}}/var/nats
-    state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
-
-- name: get nats-ss zip file
-  become: no
-  get_url: 
-    url:  https://github.com/nats-io/nats-streaming-server/releases/download/v{{nats_ss_version}}/nats-streaming-server-v{{nats_ss_version}}-linux-amd64.zip
-    dest: /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip 
-    force: no
-    validate_certs: false
-
-- name: unzip nats-ss file
-  become: no
-  unarchive:
-    src:  /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/nats
-    remote_src: true
-
-- name: install nats-ss symlinks
-  become: yes
-  file: 
-    src:   /home/{{rem_user}}/.pkg/nats/nats-streaming-server-v{{nats_ss_version}}-linux-amd64/{{item}} 
-    dest:  /usr/local/bin/{{item}} 
-    state: link
-    force: yes
-  with_items:
-    - nats-streaming-server
+# - name: create data dir
+#   file: 
+#     path: /home/{{rem_user}}/var/nats
+#     state: directory 
+#     group: "{{rem_user}}" 
+#     owner: "{{rem_user}}"
+#
+# - name: get nats-ss zip file
+#   become: no
+#   get_url: 
+#     url:  https://github.com/nats-io/nats-streaming-server/releases/download/v{{nats_ss_version}}/nats-streaming-server-v{{nats_ss_version}}-linux-amd64.zip
+#     dest: /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip 
+#     force: no
+#     validate_certs: false
+#
+# - name: unzip nats-ss file
+#   become: no
+#   unarchive:
+#     src:  /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip
+#     dest: /home/{{rem_user}}/.pkg/nats
+#     remote_src: true
+#
+# - name: install nats-ss symlinks
+#   become: yes
+#   file: 
+#     src:   /home/{{rem_user}}/.pkg/nats/nats-streaming-server-v{{nats_ss_version}}-linux-amd64/{{item}} 
+#     dest:  /usr/local/bin/{{item}} 
+#     state: link
+#     force: yes
+#   with_items:
+#     - nats-streaming-server
 
 # install ruby gem for nats
 
