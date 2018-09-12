@@ -1,2 +1,4 @@
 ---
-sops_version: 3.0.4
+# sops_version: 3.0.4  superseded 2018-09-12
+
+sops_version: 3.1.0
