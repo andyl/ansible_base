@@ -14,11 +14,11 @@
   become: no
   get_url: 
     url:  https://s3.amazonaws.com/prerelease.keybase.io/linux_binaries/deb/keybase_{{keybase_version}}_amd64.deb
-    dest: /home/{{rem_user}}/.pkg/keybase_{{keybase_version}}.deb
+    dest: /home/{{rem_user}}/.pkg/keybase_{{kb_version}}.deb
     force: no
     validate_certs: false
 
 - name: install package
   become: yes
   apt: 
-    deb: /home/{{rem_user}}/.pkg/keybase_{{keybase_version}}.deb
+    deb: /home/{{rem_user}}/.pkg/keybase_{{kb_version}}.deb
