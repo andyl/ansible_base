@@ -53,6 +53,7 @@
     - debian-archive-keyring     # ssh util
     - jq                         # command-line JSON processing
     - rsync                      # file sync
+    - ecryptfs-utils             # directory encryption
 
 # - name: install extended packages
 #   become: true
