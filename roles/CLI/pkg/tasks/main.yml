@@ -54,6 +54,7 @@
     - jq                         # command-line JSON processing
     - rsync                      # file sync
     - ecryptfs-utils             # directory encryption
+    - at                         # process scheduler
 
 # - name: install extended packages
 #   become: true
