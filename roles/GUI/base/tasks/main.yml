@@ -26,6 +26,7 @@
     - libgnome2-bin        # gnome-open
     - ntpdate              # ntp date update
     - python-dbus          # dbus tools needed by terminator
+    - seahorse             # gui for gnome-keyring
 
 - name: remove Ubuntu packages
   become: true
