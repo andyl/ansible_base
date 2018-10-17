@@ -1,0 +1,30 @@
+---
+
+# NordVpn
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get deb file
+  become: no
+  get_url:
+    url: https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    dest: /home/{{rem_user}}/.pkg/nordvpn_1.0.0_all.deb
+    force: no
+    validate_certs: no
+  when: is_x86_64
+
+- name: install base package
+  apt: deb=/home/{{rem_user}}/.pkg/nordvpn_1.0.0_all.deb
+  when: is_x86_64
+
+- name: install support packages
+  become: true
+  apt:  
+    pkg: "{{item}}" 
+    state: latest 
+    install_recommends: yes
+    update_cache: yes
+  with_items:
+    - openvpn
+    - nordvpn
