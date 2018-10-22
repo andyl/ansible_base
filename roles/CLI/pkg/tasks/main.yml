@@ -30,7 +30,6 @@
     - sysstat                    # monitoring utility
     - ncdu                       # monitoring utility
     - iperf                      # network performance testing
-    - libsqlite3-dev             # sqlite database
     - libcurl4-openssl-dev       # development lib
     - libevent-dev               # development lib
     - libncurses5-dev            # development lib
