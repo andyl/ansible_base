@@ -2,10 +2,11 @@
 # FIND VERSIONS IN ~/var/data/vscode
 #
 # vscode_version: 1.19.1    superseded 2018-02-19
-# vscode_version: 1.20.1    superseded 2019-03-17
-# vscode_version: 1.21.1    superseded 2019-06-15
-# vscode_version: 1.24.1    superseded 2019-07-10
-# vscode_version: 1.25.0    superseded 2019-07-16
-# vscode_version: 1.25.1    superseded 2019-09-16
-# vscode_version: 1.27.2    superseded 2019-10-10
-vscode_version: 1.28.0
+# vscode_version: 1.20.1    superseded 2018-03-17
+# vscode_version: 1.21.1    superseded 2018-06-15
+# vscode_version: 1.24.1    superseded 2018-07-10
+# vscode_version: 1.25.0    superseded 2018-07-16
+# vscode_version: 1.25.1    superseded 2018-09-16
+# vscode_version: 1.27.2    superseded 2018-10-10
+# vscode_version: 1.28.0    superseded 2018-11-08
+vscode_version: 1.28.2
