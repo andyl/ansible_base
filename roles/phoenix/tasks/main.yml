@@ -6,19 +6,19 @@
 - name: install inotify
   apt: pkg=inotify-tools state=latest install_recommends=yes
 
-- name: create package cache dir
-  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+# - name: create package cache dir
+#   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
 
-- name: get package
-  become: no
-  get_url:
-    url:  https://github.com/phoenixframework/archives/raw/master/phx_new-{{phoenix_version}}.ez
-    dest: /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
-    force: no
-
-- name: install package
-  become: no
-  shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
-  args:
-    creates: /home/{{rem_user}}/.mix/archives/phx_new-{{phoenix_version}}.ez
-  
+# - name: get package
+#   become: no
+#   get_url:
+#     url:  https://github.com/phoenixframework/archives/raw/master/phx_new-{{phoenix_version}}.ez
+#     dest: /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
+#     force: no
+#
+# - name: install package
+#   become: no
+#   shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phx_new-{{phoenix_version}}.ez
+#   args:
+#     creates: /home/{{rem_user}}/.mix/archives/phx_new-{{phoenix_version}}.ez
+#   

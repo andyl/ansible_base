@@ -46,7 +46,7 @@
     name: "{{item}}"
     state: present
   with_items:
-    - glew
+    - glew-utils
     - libglew-dev
     - libglfw3
     - libglfw3-dev
