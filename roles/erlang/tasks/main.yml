@@ -10,6 +10,7 @@
   with_items:
     - libsctp1
     - build-essential
+    - libtinfo-dev
 
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
@@ -20,7 +21,7 @@
 - name: get deb file
   become: no
   get_url: 
-    url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
+    url:  https://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
     dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
