@@ -6,7 +6,8 @@ erlang_arm7_version: 18.3
 # erlang_version: 20.0-1       superseded 2018-jan-01
 # erlang_version: 20.2.2-1     superseded 2018-jun-20
 # erlang_version: 20.3-1       superseded 2018-nov-07
-erlang_version: 21.1-1 
+erlang_version: 20.3-1    
+# erlang_version: 21.1-1 
 
 # otp_version: 19.0.1         superseded 2017-jun-21
 # otp_version: 20.0           superseded 2018-jan-01
