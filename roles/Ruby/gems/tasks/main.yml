@@ -17,9 +17,7 @@
     - tmuxinator
     - faraday
     - multipart-post
-    # - did_you_mean
-    # - ruby-debug-ide     # used by vscode
-    # - debase             # used by vscode
+    - solargraph
 
 - name: install extended gems
   become: no
