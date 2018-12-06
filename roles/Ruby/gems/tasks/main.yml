@@ -17,7 +17,7 @@
     - tmuxinator
     - faraday
     - multipart-post
-    - solargraph
+    # - solargraph
 
 - name: install extended gems
   become: no
