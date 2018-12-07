@@ -28,11 +28,12 @@
     - firecracker
     - jailer
 
-- name: get deb file
+- name: install firectl
   become: yes
   copy:
     src:  firectl
     dest: /usr/local/bin/firectl
+    mode: 'a+rx'
 
 - name: install symlinks
   become: yes
