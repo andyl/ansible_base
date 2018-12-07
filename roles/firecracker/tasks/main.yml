@@ -1,0 +1,30 @@
+---
+
+# firecracker
+# packages at https://github.com/firecracker-microvm/firecracker/releases
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg/firecracker state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get executables
+  become: no
+  get_url:
+    url: https://github.com/firecracker-microvm/firecracker/releases/download/v{{firecracker_vsn}}/{{item}}-v{{firecracker_vsn}}
+    dest: /home/{{rem_user}}/.pkg/firecracker/{{item}}-{{firecracker_vsn}}
+    force: no
+    validate_certs: no
+  with_items:
+    - firecracker
+    - jailer
+
+- name: install symlinks
+  become: yes
+  file: 
+    src:   /home/{{rem_user}}/.pkg/firecracker/{{item}}-v{{firecracker_version}} 
+    dest:  /usr/local/bin/{{item}}
+    state: link
+    force: yes
+  with_items:
+    - firecracker
+    - jailer
+
