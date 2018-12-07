@@ -6,12 +6,23 @@
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg/firecracker state=directory group={{rem_user}} owner={{rem_user}}
 
+- name: install support packages
+  become: true
+  apt: pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - qemu-kvm 
+    - libvirt-bin 
+    - virtinst 
+    - bridge-utils 
+    - cpu-checker
+
 - name: get executables
   become: no
   get_url:
     url: https://github.com/firecracker-microvm/firecracker/releases/download/v{{firecracker_vsn}}/{{item}}-v{{firecracker_vsn}}
     dest: /home/{{rem_user}}/.pkg/firecracker/{{item}}-{{firecracker_vsn}}
     force: no
+    mode: 'a+rx'
     validate_certs: no
   with_items:
     - firecracker
@@ -20,7 +31,7 @@
 - name: install symlinks
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/firecracker/{{item}}-v{{firecracker_version}} 
+    src:   /home/{{rem_user}}/.pkg/firecracker/{{item}}-{{firecracker_vsn}} 
     dest:  /usr/local/bin/{{item}}
     state: link
     force: yes
