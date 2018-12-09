@@ -1,0 +1,17 @@
+---
+
+# kvm
+
+- name: install support packages
+  become: true
+  apt: pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - qemu-kvm 
+    - libvirt-clients
+    - libvirt-bin 
+    - livbirt-daemon-system
+    - virtinst 
+    - virt-manager
+    - bridge-utils 
+    - cpu-checker
+

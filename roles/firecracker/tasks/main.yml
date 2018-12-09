@@ -2,19 +2,10 @@
 
 # firecracker
 # packages at https://github.com/firecracker-microvm/firecracker/releases
+# depends on KVM...
 
 - name: create package cache dir
   file: path=/home/{{rem_user}}/.pkg/firecracker state=directory group={{rem_user}} owner={{rem_user}}
-
-- name: install support packages
-  become: true
-  apt: pkg={{item}} state=latest install_recommends=yes
-  with_items:
-    - qemu-kvm 
-    - libvirt-bin 
-    - virtinst 
-    - bridge-utils 
-    - cpu-checker
 
 - name: get executables
   become: no
