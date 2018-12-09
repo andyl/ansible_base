@@ -1,6 +1,10 @@
 ---
 
 # kvm
+# 
+# after installing:
+# vagrant plugin install vagrant-libvirt
+# vagrant plugin install vagrant-mutate
 
 - name: install support packages
   become: true
