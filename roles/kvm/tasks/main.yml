@@ -7,11 +7,19 @@
   apt: pkg={{item}} state=latest install_recommends=yes
   with_items:
     - qemu-kvm 
+    - qemu-utils
+    - qemu
     - libvirt-clients
     - libvirt-bin 
-    - livbirt-daemon-system
+    - libvirt-dev
+    - libvirt-daemon-system
     - virtinst 
     - virt-manager
     - bridge-utils 
     - cpu-checker
+    - ruby-libvirt
+    - dnsmasq-base
+    - libxslt-dev 
+    - libxml2-dev 
+    - zlib1g-dev 
 
