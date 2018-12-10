@@ -1,9 +1,16 @@
 ---
 
 # vagrant
+#
 # see:
 # - https://docs.vagrantup.com/v2/installation/index.html
 # - https://www.vagrantup.com/downloads
+
+# after installing on the host, manually add vagrant plugins
+ 
+# vagrant plugin install vagrant-hostupdater
+# vagrant plugin install vagrant-libvirt
+# vagrant plugin install vagrant-mutate
 
 - name: create pkg dir
   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
