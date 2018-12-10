@@ -17,10 +17,6 @@
 
 - name: install ansible package
   apt: 
-    # pkg:   "ansible={{ansible_vsn}}*"
     pkg:   "ansible"
-    # state: "present"
     state: "latest"
 
-# Notes:
-# 03-Dec-15 - Sadly, the ansible PPA only contains the latest releases of ansible, not old versions
