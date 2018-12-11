@@ -3,7 +3,7 @@
 # Installs ansible on the local machine
 
 # Abort if the ansible executable is found
-command -v ansible || (echo "ANSIBLE EXECUTABLE EXISTS"; exit 1)
+command -v ansible > /dev/null && exit
 
 echo "--- ANSIBLE INSTALL"
 echo "Installing Python Dependencies"
