@@ -21,4 +21,5 @@
 # grafana_version: 5.2.2 superseded 2018-10-10
 # grafana_version: 5.3.0 superseded 2018-10-16
 # grafana_version: 5.3.1 superseded 2018-10-24
-grafana_version: 5.3.2
+# grafana_version: 5.3.2 superseded 2018-12-11
+grafana_version: 5.4.1
