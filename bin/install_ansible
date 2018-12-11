@@ -3,16 +3,14 @@
 # Installs ansible on the local machine
 
 # Abort if the ansible executable is found
+command -v ansible || (echo "ANSIBLE EXECUTABLE EXISTS"; exit 1)
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPTDIR/../../..
-
-echo "=== ANSIBLE INSTALL ====================================="
+echo "--- ANSIBLE INSTALL"
 echo "Installing Python Dependencies"
-sudo apt install software-properties-common -y -q
+sudo apt install software-properties-common -yq > /dev/null 2>&1
 echo "Add ansible PPA"
-sudo apt-add-repository ppa:ansible/ansible
+sudo apt-add-repository ppa:ansible/ansible 
 echo "Apt Update"
-sudo apt update > /dev/null
+sudo apt update > /dev/null 2>&1
 echo "Install Ansible"
-sudo apt install ansible -y -q
+sudo apt install ansible -yq > /dev/null 2>&1
