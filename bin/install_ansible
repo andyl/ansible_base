@@ -7,6 +7,7 @@ command -v ansible > /dev/null && exit
 
 echo "--- ANSIBLE INSTALL"
 echo "Installing Python Dependencies"
+sudo apt install python ssh -yq > /dev/null 2>&1
 sudo apt install software-properties-common -yq > /dev/null 2>&1
 echo "Add ansible PPA"
 sudo apt-add-repository ppa:ansible/ansible > /dev/null 2>&1
