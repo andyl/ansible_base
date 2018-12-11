@@ -29,7 +29,6 @@
   become: true
   roles:
     - Vars/predicates
-    - Vars/env
     - Vars/hostname
     - Vars/dump
     # - Ruby/sysruby   # lang: ruby
