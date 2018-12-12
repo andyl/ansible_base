@@ -18,7 +18,7 @@ cd util
 if [[ -d x-ansible ]] ; then
   echo "Updating roles"
   cd x-ansible
-  git pull > /dev/null 2>&1
+  sudo git pull > /dev/null 2>&1
   cd ..
 else
   echo "Cloning roles"

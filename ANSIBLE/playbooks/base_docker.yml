@@ -37,13 +37,13 @@
     - Ruby/gems      # lang: ruby
     - CLI/user       # cli 
     - CLI/pkg        # cli 
-    - CLI/util_base  # cli 
-    - CLI/util_code  # cli 
+    # - CLI/util_base  # cli 
+    # - CLI/util_code  # cli 
     - CLI/tzone      # cli 
     - cli_util       # bat, fd, etc.
-    # - pip            # python packages
-    # - tmux           # terminal multiplexer
-    # - lua            # lang: lua
+    - pip            # python packages
+    - tmux           # terminal multiplexer
+    - lua            # lang: lua
     - nodejs         # lang: node
     - vim            # vim 8
     - neovim         # next-gen vim
