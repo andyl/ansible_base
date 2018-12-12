@@ -24,9 +24,15 @@ else
   sudo rm -rf x-ansible
   git clone https://github.com/andyl/x-ansible.git > /dev/null 2>&1
 fi
-cd x-ansible/bin
+
+echo "=== SYNC /vagrant/ANSIBLE"
+mkdir -p /vagrant
+rm -rf /vagrant/ANSIBLE
+cp -r x-ansible/ANSIBLE /vagrant
 
 echo "=== INSTALL ANSIBLE EXECUTABLE"
+cd x-ansible/bin
 ./install_ansible
 echo "DONE."
+
 
