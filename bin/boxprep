@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 function do_boxprep() {
+  echo "=== UPDATE APT REPOS"
+  sudo apt update > /dev/null 2>&1
+
   echo "=== REMOVE APT CACHE"
   sudo apt clean
-
-  # echo "=== ZERO OUT DRIVE"
-  # sudo dd if=/dev/zero of=/EMPTY bs=1M
-  # sudo rm -f /EMPTY
 
   echo "=== REMOVE HISTORY"
   cat /dev/null > ~/.bash_history 
