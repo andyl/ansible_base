@@ -2,7 +2,16 @@
 
 # Vagrant/Ansible Bootstrap Script
 
-echo "=== ANSIBLE ROLES"
+# This bootstrap script does two things:
+# 1) gets the `ansible` roles onto the target machine
+# 2) installs ansible onto the target machine
+
+# The script is meant to be run by the Vagrant shell-provisioner.
+#
+# source <(curl -s <SCRIPT URL>)
+# 
+
+echo "=== INSTALL ANSIBLE ROLES"
 mkdir -p util
 cd util
 if [[ -d x-ansible ]] ; then
@@ -17,7 +26,7 @@ else
 fi
 cd x-ansible/bin
 
-echo "=== ANSIBLE EXECUTABLE"
+echo "=== INSTALL ANSIBLE EXECUTABLE"
 ./install_ansible
 echo "DONE."
 
