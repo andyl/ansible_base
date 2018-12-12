@@ -12,7 +12,6 @@ Ansible Roles and Libraries
     - set `x-ansible/roles` to your roles path
 
   eg
-
       
       # location of ansible library, eliminates need to specify --module-path
       library = /home/<username>/x-ansible:/usr/share/pyshared/ansible/modules/*
@@ -20,3 +19,9 @@ Ansible Roles and Libraries
       roles_path = /home/<username>/x-ansible/roles
 
 3. Profit
+
+## Automation with Vagrant
+
+These Ansible roles work with the [VVM (Vagrant Virtual
+Machine)](https://github.com/andyl/VVM) repo for automated VM creation and
+provisioning.
