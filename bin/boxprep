@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+function do_boxprep() {
+  # Remove APT Cache
+  sudo apt clean
+
+  # Zero-Out the Drive
+  sudo dd if=/dev/zero of=/EMPTY bs=1M
+  sudo rm -f /EMPTY
+
+  # Clear the Bash History
+  cat /dev/null > ~/.bash_history 
+}
+
+function do_no_action() {
+  echo "No action taken"
+}
+
+echo "Prep your VM before creating a base box."
+echo "WARNING: This will wipe out your history and other settings."
+read -p "Are you sure? (y/N) " choice
+case "$choice" in
+  y|Y ) do_boxprep;;
+  n|N ) do_no_action;;
+  * )   do_no_action;;
+esac
+
