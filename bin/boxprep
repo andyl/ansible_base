@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
 function do_boxprep() {
-  # Remove APT Cache
+  echo "=== REMOVE APT CACHE"
   sudo apt clean
 
-  # Zero-Out the Drive
-  sudo dd if=/dev/zero of=/EMPTY bs=1M
-  sudo rm -f /EMPTY
+  # echo "=== ZERO OUT DRIVE"
+  # sudo dd if=/dev/zero of=/EMPTY bs=1M
+  # sudo rm -f /EMPTY
 
-  # Clear the Bash History
+  echo "=== REMOVE HISTORY"
   cat /dev/null > ~/.bash_history 
+  history -c
 }
 
 function do_no_action() {
