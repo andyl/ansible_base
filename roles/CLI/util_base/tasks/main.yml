@@ -3,7 +3,7 @@
 # CLI/util_base
 
 - name: create a util directory
-  become: false
+  become: true
   file: 
     path: /home/{{rem_user}}/util 
     state: directory 
