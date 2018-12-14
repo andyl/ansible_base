@@ -60,10 +60,10 @@
     - redis          # svc: key-value store
     - sqlite         # sqlite3 database
 
-    - nats           # svc: messaging 
     - influxdb       # svc: metric database
     - telegraf       # svc: metric capture
     - grafana        # svc: metric charting/graphing
+    - nats           # svc: messaging 
     - { role: postgres      , when: is_ubuntu } 
     - { role: postgres_user , when: is_ubuntu } 
     - { role: postgres_db   , when: is_ubuntu } 
