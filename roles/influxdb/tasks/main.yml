@@ -11,18 +11,18 @@
     state: directory 
     group: "{{rem_user}}"
     owner: "{{rem_user}}"
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: get deb file
   become: no
   get_url: 
     url: http://dl.influxdata.com/influxdb/releases/influxdb_{{influx_version}}_amd64.deb
     dest: /home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: install package
   apt: deb=/home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: install python dependencies
   become: yes
@@ -35,7 +35,7 @@
   template:
     src: logrotate
     dest: /etc/logrotate.d/influxdb
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: install config file
   become: true
@@ -45,12 +45,12 @@
     owner: root 
     group: root
   notify: restart influxdb
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: setup admin user
   command: influx -execute "create user admin with password 'admin' with all privileges"
   ignore_errors: true
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
 
 - name: create database
   influxdb_database:
@@ -70,4 +70,4 @@
     - weather
     - bugm_log
     - bugm_stats
-  when: ansible_hostname in influx_hosts
+  # when: ansible_hostname in influx_hosts
