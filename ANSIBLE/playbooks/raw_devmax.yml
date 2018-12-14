@@ -1,0 +1,69 @@
+--- 
+# VAGRANT/ANSIBLE PROVISIONING - UBUNTU 18.04 SERVER
+#
+# TO BRING UP A NEW USER
+# first: install ubuntu onto new machine
+# create deploy user on new machine:
+# > sudo useradd -m <username>
+# > sudo su
+# $ passwd <username>             # update <passwd>
+# $ usermod -aG admin <username>  # add to admin or sudo group 
+# $ exit
+#
+# DNS Setup:
+# - update /etc/hosts
+# - update local DNSMASQ
+#
+# from new: > sudo apt-get install ssh python
+# from old: keysend <username@new> <passwd>
+
+- hosts: all
+  vars:
+    - rem_user: vagrant
+    - lcl_user: "{{ lookup('env', 'USER') }}"
+    - lcl_root: "/home/{{lcl_user}}/src/bugmark"
+    - dotenv:   "{{lcl_root}}/.env"
+    - pg_user:  "{{APP_NAME}}"
+    - pg_pass:  "{{POSTGRES_PASS}}"
+  remote_user:  "{{rem_user}}"
+  become: true
+  roles:
+    - Vars/predicates
+    - Vars/hostname
+    - Vars/dump
+    - Ruby/sysruby   # lang: ruby
+    - Ruby/chruby    # lang: ruby
+    - Ruby/install   # lang: ruby
+    - Ruby/gems      # lang: ruby
+    - CLI/user       # cli 
+    - CLI/pkg        # cli 
+    - CLI/util_base  # cli 
+    - CLI/tzone      # cli 
+    - cli_util       # bat, fd, etc.
+    - pip            # python packages
+    - tmux           # terminal multiplexer
+    - lua            # lang: lua
+    - nodejs         # lang: node
+    - yarn           # lang: node / package manager
+    - vim            # vim 8
+    - neovim         # next-gen vim
+    - docker         # containerization
+    - nginx          # svc: webserver
+    - nginx_mmht     # svc: middle-man html apps
+    - sshchat        # ssh chat
+    - sftp           # ssh ftp
+    - erlang         # lang: erlang
+    - elixir         # lang: erlang/elixir
+    - elixir_ls      # lang: erlang/elixir (language server)
+    - phoenix        # lang: erlang/elixir (phoenix framework)
+
+    - redis          # svc: key-value store
+    - sqlite         # sqlite3 database
+
+    - nats           # svc: messaging 
+    - influxdb       # svc: metric database
+    - telegraf       # svc: metric capture
+    - grafana        # svc: metric charting/graphing
+    - { role: postgres      , when: is_ubuntu } 
+    - { role: postgres_user , when: is_ubuntu } 
+    - { role: postgres_db   , when: is_ubuntu } 

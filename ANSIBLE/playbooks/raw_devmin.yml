@@ -57,12 +57,13 @@
     - elixir_ls      # lang: erlang/elixir (language server)
     - phoenix        # lang: erlang/elixir (phoenix framework)
 
-    - sqlite         # sqlite3 browser   
-    - influxdb       # svc: metric database
-    - telegraf       # svc: metric capture
-    - grafana        # svc: metric charting/graphing
-    - nats           # svc: messaging 
-    - redis          # svc: key-value store
-    - { role: postgres      , when: is_ubuntu } 
-    - { role: postgres_user , when: is_ubuntu } 
-    - { role: postgres_db   , when: is_ubuntu } 
+    # - redis          # svc: key-value store
+    # - sqlite         # sqlite3 database
+
+    # - influxdb       # svc: metric database
+    # - telegraf       # svc: metric capture
+    # - grafana        # svc: metric charting/graphing
+    # - nats           # svc: messaging 
+    # - { role: postgres      , when: is_ubuntu } 
+    # - { role: postgres_user , when: is_ubuntu } 
+    # - { role: postgres_db   , when: is_ubuntu } 
