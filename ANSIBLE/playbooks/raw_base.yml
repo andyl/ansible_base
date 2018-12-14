@@ -38,24 +38,26 @@
     # - CLI/user       # cli 
     # - CLI/pkg        # cli 
     # - CLI/util_base  # cli 
-    # - CLI/util_code  # cli 
     # - CLI/tzone      # cli 
     # - cli_util       # bat, fd, etc.
     # - pip            # python packages
     # - tmux           # terminal multiplexer
     # - lua            # lang: lua
     # - nodejs         # lang: node
+    # - yarn           # lang: node / package manager
     # - vim            # vim 8
     # - neovim         # next-gen vim
-    # - yarn           # lang: node / package manager
+    # - docker         # containerization
+    # - nginx          # svc: webserver
+    # - nginx_mmht     # svc: middle-man html apps
+    # - sshchat        # ssh chat
+    # - sftp           # ssh ftp
     # - erlang         # lang: erlang
     # - elixir         # lang: erlang/elixir
     # - elixir_ls      # lang: erlang/elixir (language server)
     # - phoenix        # lang: erlang/elixir (phoenix framework)
-    # - nginx          # svc: webserver
-    # - nginx_mmht     # svc: middle-man html apps
-    # - sqlite         # sqlite3 browser   
     #
+    # - sqlite         # sqlite3 browser   
     # - influxdb       # svc: metric database
     # - telegraf       # svc: metric capture
     # - grafana        # svc: metric charting/graphing
@@ -64,6 +66,3 @@
     # - { role: postgres      , when: is_ubuntu } 
     # - { role: postgres_user , when: is_ubuntu } 
     # - { role: postgres_db   , when: is_ubuntu } 
-    # - docker         # containerization
-    # - sshchat        # ssh chat
-    # - sftp           # ssh ftp
