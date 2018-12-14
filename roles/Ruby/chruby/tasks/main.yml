@@ -16,7 +16,6 @@
 - name: untar package
   become: no
   shell: tar -xzf /home/{{rem_user}}/.pkg/chruby-{{chruby_version}}.tar.gz chdir=/home/{{rem_user}}/.pkg creates=/home/{{rem_user}}/.pkg/chruby-{{chruby_version}}
-  warn: false
 
 - name: get current version
   shell:    chruby-exec --version
