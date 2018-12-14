@@ -57,7 +57,6 @@
     - elixir_ls      # lang: erlang/elixir (language server)
     - phoenix        # lang: erlang/elixir (phoenix framework)
 
-    - redis          # svc: key-value store
     - sqlite         # sqlite3 database
 
     - influxdb       # svc: metric database
