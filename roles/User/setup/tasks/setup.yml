@@ -22,10 +22,18 @@
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
-- name: set ssh key for {{tgt_user}} from current user
-  authorized_key:
-    user: "{{tgt_user}}"
-    state: present
-    key: "{{ lookup('file', '/home/{{lcl_user}}/.ssh/id_rsa.pub') }}"
-    # key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+# - name: set ssh key for {{tgt_user}} from current user
+#   authorized_key:
+#     user: "{{tgt_user}}"
+#     state: present
+#     key: "{{ lookup('file', '/home/{{lcl_user}}/.ssh/id_rsa.pub') }}"
+#     # key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+- name: Upload SSH key
+  copy:
+   src:  ~/.ssh/id_rsa.pub
+   dest: /home/{{tgt_user}}/.ssh/authorized_keys
+   owner: "{{tgt_user}}"
+   group: "{{tgt_user}}"
+   mode: 0700
 
