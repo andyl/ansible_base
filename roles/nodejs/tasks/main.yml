@@ -2,47 +2,11 @@
 
 # nodejs
 
-# nodejs installation has moved from 'chris-lea' to 'nodesource'
-# see https://github.com/nodesource/distributions#installation-instructions
+- name: node for ubuntu
+  include: node_ubu.yml
+  when: is_ubuntu
 
-- name: remove old PPA
-  apt_repository: repo=ppa:chris-lea/node.js state=absent
-
-- name: add repository key
-  apt_key: 
-    url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
-    state: present
-
-- name: remove old repositories
-  apt_repository:
-    repo: 'deb https://deb.nodesource.com/node_{{item}}.x {{ansible_distribution_release}} main'
-    state: absent
-    update_cache: yes
-  with_items:
-    - 4
-    - 5
-    - 6
-    - 7
-
-- name: add repository
-  apt_repository:
-    repo: 'deb https://deb.nodesource.com/node_{{item}}.x {{ansible_distribution_release}} main'
-    state: present
-    update_cache: yes
-  with_items:
-    - 8
-
-- name: add nodejs and npm
-  apt: pkg={{item}} state=latest force=yes
-  with_items:
-    - nodejs
-
-- name: npm packages
-  become: yes
-  npm: name={{item}} state=latest global=yes
-  with_items:
-    - brunch
-    - coffeescript
-    - fkill-cli 
-    - graphqurl
+- name: node for rpi
+  include: node_rpi.yml
+  when: is_rpi
 
