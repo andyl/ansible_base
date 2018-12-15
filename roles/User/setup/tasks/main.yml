@@ -1,0 +1,9 @@
+---
+
+- name: setup {{rem_user}}
+  include: setup.yml tgt_user="{{rem_user}}"
+
+- name: setup {{alt_user}}
+  include: setup.yml tgt_user="{{alt_user}}"
+  when: alt_user != rem_user
+
