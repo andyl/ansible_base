@@ -26,6 +26,6 @@
   authorized_key:
     user: "{{tgt_user}}"
     state: present
-    key: "{{ lookup('file', "/home/{{lcl_user}}/.ssh/id_rsa.pub") }}"
+    key: "{{ lookup('file', '/home/{{lcl_user}}/.ssh/id_rsa.pub') }}"
     # key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
