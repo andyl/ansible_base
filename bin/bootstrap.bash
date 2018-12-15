@@ -13,7 +13,7 @@
 # 
 
 function writekey() {
-  [ $# == 1 ] || return
+  [ $# == 1 ] || return 0
   echo $1 > /tmp/hostkey.pub
 }
 
