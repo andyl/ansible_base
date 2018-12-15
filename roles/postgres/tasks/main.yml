@@ -11,3 +11,6 @@
 - name: postgres for rpi
   include: pg_rpi.yml
   when: is_rpi
+
+- name: postgres users
+  include: user.yml

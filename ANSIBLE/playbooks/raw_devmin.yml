@@ -20,11 +20,8 @@
 - hosts: all
   vars:
     - rem_user: vagrant
+    - alt_user: vagrant
     - lcl_user: "{{ lookup('env', 'USER') }}"
-    - lcl_root: "/home/{{lcl_user}}/src/bugmark"
-    - dotenv:   "{{lcl_root}}/.env"
-    - pg_user:  "{{APP_NAME}}"
-    - pg_pass:  "{{POSTGRES_PASS}}"
   remote_user:  "{{rem_user}}"
   become: true
   roles:
@@ -39,7 +36,7 @@
     - CLI/pkg        # cli 
     - CLI/util_base  # cli 
     - CLI/tzone      # cli 
-    - cli_util       # bat, fd, etc.
+    - CLI/extras     # bat, fd, etc.
     - pip            # python packages
     - tmux           # terminal multiplexer
     - lua            # lang: lua
@@ -64,6 +61,4 @@
     # - telegraf       # svc: metric capture
     # - grafana        # svc: metric charting/graphing
     # - nats           # svc: messaging 
-    # - { role: postgres      , when: is_ubuntu } 
-    # - { role: postgres_user , when: is_ubuntu } 
-    # - { role: postgres_db   , when: is_ubuntu } 
+    # - postgres       # svc: relational database
