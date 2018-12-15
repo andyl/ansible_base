@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Vagrant/Ansible Bootstrap Script
 
@@ -13,7 +13,7 @@
 # 
 
 function writekey() {
-  [ $# == 1 ] || return 0
+  [[ $# == 1 ]] || return 0
   echo $1 > /tmp/hostkey.pub
 }
 
