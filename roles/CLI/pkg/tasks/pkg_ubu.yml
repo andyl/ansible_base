@@ -6,20 +6,19 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
-    - python-software-properties # required by apt-get
+    - language-pack-en-base      # american time zones
     - python-pip                 # required by ansible
     - python-dev                 # required by ansible
-    - python-virtualenv          # required by ansible
     - build-essential            # compile tools
     - dnsutils                   # dnsutils
     - git-core                   # git
-    - aptitude                   # package manager
     - cmake                      # required by libgit2/rugged
     - libicu-dev                 # development lib
     - libmagickcore-dev          # image processing
     - libmagickwand-dev          # image processing
     - imagemagick                # image processing
     - graphviz                   # diagram generation
+    - gnuplot                    # graph generation
     - htop                       # monitoring utility
     - atop                       # monitoring utility
     - ncdu                       # monitoring utility
@@ -29,7 +28,8 @@
     - iotop                      # monitoring utility
     - nload                      # monitoring utility
     - sysstat                    # monitoring utility
-    - libsqlite3-dev             # sqlite database
+    - ncdu                       # monitoring utility
+    - iperf                      # network performance testing
     - libcurl4-openssl-dev       # development lib
     - libevent-dev               # development lib
     - libncurses5-dev            # development lib
@@ -45,14 +45,22 @@
     - xvfb                       # X-windows utility tool
     - tree                       # cli utility
     - curl                       # cli utility
-    - httpie                     # cli utility
     - wget                       # cli utility
     - unzip                      # cli utility
     - zip                        # cli utility
+    - silversearcher-ag          # search utility
     - debian-archive-keyring     # ssh util
-    - exuberant-ctags            # vim file navigation
-    - vim-gnome                  # vim!
-    - ruby1.9.1                  # system ruby
+    - jq                         # command-line JSON processing
+    - rsync                      # file sync
+    - ecryptfs-utils             # directory encryption
+    - at                         # process scheduler
+
+# - name: install extended packages
+#   become: true
+#   apt:  pkg={{item}} state=latest install_recommends=no
+#   when: not_xu4
+#   with_items:
+    # - speedtest-cli              # network performance testing
 
 - name: remove packages
   become: true
@@ -60,14 +68,10 @@
   with_items:
     - whoopsie        # ubuntu bug reporter
 
-- name: upload lang.sh
-  copy: src=lang.sh dest=/etc/profile.d/lang.sh
-  become: true
-  when: lcl_hostname != ansible_hostname
+# - name: upload lang.sh
+#   copy: src=lang.sh dest=/etc/profile.d/lang.sh
+#   become: true
+#   when: lcl_hostname != ansible_hostname
 
-- name: install jq
-  become: true
-  get_url: 
-    url: http://stedolan.github.io/jq/download/linux64/jq
-    dest: /usr/local/bin/jq mode="a+rx"
-
+- include: phantomjs.yml
+  when: is_ubuntu 
