@@ -13,10 +13,9 @@
 # 
 
 function writekey() {
-  echo "=== WRITING KEY"
-  echo "NUM ITEMS - $#"
-  echo $1
   [[ $# == 1 ]] || return 0
+  echo "=== WRITING KEY"
+  echo $1
   echo $1 > /tmp/hostkey.pub
 }
 
