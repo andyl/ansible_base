@@ -12,6 +12,11 @@
 # source <(curl -sL <SCRIPT URL>)
 # 
 
+function writekey() {
+  [ $# == 1 ] || return
+  echo $1 > /tmp/hostkey.pub
+}
+
 echo "=== INSTALL ANSIBLE ROLES"
 mkdir -p util
 cd util

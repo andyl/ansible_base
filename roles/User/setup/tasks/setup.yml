@@ -22,25 +22,21 @@
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
-- name: test for public_key
-  local_action: stat path="~/.ssh/id_rsa.pub"
-  ignore_error: true
-  # changed_when: false
-  register: public_key
-
 - name: copy public key
   copy:
     src: "~/.ssh/id_rsa.pub"
-    dest: /tmp/pubkey.txt
+    dest: /tmp/host.pubkey
     force: true
-  when: public_key.stat.exists
+  when: copyable_hostkey
 
-- name: set ssh key for {{tgt_user}} from current user
+- name: test for pubkey
+  stat: path=/tmp/host.pubkey
+  register: host_pubkey
+
+- name: set ssh key for {{tgt_user}} 
   authorized_key:
     user: "{{tgt_user}}"
     state: present
-    key: "{{ lookup('file', '/tmp/pubkey.txt') }}"
-    # key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-  when: public_key.stat.exists
-
+    key: "{{ lookup('file', '/tmp/host.pubkey') }}"
+  when: host_pubkey.stat.exists
 
