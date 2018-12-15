@@ -28,11 +28,11 @@
     - Vars/predicates
     - Vars/hostname
     - Vars/dump
+    - User/setup
     # - Ruby/sysruby   # lang: ruby
     # - Ruby/chruby    # lang: ruby
     # - Ruby/install   # lang: ruby
     # - Ruby/gems      # lang: ruby
-    # - CLI/user       # cli 
     # - CLI/pkg        # cli 
     # - CLI/util_base  # cli 
     # - CLI/tzone      # cli 
