@@ -24,6 +24,8 @@
 
 - name: test for public_key
   local_action: stat path="~/.ssh/id_rsa.pub"
+  ignore_error: true
+  # changed_when: false
   register: public_key
 
 - name: copy public key
