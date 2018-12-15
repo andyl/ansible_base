@@ -24,7 +24,7 @@
 
 - name: set ssh key for {{tgt_user}} from current user
   authorized_key:
-    user: {{tgt_user}}
+    user: "{{tgt_user}}"
     state: present
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
