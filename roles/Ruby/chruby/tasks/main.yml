@@ -10,11 +10,16 @@
     url:  https://github.com/postmodern/chruby/archive/v{{chruby_version}}.tar.gz
     dest: /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz
     force: no
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
     validate_certs: false
 
 - name: untar package
-  become: no
-  shell: tar -xzf /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz chdir=/home/{{tgt_user}}/.pkg creates=/home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}
+  unarchive:
+    src:  /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz 
+    dest: /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: get current version
   shell:    chruby-exec --version
