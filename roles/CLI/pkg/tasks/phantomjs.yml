@@ -13,5 +13,4 @@
   copy: src={{item}} dest=/usr/local/bin/{{item}} mode="a+rx"
   become: true
   with_items:
-    - phantomjs198
     - phantomjs211
