@@ -2,9 +2,9 @@
 
 # nginx
 
-# - name: nginx base configuration
-#   include: main.yml
-#
+- name: nginx base configuration
+  include: base.yml
+
 # - name: nginx blob configuration
 #   include: blob.yml
 #   when: nginx_blob
