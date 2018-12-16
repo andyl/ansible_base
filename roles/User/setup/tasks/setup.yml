@@ -38,7 +38,8 @@
     var: copyable_hostkey
 
 - name: test for pubkey
-  stat: path=/tmp/hostkey.pub
+  stat: 
+    path: /tmp/hostkey.pub
   register: host_pubkey
 
 - name: qwer1
