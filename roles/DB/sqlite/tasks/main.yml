@@ -3,7 +3,6 @@
 # sqlite3
 
 - name: install packages
-  become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
     - sqlite3                    # sqlite3 database
