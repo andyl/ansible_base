@@ -1,3 +1,0 @@
----
-relay_host: "[smtp.gmail.com]:587"
-call_home_email: "spam@michaelgregg.com"
