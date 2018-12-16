@@ -5,9 +5,8 @@
 - name: nginx base configuration
   include: base.yml
 
-- name: debug yeah
-  debug:
-    msg: "{{nginx_cfgs}}"
+- debug:
+    var: nginx_cfgs
 
 # - name: nginx blob configuration
 #   include: blob.yml
