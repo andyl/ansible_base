@@ -9,7 +9,7 @@
     update_password: on_create
     generate_ssh_key: yes 
 
-- name: test for sudoers
+- name: test sudoers for {{alt_user}}
   stat: path=/etc/sudoers.d/{{alt_user}}
   become: true
   register: sudoer_file
@@ -28,7 +28,7 @@
 # copyable_hostkey
 # - running ansible remotely (not locally)
 # - the file exists (aka not on windows or mac)
-- name: copy public key
+- name: copy public key for {{alt_user}}
   copy:
     src: "~/.ssh/id_rsa.pub"
     dest: /tmp/host.pubkey
@@ -37,7 +37,7 @@
 
 # /tmp/hostkey.pub can be written in the 'copy public key' task 
 # or in a provisioning step in the Vagrantfile
-- name: test for pubkey
+- name: test for pubkey for {{alt_user}}
   stat: 
     path: /tmp/hostkey.pub
   register: host_pubkey
