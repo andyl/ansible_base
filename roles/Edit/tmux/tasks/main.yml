@@ -3,7 +3,6 @@
 # note: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
 
 - name: install tmux executable
-  become: true
   copy:
     src: tmux-{{ansible_architecture}}-{{tmux_version}}
     dest: /usr/bin/tmux
@@ -15,7 +14,6 @@
 # https://github.com/tmate-io/tmate/releases
 
 - name: install tmate executable
-  become: true
   copy:
     src: tmate-{{tmate_version}}
     dest: /usr/bin/tmate
