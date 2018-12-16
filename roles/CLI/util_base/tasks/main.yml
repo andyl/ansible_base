@@ -3,27 +3,27 @@
 # CLI/util_base
 
 - name: create a util directory
-  become: true
   file: 
     path: /home/{{tgt_user}}/util 
     state: directory 
     group: "{{tgt_user}}" 
     owner: "{{tgt_user}}"
 
-- name: install base_util for target user
-  become: false
+- name: install base_util for {{tgt_user}}
+  become_user: "{{tgt_user}}"
   git:
     repo:   https://github.com/andyl/base_util.git
     dest:   /home/{{tgt_user}}/util/base_util
-    update: no
+    update: yes
 
 - name: run init script 
-  become: false
+  become_user: "{{tgt_user}}"
   shell: /home/{{tgt_user}}/util/base_util/init 
   args:
     creates: /home/{{tgt_user}}/.hushlogin
 
 - name: add 'source' directive to ~/.bashrc
+  become_user: "{{tgt_user}}"
   blockinfile:
     create: yes
     path: /home/{{tgt_user}}/.bashrc
