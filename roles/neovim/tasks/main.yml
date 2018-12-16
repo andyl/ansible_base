@@ -12,10 +12,10 @@
 
 - name: create pkg dir
   file: 
-    path:  "/home/{{rem_user}}/{{item}}"
+    path:  "/home/{{alt_user}}/{{item}}"
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}"
+    owner: "{{alt_user}}"
   with_items:
     - ".pkg"
     - ".config"
@@ -24,14 +24,14 @@
   become: no
   get_url: 
     url:  https://github.com/neovim/neovim/releases/download/v{{nvim_version}}/nvim.appimage
-    dest: /home/{{rem_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    dest: /home/{{alt_user}}/.pkg/nvim_{{nvim_version}}.appimage
     validate_certs: false
     mode: "a+rx"
 
 - name: installation symlink
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    src:   /home/{{alt_user}}/.pkg/nvim_{{nvim_version}}.appimage
     dest:  /usr/local/bin/nvim
     state: link
     force: yes

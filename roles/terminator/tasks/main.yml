@@ -38,17 +38,17 @@
 #
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg 
+    path: /home/{{alt_user}}/.pkg 
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}"
+    owner: "{{alt_user}}"
 
 - name: get deb file
   become: no
   copy:
     src:  terminator_1.91.deb
-    dest: /home/{{rem_user}}/.pkg/terminator_1.91.deb     
+    dest: /home/{{alt_user}}/.pkg/terminator_1.91.deb     
 
 - name: install terminator package
-  apt: deb=/home/{{rem_user}}/.pkg/terminator_1.91.deb     
+  apt: deb=/home/{{alt_user}}/.pkg/terminator_1.91.deb     
 

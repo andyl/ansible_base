@@ -5,27 +5,27 @@
 - name: create a util directory
   become: true
   file: 
-    path: /home/{{rem_user}}/util 
+    path: /home/{{tgt_user}}/util 
     state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
 
 - name: install base_util for target user
   become: false
   git:
     repo:   https://github.com/andyl/base_util.git
-    dest:   /home/{{rem_user}}/util/base_util
+    dest:   /home/{{tgt_user}}/util/base_util
     update: no
 
 - name: run init script 
   become: false
-  shell: /home/{{rem_user}}/util/base_util/init 
+  shell: /home/{{tgt_user}}/util/base_util/init 
   args:
-    creates: /home/{{rem_user}}/.hushlogin
+    creates: /home/{{tgt_user}}/.hushlogin
 
 - name: add 'source' directive to ~/.bashrc
   blockinfile:
     create: yes
-    path: /home/{{rem_user}}/.bashrc
+    path: /home/{{tgt_user}}/.bashrc
     block: |
       [ -f ~/.bashrc_util ] && source ~/.bashrc_util

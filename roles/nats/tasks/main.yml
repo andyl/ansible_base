@@ -4,10 +4,10 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg/nats
+    path: /home/{{alt_user}}/.pkg/nats
     state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}" 
+    owner: "{{alt_user}}"
 
 # gnatsd
 
@@ -15,21 +15,21 @@
   become: no
   get_url: 
     url:  https://github.com/nats-io/gnatsd/releases/download/v{{gnatsd_version}}/gnatsd-v{{gnatsd_version}}-linux-amd64.zip
-    dest: /home/{{rem_user}}/.pkg/gnatsd_{{gnatsd_version}}.zip 
+    dest: /home/{{alt_user}}/.pkg/gnatsd_{{gnatsd_version}}.zip 
     force: no
     validate_certs: false
 
 - name: unzip gnatsd file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/gnatsd_{{gnatsd_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/nats
+    src:  /home/{{alt_user}}/.pkg/gnatsd_{{gnatsd_version}}.zip
+    dest: /home/{{alt_user}}/.pkg/nats
     remote_src: true
 
 - name: install gnatsd symlinks
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/nats/gnatsd-v{{gnatsd_version}}-linux-amd64/{{item}} 
+    src:   /home/{{alt_user}}/.pkg/nats/gnatsd-v{{gnatsd_version}}-linux-amd64/{{item}} 
     dest:  /usr/local/bin/{{item}} 
     state: link
     force: yes
@@ -40,30 +40,30 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg/nats-top-{{nats_top_version}}
+    path: /home/{{alt_user}}/.pkg/nats-top-{{nats_top_version}}
     state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}" 
+    owner: "{{alt_user}}"
 
 - name: get nats-top zip file
   become: no
   get_url: 
     url:  https://github.com/nats-io/nats-top/releases/download/v{{nats_top_version}}/nats-top-linux_amd64.zip
-    dest: /home/{{rem_user}}/.pkg/nats-top_{{nats_top_version}}.zip 
+    dest: /home/{{alt_user}}/.pkg/nats-top_{{nats_top_version}}.zip 
     force: no
     validate_certs: false
 
 - name: unzip nats-top file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/nats-top_{{nats_top_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/nats-top-{{nats_top_version}}
+    src:  /home/{{alt_user}}/.pkg/nats-top_{{nats_top_version}}.zip
+    dest: /home/{{alt_user}}/.pkg/nats-top-{{nats_top_version}}
     remote_src: true
 
 - name: install nats-top symlinks
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/nats-top-{{nats_top_version}}/nats-top-linux_amd64/{{item}} 
+    src:   /home/{{alt_user}}/.pkg/nats-top-{{nats_top_version}}/nats-top-linux_amd64/{{item}} 
     dest:  /usr/local/bin/{{item}} 
     state: link
     force: yes
@@ -74,30 +74,30 @@
 
 # - name: create data dir
 #   file: 
-#     path: /home/{{rem_user}}/var/nats
+#     path: /home/{{alt_user}}/var/nats
 #     state: directory 
-#     group: "{{rem_user}}" 
-#     owner: "{{rem_user}}"
+#     group: "{{alt_user}}" 
+#     owner: "{{alt_user}}"
 #
 # - name: get nats-ss zip file
 #   become: no
 #   get_url: 
 #     url:  https://github.com/nats-io/nats-streaming-server/releases/download/v{{nats_ss_version}}/nats-streaming-server-v{{nats_ss_version}}-linux-amd64.zip
-#     dest: /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip 
+#     dest: /home/{{alt_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip 
 #     force: no
 #     validate_certs: false
 #
 # - name: unzip nats-ss file
 #   become: no
 #   unarchive:
-#     src:  /home/{{rem_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip
-#     dest: /home/{{rem_user}}/.pkg/nats
+#     src:  /home/{{alt_user}}/.pkg/nats_ss_{{nats_ss_version}}.zip
+#     dest: /home/{{alt_user}}/.pkg/nats
 #     remote_src: true
 #
 # - name: install nats-ss symlinks
 #   become: yes
 #   file: 
-#     src:   /home/{{rem_user}}/.pkg/nats/nats-streaming-server-v{{nats_ss_version}}-linux-amd64/{{item}} 
+#     src:   /home/{{alt_user}}/.pkg/nats/nats-streaming-server-v{{nats_ss_version}}-linux-amd64/{{item}} 
 #     dest:  /usr/local/bin/{{item}} 
 #     state: link
 #     force: yes

@@ -13,13 +13,13 @@
 # vagrant plugin install vagrant-mutate
 
 - name: create pkg dir
-  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{alt_user}}/.pkg state=directory group={{alt_user}} owner={{alt_user}}
 
 - name: get deb file
   become: no
   get_url: 
     url: https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}_x86_64.deb
-    dest: /home/{{rem_user}}/.pkg/vagrant_{{vagrant_version}}.deb
+    dest: /home/{{alt_user}}/.pkg/vagrant_{{vagrant_version}}.deb
 
 - name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/vagrant_{{vagrant_version}}.deb
+  apt: deb=/home/{{alt_user}}/.pkg/vagrant_{{vagrant_version}}.deb

@@ -5,28 +5,28 @@
 - name: create pkg dir
   become: no
   file: 
-    path: /home/{{rem_user}}/.pkg 
+    path: /home/{{alt_user}}/.pkg 
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}"
+    owner: "{{alt_user}}"
 
 - name: get tar file
   become: no
   get_url: 
     url:  https://www.torproject.org/dist/torbrowser/{{tor_browser_version}}/tor-browser-linux64-{{tor_browser_version}}_en-US.tar.xz
-    dest: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
+    dest: /home/{{alt_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}.tar.xz
 
 - name: extract tar file
   become: no
   shell: mkdir -p tor-browser-linux64-{{tor_browser_version}} && tar -xf tor-browser-linux64-{{tor_browser_version}}.tar.xz -C tor-browser-linux64-{{tor_browser_version}} --strip-components=1
   args:
-      chdir: /home/{{rem_user}}/.pkg
-      creates: /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
+      chdir: /home/{{alt_user}}/.pkg
+      creates: /home/{{alt_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
 
 - name: create symlink
   become: no
   file:
-    src:  /home/{{rem_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
-    dest: /home/{{rem_user}}/.pkg/tor-base
+    src:  /home/{{alt_user}}/.pkg/tor-browser-linux64-{{tor_browser_version}}
+    dest: /home/{{alt_user}}/.pkg/tor-base
     state: link 
 

@@ -13,7 +13,7 @@
     - libtinfo-dev
 
 - name: create package cache dir
-  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{alt_user}}/.pkg state=directory group={{alt_user}} owner={{alt_user}}
 
 # FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
 # see http://www.erlang-solutions.com/resources/download.html
@@ -22,11 +22,11 @@
   become: no
   get_url: 
     url:  https://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
-    dest: /home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
+    dest: /home/{{alt_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
 - name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
+  apt: deb=/home/{{alt_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
   when: is_x86_64
 
 # FOR ARM7 (32 bit RPi/Raspbian and Odroid-XU4)
@@ -35,54 +35,54 @@
 # - save the precompile in x-ansible/roles/erlang/files/arm7/<release>
 
 - name: create package cache dir
-  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{alt_user}}/.pkg state=directory group={{alt_user}} owner={{alt_user}}
 
 - name: copy release tarfile
   copy:
     src:  arm7/erl_arm7_{{erlang_arm7_version}}.tar.gz
-    dest: /home/{{rem_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}.tar.gz
+    dest: /home/{{alt_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}.tar.gz
   when: is_arm7
 
 - name:  expand release tarfile
   shell: tar xf erl_arm7_{{erlang_arm7_version}}.tar.gz
   args:
-    chdir:   /home/{{rem_user}}/.pkg
-    creates: /home/{{rem_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}
+    chdir:   /home/{{alt_user}}/.pkg
+    creates: /home/{{alt_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}
   when: is_arm7
 
 - name:  install arm7 erlang
   become:  yes
   shell: cp -R usr/* /usr
   args:
-    chdir:   /home/{{rem_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}
+    chdir:   /home/{{alt_user}}/.pkg/erl_arm7_{{erlang_arm7_version}}
     creates: /usr/local/bin/erl
   when: is_arm7
 
 # GET OTP SOURCE FOR DOCCO AND CODE LOOKUPS
 
 - name: create package cache dir
-  file: path=/home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}} state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{alt_user}}/.beam_src/otp-OTP-{{otp_version}} state=directory group={{alt_user}} owner={{alt_user}}
   when: is_x86_64
 
 - name: download OTP tar file
   become: no
   get_url: 
     url:  https://github.com/erlang/otp/releases/download/OTP-{{otp_version}}/OTP-{{otp_version}}-bundle.tar.gz
-    dest: /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    dest: /home/{{alt_user}}/.beam_src/otp-{{otp_version}}.tar.gz
     validate_certs: false
   when: is_x86_64
 
 - name: expand OTP tar file
   unarchive:
-    src:  /home/{{rem_user}}/.beam_src/otp-{{otp_version}}.tar.gz
-    dest: /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}
+    src:  /home/{{alt_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    dest: /home/{{alt_user}}/.beam_src/otp-OTP-{{otp_version}}
     remote_src: true
   when: is_x86_64
 
 - name: create symlink to OTP source dir
   file: 
-    src:  /home/{{rem_user}}/.beam_src/otp-OTP-{{otp_version}}/otp
-    dest: /home/{{rem_user}}/.beam_src/otp
+    src:  /home/{{alt_user}}/.beam_src/otp-OTP-{{otp_version}}/otp
+    dest: /home/{{alt_user}}/.beam_src/otp
     mode: "a+rx"
     state: link 
   when: is_x86_64

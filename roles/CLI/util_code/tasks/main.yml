@@ -5,24 +5,24 @@
 - name: create a util directory
   become: false
   file: 
-    path: /home/{{rem_user}}/util 
+    path: /home/{{tgt_user}}/util 
     state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
 
 - name: create a util directory
   become: false
-  file: path=/home/{{rem_user}}/util state=directory group={{rem_user}} owner={{rem_user}}
+  file: path=/home/{{tgt_user}}/util state=directory group={{tgt_user}} owner={{tgt_user}}
   when: lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
 - name: install code_util for target user
   become: false
-  synchronize: src=/home/{{lcl_user}}/util/code_util dest=/home/{{rem_user}}/util
+  synchronize: src=/home/{{lcl_user}}/util/code_util dest=/home/{{tgt_user}}/util
   changed_when: false 
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
 - name: run util init script
   become: false
-  shell: /home/{{rem_user}}/util/base_util/init creates=/home/{{rem_user}}/.gitconfig
+  shell: /home/{{tgt_user}}/util/base_util/init creates=/home/{{tgt_user}}/.gitconfig
   when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
 

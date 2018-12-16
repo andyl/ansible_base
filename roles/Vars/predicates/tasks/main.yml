@@ -4,8 +4,6 @@
 
 - name: test for hostkey
   local_action: stat path="~/.ssh/id_rsa.pub"
-  # ignore_error: true
-  # changed_when: false
   register: hostkey
 
 - name: set base predicates

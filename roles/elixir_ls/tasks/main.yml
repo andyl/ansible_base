@@ -4,38 +4,38 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}
+    path: /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}
     state: directory 
-    group: "{{rem_user}}" 
-    owner: "{{rem_user}}"
+    group: "{{alt_user}}" 
+    owner: "{{alt_user}}"
 
 
 - name: get elixir_ls zip file
   become: no
   get_url: 
     url: https://github.com/JakeBecker/elixir-ls/releases/download/v{{els_version}}/elixir-ls.zip
-    dest: /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}.zip 
+    dest: /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}.zip 
     force: no
     validate_certs: false
 
 - name: unzip elixir_ls file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}.zip
-    dest: /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}
+    src:  /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}.zip
+    dest: /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}
     remote_src: true
 
 - name: set script permission
   become: no
   file:
-    path: /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
+    path: /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
     mode:  "a+rx"
     state: touch
 
 - name: create elixir_ls symlink
   become: yes
   file: 
-    src:   /home/{{rem_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
+    src:   /home/{{alt_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
     dest:  /usr/local/bin/elixir_ls
     state: link
     force: yes
