@@ -52,6 +52,8 @@
 
 - name: remove files and directories
   shell: "/bin/rm -rf /home/{{tgt_user}}/{{item}}"
+  args:
+    warn: False
   with_items:
     - src/ruby-*
 
