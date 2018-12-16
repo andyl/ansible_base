@@ -35,8 +35,8 @@
   changed_when: false 
 
 - name: install ruby_install script
-  become_user: "{{tgt_user}}"
-  command: make install chdir=/home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}} 
+  command: make install 
+    chdir: /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}} 
   when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
 
 - name: build rubies
