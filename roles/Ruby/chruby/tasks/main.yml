@@ -17,7 +17,7 @@
 - name: untar package
   unarchive:
     src:  /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz 
-    dest: /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}
+    dest: /home/{{tgt_user}}/.pkg
     group: "{{tgt_user}}"
     owner: "{{tgt_user}}"
 
