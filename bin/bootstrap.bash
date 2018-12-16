@@ -40,5 +40,4 @@ cp -r x-ansible/ANSIBLE /vagrant
 echo "=== INSTALL ANSIBLE EXECUTABLE"
 cd x-ansible/bin
 ./install_ansible
-echo "DONE."
 

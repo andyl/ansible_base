@@ -3,7 +3,11 @@
 # chruby
 
 - name: create package cache dir
-  file: path=/home/{{tgt_user}}/.pkg state=directory group={{tgt_user}} owner={{tgt_user}}
+  file: 
+    path: /home/{{tgt_user}}/.pkg 
+    state: directory 
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
 
 - name: get package
   get_url:
@@ -16,10 +20,11 @@
 
 - name: untar package
   unarchive:
-    src:  /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz 
-    dest: /home/{{tgt_user}}/.pkg
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    src:     /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}.tar.gz 
+    dest:    /home/{{tgt_user}}/.pkg
+    creates: /home/{{tgt_user}}/.pkg/chruby-{{chruby_version}}
+    group:   "{{tgt_user}}"
+    owner:   "{{tgt_user}}"
 
 - name: get current version
   shell:    chruby-exec --version
