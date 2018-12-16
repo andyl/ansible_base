@@ -1,0 +1,16 @@
+---
+
+# postgres
+# see http://wiki.postgresql.org/wiki/Apt
+# see http://wiki.postgresql.org/wiki/Apt/FAQ
+
+- name: postgres for ubuntu
+  include: pg_ubu.yml
+  when: is_ubuntu
+
+- name: postgres for rpi
+  include: pg_rpi.yml
+  when: is_rpi
+
+- name: postgres users
+  include: user.yml

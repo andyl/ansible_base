@@ -5,7 +5,7 @@
 # see http://wiki.postgresql.org/wiki/Apt/FAQ
 
 - name: postgres for ubuntu
-  include: pg_ubuntu.yml
+  include: pg_ubu.yml
   when: is_ubuntu
 
 - name: postgres for rpi

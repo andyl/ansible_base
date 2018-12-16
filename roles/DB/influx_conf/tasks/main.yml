@@ -1,0 +1,29 @@
+---
+
+# influxdb
+# see:
+# - http://influxdb.com/download/
+# - http://influxdb.com/docs/v0.9/introduction/installation.html
+
+- name: setup admin user
+  command: influx -execute "create user admin with password 'admin' with all privileges"
+  ignore_errors: true
+
+- name: create database
+  influxdb_database:
+    username: "admin"
+    password: "admin"
+    hostname: "localhost"
+    database_name: "{{ item }}"
+    state: present
+  with_items:
+    - telegraf
+    - stocks
+    - ping
+    - influx
+    - cronlog
+    - bootlog
+    - backups
+    - weather
+    - bugm_log
+    - bugm_stats

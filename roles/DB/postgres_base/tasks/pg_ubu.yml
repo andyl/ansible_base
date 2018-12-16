@@ -80,7 +80,6 @@
   meta: flush_handlers
 
 - name: create template_base database
-  become: true
   postgresql_db: 
     name:       template_base 
     encoding:   UTF8 
