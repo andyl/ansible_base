@@ -29,9 +29,19 @@
     force: true
   when: copyable_hostkey
 
+- name: asdf
+  debug:
+    msg: "HELLO WORLD"
+    var: copyable_hostkey
+
 - name: test for pubkey
   stat: path=/tmp/host.pubkey
   register: host_pubkey
+
+- name: qwer
+  debug:
+    msg: "GOODBYE WORLD"
+    var: host_pubkey
 
 - name: set ssh key for {{tgt_user}} 
   authorized_key:

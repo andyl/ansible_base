@@ -1,5 +1,10 @@
 ---
 
+# There's two things that we're trying to do here:
+# 1) support a base user and an alternate user
+# 2) ssh-copy-id if possible
+#
+
 - name: setup {{rem_user}}
   include: setup.yml tgt_user="{{rem_user}}"
 
