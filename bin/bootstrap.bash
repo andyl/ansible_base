@@ -15,7 +15,6 @@
 function writekey() {
   [[ $# == 1 ]] || return 0
   echo "=== WRITING KEY"
-  echo $1
   echo $1 > /tmp/hostkey.pub
 }
 
