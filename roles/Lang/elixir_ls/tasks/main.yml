@@ -19,7 +19,6 @@
     owner: "{{tgt_user}}"
 
 - name: unzip elixir_ls file
-  become: no
   unarchive:
     src:  /home/{{tgt_user}}/.pkg/elixir_ls/els_{{els_version}}.zip
     dest: /home/{{tgt_user}}/.pkg/elixir_ls/els_{{els_version}}
@@ -28,7 +27,6 @@
     owner: "{{tgt_user}}"
 
 - name: set script permission
-  become: no
   file:
     path: /home/{{tgt_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
     mode:  "a+rx"
@@ -37,7 +35,6 @@
     owner: "{{tgt_user}}"
 
 - name: create elixir_ls symlink
-  become: yes
   file: 
     src:   /home/{{tgt_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
     dest:  /usr/local/bin/elixir_ls
