@@ -26,7 +26,6 @@
 # ----- fd -----
 
 - name: get fd deb file
-  become: no
   get_url: 
     url: https://github.com/sharkdp/fd/releases/download/v{{fd_version}}/fd_{{fd_version}}_amd64.deb
     dest: /home/{{tgt_user}}/.pkg/fd_{{fd_version}}.deb
