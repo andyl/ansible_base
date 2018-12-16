@@ -38,7 +38,7 @@
     var: copyable_hostkey
 
 - name: test for pubkey
-  stat: path=/tmp/host.pubkey
+  stat: path=/tmp/hostkey.pub
   register: host_pubkey
 
 - name: qwer1
@@ -53,6 +53,6 @@
   authorized_key:
     user: "{{tgt_user}}"
     state: present
-    key: "{{ lookup('file', '/tmp/host.pubkey') }}"
+    key: "{{ lookup('file', '/tmp/hostkey.pub') }}"
   when: host_pubkey.stat.exists
 
