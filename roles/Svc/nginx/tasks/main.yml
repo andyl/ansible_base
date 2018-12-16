@@ -2,14 +2,14 @@
 
 # nginx
 
-- name: nginx base configuration
-  include: main.yml
-
-- name: nginx blob configuration
-  include: blob.yml
-  when: nginx_blob
-
-- name: nginx alt configuration
-  include: blob.yml
-  when: nginx_alt
+# - name: nginx base configuration
+#   include: main.yml
+#
+# - name: nginx blob configuration
+#   include: blob.yml
+#   when: nginx_blob
+#
+# - name: nginx alt configuration
+#   include: blob.yml
+#   when: nginx_alt
 
