@@ -29,7 +29,7 @@ if [[ -d x-ansible ]] ; then
 else
   echo "Cloning roles"
   sudo rm -rf x-ansible
-  git clone https://github.com/andyl/x-ansible.git > /dev/null 2>&1
+  git clone --depth=1 https://github.com/andyl/x-ansible.git > /dev/null 2>&1
 fi
 
 echo "=== WRITE /vagrant/ANSIBLE"
