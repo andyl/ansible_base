@@ -27,6 +27,7 @@
     owner:   "{{tgt_user}}"
 
 - name: get current version of ruby_install
+  become_user: "{{tgt_user}}"
   shell: ruby-install --version
   register: rinst_current_version
   ignore_errors: True
@@ -34,27 +35,36 @@
   changed_when: false 
 
 - name: install ruby_install script
+  become_user: "{{tgt_user}}"
   command: make install chdir=/home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}} 
   when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
 
 - name: build rubies
-  become: no
+  become_user: "{{tgt_user}}"
   shell: /usr/local/bin/ruby-install ruby {{item}} creates=~/.rubies/ruby-{{item}}
   with_items: '{{chruby_rubies}}'
 
 - name: set global ruby
-  become: no
+  become_user: "{{tgt_user}}"
   shell: echo {{chruby_global}} > ~/.ruby-version
   changed_when: false
 
 - name: remove files and directories
-  become: yes
   shell: "/bin/rm -rf /home/{{tgt_user}}/{{item}}"
   with_items:
     - src/ruby-*
 
 - name: setup rbenv symlink directory
-  file: path=/home/{{tgt_user}}/.rbenv state=directory
+  file: 
+    path: /home/{{tgt_user}}/.rbenv 
+    state: directory
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: create rbenv symlink
-  file: src=/home/{{tgt_user}}/.rubies dest=/home/{{tgt_user}}/.rbenv/versions state=link 
+  file: 
+    src:/home/{{tgt_user}}/.rubies 
+    dest: /home/{{tgt_user}}/.rbenv/versions 
+    state: link 
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"

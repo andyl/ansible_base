@@ -3,7 +3,7 @@
 # ruby_gems
 
 - name: install base gems
-  become: no
+  become_user: "{{tgt_user}}"
   gem: name="{{item}}"
   with_items:
     - bundler
@@ -20,7 +20,7 @@
     # - solargraph
 
 - name: install extended gems
-  become: no
+  become_user: "{{tgt_user}}"
   gem: name="{{item}}"
   when: not_xu4
   with_items:
