@@ -1,24 +1,24 @@
 ---
 
-- name: create user {{tgt_user}}
+- name: create user {{alt_user}}
   become: true
   user: 
-    name: "{{tgt_user}}" 
+    name: "{{alt_user}}" 
     shell: /bin/bash 
     password: $6$5WhqbRWhmf$k5xvagkoif0j3y6jggZ.La.YZuE1.VCSP2f3KXzTCmNeD0VSZo/srlkYm0HxA8kP3HW75yltrom5sHdOL5jbz.
     update_password: on_create
     generate_ssh_key: yes 
 
 - name: test for sudoers
-  stat: path=/etc/sudoers.d/{{tgt_user}}
+  stat: path=/etc/sudoers.d/{{alt_user}}
   become: true
   register: sudoer_file
 
-- name: config sudoers for {{tgt_user}}
+- name: config sudoers for {{alt_user}}
   become: true
   template:
     src: sudoer_line.j2
-    dest: /etc/sudoers.d/{{tgt_user}}
+    dest: /etc/sudoers.d/{{alt_user}}
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
@@ -45,9 +45,9 @@
 # does the same thing as 'ssh-copy-id'
 # appends the pubkey to ~/.ssh/authorized_keys
 # once this is done you can SSH to the VM w/o password
-- name: set ssh key for {{tgt_user}} 
+- name: set ssh key for {{alt_user}} 
   authorized_key:
-    user: "{{tgt_user}}"
+    user: "{{alt_user}}"
     state: present
     key: "{{ lookup('file', '/tmp/hostkey.pub') }}"
   when: host_pubkey.stat.exists
