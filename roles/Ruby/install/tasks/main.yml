@@ -63,7 +63,7 @@
 
 - name: create rbenv symlink
   file: 
-    src:/home/{{tgt_user}}/.rubies 
+    src: /home/{{tgt_user}}/.rubies 
     dest: /home/{{tgt_user}}/.rbenv/versions 
     state: link 
     group: "{{tgt_user}}"
