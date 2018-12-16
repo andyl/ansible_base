@@ -22,6 +22,16 @@
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
+- name: create common directories
+  file: 
+    path: "{{item}}"
+    state: directory 
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
+  with_items:
+    - /home/{{tgt_user}}/.pkg
+    - /home/{{tgt_user}}/.ansible_tmp
+
 # --------------------------------------------------
 # SSH Provisioning
 
