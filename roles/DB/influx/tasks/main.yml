@@ -43,15 +43,15 @@
 - name: flush all outstanding handlers
   meta: flush_handlers
 
-# - name: setup admin user
-#   command: influx -execute "create user admin with password 'admin' with all privileges"
-#   ignore_errors: true
-
 - name: setup admin user
-  influxdb_user:
-    user_name:     admin
-    user_password: admin
-    admin: yes
+  command: influx -execute "create user admin with password 'admin' with all privileges"
+  ignore_errors: true
+
+# - name: setup admin user
+#   influxdb_user:
+#     user_name:     admin
+#     user_password: admin
+#     admin: yes
 
 - name: create database
   influxdb_database:
