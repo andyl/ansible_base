@@ -73,5 +73,5 @@
 #   become: true
 #   when: lcl_hostname != ansible_hostname
 
-- include: phantomjs.yml
-  when: is_ubuntu 
+# - include: phantomjs.yml
+#   when: is_ubuntu 
