@@ -1,0 +1,67 @@
+---
+
+# ejabberd
+# doc: http://www.process-one.net/docs/ejabberd/guide_en.html#htoc4
+# pkg: http://www.process-one.net/downloads
+# pkg: http://www.process-one.net/downloads/downloads-action.php?file=/ejabberd/14.07/ejabberd-14.07-linux-x86_64-installer.run
+
+- name: remove apt version of ejabberd 
+  become: yes
+  when: lcl_hostname == ansible_hostname
+  apt:  pkg=ejabberd state=absent purge=yes
+
+- name: create ejabberd user
+  user: name=ejabberd shell=/bin/bash
+
+- name: create package cache dir
+  file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+
+- name: get package
+  become: no
+  when: lcl_hostname == ansible_hostname
+  get_url:
+    url:  http://www.process-one.net/downloads/ejabberd/{{ejabberd_version}}/ejabberd-{{ejabberd_version}}-linux-x86_64-installer.run
+    dest: /home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}.run
+    force: no
+
+- name: make the installer executable
+  become: no
+  when: lcl_hostname == ansible_hostname
+  file:
+    path: /home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}.run
+    mode: 0700
+
+- name: run installer
+  become: no
+  when: lcl_hostname == ansible_hostname
+  shell: ./ejabberd-{{ejabberd_version}}.run --adminpw ejpwd --mode unattended --prefix /home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}
+  args:
+    chdir:   /home/{{rem_user}}/.pkg 
+    creates: /home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}
+      
+# - name: create init symlink
+#   become: yes
+#   when: lcl_hostname == ansible_hostname
+#   file: src=/home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}/bin/ejabberd.init dest=/etc/init.d/ejabberd state=link
+# 
+# - name: create executable symlinks
+#   become: yes
+#   when: lcl_hostname == ansible_hostname
+#   file: src=/home/{{rem_user}}/.pkg/ejabberd-{{ejabberd_version}}/bin/{{item}} dest=/usr/sbin/{{item}} state=link
+#   with_items:
+#     - ejabberdctl
+#         
+# - name: start ejabberd service
+#   become: yes
+#   when: lcl_hostname == ansible_hostname
+#   service: name=ejabberd state=started
+# 
+# - name: setup ejabberd users
+#   become: yes
+#   when: lcl_hostname == ansible_hostname
+#   ejabberd_user: host=localhost password=ejpwd username={{item}}
+#   with_items:
+#     - andyl
+#     - admin
+#     - test1
+#     - test2

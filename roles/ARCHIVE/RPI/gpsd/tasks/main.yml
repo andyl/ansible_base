@@ -1,0 +1,57 @@
+---
+
+# gpsd
+
+- name: install support packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - usbutils        # Utilities to examine usb devices
+    - gpsd            # Main gpsd server
+    - gpsd-clients    # Supporting client packages
+    - minicom         # Tool useful to diagnose what is going on with a tty device
+  
+- name: install shell script to alter ttyUSBGPS link
+  become: true
+  copy: 
+    src: setup-usb-gps.bash
+    dest: /bin/setup-usb-gps.bash
+    mode: "a+rx"
+
+- name: configure /etc/default/gpsd
+  lineinfile: 
+    dest:    /etc/default/gpsd
+    line:    "{{ item.line }}" 
+    regexp:  "{{ item.reg }}"
+  with_items:
+    - {reg: "^DEVICES=\"\""                 , line: "DEVICES=\"/dev/ttyUSB0\""      }
+
+- name: Add udev rules for common tty devices
+  become: true
+  copy:
+    src: 70-gpsd.rules
+    dest: /etc/udev/rules.d/70-gpsd.rules
+    mode: "a+rx"
+
+- name: Restart udev
+  become: true
+  service: name=udev state=restarted
+
+- name: Set the permissions for USB tty devices for this session
+  become: true
+  shell: if [ -c /dev/ttyUSB0 ]; then chmod 777 /dev/ttyUSB*; fi
+
+- name: Set the permissions for ACM tty devices for this session
+  become: true
+  shell: if [ -c /dev/ttyACM0 ]; then chmod 777 /dev/ttyACM*; fi
+
+- name: auto-start gpsd point on Boot
+  become:  true
+  shell: "{{item}}" 
+  with_items:
+    - "update-rc.d gpsd enable"
+
+- name: Restart gpsd
+  become: true
+  service: name=gpsd state=restarted
+

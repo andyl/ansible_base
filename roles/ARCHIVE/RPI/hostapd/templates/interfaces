@@ -1,0 +1,24 @@
+###############################################################################
+# Ansible Managed: Do Not Edit Directly!!
+# generated {{template_run_date}} by {{template_uid}} on {{template_host}} from
+# {{template_fullpath}}
+###############################################################################
+
+auto lo
+
+# outbound ethernet connection
+iface lo inet loopback     
+iface eth0 inet dhcp
+
+# inbound WIFI connection
+iface wlan0 inet static    
+  address 192.168.42.1
+  netmask 255.255.255.0
+
+# outbound WIFI connection
+iface wlan1 inet dhcp      
+  wpa-ssid "SSID_TBD"
+  wpa-psk  "PASS_TBD"
+
+# restore IPTABLES settings
+up iptables-restore < /etc/iptables.ipv4.nat

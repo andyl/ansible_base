@@ -1,0 +1,82 @@
+---
+
+# gpsd
+
+- name: install support packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - usbutils      # Utilities to examine usb devices
+    - minicom       # Tool useful to diagnose what is going on with a tty device
+    - python-serial # Python serial lib
+#    - gobi-loader   # For loading firmware onto Gobi modems
+    - build-essential 
+    - gcc
+  
+- name: install modem status shell file.
+  become: true
+  copy: 
+    src: get-modem-status.py
+    dest: /bin/get-modem-status.py
+    mode: "a+rx"
+
+- name: Add sudo rule for web admin operation
+  become: true
+  shell: "grep 'deploy ALL=(ALL) NOPASSWD: /bin/get-modem-status.py' /etc/sudoers; if [ $? -ne 0 ]; then echo  'deploy ALL=(ALL) NOPASSWD: /bin/get-modem-status.py' >> /etc/sudoers; fi;"
+
+- name: Create /lib/firmware/gobi
+  become: true
+  shell: mkdir -p /lib/firmware/gobi;chmod 755 /lib/firmware/gobi
+
+- name: install gobi 2000 firmware part 1 
+  become: true
+  copy: 
+    src: gobi-2000/6.tar.bz
+    dest: /lib/firmware/gobi/6.tar.bz
+    mode: "a+rx"
+
+- name: install gobi 2000 firmware part 2 
+  become: true
+  copy: 
+    src: gobi-2000/UTMS.tar.bz
+    dest: /lib/firmware/gobi/UMTS.tar.bz
+    mode: "a+rx"
+
+- name: install reset usb
+  become: true
+  copy: 
+    src: reset-usb.c
+    dest: /bin/reset-usb.c
+    mode: "a+rx"
+
+- name: Build reset-usb
+  become: true
+  shell: if [ ! -f /bin/reset-usb ]; then cd /bin; gcc -o ./reset-usb reset-usb.c; fi; chmod 755 /bin/reset-usb
+
+- name: extract firmware in /lib/firmware/gobi
+  become: true
+  shell: cd /lib/firmware/gobi; tar xvfj 6.tar.bz;tar xvfj UMTS.tar.bz;chmod 755 *; rm -f *.bz
+
+- name: Link Gobi loader
+  become: true
+  file: src=/lib/udev/gobi_loader dest=/bin/gobi_loader owner=root group=root state=link
+
+- name: install sakis3g
+  become: true
+  copy: 
+    src: sakis3g
+    dest: /bin/sakis3g
+    mode: "a+rx"
+
+- name: install gobi udev rules
+  become: true
+  file: src=/lib/udev/rules.d/60-gobi-loader.rules dest=/etc/udev/rules.d/60-gobi.rules owner=root group=root state=link
+
+- name: Restart udev to take on new rules
+  become: true
+  shell: /etc/init.d/udev restart
+
+- name: reload qcserial module
+  become: true
+  shell: lsmod | grep qcserial; if [ $? -eq 0 ]; then rmmod qcserial; modprobe qcserial; fi
+

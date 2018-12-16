@@ -1,0 +1,52 @@
+---
+
+# tmux
+
+- name: add tmux PPA (ubuntu 1404)
+  become: true
+  when: is_ubuntu_1404
+  apt_repository: repo="ppa:pi-rho/dev" 
+
+- name: add tmux PPA (ubuntu 1204)
+  become: true
+  when: is_ubuntu_1204
+  apt_repository: repo="ppa:kalakris/tmux" 
+
+- name: install tmux (ubuntu)
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  when: is_ubuntu
+  with_items:
+    - tmux
+
+- name: copy tmux executable (rpi)
+  become: true
+  when: is_rpi
+  copy:
+    src: rpi/tmux
+    dest: /usr/local/bin/tmux
+    mode: 'a+rx'
+
+# wemux
+
+- name: install wemux github repo
+  git:
+    repo:   "https://github.com/zolrath/wemux.git"
+    dest:   "/usr/local/share/wemux"
+    depth:  1
+    force:  true
+    update: true
+
+- name: create wemux symlink to executable
+  file: 
+    src: /usr/local/share/wemux/wemux
+    dest: /usr/local/bin/wemux
+    mode: "a+rx"
+    state: link 
+
+- name: install wemux.conf
+  template:
+    src: wemux.conf
+    dest: /usr/local/etc/wemux.conf
+
+

@@ -1,0 +1,90 @@
+---
+
+# cli_base
+
+- name: install common packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - python-software-properties # required by apt-get
+    - python-pip                 # required by ansible
+    - python-dev                 # required by ansible
+    - python-virtualenv          # required by ansible
+    - build-essential            # compile tools
+    - dnsutils                   # dnsutils
+    - aptitude                   # package manager
+    - cmake                      # required by libgit2/rugged
+    - libicu-dev                 # development lib
+    - libmagickcore-dev          # image processing
+    - libmagickwand-dev          # image processing
+    - imagemagick                # image processing
+    - graphviz                   # diagram generation
+    - htop                       # monitoring utility
+    - atop                       # monitoring utility
+    - ncdu                       # monitoring utility
+    - nmon                       # monitoring utility
+    - iftop                      # monitoring utility
+    - dstat                      # monitoring utility
+    - iotop                      # monitoring utility
+    - nmap                       # monitoring utility
+    - nload                      # monitoring utility
+    - sysstat                    # monitoring utility
+    - libsqlite3-dev             # sqlite database
+    - libcurl4-openssl-dev       # development lib
+    - libevent-dev               # development lib
+    - libncurses5-dev            # development lib
+    - libxml2-dev                # development lib
+    - libreadline-dev            # development lib
+    - libssl-dev                 # development lib
+    - libxslt1-dev               # development lib
+    - zlib1g-dev                 # development lib
+    - wkhtmltopdf                # pdf generation
+    - multitail                  # log file monitoring
+    - encfs                      # file system encryption
+    - sshfs                      # file system encryption
+    - xvfb                       # X-windows utility tool
+    - tree                       # cli utility
+    - curl                       # cli utility
+    - wget                       # cli utility
+    - unzip                      # cli utility
+    - zip                        # cli utility
+    - debian-archive-keyring     # ssh util
+    - exuberant-ctags            # vim file navigation
+    - vim-gnome                  # vim!
+    - ruby                       # system ruby
+    - ruby-dev                   # compile tools
+    - mailutils                  # Support packages for postfix
+    - libsasl2-2 
+    - ca-certificates 
+    - libsasl2-modules           # End support packages for postfix
+    - usbutils                   # Utilities to examine usb devices
+    - gpsd                       # Main gpsd server
+    - gpsd-clients               # Supporting client packages
+    - minicom                    # Tool useful to diagnose what is going on with a tty device
+    - libgps-dev                 # Buildtool for direwolf
+    - screen                     # Useful to run applications without a head
+    - libasound2-dev             # Lib for gpsd
+    - libgps-dev                 # Lib for gpsd
+
+- name: remove packages
+  become: true
+  apt: pkg={{item}} state=absent
+  with_items:
+    - whoopsie        # ubuntu bug reporter
+
+- name: install jq on ubuntu
+  become: true
+  get_url: 
+    url: http://stedolan.github.io/jq/download/linux64/jq
+    dest: /usr/local/bin/jq mode="a+rx"
+  when: is_ubuntu
+
+- name: install jq on rpi
+  become: true
+  copy: src=rpi/jq dest=/usr/local/bin/jq mode="a+rx"
+  when: is_rpi
+
+- name: Enable syntax highlighting on vi and vim 
+  become: true
+  shell: sed -i s/^syntax\ enable/#syntax\ enable/g /etc/vim/vimrc; echo "syntax enable" >> /etc/vim/vimrc
+

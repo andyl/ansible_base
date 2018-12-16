@@ -1,0 +1,19 @@
+---
+
+# jq - a sed-like JSON parsing tool
+
+- name: install jq (ubuntu)
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  when: is_ubuntu
+  with_items:
+    - jq
+
+- name: copy jq executable (rpi)
+  become: true
+  when: is_rpi
+  copy:
+    src: rpi/jq
+    dest: /usr/local/bin/jq
+    mode: 'a+rx'
+

@@ -1,0 +1,47 @@
+---
+
+# cli_locale
+
+- name: upload default locale
+  become: true
+  template:
+    src: locale_default.sh
+    dest: /etc/default/locale
+    mode: "a+rx"
+
+- name: upload lang profile
+  become: true
+  template:
+    src: lang_profile.sh
+    dest: /etc/profile.d/lang.sh
+    mode: "a+rx"
+
+- name: comment GB settings
+  when: is_rpi
+  lineinfile:
+    dest:     /etc/locale.gen
+    backup:   yes
+    state:    present
+    backrefs: yes
+    regexp:   "en_GB.UTF-8 UTF-8"
+    line:     "# en_GB.UTF-8 UTF-8"
+
+- name: uncomment US settings
+  when: is_rpi
+  lineinfile:
+    dest:     /etc/locale.gen
+    backup:   yes
+    state:    present
+    backrefs: yes
+    regexp:   "# en_US.UTF-8 UTF-8"
+    line:     "en_US.UTF-8 UTF-8"
+
+- name: generate US locale
+  become: true
+  when: is_rpi and ansible_env["LANG"] != "en_US.UTF-8"
+  command: /usr/sbin/locale-gen en_US.UTF-8
+
+- name: update US locale
+  become: true
+  when: is_rpi and ansible_env["LANG"] != "en_US.UTF-8"
+  command: /usr/sbin/update-locale en_US.UTF-8

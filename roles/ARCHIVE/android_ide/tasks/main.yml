@@ -1,0 +1,57 @@
+---
+
+# android_ide
+# https://developer.android.com/studio/install.html
+
+- name: install packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - libc6:i386 
+    - libncurses5:i386 
+    - libstdc++6:i386 
+    - lib32z1 
+    - libbz2-1.0:i386
+    - cpu-checker
+    - qemu-kvm 
+    - libvirt-bin 
+    - ubuntu-vm-builder 
+    - bridge-utils 
+    - ia32-libs-multiarch
+
+- name: create pkg dir
+  file: 
+    path: /home/{{rem_user}}/.pkg 
+    state: directory 
+    group: "{{rem_user}}"
+    owner: "{{rem_user}}"
+
+- name: get android-ide zip file
+  become: no
+  get_url: 
+    url: https://dl.google.com/dl/android/studio/ide-zips/{{android_version}}/android-studio-ide-{{android_bld_num}}-linux.zip
+    dest: /home/{{rem_user}}/.pkg/android_{{android_version}}.zip
+
+- name: create target directory
+  become: no
+  file: 
+    path:  /home/{{rem_user}}/var/data/studio/android_{{android_version}}
+    state: directory
+
+- name: unzip package
+  become: no
+  unarchive:
+    src:  /home/{{rem_user}}/.pkg/android_{{android_version}}.zip
+    dest: /home/{{rem_user}}/.data/studio/android_{{android_version}}
+    remote_src: true
+
+# - name: installation symlinks
+#   become: yes
+#   file: 
+#     src:   /home/{{rem_user}}/.pkg/android_{{android_version}}/android-studio/bin/{{item}} 
+#     dest:  /usr/local/bin/{{item}} 
+#     state: link
+#     force: yes
+#   with_items:
+#     - studio.sh
+#
