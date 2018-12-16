@@ -1,7 +1,7 @@
 ---
 
 # There's two things that we're trying to do here:
-# 1) support a base user and an alternate user
+# 1) support a rem_user and an alt_user
 # 2) ssh-copy-id if possible
 #
 

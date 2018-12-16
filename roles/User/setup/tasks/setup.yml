@@ -22,6 +22,12 @@
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
+# --------------------------------------------------
+# SSH Provisioning
+
+# copyable_hostkey
+# - running ansible remotely (not locally)
+# - the file exists (aka not on windows or mac)
 - name: copy public key
   copy:
     src: "~/.ssh/id_rsa.pub"
@@ -29,31 +35,19 @@
     force: true
   when: copyable_hostkey
 
-- name: asdf1
-  debug:
-    msg: "HELLO ASDF"
-
-- name: asdf2
-  debug:
-    var: copyable_hostkey
-
+# /tmp/hostkey.pub can be written in the 'copy public key' task 
+# or in a provisioning step in the Vagrantfile
 - name: test for pubkey
   stat: 
     path: /tmp/hostkey.pub
   register: host_pubkey
 
-- name: qwer1
-  debug:
-    msg: "HELLO QWER"
-
-- name: qwer2
-  debug:
-    var: host_pubkey
-
+# does the same thing as 'ssh-copy-id'
+# appends the pubkey to ~/.ssh/authorized_keys
+# once this is done you can SSH to the VM w/o password
 - name: set ssh key for {{tgt_user}} 
   authorized_key:
     user: "{{tgt_user}}"
     state: present
     key: "{{ lookup('file', '/tmp/hostkey.pub') }}"
   when: host_pubkey.stat.exists
-
