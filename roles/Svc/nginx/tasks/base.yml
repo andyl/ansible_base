@@ -17,16 +17,6 @@
 - name: create cfg directory
   file: path=/etc/nginx/conf.cfg state=directory
 
-- name: create html directories
-  file: 
-    path: /usr/share/nginx/{{item}} 
-    state: directory
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
-  with_items:
-    - alt
-    - mmht
-
 - name: install base config
   template: 
     src:   nginx.conf.j2 
@@ -34,25 +24,4 @@
     owner: root 
     group: root
   notify: restart nginx
-
-# - name: write alt configs
-#   become: true
-#   template: 
-#     src:   conf.cfg/{{ item }}.conf.j2 
-#     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
-#     owner: root 
-#     group: root
-#   with_items: nginx_cfgs
-#   notify: restart nginx
-
-# - name: list cfgs
-#   shell: ls -1 /etc/nginx/conf.cfg
-#   register: old_cfgs
-#   changed_when: false
-#
-# - name: remove unused profiles
-#   file: path=/etc/nginx/conf.cfg/{{ item }} state=absent
-#   with_items: old_cfgs.stdout_lines
-#   when: item.split('.')[0] not in nginx_cfgs
-#   notify: restart nginx
 

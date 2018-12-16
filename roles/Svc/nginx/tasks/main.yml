@@ -2,17 +2,38 @@
 
 # nginx
 
-- name: nginx base configuration
+# use this role to install nginx and 'nginx apps'
+# an 'nginx app' is a config to serve static HTML
+# each 'nginx app' has a task file and a template
+# valid nginx_apps are ['blob', 'alt']
+#
+# to invoke an app:
+# - {role: Svc/nginx, nginx_apps: ['blob', 'alt']
+
+- name: nginx base tasks
   include: base.yml
 
-- debug:
-    var: nginx_cfgs
+- name: write app config for {{item}}
+  template: 
+    src:   conf.cfg/{{ item }}.conf.j2 
+    dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
+    owner: root 
+    group: root
+  with_items: nginx_apps
+  notify: restart nginx
 
-# - name: nginx blob configuration
-#   include: blob.yml
-#   when: nginx_blob
-#
-# - name: nginx alt configuration
-#   include: blob.yml
-#   when: nginx_alt
+- name: nginx {{item}} tasks
+  include: {{item}}.yml
+  with_items: nginx_apps
+
+- name: list cfgs
+  shell: ls -1 /etc/nginx/conf.cfg
+  register: old_cfgs
+  changed_when: false
+ 
+- name: remove unused profiles
+  file: path=/etc/nginx/conf.cfg/{{ item }} state=absent
+  with_items: old_cfgs.stdout_lines
+  when: item.split('.')[0] not in nginx_apps
+  notify: restart nginx
 
