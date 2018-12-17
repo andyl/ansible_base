@@ -50,5 +50,5 @@
   #   state: absent
   with_items: "{{old_cfgs.stdout_lines}}"
   when: item.split('.')[0] not in nginx_apps
-  notify: restart nginx
+  # notify: restart nginx
 
