@@ -36,10 +36,14 @@
   shell: ls -1 /etc/nginx/conf.cfg
   register: old_cfgs
   changed_when: false
+
+- name: list of nginx_apps
+  debug:
+    var: old_cfgs
  
 - name: remove unused profiles
   file: path=/etc/nginx/conf.cfg/{{ item }}.conf state=absent
-  with_items: old_cfgs.stdout_lines
+  with_items: "{{old_cfgs.stdout_lines}}"
   when: item.split('.')[0] not in nginx_apps
   notify: restart nginx
 
