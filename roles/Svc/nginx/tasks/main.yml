@@ -25,7 +25,7 @@
     state: stopped
 
 - name: remove old app configs
-  command: "sudo rm -f /etc/nginx/conf.cfg/*.conf > /tmp/rm.txt 2>&1"
+  command: "rm -f /etc/nginx/conf.cfg/*.conf > /tmp/rm.txt 2>&1"
 
 - name: write app config
   template: 
