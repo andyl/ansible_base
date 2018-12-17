@@ -19,6 +19,11 @@
   debug:
     var: nginx_apps
 
+- name: Stop nginx service
+  service: 
+    name: nginx
+    state: stopped
+
 - name: remove old app configs
   command: "sudo rm -f /etc/nginx/conf.cfg/*.conf"
 
@@ -29,26 +34,25 @@
     owner: "{{tgt_user}}"
     group: "{{tgt_user}}"
   with_items: "{{nginx_apps}}"
-  # notify: restart nginx
 
 # - name: nginx {{item}} tasks
 #   include: "{{item}}.yml"
 #   with_items: "{{nginx_apps}}"
 
-# - name: list cfgs
-#   shell: ls -1 /etc/nginx/conf.cfg
-#   register: old_cfgs
-#   changed_when: false
-#
-# - name: set ownership for config directory
-#   file:
-#     dest: /etc/nginx/conf.cfg
-#     state: directory
-#     owner: "{{tgt_user}}"
-#     group: "{{tgt_user}}"
+- name: list cfgs
+  shell: ls -1 /etc/nginx/conf.cfg
+  register: old_cfgs
+  changed_when: false
+
+- name: set ownership for config directory
+  file:
+    dest: /etc/nginx/conf.cfg
+    state: directory
+    owner: "{{tgt_user}}"
+    group: "{{tgt_user}}"
 
 - name: Restart nginx service
   service: 
     name: nginx
-    state: restarted
+    state: started
 
