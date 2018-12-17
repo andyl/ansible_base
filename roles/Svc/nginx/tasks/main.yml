@@ -25,15 +25,15 @@
     state: stopped
 
 - name: remove old app configs
-  command: "sudo rm -f /etc/nginx/conf.cfg/*.conf"
+  command: "sudo rm -f /etc/nginx/conf.cfg/*.conf > /tmp/rm.txt 2>&1"
 
-# - name: write app config
-#   template: 
-#     src:   "{{ item }}.conf.j2"
-#     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
-#     owner: "{{tgt_user}}"
-#     group: "{{tgt_user}}"
-#   with_items: "{{nginx_apps}}"
+- name: write app config
+  template: 
+    src:   "{{ item }}.conf.j2"
+    dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
+    owner: "{{tgt_user}}"
+    group: "{{tgt_user}}"
+  with_items: "{{nginx_apps}}"
 
 # - name: nginx {{item}} tasks
 #   include: "{{item}}.yml"
