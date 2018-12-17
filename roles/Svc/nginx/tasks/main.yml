@@ -19,13 +19,19 @@
   debug:
     var: nginx_apps
 
+- name: set ownership for config directory
+  file:
+    dest: /etc/nginx/conf.cfg
+    state: directory
+    owner: "{{tgt_user}}"
+    group: "{{tgt_user}}"
+
 - name: write app config
   template: 
     src:   "{{ item }}.conf.j2"
     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
     owner: "{{tgt_user}}"
     group: "{{tgt_user}}"
-    mode:  "a+rx"
   with_items: "{{nginx_apps}}"
   # notify: restart nginx
 
@@ -43,10 +49,9 @@
     var: old_cfgs
  
 - name: remove unused profiles
-  command: "sudo rm -f /etc/nginx/conf.cfg/{{item}}.conf"
-  # file: 
-  #   path: "/etc/nginx/conf.cfg/{{ item }}.conf" 
-  #   state: absent
+  file: 
+    path: "/etc/nginx/conf.cfg/{{ item }}.conf" 
+    state: absent
   with_items: "{{old_cfgs.stdout_lines}}"
   when: item.split('.')[0] not in nginx_apps
   # notify: restart nginx
