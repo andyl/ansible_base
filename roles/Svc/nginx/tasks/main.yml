@@ -24,6 +24,9 @@
     name: nginx
     state: stopped
 
+- name: echo something
+  command: "echo fuzz > /tmp/fuz.txt"
+
 - name: remove old app configs
   command: "rm -f /etc/nginx/conf.cfg/*.conf > /tmp/rm.txt 2>&1"
 
