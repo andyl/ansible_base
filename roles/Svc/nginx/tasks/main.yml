@@ -23,10 +23,9 @@
   template: 
     src:   "{{ item }}.conf.j2"
     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
-    # owner: root 
-    # group: root
     owner: "{{tgt_user}}"
     group: "{{tgt_user}}"
+    mode:  "a+rx"
   with_items: "{{nginx_apps}}"
   # notify: restart nginx
 
