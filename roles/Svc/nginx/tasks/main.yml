@@ -15,6 +15,10 @@
 - name: nginx base tasks
   include: base.yml
 
+- name: list of nginx_apps
+  debug:
+    var: nginx_apps
+
 - name: write app config for {{ item }}
   template: 
     src:   "{{ item }}.conf.j2"
