@@ -24,11 +24,17 @@
     name: nginx
     state: stopped
 
-- name: echo something
-  command: "echo fuzz > /tmp/fuz.txt"
+- name: remove conf directory
+  file:
+    dest: /etc/nginx/conf.cfg
+    state: absent
 
-- name: remove old app configs
-  command: "rm -f /etc/nginx/conf.cfg/*.conf > /tmp/rm.txt 2>&1"
+- name: create conf directory
+  file:
+    dest: /etc/nginx/conf.cfg
+    state: directory
+    owner: "{{tgt_user}}"
+    group: "{{tgt_user}}"
 
 - name: write app config
   template: 
@@ -46,13 +52,6 @@
 #   shell: ls -1 /etc/nginx/conf.cfg
 #   register: old_cfgs
 #   changed_when: false
-#
-# - name: set ownership for config directory
-#   file:
-#     dest: /etc/nginx/conf.cfg
-#     state: directory
-#     owner: "{{tgt_user}}"
-#     group: "{{tgt_user}}"
 #
 # - name: Restart nginx service
 #   service: 
