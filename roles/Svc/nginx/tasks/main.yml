@@ -29,7 +29,7 @@
   notify: restart nginx
 
 - name: nginx {{item}} tasks
-  include: {{item}}.yml
+  include: "{{item}}.yml"
   with_items: "{{nginx_apps}}"
 
 - name: list cfgs
