@@ -28,9 +28,9 @@
   with_items: "{{nginx_apps}}"
   notify: restart nginx
 
-# - name: nginx {{item}} tasks
-#   include: {{item}}.yml
-#   with_items: nginx_apps
+- name: nginx {{item}} tasks
+  include: {{item}}.yml
+  with_items: "{{nginx_apps}}"
 
 - name: list cfgs
   shell: ls -1 /etc/nginx/conf.cfg
