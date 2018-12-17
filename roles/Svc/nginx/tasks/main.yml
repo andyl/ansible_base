@@ -15,9 +15,9 @@
 - name: nginx base tasks
   include: base.yml
 
-- name: write app config for {{item}}
+- name: write app config for {{ item }}
   template: 
-    src:   conf.cfg/{{ item }}.conf.j2 
+    src:   "{{ item }}.conf.j2"
     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
     owner: root 
     group: root
