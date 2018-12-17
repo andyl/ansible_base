@@ -44,7 +44,7 @@
     var: old_cfgs
  
 - name: remove unused profiles
-  command: "rm -f /etc/nginx/conf.cfg/{{item}}.conf"
+  command: "sudo rm -f /etc/nginx/conf.cfg/{{item}}.conf"
   # file: 
   #   path: "/etc/nginx/conf.cfg/{{ item }}.conf" 
   #   state: absent
