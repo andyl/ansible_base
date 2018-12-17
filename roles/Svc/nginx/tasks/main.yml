@@ -19,18 +19,18 @@
   debug:
     var: nginx_apps
 
-- name: write app config  for {{item}}
+- name: write app config
   template: 
     src:   "{{ item }}.conf.j2"
     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
     owner: root 
     group: root
   with_items: "{{nginx_apps}}"
-  notify: restart nginx
+  # notify: restart nginx
 
-- name: nginx {{item}} tasks
-  include: "{{item}}.yml"
-  with_items: "{{nginx_apps}}"
+# - name: nginx {{item}} tasks
+#   include: "{{item}}.yml"
+#   with_items: "{{nginx_apps}}"
 
 - name: list cfgs
   shell: ls -1 /etc/nginx/conf.cfg
