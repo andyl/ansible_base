@@ -44,12 +44,12 @@
     group: "{{tgt_user}}"
   with_items: "{{nginx_apps}}"
 
-# - name: nginx {{item}} tasks
-#   include: "{{item}}.yml"
-#   with_items: "{{nginx_apps}}"
+- name: nginx {{item}} tasks
+  include: "{{item}}.yml"
+  with_items: "{{nginx_apps}}"
 
-# - name: Restart nginx service
-#   service: 
-#     name: nginx
-#     state: started
+- name: Restart nginx service
+  service: 
+    name: nginx
+    state: started
 
