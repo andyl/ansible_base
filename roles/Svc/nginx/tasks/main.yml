@@ -19,6 +19,9 @@
   debug:
     var: nginx_apps
 
+- name: remove old app configs
+  command: "sudo rm -f /etc/nginx/conf.cfg/*.conf"
+
 - name: write app config
   template: 
     src:   "{{ item }}.conf.j2"
@@ -32,28 +35,20 @@
 #   include: "{{item}}.yml"
 #   with_items: "{{nginx_apps}}"
 
-- name: list cfgs
-  shell: ls -1 /etc/nginx/conf.cfg
-  register: old_cfgs
-  changed_when: false
+# - name: list cfgs
+#   shell: ls -1 /etc/nginx/conf.cfg
+#   register: old_cfgs
+#   changed_when: false
+#
+# - name: set ownership for config directory
+#   file:
+#     dest: /etc/nginx/conf.cfg
+#     state: directory
+#     owner: "{{tgt_user}}"
+#     group: "{{tgt_user}}"
 
-- name: list of nginx_apps
-  debug:
-    var: old_cfgs
-
-- name: set ownership for config directory
-  file:
-    dest: /etc/nginx/conf.cfg
-    state: directory
-    owner: "{{tgt_user}}"
-    group: "{{tgt_user}}"
- 
-- name: remove unused profiles
-  command: "sudo rm -f /etc/nginx/conf.cfg/{{item}}.conf"
-  # file: 
-  #   path: "/etc/nginx/conf.cfg/{{ item }}.conf" 
-  #   state: absent
-  with_items: "{{old_cfgs.stdout_lines}}"
-  when: item.split('.')[0] not in nginx_apps
-  # notify: restart nginx
+- name: Restart nginx service
+  service: 
+    name: nginx
+    state: restarted
 
