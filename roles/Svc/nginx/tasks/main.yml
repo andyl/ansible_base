@@ -36,7 +36,7 @@
     owner: "{{tgt_user}}"
     group: "{{tgt_user}}"
 
-- name: write app config
+- name: write {{item}} app config
   template: 
     src:   "{{ item }}.conf.j2"
     dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
@@ -44,15 +44,10 @@
     group: "{{tgt_user}}"
   with_items: "{{nginx_apps}}"
 
-# - name: nginx {{item}} tasks
-#   include: "{{item}}.yml"
-#   with_items: "{{nginx_apps}}"
+- name: nginx {{item}} tasks
+  include: "{{item}}.yml"
+  with_items: "{{nginx_apps}}"
 
-# - name: list cfgs
-#   shell: ls -1 /etc/nginx/conf.cfg
-#   register: old_cfgs
-#   changed_when: false
-#
 # - name: Restart nginx service
 #   service: 
 #     name: nginx
