@@ -19,13 +19,6 @@
   debug:
     var: nginx_apps
 
-- name: set ownership for config directory
-  file:
-    dest: /etc/nginx/conf.cfg
-    state: directory
-    owner: "{{tgt_user}}"
-    group: "{{tgt_user}}"
-
 - name: write app config
   template: 
     src:   "{{ item }}.conf.j2"
@@ -47,6 +40,13 @@
 - name: list of nginx_apps
   debug:
     var: old_cfgs
+
+- name: set ownership for config directory
+  file:
+    dest: /etc/nginx/conf.cfg
+    state: directory
+    owner: "{{tgt_user}}"
+    group: "{{tgt_user}}"
  
 - name: remove unused profiles
   command: "sudo rm -f /etc/nginx/conf.cfg/{{item}}.conf"
