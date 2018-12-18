@@ -43,7 +43,7 @@
   notify: restart nginx
 
 - name: create INDEX files
-  file: 
+  copy: 
     src: "{{ item.src }}"
     dest: /usr/share/nginx/{{ item.dest }} 
     group: "{{tgt_user}}" 
