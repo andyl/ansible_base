@@ -2,54 +2,6 @@
 
 # nginx
 
-# use this role to install nginx and 'nginx apps'
-# an 'nginx app' is a config to serve static HTML
-# each 'nginx app' has a task file and a template
-# valid nginx_apps are ['blob', 'alt']
-#
-# to invoke an app:
-# - {role: Svc/nginx, nginx_apps: ['blob', 'alt']
-# 
-# nginx_apps default is []
-
 - name: nginx base tasks
   include: base.yml
-
-- name: list of nginx_apps
-  debug:
-    var: nginx_apps
-
-- name: Stop nginx service
-  service: 
-    name: nginx
-    state: stopped
-
-- name: remove conf directory
-  file:
-    dest: /etc/nginx/conf.cfg
-    state: absent
-
-- name: create conf directory
-  file:
-    dest: /etc/nginx/conf.cfg
-    state: directory
-    owner: "{{tgt_user}}"
-    group: "{{tgt_user}}"
-
-- name: write {{item}} app config
-  template: 
-    src:   "{{ item }}.conf.j2"
-    dest:  /etc/nginx/conf.cfg/{{ item }}.conf 
-    owner: "{{tgt_user}}"
-    group: "{{tgt_user}}"
-  with_items: "{{nginx_apps}}"
-
-- name: nginx {{item}} tasks
-  include: "{{item}}.yml"
-  with_items: "{{nginx_apps}}"
-
-- name: Restart nginx service
-  service: 
-    name: nginx
-    state: started
 

@@ -7,15 +7,32 @@
   with_items:
     - nginx
 
-- name: set config directory permissions
+- name: create cfg directory
   file: 
     group: "{{tgt_user}}" 
     owner: "{{tgt_user}}"
     path:  /etc/nginx/conf.d 
     state: directory
     
-- name: create cfg directory
-  file: path=/etc/nginx/conf.cfg state=directory
+- name: create html directories
+  file: 
+    path: /usr/share/nginx/{{item}} 
+    state: directory
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
+  with_items:
+    - nginx
+    - nginx/root
+    - nginx/cblob
+    - nginx/html
+
+- name: install nginx config
+  template: 
+    src:   nginx.conf.j2 
+    dest:  /etc/nginx/nginx.conf
+    owner: root 
+    group: root
+  notify: restart nginx
 
 - name: install base config
   template: 
@@ -24,4 +41,16 @@
     owner: root 
     group: root
   notify: restart nginx
+
+- name: create INDEX files
+  file: 
+    src: "{{ item.src }}"
+    dest: /usr/share/nginx/{{ item.dest }} 
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
+    force: no
+  with_items:
+    - { src: 'root_index.html', dest: 'root/index.html' }
+    - { src: 'cblob_readme.md', dest: 'cblob/README.md' }
+    - { src: 'html_index.html', dest: 'root/index.html' }
 
