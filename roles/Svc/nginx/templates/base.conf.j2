@@ -1,15 +1,18 @@
 server {
 	root /usr/share/nginx;
 
-	location /root {
+	location / {
+	  root /usr/share/nginx/root;
 	  index index.html index.htm;
 	}
 
 	location /cblob {
-	  autoindex
+	  root /usr/share/nginx/cblob;
+	  autoindex on;
 	}
 
 	location /html {
+	  root /usr/share/nginx/html;
 	  index index.html index.htm;
 	}
 }
