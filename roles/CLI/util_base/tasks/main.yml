@@ -14,6 +14,7 @@
   git:
     repo:   https://github.com/andyl/base_util.git
     dest:   /home/{{tgt_user}}/util/base_util
+    depth:  1
     update: yes
 
 - name: run init script 
