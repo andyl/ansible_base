@@ -40,11 +40,10 @@ http {
 	# gzip_http_version 1.1;
 	# gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
-
 	# ----- Virtual Hosts
 
-	include /etc/nginx/conf.d/*.conf;
-  # include /etc/nginx/conf.cfg/*.conf;
+  include /etc/nginx/conf.cfg/*.conf;
+	# include /etc/nginx/conf.d/*.conf;
 	# include /etc/nginx/sites-enabled/*;
 }
 
