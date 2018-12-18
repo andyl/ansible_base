@@ -22,7 +22,6 @@
     owner: "{{tgt_user}}"
   with_items:
     - nginx
-    - nginx/root
     - nginx/cblob
     - nginx/html
 
@@ -50,7 +49,6 @@
     owner: "{{tgt_user}}"
     force: no
   with_items:
-    - { src: 'root_index.html', dest: 'root/index.html' }
     - { src: 'cblob_readme.md', dest: 'cblob/README.md' }
-    - { src: 'html_index.html', dest: 'root/index.html' }
+    - { src: 'html_index.html', dest: 'html/index.html' }
 
