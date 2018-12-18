@@ -16,7 +16,7 @@
     
 - name: create html directories
   file: 
-    path: /usr/share/nginx/{{item}} 
+    path: /usr/share/{{item}} 
     state: directory
     group: "{{tgt_user}}" 
     owner: "{{tgt_user}}"
