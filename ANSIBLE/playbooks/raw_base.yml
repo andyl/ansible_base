@@ -1,63 +1,54 @@
 --- 
 # VAGRANT/ANSIBLE PROVISIONING - UBUNTU 18.04 SERVER
 #
-# TO BRING UP A NEW USER
-# first: install ubuntu onto new machine
-# create deploy user on new machine:
+# TO BRING UP A NEW MACHINE
+# create deploy user on new ubuntu machine:
 # > sudo useradd -m <username>
 # > sudo su
-# $ passwd <username>             # update <passwd>
-# $ usermod -aG admin <username>  # add to admin or sudo group 
+# $ passwd <username>            # update <passwd>
+# $ usermod -aG sudo <username>  # add to admin or sudo group 
 # $ exit
 #
-# DNS Setup:
-# - update /etc/hosts
-# - update local DNSMASQ
+# DNS Setup: update /etc/hosts OR local DNSMASQ
 #
-# from new: > sudo apt-get install ssh python
-# from old: keysend <username@new> <passwd>
 
 - hosts: all
   vars:
     - rem_user: vagrant
-    - tgt_user: vagrant
+    - tgt_user: aleak
     - lcl_user: "{{ lookup('env', 'USER') }}"
   remote_user:  "{{rem_user}}"
   become: true
   roles:
-    - Vars/predicates
-    - Vars/hostname
-    - Vars/dump
-    - User/setup
-    # - Ruby/sysruby   # lang: ruby
-    # - Ruby/chruby    # lang: ruby
-    # - Ruby/install   # lang: ruby
-    # - Ruby/gems      # lang: ruby
-    # - CLI/pkg        # cli 
-    # - CLI/util_base  # cli 
-    # - CLI/tzone      # cli 
-    # - CLI/extras     # bat, fd, etc.
-    # - pip            # python packages
-    # - tmux           # terminal multiplexer
-    # - lua            # lang: lua
-    # - nodejs         # lang: node
-    # - yarn           # lang: node / package manager
-    # - vim            # vim 8
-    # - neovim         # next-gen vim
-    # - docker         # containerization
-    # - nginx          # svc: webserver
-    # - nginx_mmht     # svc: middle-man html apps
-    # - sshchat        # ssh chat
-    # - sftp           # ssh ftp
-    # - erlang         # lang: erlang
-    # - elixir         # lang: erlang/elixir
-    # - elixir_ls      # lang: erlang/elixir (language server)
-    # - phoenix        # lang: erlang/elixir (phoenix framework)
-    #
-    # - sqlite         # sqlite3 browser   
-    # - influxdb       # svc: metric database
-    # - telegraf       # svc: metric capture
-    # - grafana        # svc: metric charting/graphing
-    # - nats           # svc: messaging 
-    # - redis          # svc: key-value store
-    # - postgres       # src: relational DB
+    - Vars/predicates  # variables
+    - Vars/hostname    # hostname
+    - Vars/dump        # dump for debugging
+    - User/setup       # tgt_user account and SSH keys
+    # - Ruby/sysruby     # system ruby
+    # - Ruby/chruby      # ruby version manager
+    # - Ruby/install     # install ruby version
+    # - Ruby/gems        # install ruby gems
+    # - CLI/pkg          # cli 
+    # - CLI/util_base    # cli 
+    # - CLI/tzone        # cli 
+    # - CLI/extras       # bat, fd, etc.
+    # - Lang/pip         # python packages
+    # - Lang/lua         # lua
+    # - Lang/nodejs      # node
+    # - Lang/yarn        # node / package manager
+    # - Lang/erlang      # erlang
+    # - Lang/elixir      # elixir
+    # - Lang/elixir_ls   # elixir language server
+    # - Lang/phoenix     # erlang/elixir (phoenix framework)
+    # - Edit/tmux        # terminal multiplexer
+    # - Edit/vim         # vim 8
+    # - Edit/neovim      # next-gen vim
+    # - DB/sqlite        # sqlite3 browser   
+    # - DB/influx        # metric database
+    # - DB/postgres      # relational DB
+    # - Svc/telegraf     # metric capture
+    # - Svc/grafana      # metric charting/graphing
+    # - Svc/nats         # messaging 
+    # - docker           # containerization
+    # - sshchat          # ssh chat
+    # - sftp             # ssh ftp
