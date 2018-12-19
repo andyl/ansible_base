@@ -12,22 +12,22 @@
     - '.pkg'
     - '.rubies'
 
-# - name: get ruby_install package
-#   get_url:
-#     url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
-#     dest:  /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
-#     validate_certs: false
-#     force: no
-#     group: "{{tgt_user}}"
-#     owner: "{{tgt_user}}"
-#
-# - name: untar package
-#   unarchive:
-#     src:     /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
-#     dest:    /home/{{tgt_user}}/.pkg
-#     creates: /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}
-#     group:   "{{tgt_user}}"
-#     owner:   "{{tgt_user}}"
+- name: get ruby_install package
+  get_url:
+    url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
+    dest:  /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
+    validate_certs: false
+    force: no
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
+
+- name: untar package
+  unarchive:
+    src:     /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
+    dest:    /home/{{tgt_user}}/.pkg
+    creates: /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}
+    group:   "{{tgt_user}}"
+    owner:   "{{tgt_user}}"
 
 - name: get current version of ruby_install
   become_user: "{{tgt_user}}"
@@ -47,7 +47,7 @@
   become_user: "{{tgt_user}}"
   get_url:
     url:  http://{{cblob_host}}/ruby/ruby{{item}}.tar.gz
-    dest: /home/{{tgt_user}}/.pkg/ruby{{item}}.tar.gz
+    dest: /home/{{tgt_user}}/.rubies/ruby{{item}}.tar.gz
   with_items: '{{chruby_rubies}}'
 
 - name: untar rubies
