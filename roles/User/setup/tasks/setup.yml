@@ -26,13 +26,13 @@
   file: 
     path: "/home/{{item}}"
     state: directory 
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{alt_user}}" 
+    owner: "{{alt_user}}"
   with_items:
-    - "{{tgt_user}}"
-    - "{{tgt_user}}/.pkg"
-    - "{{tgt_user}}/.ansible_tmp"
-    - "{{tgt_user}}/.rubies"
+    - "{{alt_user}}"
+    - "{{alt_user}}/.pkg"
+    - "{{alt_user}}/.ansible_tmp"
+    - "{{alt_user}}/.rubies"
 
 # --------------------------------------------------
 # SSH Provisioning
