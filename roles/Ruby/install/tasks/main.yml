@@ -47,7 +47,7 @@
   become_user: "{{tgt_user}}"
   get_url:
     url:  http://{{cblob_host}}/ruby/ruby{{item}}.tar.gz
-    dest: /home/{{tgt_user}}/.rubies/ruby{{item}}.tar.gz
+    dest: /home/{{tgt_user}}/.pkg/ruby{{item}}.tar.gz
   with_items: '{{chruby_rubies}}'
 
 - name: untar rubies
