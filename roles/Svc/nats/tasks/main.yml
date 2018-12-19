@@ -147,6 +147,6 @@
 
 # liftbridge
 
-- name: install liftbridge
-  shell: "go get github.com/liftbridge-io/liftbridge"
-  changed_when: false
+# - name: install liftbridge
+#   shell: "go get github.com/liftbridge-io/liftbridge"
+#   changed_when: false
