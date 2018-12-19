@@ -61,7 +61,7 @@
 - name: with_together
   debug:
     msg: "{{item.0}} / {{item.1}}"
-  loop: "{{chruby_rubies|zip(ruby_scripts)|list}}"
+  loop: "{{chruby_rubies|product(ruby_scripts)|list}}"
   # with_together:
   #   - '{{chruby_rubies}}'
   #   - '{{ruby_scripts}}'
@@ -76,22 +76,22 @@
 #     - '{{chruby_rubies}}'
 #     - '{{ruby_scripts}}'
 
-- name: set global ruby
-  become_user: "{{tgt_user}}"
-  shell: echo {{chruby_global}} > ~/.ruby-version
-  changed_when: false
-
-- name: setup rbenv symlink directory
-  file: 
-    path: /home/{{tgt_user}}/.rbenv 
-    state: directory
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
-
-- name: create rbenv symlink
-  file: 
-    src: /home/{{tgt_user}}/.rubies 
-    dest: /home/{{tgt_user}}/.rbenv/versions 
-    state: link 
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+# - name: set global ruby
+#   become_user: "{{tgt_user}}"
+#   shell: echo {{chruby_global}} > ~/.ruby-version
+#   changed_when: false
+#
+# - name: setup rbenv symlink directory
+#   file: 
+#     path: /home/{{tgt_user}}/.rbenv 
+#     state: directory
+#     group: "{{tgt_user}}"
+#     owner: "{{tgt_user}}"
+#
+# - name: create rbenv symlink
+#   file: 
+#     src: /home/{{tgt_user}}/.rubies 
+#     dest: /home/{{tgt_user}}/.rbenv/versions 
+#     state: link 
+#     group: "{{tgt_user}}"
+#     owner: "{{tgt_user}}"
