@@ -12,6 +12,7 @@ ruby_scripts:
   - bin/rake
   - bin/ri
   - bin/gem
+  - bin/ruby
   - lib/ruby/2.5.0/x86_64-linux/rbconfig.rb
   - lib/ruby/gems/2.5.0/gems/rdoc-6.0.1/exe/ri
   - lib/ruby/gems/2.5.0/gems/rdoc-6.0.1/exe/rdoc
