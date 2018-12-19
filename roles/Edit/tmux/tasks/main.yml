@@ -3,8 +3,8 @@
 # note: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
 
 - name: install tmux executable
-  copy:
-    src: tmux-{{ansible_architecture}}-{{tmux_version}}
+  get_url:
+    url:  http://{{cblob_host}}/tmux/tmux-{{ansible_architecture}}-{{tmux_version}}
     dest: /usr/bin/tmux
     mode: "a+rx"
 
@@ -14,8 +14,8 @@
 # https://github.com/tmate-io/tmate/releases
 
 - name: install tmate executable
-  copy:
-    src: tmate-{{tmate_version}}
+  get_url:
+    url:  http://{{cblob_host}}/tmux/tmate-{{tmate_version}}
     dest: /usr/bin/tmate
     mode: "a+rx"
 
