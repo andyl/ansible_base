@@ -58,15 +58,19 @@
     creates: /home/{{tgt_user}}/.pkg/ruby-{{item}}
   with_items: '{{chruby_rubies}}'
 
-- name: replace ruby shebangs
-  replace:
-    path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
-    regexp:   '/home/aleak/.rubies'
-    replace: '/home/{{tgt_user}}/.rubies'
-    backup:  no
-  with_together:
-    - '{{chruby_rubies}}'
-    - '{{ruby_scripts}}'
+- name: with_together
+  debug:
+    msg: "{{item.0}} / {{item.1}}"
+
+# - name: replace ruby shebangs
+#   replace:
+#     path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
+#     regexp:  '/home/aleak/.rubies'
+#     replace: '/home/{{tgt_user}}/.rubies'
+#     backup:  no
+#   with_together:
+#     - '{{chruby_rubies}}'
+#     - '{{ruby_scripts}}'
 
 - name: set global ruby
   become_user: "{{tgt_user}}"
