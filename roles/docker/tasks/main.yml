@@ -87,9 +87,8 @@
 # ----- docker-gen -----
 
 - name: install docker-gen
-  become: true
-  copy:
-    src:  docker-gen
+  get_url:
+    url:  http://{{cblob_host}}/docker/docker-gen
     dest: /usr/local/bin/docker-gen
     mode: "a+rx"
 

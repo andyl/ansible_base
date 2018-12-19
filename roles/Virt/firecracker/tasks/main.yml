@@ -21,8 +21,8 @@
 
 - name: install firectl
   become: yes
-  copy:
-    src:  firectl
+  get_url:
+    url:  http://{{cblob_host}}/firecracker/firectl
     dest: /usr/local/bin/firectl
     mode: 'a+rx'
 
