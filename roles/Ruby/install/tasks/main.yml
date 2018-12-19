@@ -60,8 +60,8 @@
 
 - name: replace ruby shebangs
   replace:
-    path: /home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}
-    regex:   '/home/aleak/.rubies'
+    path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
+    regexp:   '/home/aleak/.rubies'
     replace: '/home/{{tgt_user}}/.rubies'
     backup:  no
   with_together:
