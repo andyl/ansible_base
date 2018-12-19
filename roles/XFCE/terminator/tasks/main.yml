@@ -1,54 +1,29 @@
 ---
 
 # terminator
-#
-# May 02, 2017 - install terminator 1.9.1
-# - 1.9.1 fixes nvim cursor bugs
-# - the PPA still installs 0.98
-# - workaround:
-# -- save the 1.9.1 deb from the Terminator GTK3 Nightly Builds
-# -- install from .pkg
-#
-# Dec 03, 2015 - new terminator release - 0.98
-# - looks like the PPA is maintained again
-# - revert to PPA install method
-#
-# May 01, 2014 - more PPA troubles - solution: 
-# - capture the .deb file in the ansible repo
-# - download the .deb file at install time into ~/.pkg
-# - install from ~/.pkg
-# - add a version number
-#
-# Apr 29, 2014 - the PPA key is not working
-# see http://gnometerminator.blogspot.com/p/introduction.html
-#
 
 - name: remove terminator PPA
   apt_repository: repo='ppa:gnome-terminator' state='absent'
 
 - name: remove terminator
-  become: true
   apt:  pkg={{item}} state=absent 
   with_items:
     - terminator
 
-#- name: cleanup invalid ppa
-#  become:  true
-#  shell: rm -f /etc/apt/sources.list.d/ppa_gnome_terminator*
-#
 - name: create pkg dir
   file: 
-    path: /home/{{alt_user}}/.pkg 
+    path: /home/{{tgt_user}}/.pkg 
     state: directory 
-    group: "{{alt_user}}"
-    owner: "{{alt_user}}"
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: get deb file
-  become: no
-  copy:
-    src:  terminator_1.91.deb
-    dest: /home/{{alt_user}}/.pkg/terminator_1.91.deb     
+  get_url:
+    url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
+    dest: /home/{{tgt_user}}/.pkg/terminator_1.91.deb     
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: install terminator package
-  apt: deb=/home/{{alt_user}}/.pkg/terminator_1.91.deb     
+  apt: deb=/home/{{tgt_user}}/.pkg/terminator_1.91.deb     
 
