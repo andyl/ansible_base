@@ -12,3 +12,4 @@ ruby_scripts:
   - bin/rake
   - bin/ri
   - bin/gem
+  - lib/ruby/2.5.0/x86_64-linux/rbconfig.rb
