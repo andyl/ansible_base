@@ -22,29 +22,17 @@
     validate: 'visudo -cf %s'
   when: not sudoer_file.stat.exists
 
-# - name: create package cache dir
-#   file: 
-#     path: /home/{{tgt_user}}/.pkg 
-#     state: directory 
-#     group: "{{tgt_user}}" 
-#     owner: "{{tgt_user}}"
-#
-# - name: create package cache dir
-#   file: 
-#     path: /home/{{tgt_user}}/.ansible_tmp
-#     state: directory 
-#     group: "{{tgt_user}}" 
-#     owner: "{{tgt_user}}"
-
-# - name: create common directories
-#   file: 
-#     path: "{{item}}"
-#     state: directory 
-#     group: "{{tgt_user}}" 
-#     owner: "{{tgt_user}}"
-#   with_items:
-#     - /home/{{tgt_user}}/.pkg
-#     - /home/{{tgt_user}}/.ansible_tmp
+- name: set permissions on common directories
+  file: 
+    path: "/home/{{item}}"
+    state: directory 
+    group: "{{tgt_user}}" 
+    owner: "{{tgt_user}}"
+  with_items:
+    - "{{tgt_user}}"
+    - "{{tgt_user}}/.pkg"
+    - "{{tgt_user}}/.ansible_tmp"
+    - "{{tgt_user}}/.rubies"
 
 # --------------------------------------------------
 # SSH Provisioning
