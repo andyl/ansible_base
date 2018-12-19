@@ -61,9 +61,10 @@
 - name: with_together
   debug:
     msg: "{{item.0}} / {{item.1}}"
-  with_together:
-    - '{{chruby_rubies}}'
-    - '{{ruby_scripts}}'
+  loop: "{{chruby_rubies|zip(ruby_scripts)|list}}"
+  # with_together:
+  #   - '{{chruby_rubies}}'
+  #   - '{{ruby_scripts}}'
 
 # - name: replace ruby shebangs
 #   replace:
