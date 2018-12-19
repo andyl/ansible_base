@@ -46,7 +46,6 @@
     # - DB/sqlite        # sqlite3 browser   
     # - DB/influx        # metric database
     # - DB/postgres      # relational DB
-    # - Svc/telegraf     # metric capture
     # - Svc/grafana      # metric charting/graphing
     # - Svc/nats         # messaging 
     # - docker           # containerization
