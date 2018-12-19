@@ -106,14 +106,14 @@
 
 # install ruby gem for nats
 
-- name: install nats gems
-  become: no
-  gem: 
-    name:  "{{item}}"
-    state: latest
-  with_items:
-    # - nats
-    # - nats-pure
+# - name: install nats gems
+#   become: no
+#   gem: 
+#     name:  "{{item}}"
+#     state: latest
+#   with_items:
+#     - nats
+#     - nats-pure
 
 # install config file
 
