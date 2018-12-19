@@ -31,14 +31,6 @@
     group: "{{tgt_user}}"
     owner: "{{tgt_user}}"
 
-- name: get executable file
-  get_url: 
-    url:  http://{{cblob_host}}/vim/vimal_{{vim_version}}-1_amd64.deb
-    dest: /home/{{tgt_user}}/.pkg/nvim_{{nvim_version}}.appimage
-    validate_certs: false
-    mode: "a+rx"
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
 - name: get deb file
   get_url: 
     url:  http://{{cblob_host}}/vim/vimal_{{vim_version}}-1_amd64.deb
