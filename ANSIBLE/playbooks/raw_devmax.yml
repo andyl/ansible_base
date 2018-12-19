@@ -15,7 +15,7 @@
 - hosts: all
   vars:
     - rem_user: vagrant
-    - tgt_user: aleak
+    - tgt_user: vagrant
     - lcl_user: "{{ lookup('env', 'USER') }}"
   remote_user:  "{{rem_user}}"
   become: true
