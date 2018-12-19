@@ -13,21 +13,21 @@
     - libfontconfig
   changed_when: false
     
-- name: create sshchat dir
+- name: create pkg dir
   file: 
-    path: /home/{{alt_user}}/.pkg 
+    path: /home/{{tgt_user}}/.pkg 
     state: directory 
-    group: "{{alt_user}}"
-    owner: "{{alt_user}}"
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: get deb file
   become: no
   get_url: 
     url:  https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{grafana_version}}_amd64.deb
-    dest: /home/{{alt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+    dest: /home/{{tgt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
 
 - name: install package
-  apt: deb=/home/{{alt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+  apt: deb=/home/{{tgt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
 
 - name: install config file
   become: true
