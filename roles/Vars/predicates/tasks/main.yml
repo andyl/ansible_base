@@ -6,6 +6,10 @@
   local_action: stat path="~/.ssh/id_rsa.pub"
   register: hostkey
 
+- name: set cblob_host
+  set_fact:
+    cblob_host: bugmark.tech:8080/cblob
+
 - name: set base predicates
   set_fact:
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
