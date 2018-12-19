@@ -1,4 +1,0 @@
----
-- name: restart btsync
-  service: name=btsync state=restarted
-  become: true
