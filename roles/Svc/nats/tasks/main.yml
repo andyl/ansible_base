@@ -112,9 +112,8 @@
     name:  "{{item}}"
     state: latest
   with_items:
-    - nats
+    # - nats
     - nats-pure
-    - nats-streaming
 
 # install config file
 
