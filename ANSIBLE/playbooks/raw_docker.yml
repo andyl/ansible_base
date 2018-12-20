@@ -48,6 +48,6 @@
     # - DB/postgres      # relational DB
     # - Svc/grafana      # metric charting/graphing
     # - Svc/nats         # messaging 
-    - docker           # containerization
+    - Virt/docker        # containerization
     # - sshchat          # ssh chat
     # - sftp             # ssh ftp
