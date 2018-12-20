@@ -21,10 +21,11 @@
     owner: "{{tgt_user}}"
 
 - name: get deb file
-  become: no
   get_url: 
     url:  https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{grafana_version}}_amd64.deb
     dest: /home/{{tgt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: install package
   apt: deb=/home/{{tgt_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
