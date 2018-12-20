@@ -4,15 +4,24 @@
 # see https://www.virtualbox.org/wiki/Linux_Downloads
 
 - name: add apt key
-  become: true
-  apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc state=present
+  apt_key: 
+    url: http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc
+    state: present
 
 - name: add repository
-  become: true
-  apt_repository: repo='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib' state=present
+  apt_repository: 
+    repo: 'deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib' 
+    state: present
+
+- name: remove old packages
+  apt: 
+    pkg: "{{item}}"
+    state: absent
+    update_cache: yes
+  with_items:
+    - virtualbox
 
 - name: install package
-  become: true
   apt: 
     pkg: "{{item}}"
     state: latest

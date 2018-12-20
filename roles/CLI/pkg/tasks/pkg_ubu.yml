@@ -54,6 +54,7 @@
     - rsync                      # file sync
     - ecryptfs-utils             # directory encryption
     - at                         # process scheduler
+    - aptitude                   # package manager
 
 # - name: install extended packages
 #   become: true
