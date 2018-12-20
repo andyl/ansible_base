@@ -28,5 +28,4 @@
     update_cache: yes
   with_items:
     - virtualbox-5.2
-    - virtualbox-qt
 

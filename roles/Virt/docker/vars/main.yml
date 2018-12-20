@@ -1,0 +1,4 @@
+---
+# docker_compose_version: 1.4.2   superseded 2018-07-10
+# docker_compose_version: 1.21.2  superseded 2018-07-29
+docker_compose_version: 1.22.0
