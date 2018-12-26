@@ -1,9 +1,10 @@
 ---
-ruby_install_version: 0.6.1
+ruby_install_version: 0.7.0
 
 chruby_global: 2.5.1
 chruby_rubies:
   - 2.5.1
+  - 2.6.0
 
 ruby_scripts:
   - bin/rdoc
@@ -12,6 +13,3 @@ ruby_scripts:
   - bin/rake
   - bin/ri
   - bin/gem
-  # - lib/ruby/2.5.0/x86_64-linux/rbconfig.rb
-  # - lib/ruby/gems/2.5.0/gems/rdoc-6.0.1/exe/ri
-  # - lib/ruby/gems/2.5.0/gems/rdoc-6.0.1/exe/rdoc
