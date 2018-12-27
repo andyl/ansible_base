@@ -33,6 +33,12 @@
   no_log:        true
   changed_when:  false
 
+- name: install chruby-run (run global ruby)
+  copy:
+    src:  chruby-run
+    dest: /usr/local/bin/chruby-run
+    mode: 'a+rx'
+
 - name: install
   become: yes
   command: make install chdir=/home/{{tgt_user}}/.pkg/chruby-{{chruby_version}} 
