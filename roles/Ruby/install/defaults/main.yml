@@ -1,15 +1,15 @@
 ---
 ruby_install_version: 0.7.0
 
-chruby_global: 2.5.1
+chruby_global: 2.6.0
 chruby_rubies:
   - 2.5.1
   - 2.6.0
 
-ruby_scripts:
-  - bin/rdoc
-  - bin/irb
-  - bin/erb
-  - bin/rake
-  - bin/ri
-  - bin/gem
+# ruby_scripts:
+#   - bin/rdoc
+#   - bin/irb
+#   - bin/erb
+#   - bin/rake
+#   - bin/ri
+#   - bin/gem

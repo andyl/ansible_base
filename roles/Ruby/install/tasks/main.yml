@@ -64,13 +64,13 @@
     state: absent
   with_items: '{{chruby_rubies}}'
 
-- name: replace ruby shebangs
-  replace:
-    path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
-    regexp:  '/home/aleak/.rubies'
-    replace: '/home/{{tgt_user}}/.rubies'
-    backup:  no
-  loop: "{{chruby_rubies|product(ruby_scripts)|list}}"
+# - name: replace ruby shebangs
+#   replace:
+#     path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
+#     regexp:  '/home/aleak/.rubies'
+#     replace: '/home/{{tgt_user}}/.rubies'
+#     backup:  no
+#   loop: "{{chruby_rubies|product(ruby_scripts)|list}}"
 
 - name: set global ruby
   become_user: "{{tgt_user}}"

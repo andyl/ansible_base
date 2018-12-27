@@ -33,7 +33,7 @@
   no_log:        true
   changed_when:  false
 
-- name: install chruby-run (run global ruby)
+- name: install chruby-run 
   copy:
     src:  chruby-run
     dest: /usr/local/bin/chruby-run
