@@ -19,8 +19,6 @@
     state: absent
     update_cache: yes
   with_items:
-    - 4
-    - 5
     - 6
     - 7
     - 8
