@@ -8,7 +8,8 @@
 
 - name: set cblob_host
   set_fact:
-    cblob_host: bugmark.tech:8080/cblob
+    # cblob_host: bugmark.tech:8080/cblob
+    cblob_host: files.casmacc.plus
 
 - name: set base predicates
   set_fact:
