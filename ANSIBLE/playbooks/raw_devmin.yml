@@ -50,4 +50,4 @@
     # - Svc/grafana      # metric charting/graphing
     # - Svc/nats         # messaging 
     # - Virt/docker      # containerization
-    - sftp             # ssh ftp
+    # - sftp             # ssh ftp
