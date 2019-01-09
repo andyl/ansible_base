@@ -4,17 +4,17 @@
  
 - name: create pkg dir
   file: 
-    path: /home/{{alt_user}}/.pkg 
+    path: /home/{{tgt_user}}/.pkg 
     state: directory 
-    group: "{{alt_user}}"
-    owner: "{{alt_user}}"
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: copy package
   copy:
     src:  ~/var/data/vscode/code_{{vscode_version}}.deb
-    dest: /home/{{alt_user}}/.pkg/code_{{vscode_version}}.deb
+    dest: /home/{{tgt_user}}/.pkg/code_{{vscode_version}}.deb
 
 - name: install package
   apt: 
-    deb: /home/{{alt_user}}/.pkg/code_{{vscode_version}}.deb
+    deb: /home/{{tgt_user}}/.pkg/code_{{vscode_version}}.deb
 
