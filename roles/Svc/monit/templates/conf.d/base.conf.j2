@@ -1,0 +1,67 @@
+# {{ansible_managed}}
+# {{template_path}}
+
+check process nginx with pidfile /var/run/nginx.pid
+  start program = "/etc/init.d/nginx start" with timeout 60 seconds
+  stop program  = "/etc/init.d/nginx stop"
+  if cpu > 60% for 2 cycles then alert
+  if cpu > 80% for 5 cycles then restart
+  if totalmem > 500.0 MB for 5 cycles then restart
+  if children > 250 then restart  
+  if loadavg(5min) greater than 10 for 8 cycles then stop
+  if failed host 127.0.0.1 port 80 protocol http then restart
+  if 4 restarts within 5 cycles then timeout
+  group httpd
+
+check process postgres with pidfile /var/run/postgresql/9.3-main.pid
+  group database
+  start program = "/etc/init.d/postgresql start"
+  stop  program = "/etc/init.d/postgresql stop"
+  if failed unixsocket /var/run/postgresql/.s.PGSQL.5432 then restart
+  if failed host 127.0.0.1 port 5432 protocol PGSQL then restart
+  if 5 restarts within 5 cycles then timeout
+
+check process redis with pidfile /var/run/redis/redis-server.pid
+  start program = "/etc/init.d/redis-server start"
+  stop program  = "/etc/init.d/redis-server stop"
+  if failed host 127.0.0.1 port 6379 then restart
+  if 4 restarts within 5 cycles then timeout
+  group database
+
+ check process memcached with pidfile /var/run/memcached.pid
+   start program = "/etc/init.d/memcached start"
+   stop program  = "/etc/init.d/memcached stop" 
+   if failed host 127.0.0.1 port 11211 protocol MEMCACHE then restart 
+   if cpu > 60% for 2 cycles then alert
+   if cpu > 98% for 5 cycles then restart 
+   if 2 restarts within 3 cycles then timeout 
+   group cache
+
+check process influxdb with pidfile /var/run/influxdb/influxd.pid
+  start program = "/etc/init.d/influxdb start"
+  stop program  = "/etc/init.d/influxdb stop"
+  if failed host 127.0.0.1 port 8086 then restart
+  if 4 restarts within 5 cycles then timeout
+  group metrics
+
+check process collectd with pidfile /var/run/collectd.pid
+  start program = "/etc/init.d/collectd start"
+  stop program  = "/etc/init.d/collectd stop"
+  if 4 restarts within 5 cycles then timeout
+  group metrics
+
+check process cron with pidfile /var/run/crond.pid
+  group system
+  start program = "/etc/init.d/cron start"
+  stop  program = "/etc/init.d/cron stop"
+  if 5 restarts within 5 cycles then timeout
+
+check process sshd with pidfile /var/run/sshd.pid
+  start program = "/etc/init.d/sshd start"
+  stop program  = "/etc/init.d/sshd stop"
+  if failed port 22 protocol ssh then restart
+  if 5 restarts within 5 cycles then timeout
+  group system
+
+check filesystem rootfs with path /
+  if inode usage > 80% then alert

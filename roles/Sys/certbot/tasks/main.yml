@@ -1,0 +1,18 @@
+---
+
+# certbot
+
+# this just installs the lets_encrypt certbot client
+# 
+# after the application is installed and nginx is configured,
+# provision the SSL certs with the certbot command
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - certbot
+
+# - name: create SSL certs
+#   shell: "/home/{{rem_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
+
