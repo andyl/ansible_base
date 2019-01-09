@@ -32,10 +32,12 @@ else
   git clone --depth=1 https://github.com/andyl/x-ansible.git > /dev/null 2>&1
 fi
 
-echo "=== WRITE /vagrant/ANSIBLE"
+# to prevent copying the ANSIBLE directory, add
+# `export NOANSIBLE=true` to your shell provisioner
+echo "=== COPY /vagrant/ANSIBLE"
 mkdir -p /vagrant
 rm -rf /vagrant/ANSIBLE
-cp -r x-ansible/ANSIBLE /vagrant
+[ -z $NOANSIBLE ] || cp -r x-ansible/ANSIBLE /vagrant
 
 echo "=== INSTALL ANSIBLE EXECUTABLE"
 cd x-ansible/bin
