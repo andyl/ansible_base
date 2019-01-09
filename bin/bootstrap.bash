@@ -37,7 +37,7 @@ fi
 echo "=== COPY /vagrant/ANSIBLE"
 mkdir -p /vagrant
 rm -rf /vagrant/ANSIBLE
-[ -z $NOANSIBLE ] || cp -r x-ansible/ANSIBLE /vagrant
+[ -z $NOANSIBLE ] && cp -r x-ansible/ANSIBLE /vagrant
 
 echo "=== INSTALL ANSIBLE EXECUTABLE"
 cd x-ansible/bin
