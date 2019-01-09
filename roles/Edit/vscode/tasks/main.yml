@@ -9,10 +9,12 @@
     group: "{{tgt_user}}"
     owner: "{{tgt_user}}"
 
-- name: copy package
-  copy:
-    src:  ~/var/data/vscode/code_{{vscode_version}}.deb
+- name: get deb file
+  get_url: 
+    url:  http://{{cblob_host}}/vscode/code_{{vscode_version}}.deb
     dest: /home/{{tgt_user}}/.pkg/code_{{vscode_version}}.deb
+    group: "{{tgt_user}}"
+    owner: "{{tgt_user}}"
 
 - name: install package
   apt: 
