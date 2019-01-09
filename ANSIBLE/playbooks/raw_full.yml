@@ -36,18 +36,17 @@
     - Lang/lua         # lua
     - Lang/nodejs      # node
     - Lang/yarn        # node / package manager
-    # - Lang/erlang      # erlang
-    # - Lang/elixir      # elixir
-    # - Lang/elixir_ls   # elixir language server
-    # - Lang/phoenix     # erlang/elixir (phoenix framework)
+    - Lang/erlang      # erlang
+    - Lang/elixir      # elixir
+    - Lang/elixir_ls   # elixir language server
+    - Lang/phoenix     # erlang/elixir (phoenix framework)
     - Edit/tmux        # terminal multiplexer
     - Edit/vim         # vim 8
     - Edit/neovim      # next-gen vim
     - Edit/emacs       # emacs
-    # - DB/sqlite        # sqlite3 browser   
-    # - DB/influx        # metric database
-    # - DB/postgres      # relational DB
-    # - Svc/grafana      # metric charting/graphing
-    # - Svc/nats         # messaging 
-    - Virt/docker        # containerization
-    # - sftp             # ssh ftp
+    - DB/sqlite        # sqlite3 browser   
+    - DB/influx        # metric database
+    - DB/postgres      # relational DB
+    - Svc/grafana      # metric charting/graphing
+    - Svc/nats         # messaging 
+    - Virt/docker      # containerization
