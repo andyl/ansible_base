@@ -14,7 +14,6 @@
     name:  sendfile
     group: sftp_group
     home:  /home/sendfile
-    # shell: /sbin/nologin
     shell: /bin/bash
     state: present
     password: $6$Q1lz7yce1$/1JWew4XTjOXvc5eEcYps365h3k7QoUxX9ZA0S/ce2tpxX.6komZ5NHPG3/pjqQxDv48RqO9UimrBJBlcQol81
