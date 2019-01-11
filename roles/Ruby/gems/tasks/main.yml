@@ -6,24 +6,8 @@
   become_user: "{{tgt_user}}"
   gem: name="{{item}}"
   with_items:
-    - bundler
     - pry
     - hirb
     - colored
-    - net-ping
-    - radix62
-    - octokit
-    - highline
     - tmuxinator
-    - faraday
-    - multipart-post
-    # - solargraph
-
-- name: install extended gems
-  become_user: "{{tgt_user}}"
-  gem: name="{{item}}"
-  when: not_xu4
-  with_items:
-    - net-ssh
-    - net-sftp
 
