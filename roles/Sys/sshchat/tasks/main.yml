@@ -5,28 +5,28 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}
+    path: /home/{{sys_user}}/.pkg/sshchat_{{sshchat_version}}
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get zip file
   become: no
   get_url: 
     url:  https://github.com/shazow/ssh-chat/releases/download/v{{sshchat_version}}/ssh-chat-linux_386.tgz
-    dest: /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}.tgz
+    dest: /home/{{sys_user}}/.pkg/sshchat_{{sshchat_version}}.tgz
 
 - name: expand zip file
   become: no
   unarchive:
-    src:  /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}.tgz
-    dest: /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}
+    src:  /home/{{sys_user}}/.pkg/sshchat_{{sshchat_version}}.tgz
+    dest: /home/{{sys_user}}/.pkg/sshchat_{{sshchat_version}}
     remote_src: true
 
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{rem_user}}/.pkg/sshchat_{{sshchat_version}}/ssh-chat/ssh-chat
+    src:  /home/{{sys_user}}/.pkg/sshchat_{{sshchat_version}}/ssh-chat/ssh-chat
     dest: /usr/bin/ssh-chat
     state: link 
 

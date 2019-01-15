@@ -42,23 +42,23 @@
 
 - name: create pkg dir
   file: 
-    path:  /home/{{rem_user}}/.pkg 
+    path:  /home/{{sys_user}}/.pkg 
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get deb file
   become: no
   get_url: 
     url: https://github.com/ethereum/mist/releases/download/v0.9.0/{{item}}-linux64-0-9-0.deb
-    dest: /home/{{rem_user}}/.pkg/{{item}}.deb
+    dest: /home/{{sys_user}}/.pkg/{{item}}.deb
   with_items:
     - Ethereum-Wallet
     - Mist
 
 - name: install package
   apt: 
-    deb: /home/{{rem_user}}/.pkg/{{item}}.deb 
+    deb: /home/{{sys_user}}/.pkg/{{item}}.deb 
   with_items:
     - Ethereum-Wallet
     - Mist

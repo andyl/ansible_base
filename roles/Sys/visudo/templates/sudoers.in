@@ -29,5 +29,5 @@ root	ALL=(ALL:ALL) ALL
 #includedir /etc/sudoers.d
 #
 
-{{rem_user}} ALL=(ALL) NOPASSWD: ALL
+{{sys_user}} ALL=(ALL) NOPASSWD: ALL
 

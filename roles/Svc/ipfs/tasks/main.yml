@@ -5,16 +5,16 @@
 - name: create pkg dir
   become: no
   file: 
-    path: /home/{{rem_user}}/.pkg 
+    path: /home/{{sys_user}}/.pkg 
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get tar file
   become: no
   get_url: 
     url:  https://dist.ipfs.io/{{item.pkg}}/{{item.vsn}}/{{item.pkg}}_{{item.vsn}}_linux-amd64.tar.gz
-    dest: /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}.tar.gz
+    dest: /home/{{sys_user}}/.pkg/{{item.pkg}}_{{item.vsn}}.tar.gz
   with_items: "{{ipfs_vars}}"
 
 - name: extract tar file
@@ -22,14 +22,14 @@
   # shell: mkdir -p {{item.pkg}}_{{item.vsn}} && tar -xf {{item.pkg}}_{{item.vsn}}.tar.gz -C tor-browser-linux64-{{tor_browser_version}} --strip-components=1
   shell: mkdir -p {{item.pkg}}_{{item.vsn}} && tar -xf {{item.pkg}}_{{item.vsn}}.tar.gz -C {{item.pkg}}_{{item.vsn}} 
   args:
-      chdir: /home/{{rem_user}}/.pkg
-      creates: /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}
+      chdir: /home/{{sys_user}}/.pkg
+      creates: /home/{{sys_user}}/.pkg/{{item.pkg}}_{{item.vsn}}
   with_items: "{{ipfs_vars}}"
 
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{rem_user}}/.pkg/{{item.pkg}}_{{item.vsn}}/{{item.pkg}}/{{item.exe}}
+    src:  /home/{{sys_user}}/.pkg/{{item.pkg}}_{{item.vsn}}/{{item.pkg}}/{{item.exe}}
     dest: /usr/bin/{{item.exe}}
     state: link 
   with_items: "{{ipfs_vars}}"
@@ -39,8 +39,8 @@
   file:
     path:  "{{item}}"
     state: directory
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
   with_items:
     - /ipfs
     - /ipns

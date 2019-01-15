@@ -7,18 +7,18 @@
   apt: pkg=inotify-tools state=latest install_recommends=yes
 
 # - name: create package cache dir
-#   file: path=/home/{{rem_user}}/.pkg state=directory group={{rem_user}} owner={{rem_user}}
+#   file: path=/home/{{sys_user}}/.pkg state=directory group={{sys_user}} owner={{sys_user}}
 #
 # - name: get package
 #   become: no
 #   get_url:
 #     url:  https://github.com/phoenixframework/phoenix/archive/v{{phoenix_version}}.tar.gz
-#     dest: /home/{{rem_user}}/.pkg/phx-{{phoenix_version}}.tar.gz
+#     dest: /home/{{sys_user}}/.pkg/phx-{{phoenix_version}}.tar.gz
 #     force: no
 #
 # - name: install package
 #   become: no
-#   shell: echo Y | mix archive.install /home/{{rem_user}}/.pkg/phx-{{phoenix_version}}.tar.gz
+#   shell: echo Y | mix archive.install /home/{{sys_user}}/.pkg/phx-{{phoenix_version}}.tar.gz
 #   args:
-#     creates: /home/{{rem_user}}/.mix/archives/phx-{{phoenix_version}}.tar.gz
+#     creates: /home/{{sys_user}}/.mix/archives/phx-{{phoenix_version}}.tar.gz
 #

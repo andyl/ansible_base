@@ -14,5 +14,5 @@
     - certbot
 
 # - name: create SSL certs
-#   shell: "/home/{{rem_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
+#   shell: "/home/{{sys_user}}/util/pdev_util/bin/cert_gen {{inventory_hostname}} {{subdomains}}"
 

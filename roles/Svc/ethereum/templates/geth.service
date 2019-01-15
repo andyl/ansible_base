@@ -13,7 +13,7 @@ Type=simple
 ExecStart=/usr/bin/geth --rpc --ws --metrics daemon
 ExecStop=/usr/bin/pkill geth
 Restart=always
-User={{rem_user}}
+User={{sys_user}}
 
 [Install]
 WantedBy=default.target

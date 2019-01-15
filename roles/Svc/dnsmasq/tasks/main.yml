@@ -34,7 +34,7 @@
 # - name: install home-dir files
 #   template:
 #     src:  "{{item}}"
-#     dest: /home/{{rem_user}}/{{item}}
+#     dest: /home/{{sys_user}}/{{item}}
 #   notify: restart dnsmasq
 #   with_items:
 #     - dnsmasq.conf

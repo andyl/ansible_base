@@ -8,9 +8,9 @@ Description=Airflow scheduler daemon
 After=network.target 
 
 [Service]
-User={{rem_user}}
-Group={{rem_user}}
-Environment=AIRFLOW_HOME=/home/{{rem_user}}/util/air_util
+User={{sys_user}}
+Group={{sys_user}}
+Environment=AIRFLOW_HOME=/home/{{sys_user}}/util/air_util
 Type=simple
 ExecStart=/usr/local/bin/airflow scheduler
 Restart=always

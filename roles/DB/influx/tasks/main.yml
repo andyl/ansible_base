@@ -7,20 +7,20 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg 
+    path: /home/{{sys_user}}/.pkg 
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get deb file
   get_url: 
     url: http://dl.influxdata.com/influxdb/releases/influxdb_{{influx_version}}_amd64.deb
-    dest: /home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    dest: /home/{{sys_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: install package
-  apt: deb=/home/{{rem_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
+  apt: deb=/home/{{sys_user}}/.pkg/influxdb_{{influx_version}}_amd64.deb
 
 - name: install python dependencies
   pip: name={{item}}

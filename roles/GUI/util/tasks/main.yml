@@ -4,7 +4,7 @@
 
 # - name: rsync config directory
 #   become: false
-#   synchronize: src=/home/{{lcl_user}}/c dest=/home/{{rem_user}} delete=yes
+#   synchronize: src=/home/{{lcl_user}}/c dest=/home/{{sys_user}} delete=yes
 #   changed_when: false
 #   when: lcl_hostname != ansible_hostname
 

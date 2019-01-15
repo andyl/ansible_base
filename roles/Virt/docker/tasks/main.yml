@@ -41,7 +41,7 @@
     groups: docker
     append: yes
   with_items:
-    - "{{rem_user}}"
+    - "{{sys_user}}"
 
 - name: add repository
   apt_repository:
@@ -64,15 +64,15 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{rem_user}}/.pkg/docker
+    path: /home/{{sys_user}}/.pkg/docker
     state: directory 
-    group: "{{rem_user}}"
-    owner: "{{rem_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: download docker_compose package
   get_url:
     url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
-    dest: /home/{{rem_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
+    dest: /home/{{sys_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
     mode: 'a+rx'
     validate_certs: false
 
@@ -82,7 +82,7 @@
     state: link 
     force: true
     dest:  /usr/local/bin/docker-compose
-    src:   /home/{{rem_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
+    src:   /home/{{sys_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
 
 # ----- docker-gen -----
 

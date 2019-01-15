@@ -7,7 +7,7 @@
   become: true
   lineinfile: 
     dest:   "/etc/lightdm/lightdm.conf"
-    line:   "autologin-user={{rem_user}}"
+    line:   "autologin-user={{sys_user}}"
     regexp: "^autologin-user"
 
 - name: create LXDE config directories
@@ -15,20 +15,20 @@
     dest:  "{{item}}"
     state: directory
   with_items:
-    - /home/{{rem_user}}/.config/lxpanel/LXDE-pi/panels
-    - /home/{{rem_user}}/.config/openbox
+    - /home/{{sys_user}}/.config/lxpanel/LXDE-pi/panels
+    - /home/{{sys_user}}/.config/openbox
 
 - name: setup LXDE panels
   copy: 
     src: panel
-    dest: /home/{{rem_user}}/.config/lxpanel/LXDE-pi/panels/panel
-    owner: "{{rem_user}}"
-    group: "{{rem_user}}"
+    dest: /home/{{sys_user}}/.config/lxpanel/LXDE-pi/panels/panel
+    owner: "{{sys_user}}"
+    group: "{{sys_user}}"
 
 - name: setup LXDE desktops
   copy: 
     src: lxde-pi-rc.xml
-    dest: /home/{{rem_user}}/.config/openbox/lxde-pi-rc.xml
-    owner: "{{rem_user}}"
-    group: "{{rem_user}}"
+    dest: /home/{{sys_user}}/.config/openbox/lxde-pi-rc.xml
+    owner: "{{sys_user}}"
+    group: "{{sys_user}}"
 

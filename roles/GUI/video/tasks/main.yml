@@ -14,4 +14,4 @@
 #     - hal
 #
 # - name: cleanup   
-#   shell: rm -rf .adobe removes=/home/{{rem_user}}/.adobe chdir=/home/{{rem_user}}
+#   shell: rm -rf .adobe removes=/home/{{sys_user}}/.adobe chdir=/home/{{sys_user}}

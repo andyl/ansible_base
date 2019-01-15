@@ -7,9 +7,9 @@
 
 - name: create user directory
   file: 
-    path:  /home/{{rem_user}}/lafs
-    owner: "{{rem_user}}"
-    group: "{{rem_user}}"
+    path:  /home/{{sys_user}}/lafs
+    owner: "{{sys_user}}"
+    group: "{{sys_user}}"
     mode:  0755
     state: directory
     recurse: yes
@@ -17,13 +17,13 @@
 - name: create sync directory
   file: 
     path:  "{{item}}"
-    owner: "{{rem_user}}"
-    group: "{{rem_user}}"
+    owner: "{{sys_user}}"
+    group: "{{sys_user}}"
     state: directory
     recurse: yes
   with_items:
-    - /home/{{rem_user}}/.sync
-    - /home/{{rem_user}}/lafs/.sync
+    - /home/{{sys_user}}/.sync
+    - /home/{{sys_user}}/lafs/.sync
 
 - name: install executable
   get_url:
@@ -44,8 +44,8 @@
 - name: create logfile
   file:
     path:  /var/log/btsync/btsync.log
-    owner: "{{rem_user}}"
-    group: "{{rem_user}}"
+    owner: "{{sys_user}}"
+    group: "{{sys_user}}"
     mode:  "a+rw"
     state: touch
 
