@@ -40,10 +40,10 @@
     - Lang/elixir      # elixir
     - Lang/elixir_ls   # elixir language server
     - Lang/phoenix     # erlang/elixir (phoenix framework)
-    - Edit/tmux        # terminal multiplexer
-    - Edit/vim         # vim 8
-    - Edit/neovim      # next-gen vim
-    - Edit/emacs       # emacs
+    - Edit/sys_tmux    # terminal multiplexer
+    - Edit/sys_vim     # vim 8
+    - Edit/sys_neovim  # next-gen vim
+    - Edit/sys_emacs   # emacs
     - DB/sqlite        # sqlite3 browser   
     - DB/influx        # metric database
     - DB/postgres      # relational DB
