@@ -4,6 +4,7 @@
 
 - name: install support software
   apt:  pkg={{item}} state=latest 
+  become: yes
   with_items:
     - build-essential
     - libssl-dev
