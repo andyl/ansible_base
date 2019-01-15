@@ -1,6 +1,6 @@
 ---
 
-# elixir
+# Elixir
 # packages at https://github.com/elixir-lang/elixir/releases
 
 - name: create package cache dir
