@@ -24,11 +24,11 @@
     - Vars/hostname    # hostname
     - Vars/dump        # dump for debugging
     - User/setup       # gen_user account and SSH keys
-    - Ruby/sysruby     # system ruby
+    - Ruby/sys_ruby    # system ruby
     - Ruby/chruby      # ruby version manager
     - Ruby/install     # install ruby version
     - Ruby/gems        # install ruby gems
-    - CLI/pkg          # cli 
+    - CLI/sys_pkg      # cli 
     - CLI/util_base    # cli 
     - CLI/tzone        # cli 
     - CLI/extras       # bat, fd, etc.
