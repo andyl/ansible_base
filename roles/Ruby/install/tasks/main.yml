@@ -4,10 +4,10 @@
 
 - name: create dirs
   file: 
-    path: /home/{{tgt_user}}/{{item}}
+    path: /home/{{gen_user}}/{{item}}
     state: directory 
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
   with_items:
     - '.pkg'
     - '.rubies'
@@ -15,22 +15,22 @@
 - name: get ruby_install package
   get_url:
     url:   https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
-    dest:  /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
+    dest:  /home/{{gen_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz
     validate_certs: false
     force: no
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: untar package
   unarchive:
-    src:     /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
-    dest:    /home/{{tgt_user}}/.pkg
-    creates: /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}
-    group:   "{{tgt_user}}"
-    owner:   "{{tgt_user}}"
+    src:     /home/{{gen_user}}/.pkg/ruby-install-{{ruby_install_version}}.tar.gz 
+    dest:    /home/{{gen_user}}/.pkg
+    creates: /home/{{gen_user}}/.pkg/ruby-install-{{ruby_install_version}}
+    group:   "{{gen_user}}"
+    owner:   "{{gen_user}}"
 
 - name: get current version of ruby_install
-  become_user: "{{tgt_user}}"
+  become_user: "{{gen_user}}"
   shell: ruby-install --version
   register: rinst_current_version
   ignore_errors: True
@@ -40,54 +40,54 @@
 - name: install ruby_install script
   command: make install 
   args:
-    chdir: /home/{{tgt_user}}/.pkg/ruby-install-{{ruby_install_version}}
+    chdir: /home/{{gen_user}}/.pkg/ruby-install-{{ruby_install_version}}
   when: rinst_current_version.rc != 0 or rinst_current_version.stdout.split()[1] != ruby_install_version
 
 - name: get rubies
-  become_user: "{{tgt_user}}"
+  become_user: "{{gen_user}}"
   get_url:
     url:  http://{{cblob_host}}/ruby/ruby{{item}}.tar.gz
-    dest: /home/{{tgt_user}}/.pkg/ruby{{item}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
   with_items: '{{chruby_rubies}}'
 
 - name: untar rubies
-  become_user: "{{tgt_user}}"
+  become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{tgt_user}}/.pkg/ruby{{item}}.tar.gz
-    dest: /home/{{tgt_user}}/.rubies
-    creates: /home/{{tgt_user}}/.rubies/ruby-{{item}}
+    src:  /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
+    dest: /home/{{gen_user}}/.rubies
+    creates: /home/{{gen_user}}/.rubies/ruby-{{item}}
   with_items: '{{chruby_rubies}}'
 
 - name: remove ri directory
   file:
-    path: /home/{{tgt_user}}/.rubies/{{item}}/share/ri
+    path: /home/{{gen_user}}/.rubies/{{item}}/share/ri
     state: absent
   with_items: '{{chruby_rubies}}'
 
 # - name: replace ruby shebangs
 #   replace:
-#     path: '/home/{{tgt_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
+#     path: '/home/{{gen_user}}/.rubies/ruby-{{item.0}}/{{item.1}}'
 #     regexp:  '/home/aleak/.rubies'
-#     replace: '/home/{{tgt_user}}/.rubies'
+#     replace: '/home/{{gen_user}}/.rubies'
 #     backup:  no
 #   loop: "{{chruby_rubies|product(ruby_scripts)|list}}"
 
 - name: set global ruby
-  become_user: "{{tgt_user}}"
+  become_user: "{{gen_user}}"
   shell: echo {{chruby_global}} > ~/.ruby-version
   changed_when: false
 
 - name: setup rbenv symlink directory
   file: 
-    path: /home/{{tgt_user}}/.rbenv 
+    path: /home/{{gen_user}}/.rbenv 
     state: directory
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: create rbenv symlink
   file: 
-    src: /home/{{tgt_user}}/.rubies 
-    dest: /home/{{tgt_user}}/.rbenv/versions 
+    src: /home/{{gen_user}}/.rubies 
+    dest: /home/{{gen_user}}/.rbenv/versions 
     state: link 
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"

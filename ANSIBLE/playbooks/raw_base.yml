@@ -15,7 +15,7 @@
 - hosts: all
   vars:
     - sys_user: vagrant
-    - tgt_user: vagrant
+    - gen_user: vagrant
     - lcl_user: "{{ lookup('env', 'USER') }}"
   remote_user:  "{{sys_user}}"
   become: true
@@ -23,4 +23,4 @@
     - Vars/predicates  # variables
     - Vars/hostname    # hostname
     - Vars/dump        # dump for debugging
-    - User/setup       # tgt_user account and SSH keys
+    - User/setup       # gen_user account and SSH keys

@@ -9,8 +9,8 @@
 
 - name: create cfg directory
   file: 
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
     path:  /etc/nginx/conf.d 
     state: directory
     
@@ -18,8 +18,8 @@
   file: 
     path: /usr/share/{{item}} 
     state: directory
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
   with_items:
     - nginx
     - nginx/cblob
@@ -45,8 +45,8 @@
   copy: 
     src: "{{ item.src }}"
     dest: /usr/share/nginx/{{ item.dest }} 
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
     force: no
   with_items:
     - { src: 'cblob_readme.md', dest: 'cblob/README.md' }

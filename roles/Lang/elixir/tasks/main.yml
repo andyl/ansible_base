@@ -5,38 +5,38 @@
 
 - name: create package cache dir
   file: 
-    path: /home/{{tgt_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg 
     state: directory 
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
 - name: get package
   get_url:
     url:  https://github.com/elixir-lang/elixir/releases/download/v{{elixir_version}}/Precompiled.zip
-    dest: /home/{{tgt_user}}/.pkg/elixir-{{elixir_version}}.zip
+    dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
     force: no
     validate_certs: no
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
 - name: create target directory
   file: 
-    path:  /home/{{tgt_user}}/.pkg/elixir-{{elixir_version}}
+    path:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
     state: directory
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
 - name: unzip package
   unarchive:
-    src:  /home/{{tgt_user}}/.pkg/elixir-{{elixir_version}}.zip
-    dest: /home/{{tgt_user}}/.pkg/elixir-{{elixir_version}}
+    src:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
+    dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
     remote_src: true
-    group: "{{tgt_user}}" 
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
 - name: installation symlinks
   file: 
-    src:   /home/{{tgt_user}}/.pkg/elixir-{{elixir_version}}/bin/{{item}} 
+    src:   /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}/bin/{{item}} 
     dest:  /usr/local/bin/{{item}} 
     state: link
     force: yes
@@ -61,34 +61,34 @@
 
 - name: create package cache dir
   file: 
-    path: /home/{{tgt_user}}/.beam_src 
+    path: /home/{{gen_user}}/.beam_src 
     state: directory 
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
   when: is_x86_64
 
 - name: download Elixir tar file
   get_url: 
     url:  https://github.com/elixir-lang/elixir/archive/v{{elixir_version}}.tar.gz
-    dest: /home/{{tgt_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
+    dest: /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
     validate_certs: no
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
   when: is_x86_64
 
 - name: expand Elixir tar file
   unarchive:
-    src:  /home/{{tgt_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
-    dest: /home/{{tgt_user}}/.beam_src
+    src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
+    dest: /home/{{gen_user}}/.beam_src
     remote_src: true
-    group: "{{tgt_user}}"
-    owner: "{{tgt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
   when: is_x86_64
 
 - name: create symlink to Elixir source dir
   file: 
-    src:  /home/{{tgt_user}}/.beam_src/elixir-{{elixir_version}}
-    dest: /home/{{tgt_user}}/.beam_src/elixir
+    src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}
+    dest: /home/{{gen_user}}/.beam_src/elixir
     mode: "a+rx"
     state: link 
   when: is_x86_64

@@ -1,7 +1,7 @@
 ---
 
 # There's two things that we're trying to do here:
-# 1) support a sys_user and an tgt_user
+# 1) support a sys_user and an gen_user
 # 2) ssh-copy-id if possible
 #
 
@@ -9,6 +9,6 @@
   include: setup.yml alt_user="{{sys_user}}"
 
 - name: setup {{alt_user}}
-  include: setup.yml alt_user="{{tgt_user}}"
-  when: tgt_user != sys_user
+  include: setup.yml alt_user="{{gen_user}}"
+  when: gen_user != sys_user
 
