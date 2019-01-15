@@ -3,6 +3,7 @@
 # vim8
 
 - name: remove old vim
+  become: true
   apt:  pkg={{item}} state=absent purge=yes
   with_items:
     - vim
@@ -26,18 +27,19 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{sys_user}}/.pkg 
     state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get deb file
   get_url: 
     url:  http://{{cblob_host}}/vim/vimal_{{vim_version}}-1_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    dest: /home/{{sys_user}}/.pkg/vimal_{{vim_version}}.deb
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: install vimal package
-  apt: deb=/home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb     
+  become: true
+  apt: deb=/home/{{sys_user}}/.pkg/vimal_{{vim_version}}.deb     
 

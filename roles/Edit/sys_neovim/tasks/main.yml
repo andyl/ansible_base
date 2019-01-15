@@ -11,34 +11,29 @@
 
 - name: create pkg dir
   file: 
-    path:  "/home/{{gen_user}}/{{item}}"
+    path:  "/home/{{sys_user}}/{{item}}"
     state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
   with_items:
     - ".pkg"
-    - ".config"
 
 - name: get executable file
   get_url: 
     url:  https://github.com/neovim/neovim/releases/download/v{{nvim_version}}/nvim.appimage
-    dest: /home/{{gen_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    dest: /home/{{sys_user}}/.pkg/nvim_{{nvim_version}}.appimage
     validate_certs: false
     mode: "a+rx"
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: installation symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    src:   /home/{{sys_user}}/.pkg/nvim_{{nvim_version}}.appimage
     dest:  /usr/local/bin/nvim
     state: link
     force: yes
     mode:  "a+rx"
-
-# - name: install neovim gem
-#   become: no
-#   gem: name=neovim state=latest
 
 - name: install neovim package for python
   pip: name=neovim state=latest
