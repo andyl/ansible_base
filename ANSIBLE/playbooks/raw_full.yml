@@ -28,10 +28,10 @@
     - Ruby/chruby      # ruby version manager
     - Ruby/install     # install ruby version
     - Ruby/gems        # install ruby gems
-    - CLI/sys_pkg      # cli 
-    - CLI/util_base    # cli 
-    - CLI/tzone        # cli 
-    - CLI/extras       # bat, fd, etc.
+    - CLI/sys_pkg      # system-wide packages
+    - CLI/sys_tzone    # system-wide timezone
+    - CLI/sys_extras   # system-wide utilities
+    - CLI/util_base    # user-specific utility scripts
     - Lang/pip         # python packages
     - Lang/lua         # lua
     - Lang/nodejs      # node
