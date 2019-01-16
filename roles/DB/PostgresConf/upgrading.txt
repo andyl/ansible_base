@@ -1,0 +1,15 @@
+How to Upgrade a Major Version 
+
+27 Feb 2017
+
+Lessons Learned:
+- forget using PG upgrade utilities 
+- wipe out all old data
+- re-install from backups
+
+Rationale:
+- PG upgrade utilities are complicated 
+- PG upgrade utilities take a long time to learn
+- upgrade utilities are rare / one-off 
+- backup & restore should be a normal/everyday operation
+

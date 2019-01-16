@@ -1,0 +1,15 @@
+---
+
+# postgres_user
+
+- name: create a generic postgres user
+  postgresql_user: 
+    user: "postgres" 
+    password: "postgres" 
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
+
+- name: create a postgres user for ecto development
+  postgresql_user:
+    user: "ecto"
+    password: "ecto"
+    role_attr_flags: CREATEDB,LOGIN,SUPERUSER
