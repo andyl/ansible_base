@@ -1,0 +1,8 @@
+---
+
+# vars_dump
+
+- name: dump all vars to /tmp/ansible_vars.txt
+  template:
+    src: dump_vars.j2
+    dest: /tmp/ansible_vars.txt

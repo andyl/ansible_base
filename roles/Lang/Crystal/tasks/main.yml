@@ -1,0 +1,22 @@
+---
+
+# crystal-lang
+
+# TODO:
+# - specify crystal version
+# apt: pkg=crystal={{crystal_version}} state=present force=yes
+
+- name: add repository key
+  apt_key: 
+    id:        09617FD37CC06B54
+    keyserver: keys.gnupg.net
+    state:     present
+
+- name: add repository
+  apt_repository:
+    repo: 'deb http://dist.crystal-lang.org/apt crystal main'
+    update_cache: yes
+
+- name: add crystal
+  apt: pkg=crystal={{crystal_version}} state=present force=yes
+

@@ -1,0 +1,11 @@
+---
+
+# CLI/pkg
+
+- name: pkg for ubuntu
+  include: pkg_ubu.yml
+  when: is_ubuntu
+
+- name: pkg for rpi
+  include: pkg_rpi.yml
+  when: is_rpi

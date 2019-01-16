@@ -1,0 +1,11 @@
+---
+
+# lua
+
+- name: install 
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - lua5.2
+    - liblua5.2-dev
+    - luarocks
+    - luajit

@@ -1,0 +1,36 @@
+---
+
+# rust
+# WARNING: this only installs 64 bit version, not 32 bit version
+
+- name: create package cache dir
+  file: path=/home/{{sys_user}}/.pkg state=directory group={{sys_user}} owner={{sys_user}}
+
+- name: get package
+  become: no
+  get_url:
+    url:  http://static.rust-lang.org/dist/rust-{{rust_version}}-x86_64-unknown-linux-gnu.tar.gz
+    dest: /home/{{sys_user}}/.pkg/rust-{{rust_version}}.tar.gz
+    force: no
+
+- name: untar package
+  become: no
+  shell: tar -xf rust-{{rust_version}}.tar.gz; mv rust*x86* rust-{{rust_version}} 
+  args:
+    chdir:   /home/{{sys_user}}/.pkg 
+    creates: /home/{{sys_user}}/.pkg/rust-{{rust_version}}
+
+- name: get current version
+  shell:    rustc --version
+  register: rust_current_version
+  ignore_errors: True
+  no_log:        True
+  changed_when:  false
+
+- name: install
+  become: yes
+  command: /home/{{sys_user}}/.pkg/rust-{{rust_version}}/install.sh
+  args:
+    chdir: /home/{{sys_user}}/.pkg/rust-{{rust_version}}
+  when:    rust_current_version.rc != 0 or rust_current_version.stdout.split()[1] != rust_version
+        

@@ -1,0 +1,14 @@
+---
+
+# r-base
+# The R statistical language
+
+- name: install r-base
+  apt:
+    pkg: "{{item}}"
+    state: latest
+  with_items:
+    - r-base
+    - r-base-dev
+    - r-base-core
+
