@@ -15,20 +15,20 @@
     
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{sys_user}}/.pkg 
     state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: get deb file
   get_url: 
     url:  https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{grafana_version}}_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+    dest: /home/{{sys_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
 
 - name: install package
-  apt: deb=/home/{{gen_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
+  apt: deb=/home/{{sys_user}}/.pkg/grafana_{{grafana_version}}_amd64.deb
 
 - name: install config file
   become: true
