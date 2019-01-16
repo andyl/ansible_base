@@ -20,33 +20,33 @@
   remote_user:  "{{sys_user}}"
   become: true
   roles:
-    - Vars/predicates  # variables
-    - Vars/hostname    # hostname
-    - Vars/dump        # dump for debugging
+    - Vars/Predicates  # variables
+    - Vars/Hostname    # hostname
+    - Vars/Dump        # dump for debugging
     - User/setup       # gen_user account and SSH keys
-    - Ruby/sys_ruby    # system ruby
+    - Ruby/SysRuby     # system ruby
     - Ruby/chruby      # ruby version manager
     - Ruby/install     # install ruby version
     - Ruby/gems        # install ruby gems
-    - CLI/sys_pkg      # system-wide packages
-    - CLI/sys_tzone    # system-wide timezone
-    - CLI/sys_extras   # system-wide utilities
+    - CLI/Pkg          # system-wide packages
+    - CLI/Tzone        # system-wide timezone
+    - CLI/Extras       # system-wide utilities
     - CLI/util_base    # user-specific utility scripts
-    - Lang/pip         # python packages
-    - Lang/lua         # lua
-    - Lang/nodejs      # node
-    - Lang/yarn        # node / package manager
-    - Lang/erlang      # erlang
+    - Lang/Pip         # python packages
+    - Lang/Lua         # lua
+    - Lang/Nodejs      # node
+    - Lang/Yarn        # node / package manager
+    - Lang/Erlang      # erlang
     - Lang/elixir      # elixir
     - Lang/elixir_ls   # elixir language server
     - Lang/phoenix     # erlang/elixir (phoenix framework)
-    - Edit/sys_tmux    # terminal multiplexer
-    - Edit/sys_vim     # vim 8
-    - Edit/sys_neovim  # next-gen vim
-    - Edit/sys_emacs   # emacs
-    - DB/sqlite        # sqlite3 browser   
-    - DB/influx        # metric database
-    - DB/postgres      # relational DB
-    - Svc/grafana      # metric charting/graphing
-    - Virt/docker      # containerization
-    - Sys/sftp         # to sshfs-mount directories 
+    - Edit/Tmux    # terminal multiplexer
+    - Edit/Vim     # vim 8
+    - Edit/Neovim  # next-gen vim
+    - Edit/Emacs   # emacs
+    - DB/Sqlite        # sqlite3 browser   
+    - DB/Influx        # metric database
+    - DB/Postgres      # relational DB
+    - Svc/Grafana      # metric charting/graphing
+    - Virt/Docker      # containerization
+    - Sys/Sftp         # to sshfs-mount directories 
