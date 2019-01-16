@@ -6,30 +6,25 @@
 
 - name: add postgres repository
   template: src=pgdg.list dest=/etc/apt/sources.list.d/pgdg.list
-  become: true
   notify: 
     - apt-cache update
 
 - name: import postgres repository key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
-  become: true
   notify: 
     - apt-cache update
 
 - name: remove outdated packages
-  become: true
   apt: pkg={{item}} state=absent purge=yes
   with_items:
     - postfix
     - postgresql
 
 - name: remove old postgres versions
-  become: true
   apt: pkg={{item}} state=absent purge=yes
   with_items: '{{old_postgres_versions}}'
 
 - name: remove old postgres config directories
-  become: true
   file: path=/etc/postgresql/{{item}} state=absent
   with_items: '{{old_postgres_versions}}'
 
@@ -37,20 +32,19 @@
   meta: flush_handlers
 
 - name: install postgres packages
-  become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - libpq-dev 
     - python-psycopg2
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
+    - pgadmin4
 
 - name: force port 5432
   lineinfile:
     dest:   /etc/postgresql/{{postgres_version}}/main/postgresql.conf
     line:   "port = 5432"
     regexp: "^port ="
-  become: true
   notify:
     - restart postgres 
 
@@ -61,7 +55,6 @@
     line:   "local all postgres trust" 
     regexp: "^local +all +postgres +peer" 
     backrefs: yes
-  become: true
   notify:
     - restart postgres 
 
@@ -72,7 +65,6 @@
     line:   "local all all trust" 
     regexp: "^local +all +all +peer" 
     backrefs: yes
-  become: true
   notify:
     - restart postgres 
 
