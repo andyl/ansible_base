@@ -10,5 +10,5 @@ So we have to keep old versions of debian packages around.  Yukk.  We don't
 want to put the debian packages here in the Ansible roles repo because they are
 too large, so we keep them in offline storage optimized for large binaries.
 
-We store the old version in ~/var/data/vscode.  There is a script
+We store the old version in ~/var/data/cblob/vscode.  There is a script
 "GetCurrentVersion" to pull down the current package.
