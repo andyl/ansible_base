@@ -35,8 +35,24 @@
     force: yes
     mode:  "a+rx"
 
-- name: install neovim package for python
-  pip: name=neovim state=latest
+- name: install neovim packages for python2
+  become_user: "{{gen_user}}"
+  pip: 
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - neovim
+
+- name: install neovim packages for python3
+  become_user: "{{gen_user}}"
+  pip: 
+    name: "{{item}}"
+    state: latest
+    executable: pip3
+  with_items:
+    - setuptools
+    - neovim
+    - neovim-remote
 
 - name: install neovim package for node
   npm: name=neovim state=latest global=yes
