@@ -41,3 +41,12 @@
     state: link
     force: yes
 
+- name: create release symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}
+    dest:  /home/{{gen_user}}/.pkg/elixir_ls/rel
+    state: link
+    force: yes
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
