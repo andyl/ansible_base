@@ -1,3 +1,4 @@
 ---
-#vim_version: 81a  # superseded 2018-09-09
-vim_version: 81b
+# vim_version: 81a  superseded 2018-09-09
+# vim_version: 81b  superseded 2019-02-02
+vim_version: 81c

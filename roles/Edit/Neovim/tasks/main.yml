@@ -53,6 +53,7 @@
     - setuptools
     - neovim
     - neovim-remote
+    - pynvim
 
 - name: install neovim package for node
   npm: name=neovim state=latest global=yes

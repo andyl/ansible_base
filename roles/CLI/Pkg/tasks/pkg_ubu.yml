@@ -8,6 +8,7 @@
   with_items:
     - language-pack-en-base      # american time zones
     - python-dev                 # required by ansible
+    - python3-dev                # required by ansible
     - python-pip                 # required by ansible
     - python3-pip                # required by neovim
     - build-essential            # compile tools
