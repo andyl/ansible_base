@@ -42,6 +42,7 @@
     state: latest
   with_items:
     - neovim
+    - pynvim 
 
 - name: install neovim packages for python3
   become_user: "{{gen_user}}"
@@ -57,4 +58,7 @@
 
 - name: install neovim package for node
   npm: name=neovim state=latest global=yes
+
+- name: install neovim gem for ruby
+  gem: name=neovim state=latest 
 
