@@ -44,17 +44,17 @@
     - neovim
     - pynvim 
 
-- name: install neovim packages for python3
-  become_user: "{{gen_user}}"
-  pip: 
-    name: "{{item}}"
-    state: latest
-    executable: pip3
-  with_items:
-    - setuptools
-    - neovim
-    - neovim-remote
-    - pynvim
+# - name: install neovim packages for python3
+#   become_user: "{{gen_user}}"
+#   pip: 
+#     name: "{{item}}"
+#     state: latest
+#     executable: pip3
+#   with_items:
+#     - setuptools
+#     - neovim
+#     - neovim-remote
+#     - pynvim
 
 - name: install neovim package for node
   npm: name=neovim state=latest global=yes

@@ -3,9 +3,12 @@
 # pip
   
 - name: install pip
-  apt: name=python-pip state=latest
+  apt: name="{{item}}" state=latest
+  with_items:
+    - python-pip
+    - python3-pip
 
-- name: install pip modules (all platforms)
+- name: install pip modules (all platforms - python2)
   pip: name="{{item}}" state=latest
   with_items:
     - setuptools         # python setuptools
