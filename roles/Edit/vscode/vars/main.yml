@@ -13,4 +13,5 @@
 # vscode_version: 1.29.1    superseded 2018-12-14
 # vscode_version: 1.30.0    superseded 2019-01-08
 # vscode_version: 1.30.2    superseded 2019-02-15
-vscode_version: 1.31.1
+# vscode_version: 1.31.1    superseded 2019-03-07
+vscode_version: 1.32.0
