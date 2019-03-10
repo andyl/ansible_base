@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# This hack is done to load helper 
+# functions saved in the ~/.iex 
+# directory...
+
+iex_original -pa ~/.iex "$@"
+
