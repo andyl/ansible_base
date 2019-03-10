@@ -1,0 +1,61 @@
+---
+
+# erlang x86
+
+# FOR x86_64 (64 bit UBUNTU Dev Boxes and Servers)
+# see http://www.erlang-solutions.com/resources/download.html
+
+- name: install support software
+  apt: 
+    name:  "{{item}}"
+    state: latest
+  with_items:
+    - libsctp1
+    - build-essential
+    - libtinfo-dev
+
+- name: get erlang deb file
+  get_url: 
+    url:  https://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}~ubuntu~{{ansible_distribution_release}}_amd64.deb
+    dest: /home/{{sys_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
+    validate_certs: false
+
+- name: install package
+  apt: deb=/home/{{sys_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
+
+# GET OTP SOURCE FOR DOCCO AND CODE LOOKUPS
+
+- name: create package cache dir
+  file: 
+    path: /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}} 
+    state: directory 
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
+
+- name: download OTP tar file
+  get_url: 
+    url:  https://github.com/erlang/otp/releases/download/OTP-{{otp_version}}/OTP-{{otp_version}}-bundle.tar.gz
+    dest: /home/{{sys_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
+    validate_certs: false
+
+- name: expand OTP tar file
+  unarchive:
+    src:  /home/{{sys_user}}/.beam_src/otp-{{otp_version}}.tar.gz
+    dest: /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}}
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: create symlink to OTP source dir
+  file: 
+    src:  /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}}/otp
+    dest: /home/{{sys_user}}/.beam_src/otp
+    mode: "a+rx"
+    state: link 
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
