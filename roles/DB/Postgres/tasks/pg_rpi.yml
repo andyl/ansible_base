@@ -17,7 +17,7 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes force=yes
   with_items:
-    - postgresql-9.3
+    - postgresql-9.6
   environment:
     LC_ALL: en_US.UTF-8
   ignore_errors: yes
