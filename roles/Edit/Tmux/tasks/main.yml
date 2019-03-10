@@ -1,12 +1,19 @@
 ---
 
-# note: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
+# NOTE: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
 
 - name: install tmux executable
   get_url:
     url:  http://{{cblob_host}}/tmux/tmux-{{ansible_architecture}}-{{tmux_version}}
-    dest: /usr/bin/tmux
+    dest: /usr/bin/tmux-{{tmux_version}}
     mode: "a+rx"
+
+- name: create tmux symlink 
+  file: 
+    src:   /usr/bin/tmux-{{tmux_version}}
+    dest:  /usr/bin/tmux
+    state: link
+    force: yes
 
 # tmate 
 # https://tmate.io
