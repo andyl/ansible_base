@@ -6,7 +6,6 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
-    - python-software-properties # required by apt-get
     - python-pip                 # required by ansible
     - python-dev                 # required by ansible
     - python-virtualenv          # required by ansible
@@ -47,12 +46,4 @@
   apt: pkg={{item}} state=absent
   with_items:
     - whoopsie        # ubuntu bug reporter
-
-# - name: upload lang.sh
-#   copy: src=lang.sh dest=/etc/profile.d/lang.sh
-#   become: true
-
-- name: install jq 
-  become: true
-  copy: src=jq dest=/usr/local/bin/jq mode="a+rx"
 
