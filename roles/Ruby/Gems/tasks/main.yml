@@ -1,0 +1,12 @@
+---
+
+# ruby_gems
+
+- name: install base gems
+  become_user: "{{gen_user}}"
+  gem: name="{{item}}"
+  with_items:
+    - pry
+    - hirb
+    - colored
+    - tmuxinator
