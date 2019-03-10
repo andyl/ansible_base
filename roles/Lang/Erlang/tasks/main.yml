@@ -4,15 +4,15 @@
 
 - name: create package cache dir
   file: 
-    path: /home/{{sys_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg 
     state: directory 
-    group: "{{sys_user}}" 
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
 - name: erlang for ubuntu
   include: erlang_x86.yml
   when: is_x86_64
 
 - name: erlang for rpi
-  include: erlang_arm7.yml
+  include: erlang_arm.yml
   when: is_arm7

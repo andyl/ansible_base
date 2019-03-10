@@ -1,4 +1,5 @@
 # ERLANG
 
-TODO:
-- [ ] break out x86 and ARM into separate playbooks
+For ARM install, you need to build the release.
+
+See `~/var/data/cblob/erlang`
