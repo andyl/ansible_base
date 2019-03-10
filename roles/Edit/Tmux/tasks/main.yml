@@ -18,4 +18,5 @@
     url:  http://{{cblob_host}}/tmux/tmate-{{tmate_version}}
     dest: /usr/bin/tmate
     mode: "a+rx"
+  when: is_x86_64
 
