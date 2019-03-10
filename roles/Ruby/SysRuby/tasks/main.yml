@@ -9,6 +9,10 @@
     - build-essential
     - libssl-dev
 
+- name: set ruby version (9.8)
+  set_fact: ruby_version="2.3"
+  when: ansible_distribution_version in ["9.8"]
+
 - name: set ruby version (16.04)
   set_fact: ruby_version="2.3"
   when: ansible_distribution_version in ["16.04"]
