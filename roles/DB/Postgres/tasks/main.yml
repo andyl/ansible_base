@@ -12,5 +12,5 @@
   include: pg_rpi.yml
   when: is_rpi
 
-- name: postgres users
-  include: user.yml
+- name: setup postgres users and template DB
+  include: setup.yml
