@@ -1,0 +1,17 @@
+---
+
+# ledger
+
+# see https://www.ledger-cli.org/download.html
+
+- name: add PPA
+  apt_repository: repo=ppa:mbudde/ledger 
+
+- name: add ledger 
+  apt: pkg={{item}} state=latest force=yes
+  with_items:
+    - ledger
+    - hledger 
+    - hledger-ui
+    - hledger-web
+
