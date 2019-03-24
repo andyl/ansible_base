@@ -32,6 +32,7 @@
     - sysstat                    # monitoring utility
     - ncdu                       # monitoring utility
     - iperf                      # network performance testing
+    - patch 
     - libcurl4-openssl-dev       # development lib
     - libevent-dev               # development lib
     - libncurses5-dev            # development lib
@@ -40,6 +41,7 @@
     - libssl-dev                 # development lib
     - libxslt1-dev               # development lib
     - zlib1g-dev                 # development lib
+    - liblzma-dev                # development lib
     - wkhtmltopdf                # pdf generation
     - multitail                  # log file monitoring
     - encfs                      # file system encryption
