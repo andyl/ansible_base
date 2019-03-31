@@ -1,8 +1,0 @@
----
-# get list of packages from
-# https://prerelease.keybase.io
-
-keybase_version: 2.6.0-20180814163904.23e84dff6f
-
-kb_version: "{{keybase_version.split('-')[0]}}"
-

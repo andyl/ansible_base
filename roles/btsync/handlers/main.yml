@@ -1,8 +1,0 @@
----
-- name: reload systemd
-  become: yes
-  command: systemctl daemon-reload
-
-- name: restart btsync
-  service: name=btsync enabled=yes state=restarted
-  become: true
