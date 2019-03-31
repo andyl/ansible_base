@@ -1,0 +1,13 @@
+---
+
+# hostname
+
+- name: set sysname
+  hostname:
+    name: "{{ tgt_sysname }}"
+
+- name: add sysname to /etc/hosts
+  blockinfile:
+    path: /etc/hosts
+    block: |
+      127.0.0.1 {{ tgt_sysname }}

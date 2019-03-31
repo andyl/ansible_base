@@ -1,0 +1,45 @@
+---
+
+# nerves
+
+- name: install packages
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - ssh-askpass
+    - squashfs-tools
+    - g++ 
+    - libssl-dev 
+    - libncurses5-dev 
+    - bc 
+    - m4 
+    - make 
+    - unzip 
+    - cmake
+
+- name: create pkg dir
+  file: 
+    path: /home/{{alt_user}}/.pkg 
+    state: directory 
+    group: "{{alt_user}}"
+    owner: "{{alt_user}}"
+
+- name: get fwup deb file
+  become: no
+  get_url: 
+    url: https://github.com/fhunleth/fwup/releases/download/v{{fwup_version}}/fwup_{{fwup_version}}_amd64.deb
+    dest: /home/{{alt_user}}/.pkg/fwup_{{fwup_version}}.deb
+
+- name: install fwup
+  apt: deb=/home/{{alt_user}}/.pkg/fwup_{{fwup_version}}.deb
+
+- name: get nerves package
+  become: no
+  get_url:
+    url:  https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez
+    dest: /home/{{alt_user}}/.pkg/nerves_bootstrap.ez
+    force: yes
+
+- name: install nerves package
+  become: no
+  shell: echo Y | mix archive.install /home/{{alt_user}}/.pkg/nerves_bootstrap.ez
+  

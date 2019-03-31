@@ -1,0 +1,22 @@
+---
+
+# nscope
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get deb file
+  get_url: 
+    url: https://www.nscope.org/v081/linux/nscope_{{nscope_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/nscope_{{nscope_version}}_amd64.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install packagae
+  apt:
+    deb: /home/{{gen_user}}/.pkg/nscope_{{nscope_version}}_amd64.deb
+

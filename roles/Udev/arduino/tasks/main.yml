@@ -1,0 +1,34 @@
+---
+
+# arduino
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url: 
+    url: http://downloads.arduino.cc/arduino-{{arduino_version}}-linux64.tar.xz
+    dest: /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}.tar.xz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar package
+  unarchive:
+    src:     /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}.tar.xz 
+    dest:    /home/{{gen_user}}/.pkg
+    creates: /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}
+    group:   "{{gen_user}}"
+    owner:   "{{gen_user}}"
+
+- name: install packagae
+  command: "/home/{{gen_user}}/.pkg/arduino-{{arduino_version}}/install.sh"
+
+- name: install pip modules 
+  pip: name="{{item}}" state=latest
+  with_items:
+    - pyserial
+    - esptool
