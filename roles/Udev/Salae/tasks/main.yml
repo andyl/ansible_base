@@ -18,9 +18,10 @@
 
 - name: unzip package
   unarchive:
-    src:     /home/{{gen_user}}/.pkg/salae-{{salae_version}}.zip
+    src:     /home/{{gen_user}}/.pkg/salae_{{salae_version}}.zip
     dest:    /home/{{gen_user}}/.pkg
-    creates: /home/{{gen_user}}/.pkg/salae-{{salae_version}}
+    creates: /home/{{gen_user}}/.pkg/salae_{{salae_version}}
+    remote_src: yes
     group:   "{{gen_user}}"
     owner:   "{{gen_user}}"
 
