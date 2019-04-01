@@ -1,0 +1,32 @@
+---
+
+# saleae
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file
+  get_url: 
+    url: https://downloads.saleae.com/logic/{{saleae_vsn}}/Logic%20{{saleae_vsn}}%20(64-bit).zip
+    dest:  /home/{{gen_user}}/.pkg/saleae_{{saleae_vsn}}.zip
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: unzip package
+  shell: unzip -o -q saleae_{{saleae_vsn}}.zip && mv Logic* saleae_{{saleae_vsn}}
+  args:
+    warn:    false
+    chdir:   /home/{{gen_user}}/.pkg
+    creates: /home/{{gen_user}}/.pkg/saleae_{{saleae_vsn}}
+
+- name: create saleae symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/saleae_{{saleae_vsn}}/Logic
+    dest:  /usr/bin/saleae
+    state: link
+    force: yes
+
