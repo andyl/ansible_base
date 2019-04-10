@@ -1,0 +1,16 @@
+---
+
+# LimeSDR
+
+# - name: create pkg dir
+#   file: 
+#     path: /home/{{gen_user}}/.pkg 
+#     state: directory 
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+
+- name: Install LimeSuite
+  include: lime_suite.yml
+
+- name: Install GnuRadio
+  include: gnu_radio.yml

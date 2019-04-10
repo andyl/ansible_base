@@ -1,0 +1,12 @@
+---
+
+# Gnu Radio
+
+- name: install packages
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - gnuradio
+    - gnuradio-dev
+    - libboost-all-dev
+    - swig
+
