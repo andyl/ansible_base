@@ -17,6 +17,6 @@
 
 - name: install ansible package
   apt: 
-    pkg:   "ansible"
-    state: "latest"
-
+    pkg:   "ansible={{ansible_vsn}}"
+    install_recommends: yes
+    update_cache:       yes
