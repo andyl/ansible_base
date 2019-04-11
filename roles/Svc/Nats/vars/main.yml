@@ -1,0 +1,8 @@
+---
+# gnatsd_version:   1.1.0   superseded 2018-07-09
+gnatsd_version:     1.2.0
+
+# nats_ss_version:  0.9.2   superseded 2018-07-09
+nats_ss_version:   0.10.2
+
+nats_top_version:   0.3.2

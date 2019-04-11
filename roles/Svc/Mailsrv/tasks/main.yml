@@ -1,0 +1,17 @@
+---
+
+# mailsrv - lightweight mail-handling server
+
+- name: install unit file
+  become: true
+  template: 
+    src:   mailsrv.service
+    dest:  /etc/systemd/system/mailsrv.service
+    owner: root 
+    group: root
+    force: yes
+    mode: "a+rx"
+  notify: 
+    - reload systemd
+    - enable mailsrv
+

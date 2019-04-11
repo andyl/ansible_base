@@ -1,0 +1,4 @@
+---
+- name: restart ipfs
+  service: name=ipfs state=restarted enabled=yes
+  become: true
