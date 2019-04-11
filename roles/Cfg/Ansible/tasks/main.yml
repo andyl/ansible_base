@@ -17,6 +17,5 @@
 
 - name: install ansible package
   apt: 
-    pkg:   "ansible={{ansible_vsn}}"
+    pkg:   "ansible={{ansible_vsn}}-1ppa~{{ansible_distribution_release}}"
     install_recommends: yes
-    update_cache:       yes
