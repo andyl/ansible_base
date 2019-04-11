@@ -1,8 +1,0 @@
----
-ipfs_vars:
-  - { pkg: "go-ipfs"      , exe: "ipfs"         , vsn: "v0.4.9-rc2"  }
-  - { pkg: "gx"           , exe: "gx"           , vsn: "v0.11.0"     }
-  - { pkg: "ipfs-update"  , exe: "ipfs-update"  , vsn: "v1.5.2"      }
-  - { pkg: "ipget"        , exe: "ipget"        , vsn: "v0.3.0"      }
-  - { pkg: "ipfs-see-all" , exe: "ipfs-see-all" , vsn: "v1.0.0"      }
-  - { pkg: "gx-go"        , exe: "gx-go"        , vsn: "v1.4.0"      }

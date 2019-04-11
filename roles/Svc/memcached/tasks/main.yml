@@ -1,9 +1,0 @@
----
-
-# memcached
-
-- name: install 
-  become: true
-  apt:  pkg={{item}} state=latest install_recommends=yes
-  with_items:
-    - memcached
