@@ -3,6 +3,5 @@
 # check pip version `yolk -U apache-airflow`
 
 # airflow_vsn: 1.9.0    superseded 2019-04-11
-airflow_vsn: 1.9.0
-# airflow_vsn: 1.10.3
+airflow_vsn: 1.10.3
 
