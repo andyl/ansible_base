@@ -8,7 +8,7 @@
 
 - name: install airflow pip modules 
   become: true
-  pip: name="apache-airflow={{airflow_vsn}}" 
+  pip: name="apache-airflow=={{airflow_vsn}}" 
 
 - name: install /etc/systemd/system/airflow-webserver.service
   become: true

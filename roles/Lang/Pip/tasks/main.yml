@@ -12,6 +12,7 @@
   pip: name="{{item}}" state=latest
   with_items:
     - setuptools         # python setuptools
+    - wheel              # pip cache tool
     - httpie             # command-line http client
     - mkdocs             # static html documentation
     - seashells          # pipe CL to browser (http://seashells.io)
