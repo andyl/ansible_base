@@ -29,7 +29,7 @@
 
 - name: create package cache dir
   file: 
-    path: /home/{{sys_user}}/.beam_src/OTP-{{otp_version}} 
+    path: /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}} 
     state: directory 
     group: "{{sys_user}}" 
     owner: "{{sys_user}}"
@@ -37,15 +37,15 @@
 - name: download OTP tar file
   get_url: 
     url:  https://github.com/erlang/otp/archive/OTP-{{otp_version}}.tar.gz
-    dest: /home/{{sys_user}}/.beam_src/OTP-{{otp_version}}.tar.gz
+    dest: /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}}.tar.gz
     group: "{{sys_user}}" 
     owner: "{{sys_user}}"
     validate_certs: false
 
 - name: expand OTP tar file
   unarchive:
-    src:  /home/{{sys_user}}/.beam_src/OTP-{{otp_version}}.tar.gz
-    dest: /home/{{sys_user}}/.beam_src/OTP-{{otp_version}}
+    src:  /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}}.tar.gz
+    dest: /home/{{sys_user}}/.beam_src
     group: "{{sys_user}}" 
     owner: "{{sys_user}}"
     remote_src: true
@@ -53,7 +53,7 @@
 
 - name: create symlink to OTP source dir
   file: 
-    src:  /home/{{sys_user}}/.beam_src/OTP-{{otp_version}}/otp
+    src:  /home/{{sys_user}}/.beam_src/otp-OTP-{{otp_version}}
     dest: /home/{{sys_user}}/.beam_src/otp
     mode: "a+rx"
     state: link 
