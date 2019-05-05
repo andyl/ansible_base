@@ -16,3 +16,8 @@
 # influx_version: 1.6.0      superseded on 2018-11-08
 # influx_version: 1.7.0      superseded on 2019-05-04
 influx_version: 1.7.6 
+
+
+
+
+chronograf_vsn: 1.7.11
