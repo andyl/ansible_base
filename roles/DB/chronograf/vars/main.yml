@@ -1,0 +1,8 @@
+---
+
+# NOTE: `influxdb_hostname` defined in group_vars...
+
+# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.7.11_amd64.deb
+# sudo dpkg -i chronograf_1.7.11_amd64.deb
+
+chronograf_vsn: 1.7.11
