@@ -13,7 +13,7 @@
 - name: get brave package
   become: no
   get_url: 
-    url:  https://github.com/brave/browser-laptop/releases/download/v{{brave_version}}dev/brave_{{brave_version}}_amd64.deb
+    url:  https://github.com/brave/brave-browser/releases/download/v{{brave_version}}/brave-browser_{{brave_version}}_amd64.deb
     dest: /home/{{alt_user}}/.pkg/brave_{{brave_version}}_amd64.deb
 
 - name: install brave
