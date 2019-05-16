@@ -5,18 +5,18 @@
 - name: create pkg dir
   become: no
   file: 
-    path: /home/{{alt_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg 
     state: directory 
-    group: "{{alt_user}}"
-    owner: "{{alt_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: get brave package
   become: no
   get_url: 
     url:  https://github.com/brave/brave-browser/releases/download/v{{brave_version}}/brave-browser_{{brave_version}}_amd64.deb
-    dest: /home/{{alt_user}}/.pkg/brave_{{brave_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/brave_{{brave_version}}_amd64.deb
 
 - name: install brave
   apt: 
-    deb: /home/{{alt_user}}/.pkg/brave_{{brave_version}}_amd64.deb
+    deb: /home/{{gen_user}}/.pkg/brave_{{brave_version}}_amd64.deb
 
