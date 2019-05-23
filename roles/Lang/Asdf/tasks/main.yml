@@ -7,5 +7,14 @@
   git: 
     repo: 'https://github.com/asdf-vm/asdf.git'
     dest: /home/{{gen_user}}/.asdf
+    update: yes
     version: "v{{asdf_vsn}}"
+
+- name: "add asdf plugins"
+  command: "bash -lc '[ -d /home/{{gen_user}}/.asdf/plugins/{{item}} ] || asdf plugin-add {{item}}'"
+  with_items:
+    - nodejs
+    - erlang
+    - elixir
+  become_user: "{{gen_user}}"
 
