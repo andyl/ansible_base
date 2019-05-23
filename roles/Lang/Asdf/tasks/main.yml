@@ -1,0 +1,11 @@
+---
+
+# asdf
+
+- name: clone asdf repo
+  become_user: "{{gen_user}}"
+  git: 
+    repo: 'https://github.com/asdf-vm/asdf.git'
+    dest: /home/{{gen_user}}/.asdf
+    version: "v{{asdf_vsn}}"
+

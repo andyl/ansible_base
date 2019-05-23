@@ -29,4 +29,6 @@
     create: yes
     path: /home/{{gen_user}}/.bashrc
     block: |
-      [ -f ~/.bashrc_util ] && source ~/.bashrc_util
+      [ -f ~/.bashrc_util ]                && source ~/.bashrc_util
+      [ -f ~/.asdf/asdf.sh ]               && source ~/.asdf/asdf.sh
+      [ -f ~/.asdf/completions/asdf.bash ] && source ~/.asdf/completions/asdf.bash
