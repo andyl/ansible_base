@@ -3,102 +3,102 @@
 # Elixir
 # packages at https://github.com/elixir-lang/elixir/releases
 
-# - name: create package cache dir
-#   file: 
-#     path: /home/{{gen_user}}/.pkg 
-#     state: directory 
-#     group: "{{gen_user}}" 
-#     owner: "{{gen_user}}"
-#
-# - name: get package
-#   get_url:
-#     url:  https://github.com/elixir-lang/elixir/releases/download/v{{elixir_version}}/Precompiled.zip
-#     dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
-#     force: no
-#     validate_certs: no
-#     group: "{{gen_user}}" 
-#     owner: "{{gen_user}}"
-#
-# - name: create target directory
-#   file: 
-#     path:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
-#     state: directory
-#     group: "{{gen_user}}" 
-#     owner: "{{gen_user}}"
-#
-# - name: unzip package
-#   unarchive:
-#     src:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
-#     dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
-#     remote_src: true
-#     group: "{{gen_user}}" 
-#     owner: "{{gen_user}}"
-#
-# - name: installation symlinks
-#   file: 
-#     src:   /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}/bin/{{item}} 
-#     dest:  /usr/local/bin/{{item}} 
-#     state: link
-#     force: yes
-#   with_items:
-#     - elixir
-#     - elixirc
-#     - iex
-#     - mix
-#
-# - name: install support packages
-#   apt:
-#     name: "{{item}}"
-#     state: present
-#   with_items:
-#     - glew-utils
-#     - libglew-dev
-#     - libglfw3
-#     - libglfw3-dev
-#   when: is_x86_64 
-#
-# # GET elixir SOURCE FOR DOCCO AND CODE LOOKUPS
-#
-# - name: create package cache dir
-#   file: 
-#     path: /home/{{gen_user}}/.beam_src 
-#     state: directory 
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#   when: is_x86_64
-#
-# - name: download Elixir tar file
-#   get_url: 
-#     url:  https://github.com/elixir-lang/elixir/archive/v{{elixir_version}}.tar.gz
-#     dest: /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
-#     validate_certs: no
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#   when: is_x86_64
-#
-# - name: expand Elixir tar file
-#   unarchive:
-#     src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
-#     dest: /home/{{gen_user}}/.beam_src
-#     remote_src: true
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#   when: is_x86_64
-#
-# - name: create symlink to Elixir source dir
-#   file: 
-#     src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}
-#     dest: /home/{{gen_user}}/.beam_src/elixir
-#     mode: "a+rx"
-#     state: link 
-#   when: is_x86_64
+- name: create package cache dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 
-# - name: tweak IEx configuration
-#   copy:
-#     src:  "{{item}}"
-#     dest: /usr/local/bin/{{item}}
-#     mode: "a+rx"
-#   when: is_x86_64
-#   with_items:
-#     - iex
-#     - iex_original
+- name: get package
+  get_url:
+    url:  https://github.com/elixir-lang/elixir/releases/download/v{{elixir_version}}/Precompiled.zip
+    dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
+    force: no
+    validate_certs: no
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create target directory
+  file: 
+    path:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
+    state: directory
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: unzip package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}.zip
+    dest: /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: installation symlinks
+  file: 
+    src:   /home/{{gen_user}}/.pkg/elixir-{{elixir_version}}/bin/{{item}} 
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - elixir
+    - elixirc
+    - iex
+    - mix
+
+- name: install support packages
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - glew-utils
+    - libglew-dev
+    - libglfw3
+    - libglfw3-dev
+  when: is_x86_64 
+
+# GET elixir SOURCE FOR DOCCO AND CODE LOOKUPS
+
+- name: create package cache dir
+  file: 
+    path: /home/{{gen_user}}/.beam_src 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_x86_64
+
+- name: download Elixir tar file
+  get_url: 
+    url:  https://github.com/elixir-lang/elixir/archive/v{{elixir_version}}.tar.gz
+    dest: /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
+    validate_certs: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_x86_64
+
+- name: expand Elixir tar file
+  unarchive:
+    src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}.tar.gz
+    dest: /home/{{gen_user}}/.beam_src
+    remote_src: true
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_x86_64
+
+- name: create symlink to Elixir source dir
+  file: 
+    src:  /home/{{gen_user}}/.beam_src/elixir-{{elixir_version}}
+    dest: /home/{{gen_user}}/.beam_src/elixir
+    mode: "a+rx"
+    state: link 
+  when: is_x86_64
+
+- name: tweak IEx configuration
+  copy:
+    src:  "{{item}}"
+    dest: /usr/local/bin/{{item}}
+    mode: "a+rx"
+  when: is_x86_64
+  with_items:
+    - iex
+    - iex_original
