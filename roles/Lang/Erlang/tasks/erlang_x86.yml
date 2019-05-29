@@ -16,7 +16,7 @@
 
 - name: get erlang deb file
   get_url: 
-    url:  https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_{{erlang_version}}-1~ubuntu~{{ansible_distribution_release}}_amd64.deb
+    url:  https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_{{erlang_version}}-1~ubuntu~{{ansible_distribution_release}}_amd64.deb
     dest: /home/{{sys_user}}/.pkg/erlang_{{erlang_version}}_amd64.deb
     group: "{{sys_user}}" 
     owner: "{{sys_user}}"
