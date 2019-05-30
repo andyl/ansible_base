@@ -11,25 +11,23 @@
 
 - name: create pkg dir
   file: 
-    path:  "/home/{{sys_user}}/{{item}}"
+    path:  "/home/{{gen_user}}/.pkg/nvim"
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
-  with_items:
-    - ".pkg"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: get executable file
   get_url: 
     url:  https://github.com/neovim/neovim/releases/download/v{{nvim_version}}/nvim.appimage
-    dest: /home/{{sys_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim_{{nvim_version}}.appimage
     validate_certs: false
     mode: "a+rx"
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: installation symlink
   file: 
-    src:   /home/{{sys_user}}/.pkg/nvim_{{nvim_version}}.appimage
+    src:   /home/{{gen_user}}/.pkg/nvim/nvim_{{nvim_version}}.appimage
     dest:  /usr/local/bin/nvim
     state: link
     force: yes
