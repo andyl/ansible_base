@@ -10,11 +10,10 @@
     update: yes
     version: "v{{asdf_vsn}}"
 
-- name: "add asdf plugins"
-  command: "bash -lc '[ -d /home/{{gen_user}}/.asdf/plugins/{{item}} ] || asdf plugin-add {{item}}'"
-  with_items:
-    - nodejs
-    - erlang
-    - elixir
-  become_user: "{{gen_user}}"
+# - name: "add asdf plugins"
+#   command: "bash -lc '[ -d /home/{{gen_user}}/.asdf/plugins/{{item}} ] || asdf plugin-add {{item}}'"
+#   with_items:
+#     - erlang
+#     - elixir
+#   become_user: "{{gen_user}}"
 
