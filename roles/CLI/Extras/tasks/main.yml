@@ -4,34 +4,50 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{sys_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg 
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 # ----- bat -----
 
 - name: get bat deb file
   get_url: 
     url: https://github.com/sharkdp/bat/releases/download/v{{bat_version}}/bat_{{bat_version}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/bat_{{bat_version}}.deb
+    dest: /home/{{gen_user}}/.pkg/bat_{{bat_version}}.deb
     validate_certs: false
     force: no
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: install bat
-  apt: deb=/home/{{sys_user}}/.pkg/bat_{{bat_version}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/bat_{{bat_version}}.deb
+  become: true
 
 # ----- fd -----
 
 - name: get fd deb file
   get_url: 
     url: https://github.com/sharkdp/fd/releases/download/v{{fd_version}}/fd_{{fd_version}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/fd_{{fd_version}}.deb
+    dest: /home/{{gen_user}}/.pkg/fd_{{fd_version}}.deb
     force: no
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: install fd
-  apt: deb=/home/{{sys_user}}/.pkg/fd_{{fd_version}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/fd_{{fd_version}}.deb
+  become: true
+  
+# ----- rg / ripgrep -----
+
+- name: get rg deb file
+  get_url: 
+    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_version}}/ripgrep_{{rg_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/rg_{{rg_version}}.deb
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install rg
+  apt: deb=/home/{{gen_user}}/.pkg/rg_{{rg_version}}.deb
+  become: true

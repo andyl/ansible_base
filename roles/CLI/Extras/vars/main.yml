@@ -1,6 +1,7 @@
 ---
 bat_version: 0.6.1
 
-
 fd_version: 7.1.0
+
+rg_version: 11.0.1
 
