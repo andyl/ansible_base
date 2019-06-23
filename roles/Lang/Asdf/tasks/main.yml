@@ -10,10 +10,18 @@
     update: yes
     version: "v{{asdf_vsn}}"
 
-# - name: "add asdf plugins"
-#   command: "bash -lc '[ -d /home/{{gen_user}}/.asdf/plugins/{{item}} ] || asdf plugin-add {{item}}'"
-#   with_items:
-#     - erlang
-#     - elixir
-#   become_user: "{{gen_user}}"
+- name: "install plugins"
+  command: "bash -lc 'asdf plugin-add {{ item.name }} {{ item.repo | "" }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - name: "erlang"
+    - name: "elixir"
+    - name: "ruby"
+    - name: "nodejs"
+    - name: "crystal"
+    - name: "rust"
 

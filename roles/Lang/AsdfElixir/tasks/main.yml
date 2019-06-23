@@ -1,0 +1,19 @@
+---
+
+# AsdfElixir
+
+- name: install asdf_elixir
+  command: "bash -lc 'asdf install elixir {{ item }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ item }}"
+    chdir: "/home/{{ gen_user }}"
+  with_items:
+    - 1.8.2
+    - 1.9.0-rc.0
+  become_user: "{{ gen_user }}"
+
+# - name: set global elixir version
+#   command: "bash -lc 'asdf global elixir {{ elixir_vsn }}'"
+#   args:
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"
