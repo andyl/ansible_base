@@ -11,21 +11,18 @@
     version: "v{{asdf_vsn}}"
 
 - name: install plugins
-  command: "bash -lc 'asdf plugin-add {{ item }}'"
+  command: "bash -lc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
   args:
-    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.split().first() }}"
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"
   become_user: "{{ gen_user }}"
   ignore_errors: true
   with_items:
-    - "crystal"
-    - "erlang"
-    - "elixir"
-    - "golang"
-    - "nodejs"
-    - "ruby"
-    - "rust"
-
-# if you want to install a plugin from a specific repo,
-# use the form "elixir http://github.com/my.repo"
+    - { name: crystal, repo: ""}  
+    - { name: erlang , repo: ""} 
+    - { name: elixir , repo: ""}
+    - { name: golang , repo: ""}
+    - { name: nodejs , repo: ""}
+    - { name: ruby   , repo: ""}
+    - { name: rust   , repo: ""}
 
