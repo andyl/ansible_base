@@ -41,7 +41,7 @@
     groups: docker
     append: yes
   with_items:
-    - "{{sys_user}}"
+    - "{{gen_user}}"
 
 - name: add repository
   apt_repository:
@@ -64,15 +64,15 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{sys_user}}/.pkg/docker
+    path: /home/{{gen_user}}/.pkg/docker
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: download docker_compose package
   get_url:
-    url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-Linux-x86_64
-    dest: /home/{{sys_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
+    url: https://github.com/docker/compose/releases/download/{{docker_compose_vsn}}/docker-compose-Linux-x86_64
+    dest: /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
     mode: 'a+rx'
     validate_certs: false
 
@@ -82,7 +82,39 @@
     state: link 
     force: true
     dest:  /usr/local/bin/docker-compose
-    src:   /home/{{sys_user}}/.pkg/docker/docker_compose_{{docker_compose_version}}
+    src:   /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
+
+# ----- lazy_docker -----
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download lazydocker zip
+  get_url:
+    url: https://github.com/jesseduffield/lazydocker/releases/download/v{{lazydocker_vsn}}/lazydocker_{{lazydocker_vsn}}_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
+    mode: 'a+rx'
+    validate_certs: false
+
+- name: unzip package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
+    dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for lazydocker executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/lazydocker
+    src:   /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lazydocker
 
 # ----- docker-gen -----
 

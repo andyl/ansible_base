@@ -1,4 +1,8 @@
 ---
-# docker_compose_version: 1.4.2   superseded 2018-07-10
-# docker_compose_version: 1.21.2  superseded 2018-07-29
-docker_compose_version: 1.22.0
+# docker_compose_vsn: 1.4.2   superseded 2018-07-10
+# docker_compose_vsn: 1.21.2  superseded 2018-07-29
+# docker_compose_vsn: 1.22.0  superseded 2019-07-11
+docker_compose_vsn: 1.24.1
+
+
+lazydocker_vsn: 0.5.5
