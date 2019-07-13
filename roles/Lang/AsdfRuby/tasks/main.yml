@@ -1,6 +1,15 @@
 ---
 
 # AsdfRuby
+#
+# This works but compiles ruby from scratch - SLOW
+# TBD: accelerate with pre-cached language versions 
+#
+# Approach:
+# - manually install on a base machine
+# - copy the language image to `cblob`
+# - then make the ansible role download rather than compile
+# - then re-shim to create language shims
 
 - name: install asdf_ruby
   command: "bash -lc 'asdf install ruby {{ item }}'"
