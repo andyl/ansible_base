@@ -1,0 +1,18 @@
+---
+
+# AsdfRuby
+
+- name: install asdf_ruby
+  command: "bash -lc 'asdf install ruby {{ item }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ item }}"
+    chdir: "/home/{{ gen_user }}"
+  with_items:
+    - 2.6.0
+  become_user: "{{ gen_user }}"
+
+# - name: set global ruby version
+#   command: "bash -lc 'asdf global ruby {{ ruby_vsn }}'"
+#   args:
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"
