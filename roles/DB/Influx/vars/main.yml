@@ -5,19 +5,18 @@
 # influx_version: 0.9.3      superseded on 2015-11-19
 # influx_version: 0.9.4      superseded on 2015-11-23
 # influx_version: 0.9.5      superseded on 2016-02-04
-# influx_version: 0.10.0-1   superseded on 2016-03-23
-# influx_version: 0.11.0-1   superseded on 2016-04-02
-# influx_version: 0.11.1-1   superseded on 2016-04-25
-# influx_version: 0.12.2-1   superseded on 2016-05-12
+# influx_version: 0.10.0     superseded on 2016-03-23
+# influx_version: 0.11.0     superseded on 2016-04-02
+# influx_version: 0.11.1     superseded on 2016-04-25
+# influx_version: 0.12.2     superseded on 2016-05-12
 # influx_version: 0.13.0     superseded on 2017-01-24
 # influx_version: 1.2.0      superseded on 2017-10-28
 # influx_version: 1.4.2      superseded on 2018-07-09
 # influx_version: 1.5.4      superseded on 2018-07-19
 # influx_version: 1.6.0      superseded on 2018-11-08
 # influx_version: 1.7.0      superseded on 2019-05-04
-influx_version: 1.7.6 
-
-
+# influx_version: 1.7.6      superseded on 2019-08-18
+influx_version: 1.7.8  
 
 
 chronograf_vsn: 1.7.11
