@@ -47,12 +47,6 @@
   command: influx -execute "create user admin with password 'admin' with all privileges"
   ignore_errors: true
 
-# - name: setup admin user
-#   influxdb_user:
-#     user_name:     admin
-#     user_password: admin
-#     admin: yes
-
 - name: create database
   influxdb_database:
     username: "admin"
@@ -71,6 +65,9 @@
     - weather
     - bugm_log
     - bugm_stats
+    - ragged_app
+    - crow_app
+    - purlex_app
     
 # chronograf
 
