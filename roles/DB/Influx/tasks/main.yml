@@ -65,12 +65,12 @@
     - weather
     - bugm_log
     - bugm_stats
-    - ragged_app_dev
-    - ragged_app_prod
-    - crow_app_dev
-    - crow_app_prod
-    - purlex_app_dev
-    - purlex_app_prod
+    - ragged_dev
+    - ragged_prod
+    - crow_dev
+    - crow_prod
+    - purlex_dev
+    - purlex_prod
     
 # chronograf
 
