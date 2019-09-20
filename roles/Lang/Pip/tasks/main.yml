@@ -18,6 +18,7 @@
     - seashells          # pipe CL to browser (http://seashells.io)
     - flake8             # syntax checker
     - ipython            # REPL
+    - pgcli              # CLI for Postgres
     - yolk3k             # check versions
     - python-language-server[all]
 
