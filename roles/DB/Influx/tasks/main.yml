@@ -65,8 +65,8 @@
     - weather
     - bugm_log
     - bugm_stats
-    - inf_ragged_dev
-    - inf_ragged_prod
+    - inf_feedex_dev
+    - inf_feedex_prod
     - inf_crow_dev
     - inf_crow_prod
     - inf_purlex_dev
