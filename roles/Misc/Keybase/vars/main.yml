@@ -1,0 +1,9 @@
+---
+# get list of packages from
+# https://prerelease.keybase.io
+
+# keybase_version: 2.6.0-20180814163904.23e84dff6f superseded 2019-Oct-01
+keybase_version: 4.5.0-20190919193603.93e889ab01
+
+kb_version: "{{keybase_version.split('-')[0]}}"
+
