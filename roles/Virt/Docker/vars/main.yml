@@ -5,4 +5,5 @@
 docker_compose_vsn: 1.24.1
 
 
-lazydocker_vsn: 0.5.5
+# lazydocker_vsn: 0.5.5 superseded 2019-10-16
+lazydocker_vsn: 0.7.4
