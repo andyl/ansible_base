@@ -1,10 +1,11 @@
 ---
-# vagrant_version: 1.7.2    superseded 07 Dec 2015
-# vagrant_version: 1.7.4    superseded 01 Jan 2015
-# vagrant_version: 1.8.0    superseded 10 Mar 2017
-# vagrant_version: 1.9.2    superseded 13 Apr 2018
-# vagrant_version: 2.0.3    superseded 04 May 2018
-# vagrant_version: 2.1.0    superseded 09 Dec 2018
-# vagrant_version: 2.2.0    superseded 18 Dec 2018
-# vagrant_version: 2.2.2    superseded 14 Jan 2018
-vagrant_version: 2.2.3
+# vagrant_version: 1.7.2    superseded 2015 Dec 07
+# vagrant_version: 1.7.4    superseded 2015 Jan 01
+# vagrant_version: 1.8.0    superseded 2017 Mar 10
+# vagrant_version: 1.9.2    superseded 2018 Apr 13
+# vagrant_version: 2.0.3    superseded 2018 May 04
+# vagrant_version: 2.1.0    superseded 2018 Dec 09
+# vagrant_version: 2.2.0    superseded 2018 Dec 18
+# vagrant_version: 2.2.2    superseded 2018 Jan 14
+# vagrant_version: 2.2.3    superseded 2019 Oct 17
+vagrant_version: 2.2.6
