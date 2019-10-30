@@ -39,9 +39,8 @@
     - Lang/AsdfRust   
     - Lang/Pip        
     - Lang/Lua        
-    - Lang/Java8      
-    - Lang/Nodejs     
-    - Lang/Golang     
+    # - Lang/Nodejs     
+    # - Lang/Golang     
     - Lang/ElixirLs
     - Lang/Phoenix    
     - Edit/Tmux     
