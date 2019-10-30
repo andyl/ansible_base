@@ -3,10 +3,12 @@
 # ruby_gems
 
 - name: install base gems
-  become_user: "{{gen_user}}"
+  become: true
   gem: name="{{item}}"
   with_items:
     - pry
     - hirb
     - colored
     - tmuxinator
+    - msgpack
+    - neovim

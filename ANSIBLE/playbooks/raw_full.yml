@@ -25,9 +25,7 @@
     - Vars/Dump
     - User/Setup
     - Ruby/SysRuby     
-    # - Ruby/Chruby     
-    # - Ruby/Install   
-    # - Ruby/Gems     
+    - Ruby/Gems     
     - CLI/Pkg        
     - CLI/UtilBase  
     - CLI/UtilCode 
