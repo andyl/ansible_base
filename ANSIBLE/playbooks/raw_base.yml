@@ -20,7 +20,7 @@
   remote_user:  "{{sys_user}}"
   become: true
   roles:
-    - Vars/predicates  # variables
-    - Vars/hostname    # hostname
-    - Vars/dump        # dump for debugging
-    - User/setup       # gen_user account and SSH keys
+    - Vars/Predicates  # variables
+    - Vars/Hostname    # hostname
+    - Vars/Dump        # dump for debugging
+    - User/Setup       # gen_user account and SSH keys
