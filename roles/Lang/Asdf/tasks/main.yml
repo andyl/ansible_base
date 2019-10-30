@@ -10,7 +10,7 @@
     update: yes
     version: "v{{asdf_vsn}}"
 
-- name: install plugins
+- name: "install plugins for {{gen_user}}"
   command: "bash -lc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
@@ -18,11 +18,11 @@
   become_user: "{{ gen_user }}"
   ignore_errors: true
   with_items:
-    # - { name: crystal, repo: ""}  
-    # - { name: erlang , repo: ""} 
-    # - { name: elixir , repo: ""}
-    # - { name: golang , repo: ""}
-    # - { name: nodejs , repo: ""}
+    - { name: crystal, repo: ""}  
+    - { name: erlang , repo: ""} 
+    - { name: elixir , repo: ""}
+    - { name: golang , repo: ""}
+    - { name: nodejs , repo: ""}
     - { name: ruby   , repo: ""}
-    # - { name: rust   , repo: ""}
+    - { name: rust   , repo: ""}
 
