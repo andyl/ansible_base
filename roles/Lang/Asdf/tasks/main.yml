@@ -18,11 +18,11 @@
   become_user: "{{ gen_user }}"
   ignore_errors: true
   with_items:
-    - { name: crystal, repo: ""}  
-    - { name: erlang , repo: ""} 
-    - { name: elixir , repo: ""}
-    - { name: golang , repo: ""}
-    - { name: nodejs , repo: ""}
+    # - { name: crystal, repo: ""}  
+    # - { name: erlang , repo: ""} 
+    # - { name: elixir , repo: ""}
+    # - { name: golang , repo: ""}
+    # - { name: nodejs , repo: ""}
     - { name: ruby   , repo: ""}
-    - { name: rust   , repo: ""}
+    # - { name: rust   , repo: ""}
 
