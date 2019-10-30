@@ -11,7 +11,7 @@
     version: "v{{asdf_vsn}}"
 
 - name: install plugins
-  command: "bash -lc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  command: "bash -lc 'whoami; asdf plugin-add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"
@@ -25,4 +25,4 @@
     - { name: nodejs , repo: ""}
     - { name: ruby   , repo: ""}
     - { name: rust   , repo: ""}
-
+k
