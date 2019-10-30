@@ -20,33 +20,36 @@
   remote_user:  "{{sys_user}}"
   become: true
   roles:
-    - Vars/Predicates  # variables
-    - Vars/Hostname    # hostname
-    - Vars/Dump        # dump for debugging
-    - User/setup       # gen_user account and SSH keys
-    - Ruby/SysRuby     # system ruby
-    - Ruby/chruby      # ruby version manager
-    - Ruby/install     # install ruby version
-    - Ruby/gems        # install ruby gems
-    - CLI/Pkg          # system-wide packages
-    - CLI/Tzone        # system-wide timezone
-    - CLI/Extras       # system-wide utilities
-    - CLI/util_base    # user-specific utility scripts
-    - Lang/Pip         # python packages
-    - Lang/Lua         # lua
-    - Lang/Nodejs      # node
-    - Lang/Yarn        # node / package manager
-    - Lang/Erlang      # erlang
-    - Lang/elixir      # elixir
-    - Lang/elixir_ls   # elixir language server
-    - Lang/phoenix     # erlang/elixir (phoenix framework)
-    - Edit/Tmux    # terminal multiplexer
-    - Edit/Vim     # vim 8
-    - Edit/Neovim  # next-gen vim
-    - Edit/Emacs   # emacs
-    - DB/Sqlite        # sqlite3 browser   
-    - DB/Influx        # metric database
-    - DB/Postgres      # relational DB
-    - Svc/Grafana      # metric charting/graphing
-    - Virt/Docker      # containerization
-    - Sys/Sftp         # to sshfs-mount directories 
+    - Vars/Predicates
+    - Vars/Hostname
+    - Vars/Dump
+    - User/Setup
+    - Ruby/SysRuby     
+    # - Ruby/Chruby     
+    # - Ruby/Install   
+    # - Ruby/Gems     
+    - CLI/Pkg        
+    - CLI/UtilBase  
+    - CLI/UtilCode 
+    - CLI/Extras  
+    - CLI/Tzone    
+    - Lang/Asdf          
+    - Lang/AsdfRuby     
+    - Lang/AsdfElixir  
+    - Lang/AsdfRust   
+    - Lang/Pip        
+    - Lang/Lua        
+    - Lang/Java8      
+    - Lang/Nodejs     
+    - Lang/Golang     
+    - Lang/ElixirLs
+    - Lang/Phoenix    
+    - Edit/Tmux     
+    - Edit/Neovim  
+    - Edit/Vim    
+    - DB/Sqlite        
+    - DB/Influx     
+    - DB/Redis      
+    - DB/Postgres  
+    - Sys/Sops          
+    - Virt/Docker     
