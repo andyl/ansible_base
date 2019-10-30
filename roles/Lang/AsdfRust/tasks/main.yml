@@ -3,7 +3,7 @@
 # AsdfRust
 
 - name: install asdf_rust
-  command: "bash -lc 'asdf install rust {{ item }}'"
+  command: "bash -lc '.asdf/bin/asdf install rust {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/rust/{{ item }}"
     chdir: "/home/{{ gen_user }}"
@@ -11,8 +11,3 @@
     - 1.35.0
   become_user: "{{ gen_user }}"
 
-# - name: set global rust version
-#   command: "bash -lc 'asdf global rust {{ rust_vsn }}'"
-#   args:
-#     chdir: "/home/{{ gen_user }}"
-#   become_user: "{{ gen_user }}"

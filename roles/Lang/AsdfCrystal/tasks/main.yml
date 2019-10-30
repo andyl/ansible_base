@@ -3,7 +3,7 @@
 # AsdfCrystal
 
 - name: install asdf_crystal
-  command: "bash -lc 'asdf install crystal {{ item }}'"
+  command: "bash -lc '.asdf/bin/asdf install crystal {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/crystal/{{ item }}"
     chdir: "/home/{{ gen_user }}"

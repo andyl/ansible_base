@@ -12,7 +12,7 @@
 # - then re-shim to create language shims
 
 - name: install asdf_ruby
-  command: "bash -lc './.asdf/bin/asdf install ruby {{ item }}'"
+  command: "bash -lc '.asdf/bin/asdf install ruby {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ item }}"
     chdir: "/home/{{ gen_user }}"

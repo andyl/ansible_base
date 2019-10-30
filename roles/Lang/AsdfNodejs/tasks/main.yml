@@ -3,7 +3,7 @@
 # AsdfNode
 
 - name: install asdf_nodejs
-  command: "bash -lc 'asdf install nodejs {{ item }}'"
+  command: "bash -lc '.asdf/bin/asdf install nodejs {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/nodejs/{{ item }}"
     chdir: "/home/{{ gen_user }}"

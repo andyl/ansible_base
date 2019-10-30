@@ -3,7 +3,7 @@
 # AsdfElixir
 
 - name: install asdf_elixir
-  command: "bash -lc './.asdf/bin/asdf install elixir {{ item }}'"
+  command: "bash -lc '.asdf/bin/asdf install elixir {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ item }}"
     chdir: "/home/{{ gen_user }}"
