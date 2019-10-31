@@ -25,7 +25,7 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: installation symlink
+- name: create executable symlink
   file: 
     src:   /home/{{gen_user}}/.pkg/nvim/nvim_{{nvim_version}}.appimage
     dest:  /usr/local/bin/nvim
