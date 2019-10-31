@@ -36,4 +36,3 @@
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim ruby {{ruby_vsn}}'"
 
-
