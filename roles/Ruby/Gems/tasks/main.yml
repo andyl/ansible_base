@@ -10,5 +10,3 @@
     - hirb
     - colored
     - tmuxinator
-    - msgpack
-    - neovim
