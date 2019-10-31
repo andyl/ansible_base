@@ -1,0 +1,11 @@
+---
+
+# AsdfGolang
+
+- name: install asdf_golang
+  command: "bash -ilc 'asdf install golang {{ golang_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/golang/{{ golang_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

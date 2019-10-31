@@ -1,0 +1,11 @@
+---
+
+# AsdfLua
+
+- name: install asdf_lua
+  command: "bash -ilc 'asdf install lua {{ lua_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/lua/{{ lua_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

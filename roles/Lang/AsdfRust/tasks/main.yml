@@ -3,11 +3,9 @@
 # AsdfRust
 
 - name: install asdf_rust
-  command: "bash -ilc 'asdf install rust {{ item }}'"
+  command: "bash -ilc 'asdf install rust {{ rust_vsn }}'"
   args:
-    creates: "/home/{{gen_user}}/.asdf/installs/rust/{{ item }}"
+    creates: "/home/{{gen_user}}/.asdf/installs/rust/{{ rust_vsn }}"
     chdir: "/home/{{ gen_user }}"
-  with_items:
-    - 1.35.0
   become_user: "{{ gen_user }}"
 
