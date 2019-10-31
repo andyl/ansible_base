@@ -4,14 +4,12 @@
 #
 # This works but compiles ruby from scratch - SLOW
 
-- name: install asdf_ruby
-  command: "bash -ilc 'asdf install ruby {{ item }}'"
-  args:
-    creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ item }}"
-    chdir: "/home/{{ gen_user }}"
-  with_items:
-    - 2.6.0
-  become_user: "{{ gen_user }}"
+# - name: install asdf_ruby
+#   command: "bash -ilc 'asdf install ruby {{ ruby_vsn }}'"
+#   args:
+#     creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ ruby_vsn }}"
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"
 
 # Accelerate with pre-cached language versions 
 #
@@ -21,18 +19,21 @@
 # - then make the ansible role download rather than compile
 # - then re-shim to create language shims
 
-- name: get rubies
+- name: get ruby
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/ruby/{{ansible_distribution_version}}/ruby{{item}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
-  with_items: '{{chruby_rubies}}'
+    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_distribution_version}}/ruby{{ruby_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ruby{{ruby_vsn}}.tar.gz
 
-- name: untar rubies
+- name: untar ruby
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
-    dest: /home/{{gen_user}}/.rubies
-    creates: /home/{{gen_user}}/.rubies/ruby-{{item}}
-  with_items: '{{chruby_rubies}}'
+    src:  /home/{{gen_user}}/.pkg/ruby{{ruby_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.asdf/installs/ruby
+    creates: /home/{{gen_user}}/.rubies/{{ruby_vsn}}
+
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim ruby {{ruby_vsn}}'"
+
 
