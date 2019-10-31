@@ -38,6 +38,7 @@
     - Lang/Pip        
     - Lang/Lua        
     - Lang/ElixirLs
+    - Lang/Phoenix
     - Edit/Tmux     
     - Edit/Neovim  
     - Edit/Vim    

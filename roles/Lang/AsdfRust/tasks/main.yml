@@ -3,7 +3,7 @@
 # AsdfRust
 
 - name: install asdf_rust
-  command: "bash -lc '.asdf/bin/asdf install rust {{ item }}'"
+  command: "bash -ilc 'asdf install rust {{ item }}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/rust/{{ item }}"
     chdir: "/home/{{ gen_user }}"
