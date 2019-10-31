@@ -36,13 +36,13 @@
 - name: get erlang
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/asdf_erlang/{{ansible_distribution_version}}/erlang{{erlang_vsn}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/erlang{{erlang_vsn}}.tar.gz
+    url:  http://{{cblob_host}}/asdf_erlang/{{ansible_distribution_version}}/erlang_{{erlang_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/erlang_{{erlang_vsn}}.tar.gz
 
 - name: untar erlang
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/erlang{{erlang_vsn}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/erlang_{{erlang_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/erlang
     creates: /home/{{gen_user}}/.rubies/{{erlang_vsn}}
 
