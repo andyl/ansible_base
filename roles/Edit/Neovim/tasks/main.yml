@@ -33,13 +33,14 @@
     force: yes
     mode:  "a+rx"
 
+# 2019 Oct 30 - this is broken...
 # - name: install neovim package for node
 #   npm: name=neovim state=latest global=yes
 
 # 2019 Oct 30 - this is broken...
-- name: install neovim gem for ruby
-  become_user: "{{gen_user}}"
-  gem: name=neovim state=latest 
+# - name: install neovim gem for ruby
+#   become_user: "{{gen_user}}"
+#   gem: name=neovim state=latest 
 
 - name: install neovim packages for python2
   become_user: "{{gen_user}}"

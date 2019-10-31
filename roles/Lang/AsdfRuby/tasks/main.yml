@@ -3,13 +3,6 @@
 # AsdfRuby
 #
 # This works but compiles ruby from scratch - SLOW
-# TBD: accelerate with pre-cached language versions 
-#
-# Approach:
-# - manually install on a base machine
-# - copy the language image to `cblob`
-# - then make the ansible role download rather than compile
-# - then re-shim to create language shims
 
 - name: install asdf_ruby
   command: "bash -ilc 'asdf install ruby {{ item }}'"
@@ -20,8 +13,26 @@
     - 2.6.0
   become_user: "{{ gen_user }}"
 
-# - name: set global ruby version
-#   command: "bash -lc 'asdf global ruby {{ ruby_vsn }}'"
-#   args:
-#     chdir: "/home/{{ gen_user }}"
-#   become_user: "{{ gen_user }}"
+# Accelerate with pre-cached language versions 
+#
+# Approach:
+# - manually install on a base machine
+# - copy the language image to `cblob`
+# - then make the ansible role download rather than compile
+# - then re-shim to create language shims
+
+- name: get rubies
+  become_user: "{{gen_user}}"
+  get_url:
+    url:  http://{{cblob_host}}/ruby/{{ansible_distribution_version}}/ruby{{item}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
+  with_items: '{{chruby_rubies}}'
+
+- name: untar rubies
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/ruby{{item}}.tar.gz
+    dest: /home/{{gen_user}}/.rubies
+    creates: /home/{{gen_user}}/.rubies/ruby-{{item}}
+  with_items: '{{chruby_rubies}}'
+
