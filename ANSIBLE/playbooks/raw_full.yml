@@ -45,7 +45,6 @@
     - Edit/Vim    
     - DB/Sqlite        
     - DB/Influx     
-    - DB/Redis      
     - DB/Postgres  
     - Sys/Sops          
     - Virt/Docker     
