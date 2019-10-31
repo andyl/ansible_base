@@ -7,8 +7,10 @@
   apt: pkg=inotify-tools state=latest install_recommends=yes
 
 - name: install package
-  become: no
-  command: "bash -ilc 'echo Y | mix archive.install hex phx_new {{phoenix_vsn}}'"
+  become_user: "{{gen_user}}"
+  # command: "bash -ilc 'echo Y | mix archive.install hex phx_new {{phoenix_vsn}}'"
+  # shell: "bash -ilc 'echo Y | mix archive.install hex phx_new {{phoenix_vsn}}'"
   args:
-    creates: /home/{{sys_user}}/.mix/archives/phx_new-{{phoenix_vsn}}
+    creates: /home/{{gen_user}}/.mix/archives/phx_new-{{phoenix_vsn}}
+    chdir: "/home/{{gen_user}}"
 
