@@ -8,7 +8,7 @@
 
 - name: install package
   become_user: "{{gen_user}}"
-  shell: "bash -lc 'echo Y | .asdf/shims/mix archive.install hex phx_new {{phoenix_vsn}}'"
+  shell: "bash -lc 'echo Y | mix archive.install hex phx_new {{phoenix_vsn}}'"
   args:
     creates: /home/{{gen_user}}/.mix/archives/phx_new-{{phoenix_vsn}}
     chdir: "/home/{{gen_user}}"
