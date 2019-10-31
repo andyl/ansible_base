@@ -9,6 +9,7 @@
 - name: install package
   become_user: "{{gen_user}}"
   shell: "bash -ilc 'echo Y | mix archive.install hex phx_new {{phoenix_vsn}}'"
+  ignore_errors: true
   args:
     creates: /home/{{gen_user}}/.mix/archives/phx_new-{{phoenix_vsn}}
     chdir: "/home/{{gen_user}}"
