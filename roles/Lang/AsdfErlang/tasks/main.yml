@@ -1,0 +1,11 @@
+---
+
+# AsdfErlang
+
+- name: install asdf_erlang
+  command: "bash -ilc '.asdf/bin/asdf install erlang {{ erlang_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/erlang/{{ erlang_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

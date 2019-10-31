@@ -33,6 +33,7 @@
     - CLI/Tzone    
     - Lang/Asdf          
     - Lang/AsdfRuby     
+    - Lang/AsdfErlang
     - Lang/AsdfElixir  
     - Lang/AsdfRust   
     - Lang/Pip        
