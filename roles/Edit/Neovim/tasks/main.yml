@@ -37,7 +37,7 @@
   npm: name=neovim state=latest global=yes
 
 - name: install neovim gem for ruby
-  # become_user: "{{gen_user}}"
+  become_user: "{{gen_user}}"
   gem: name=neovim state=latest 
 
 - name: install neovim packages for python2
