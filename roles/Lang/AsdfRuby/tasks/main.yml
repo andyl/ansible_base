@@ -36,13 +36,13 @@
 - name: get ruby
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_distribution_version}}/ruby{{ruby_vsn}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/ruby{{ruby_vsn}}.tar.gz
+    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_distribution_version}}/ruby_{{ruby_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}.tar.gz
 
 - name: untar ruby
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/ruby{{ruby_vsn}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/ruby
     creates: /home/{{gen_user}}/.rubies/{{ruby_vsn}}
 
