@@ -2,6 +2,14 @@
 
 # cli_base
 
+- name: set python symlink
+  file: 
+    src:   /usr/bin/python3
+    dest:  /usr/bin/python
+    state: link
+    force: yes
+    mode:  "a+rx"
+
 - name: install base packages
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
@@ -11,6 +19,7 @@
     - python3-dev                # required by ansible
     - python-pip                 # required by ansible
     - python3-pip                # required by neovim
+    - python3-venv               # required by augur
     - build-essential            # compile tools
     - dnsutils                   # dnsutils
     - git-core                   # git
