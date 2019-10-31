@@ -2,17 +2,14 @@
 
 # AsdfNode
 
-- name: install asdf_nodejs
-  command: "bash -ilc 'asdf install nodejs {{ item }}'"
-  args:
-    creates: "/home/{{gen_user}}/.asdf/installs/nodejs/{{ item }}"
-    chdir: "/home/{{ gen_user }}"
-  with_items:
-    - 12.4.0
+- name: get node keys
+  command: "/home/{{gen_user}}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
   become_user: "{{ gen_user }}"
 
-# - name: set global nodejs version
-#   command: "bash -lc 'asdf global nodejs {{ nodejs_vsn }}'"
-#   args:
-#     chdir: "/home/{{ gen_user }}"
-#   become_user: "{{ gen_user }}"
+- name: install asdf_nodejs
+  command: "bash -ilc 'asdf install nodejs {{ node_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/nodejs/{{ node_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

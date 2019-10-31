@@ -25,4 +25,5 @@
     - { name: nodejs , repo: ""}
     - { name: ruby   , repo: ""}
     - { name: rust   , repo: ""}
+    - { name: lua    , repo: ""}
 
