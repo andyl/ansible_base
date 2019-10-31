@@ -7,6 +7,7 @@
   with_items:
     - python-pip
     - python3-pip
+    - python3-setuptools
     - libpq-dev
 
 - name: install pip modules (all platforms - python2)

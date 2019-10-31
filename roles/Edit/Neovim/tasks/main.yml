@@ -56,7 +56,6 @@
     state: latest
     executable: pip3
   with_items:
-    - setuptools
     - neovim
     - neovim-remote
     - pynvim
