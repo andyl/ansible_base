@@ -19,6 +19,20 @@
 # - then make the ansible role download rather than compile
 # - then re-shim to create language shims
 
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create installs dir
+  file: 
+    path: /home/{{gen_user}}/.asdf/installs/erlang
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: get erlang
   become_user: "{{gen_user}}"
   get_url:
