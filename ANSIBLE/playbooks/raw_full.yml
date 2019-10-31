@@ -36,8 +36,9 @@
     - Lang/AsdfErlang
     - Lang/AsdfElixir  
     - Lang/AsdfRust   
+    - Lang/AsdfLua
+    - Lang/AsdfGolang
     - Lang/Pip        
-    - Lang/Lua        
     - Lang/ElixirLs
     - Lang/Phoenix
     - Edit/Tmux     
