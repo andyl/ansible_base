@@ -1,7 +1,8 @@
 ---
-# tmux_version: 2.4 superseded 19-may-2018
-# tmux_version: 2.6 superseded 31-jul-2018
-# tmux_version: 2.7 superseded 10-mar-2019
-tmux_version: 2.8
+# tmux_version: 2.4 superseded 2018-May-19
+# tmux_version: 2.6 superseded 2018-Jul-31
+# tmux_version: 2.7 superseded 2019-Mar-10
+# tmux_version: 2.8 superseded 2019-Nov-08
+tmux_version: 2.9
 
 tmate_version: 2.2.1
