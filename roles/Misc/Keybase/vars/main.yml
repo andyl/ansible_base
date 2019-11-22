@@ -3,7 +3,9 @@
 # https://prerelease.keybase.io
 
 # keybase_version: 2.6.0-20180814163904.23e84dff6f superseded 2019-Oct-01
-keybase_version: 4.5.0-20190919193603.93e889ab01
+# keybase_version: 4.5.0-20190919193603.93e889ab01 superseded 2019-Nov-22
+keybase_version: 5.0.0-20191114203213.f73f97dac6
+
 
 kb_version: "{{keybase_version.split('-')[0]}}"
 
