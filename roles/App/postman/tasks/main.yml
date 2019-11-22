@@ -19,7 +19,7 @@
 - name: untar postman
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/post.tar.gz
     dest: /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}
     remote_src: true
 
@@ -29,5 +29,5 @@
     state: link 
     force: true
     dest:  /usr/local/bin/postman
-    src:   /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}
+    src:   /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/Postman/app/Postman
 
