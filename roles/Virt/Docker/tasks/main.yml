@@ -100,7 +100,7 @@
     mode: 'a+rx'
     validate_certs: false
 
-- name: unzip package
+- name: untar package
   unarchive:
     src:  /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
     dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}
