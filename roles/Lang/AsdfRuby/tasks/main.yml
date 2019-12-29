@@ -18,6 +18,8 @@
 # - copy the language image to `cblob`
 # - then make the ansible role download rather than compile
 # - then re-shim to create language shims
+#
+# Cblob utils at ~/var/data/cblob/asdf_ruby
 
 - name: create pkg dir
   file: 
