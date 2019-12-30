@@ -52,3 +52,10 @@
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim ruby {{ruby_vsn}}'"
 
+- name: install asdf_xftile
+  copy:
+    src:  asdf_xftile
+    dest: /usr/local/bin/asdf_xftile
+    mode: 'a+rx'
+
+
