@@ -1,4 +1,5 @@
 ---
 # node_vsn: 12.4.0  superseded 2019 Oct 31
-node_vsn: 13.0.1
+# node_vsn: 13.0.1
+node_vsn: 13.7.0
 
