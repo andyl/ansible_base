@@ -3,12 +3,10 @@
 # AsdfElixir
 
 - name: install asdf_elixir
-  command: "bash -ilc '.asdf/bin/asdf install elixir {{ item }}'"
+  command: "bash -ilc '.asdf/bin/asdf install elixir {{ elixir_vsn }}'"
   args:
-    creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ item }}"
+    creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ elixir_vsn }}"
     chdir: "/home/{{ gen_user }}"
-  with_items:
-    - 1.9.2
   become_user: "{{ gen_user }}"
 
 # - name: set global elixir version
