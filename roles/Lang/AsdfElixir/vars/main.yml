@@ -27,4 +27,5 @@
 # elixir_vsn: 1.8.1  superseded 2019-05-15
 # elixir_vsn: 1.8.2  superseded 2019-06-24
 # elixir_vsn: 1.9.0  superseded 2019-10-12
-elixir_vsn: 1.9.2
+# elixir_vsn: 1.9.2  superseded 2020-01-27
+elixir_vsn: 1.10.0
