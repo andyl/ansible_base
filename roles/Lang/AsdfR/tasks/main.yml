@@ -28,7 +28,7 @@
 
 - name: create installs dir
   file: 
-    path: /home/{{gen_user}}/.asdf/installs/r
+    path: /home/{{gen_user}}/.asdf/installs/R
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -48,5 +48,5 @@
 
 - name: reshim
   become_user: "{{gen_user}}"
-  command: "bash -ilc 'asdf reshim r {{r_vsn}}'"
+  command: "bash -ilc 'asdf reshim R {{r_vsn}}'"
 
