@@ -18,6 +18,8 @@
 # - copy the language image to `cblob`
 # - then make the ansible role download rather than compile
 # - then re-shim to create language shims
+#
+# R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib=yes' asdf install R 3.6.2
 
 - name: create pkg dir
   file: 
