@@ -19,4 +19,14 @@
 
 - name: install package
   apt: deb=/home/{{gen_user}}/.pkg/rstudio_{{rstudio_vsn}}.deb
+
+- name: symlink to rstudio pandoc
+  file:
+    src:  /usr/lib/rstudio/bin/pandoc/{{item}}
+    dest: /usr/local/bin
+    state: link
+  become: yes
+  with_items:
+    - pandoc
+    - pandoc-citeproc
   
