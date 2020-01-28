@@ -7,6 +7,10 @@
   become: yes
   with_items:
     - libclang-dev
+    - texlive-latex-base 
+    - texlive-fonts-recommended 
+    - texlive-fonts-extra 
+    - texlive-latex-extra
 
 - name: create pkg dir
   file: path=/home/{{gen_user}}/.pkg state=directory group={{gen_user}} owner={{gen_user}}
