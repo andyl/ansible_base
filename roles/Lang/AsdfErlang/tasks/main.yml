@@ -44,7 +44,7 @@
   unarchive:
     src:  /home/{{gen_user}}/.pkg/erlang_{{erlang_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/erlang
-    creates: /home/{{gen_user}}/.rubies/{{erlang_vsn}}
+    creates: /home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}
 
 - name: reshim
   become_user: "{{gen_user}}"

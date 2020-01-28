@@ -8,7 +8,7 @@
 - name: get deb file
   become: no
   get_url:
-    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_version}}_amd64.deb
+    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_version}}-1_amd64.deb
     dest: /home/{{sys_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
     force: no
     validate_certs: no
@@ -18,56 +18,56 @@
   apt: deb=/home/{{sys_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
   when: is_x86_64
 
-- name: get armhf executable
-  become: no
-  get_url:
-    url:  https://dl.influxdata.com/telegraf/releases/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-    dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-    force: no
-    validate_certs: no
-  when: is_arm7
-
-- name: create executable directory
-  file: 
-    path:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}} 
-    state: directory 
-    group: "{{sys_user}}" 
-    owner: "{{sys_user}}"
-  when: is_arm7
-
-- name: untar armhf executable
-  become: no
-  unarchive:
-    src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-    dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}
-    remote_src: True
-  when: is_arm7
-
-- name: create symlink
-  become: yes
-  file:
-    src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}/telegraf/usr/bin/telegraf
-    dest: /usr/bin/telegraf
-    state: link 
-  when: is_arm7
-
-- name: install service file
-  become: true
-  template: 
-    src:   telegraf.service
-    dest:  /lib/systemd/system
-    owner: root 
-    group: root
-    mode:  "a+r"
-  notify: restart telegraf
-  when: is_arm7
-
-- name: create config directory
-  become: true
-  file: 
-    path:  /etc/telegraf
-    state: directory 
-  when: is_arm7
+# - name: get armhf executable
+#   become: no
+#   get_url:
+#     url:  https://dl.influxdata.com/telegraf/releases/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
+#     dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
+#     force: no
+#     validate_certs: no
+#   when: is_arm7
+#
+# - name: create executable directory
+#   file: 
+#     path:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}} 
+#     state: directory 
+#     group: "{{sys_user}}" 
+#     owner: "{{sys_user}}"
+#   when: is_arm7
+#
+# - name: untar armhf executable
+#   become: no
+#   unarchive:
+#     src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
+#     dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}
+#     remote_src: True
+#   when: is_arm7
+#
+# - name: create symlink
+#   become: yes
+#   file:
+#     src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}/telegraf/usr/bin/telegraf
+#     dest: /usr/bin/telegraf
+#     state: link 
+#   when: is_arm7
+#
+# - name: install service file
+#   become: true
+#   template: 
+#     src:   telegraf.service
+#     dest:  /lib/systemd/system
+#     owner: root 
+#     group: root
+#     mode:  "a+r"
+#   notify: restart telegraf
+#   when: is_arm7
+#
+# - name: create config directory
+#   become: true
+#   file: 
+#     path:  /etc/telegraf
+#     state: directory 
+#   when: is_arm7
 
 - name: install base config
   become: true

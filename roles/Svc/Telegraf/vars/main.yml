@@ -14,4 +14,4 @@
 # telegraf_version: 1.8.3-1   superseded on 2019-08-18
 # telegraf_version: 1.12.1-1  superseded on 2019-10-09
 # telegraf_version: 1.12.3-1  superseded on 2020-01-27
-telegraf_version: 1.13.2-1
+telegraf_version: 1.13.2
