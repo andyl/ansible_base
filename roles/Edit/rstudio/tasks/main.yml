@@ -9,14 +9,14 @@
     - libclang-dev
 
 - name: create pkg dir
-  file: path=/home/{{alt_user}}/.pkg state=directory group={{alt_user}} owner={{alt_user}}
+  file: path=/home/{{gen_user}}/.pkg state=directory group={{gen_user}} owner={{gen_user}}
 
 - name: get deb file
   become: no
   get_url: 
     url: https://download1.rstudio.org/desktop/bionic/amd64/rstudio-{{rstudio_vsn}}-amd64.deb
-    dest: /home/{{alt_user}}/.pkg/rstudio_{{rstudio_vsn}}.deb
+    dest: /home/{{gen_user}}/.pkg/rstudio_{{rstudio_vsn}}.deb
 
 - name: install package
-  apt: deb=/home/{{alt_user}}/.pkg/rstudio_{{rstudio_vsn}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/rstudio_{{rstudio_vsn}}.deb
   
