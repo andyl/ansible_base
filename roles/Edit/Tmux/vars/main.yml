@@ -3,6 +3,8 @@
 # tmux_version: 2.6 superseded 2018-Jul-31
 # tmux_version: 2.7 superseded 2019-Mar-10
 # tmux_version: 2.8 superseded 2019-Nov-08
-tmux_version: 2.9
+# tmux_version: 2.9 superseded 2020-Feb-06
+tmux_version: 3.0
 
-tmate_version: 2.2.1
+# tmate_version: 2.2.1  superseded 2020-Feb-06
+tmate_version: 2.4.0
