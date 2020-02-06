@@ -7,6 +7,7 @@
     url:  http://{{cblob_host}}/tmux/tmux-{{ansible_architecture}}-{{tmux_vsn}}
     dest: /usr/bin/tmux-{{tmux_vsn}}
     mode: "a+rx"
+  become: true
 
 - name: create tmux symlink 
   file: 
@@ -14,6 +15,7 @@
     dest:  /usr/bin/tmux
     state: link
     force: yes
+  become: true
 
 # tmate 
 # https://tmate.io
@@ -25,6 +27,7 @@
     url:  http://{{cblob_host}}/tmux/tmate-{{tmate_vsn}}
     dest: /usr/bin/tmate-{{tmate_vsn}}
     mode: "a+rx"
+  become: true
 
 - name: create tmate symlink 
   file: 
@@ -32,5 +35,5 @@
     dest:  /usr/bin/tmate
     state: link
     force: yes
-
+  become: true
 
