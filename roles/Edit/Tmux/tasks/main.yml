@@ -4,13 +4,13 @@
 
 - name: install tmux executable
   get_url:
-    url:  http://{{cblob_host}}/tmux/tmux-{{ansible_architecture}}-{{tmux_version}}
-    dest: /usr/bin/tmux-{{tmux_version}}
+    url:  http://{{cblob_host}}/tmux/tmux-{{ansible_architecture}}-{{tmux_vsn}}
+    dest: /usr/bin/tmux-{{tmux_vsn}}
     mode: "a+rx"
 
 - name: create tmux symlink 
   file: 
-    src:   /usr/bin/tmux-{{tmux_version}}
+    src:   /usr/bin/tmux-{{tmux_vsn}}
     dest:  /usr/bin/tmux
     state: link
     force: yes
@@ -22,8 +22,15 @@
 
 - name: install tmate executable
   get_url:
-    url:  http://{{cblob_host}}/tmux/tmate-{{tmate_version}}
-    dest: /usr/bin/tmate
+    url:  http://{{cblob_host}}/tmux/tmate-{{tmate_vsn}}
+    dest: /usr/bin/tmate-{{tmate_vsn}}
     mode: "a+rx"
-  when: is_x86_64
+
+- name: create tmate symlink 
+  file: 
+    src:   /usr/bin/tmate-{{tmate_vsn}}
+    dest:  /usr/bin/tmate
+    state: link
+    force: yes
+
 
