@@ -27,6 +27,11 @@
     - ntpdate              # ntp date update
     - python-dbus          # dbus tools needed by terminator
     - seahorse             # gui for gnome-keyring
+    - bluez                # bluetooth
+    - bluez-tools          # bluetooth 
+    - bluetooth            # bluetooth servivce
+    - rfkill               # bluetooth diagnostics
+    - blueman-applet       # bluetooth applet
 
 - name: remove Ubuntu packages
   become: true
@@ -36,7 +41,6 @@
     - update-manager
     - gmusicbrowser
     - pidgin
-    - bluez
 
 # every day at midnight
 - name: update system time
