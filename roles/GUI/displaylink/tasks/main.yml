@@ -1,0 +1,23 @@
+---
+
+# displaylink
+
+- name: install Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - dkms      # displaylink driver
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get driver file
+  get_url:
+    url:  http://{{cblob_host}}/displaylink/displaylink-driver-5.2.14.run
+    dest: /home/{{gen_user}}/.pkg/displaylink-driver-5.2.14.run
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
