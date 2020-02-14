@@ -7,7 +7,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/terminator
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -25,22 +25,28 @@
 # Terminator is a python2 script.
 # The deb packages installs an executable that references
 # /usr/bin/python instead of /usr/bin/python2
-# This breaks terminator when you use python3 as default.
+# This breaks terminator when python3 is default.
 # To fix this, we install an executable which uses /usr/bin/python2
+# In the .bashrc, we set PYTHONPATH to point to the libraries
 
-- name: get executable
+- name: get tar file
   get_url:
-    url:  http://{{cblob_host}}/terminator/terminator-1.91
-    dest: /home/{{gen_user}}/.pkg/terminator-1.91
+    url:  http://{{cblob_host}}/terminator/terminator-1.91.tar.gz
+    dest: /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-    mode: "a+rx"
+
+- name: untar 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
+    dest: /home/{{gen_user}}/.pkg/terminator
+    creates: /home/{{gen_user}}/.pkg/terminator/terminator-1.91
 
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{gen_user}}/.pkg/terminator-1.91
+    src:  /home/{{gen_user}}/.pkg/terminator/terminator-1.91/terminator
     dest: /usr/bin/terminator
     state: link 
     force: yes
-
