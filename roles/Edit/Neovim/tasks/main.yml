@@ -2,13 +2,6 @@
 
 # neovim
 
-- name: remove old PPA
-  apt_repository: repo={{item}} state=absent
-  with_items:
-    - ppa:rudenko/neovim
-    - ppa:neovim-ppa/unstable
-    - ppa:neovim-ppa/stable
-
 - name: create pkg dir
   file: 
     path:  "/home/{{gen_user}}/.pkg/nvim"
