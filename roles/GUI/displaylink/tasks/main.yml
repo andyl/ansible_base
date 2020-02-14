@@ -10,14 +10,14 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/displaylink
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-# - name: get driver file
-#   get_url:
-#     url:  http://{{cblob_host}}/displaylink/displaylink-driver-5.2.14.run
-#     dest: /home/{{gen_user}}/.pkg/displaylink-driver-5.2.14.run
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
+- name: get driver file
+  get_url:
+    url:  http://{{cblob_host}}/displaylink/5.2.14.tar
+    dest: /home/{{gen_user}}/.pkg/displaylink
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
