@@ -5,11 +5,6 @@
 - name: remove terminator PPA
   apt_repository: repo='ppa:gnome-terminator' state='absent'
 
-- name: remove terminator
-  apt:  pkg={{item}} state=absent 
-  with_items:
-    - terminator
-
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg 
@@ -17,20 +12,35 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get executable
+- name: get deb file
   get_url:
-    url:  http://{{cblob_host}}/terminator/terminator_1.91
-    dest: /home/{{gen_user}}/.pkg/terminator_1.91
+    url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
+    dest: /home/{{gen_user}}/.pkg/terminator_1.91.deb     
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-# - name: get deb file
-#   get_url:
-#     url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
-#     dest: /home/{{gen_user}}/.pkg/terminator_1.91.deb     
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#
-# - name: install terminator package
-#   apt: deb=/home/{{gen_user}}/.pkg/terminator_1.91.deb     
+- name: install terminator package
+  apt: deb=/home/{{gen_user}}/.pkg/terminator_1.91.deb     
+
+# Terminator is a python2 script.
+# The deb packages installs an executable that references
+# /usr/bin/python instead of /usr/bin/python2
+# This breaks terminator when you use python3 as default.
+# To fix this, we install an executable which uses /usr/bin/python2
+
+- name: get executable
+  get_url:
+    url:  http://{{cblob_host}}/terminator/terminator-1.91
+    dest: /home/{{gen_user}}/.pkg/terminator-1.91
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode: "a+rx"
+
+- name: create symlink
+  become: yes
+  file:
+    src:  /home/{{gen_user}}/.pkg/terminator-1.91
+    dest: /usr/bin/terminator
+    state: link 
+    force: yes
 
