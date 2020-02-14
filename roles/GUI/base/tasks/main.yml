@@ -31,7 +31,6 @@
     - bluez-tools          # bluetooth 
     - bluetooth            # bluetooth servivce
     - rfkill               # bluetooth diagnostics
-    - blueman-applet       # bluetooth applet
 
 - name: remove Ubuntu packages
   become: true
