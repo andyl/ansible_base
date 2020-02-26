@@ -21,13 +21,13 @@
 
 - name: install terminator package
   apt: deb=/home/{{gen_user}}/.pkg/terminator_1.91.deb     
+  ignore_errors: true
 
 # Terminator is a python2 script.
 # The deb packages installs an executable that references
 # /usr/bin/python instead of /usr/bin/python2
 # This breaks terminator when python3 is default.
 # To fix this, we install an executable which uses /usr/bin/python2
-# In the .bashrc, we set PYTHONPATH to point to the libraries
 
 - name: get tar file
   get_url:
