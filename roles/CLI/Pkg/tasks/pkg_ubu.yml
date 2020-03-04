@@ -77,6 +77,7 @@
     - rsync                      # file sync
     - at                         # process scheduler
     - aptitude                   # package manager
+    - fswatch                    # file system watcher
 
 - name: remove packages
   become: true
