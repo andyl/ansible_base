@@ -4,31 +4,31 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}
+    path: /home/{{gen_user}}/.pkg/elixir_ls
     state: directory 
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: get elixir_ls zip file
+- name: get elixir_ls release file
   get_url: 
-    url: https://github.com/elixir-lsp/elixir-ls/archive/v{{els_version}}/elixir-ls.zip
-    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}.zip 
+    url: http://{{cblob_host}}/elixir_ls/els_{{els_vsn}}/rel_{{els_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/elixir_ls/rel_{{els_vsn}}.tar
     force: no
     validate_certs: false
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: unzip elixir_ls file
+- name: untar release file
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}.zip
-    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}
+    src:  /home/{{gen_user}}/.pkg/elixir_ls/rel_{{els_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}
     remote_src: true
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
 - name: set script permission
   file:
-    path: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
+    path: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
     mode:  "a+rx"
     state: touch
     group: "{{gen_user}}" 
@@ -36,14 +36,14 @@
 
 - name: create elixir_ls symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}/language_server.sh
+    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
     dest:  /usr/local/bin/elixir_ls
     state: link
     force: yes
 
 - name: create release symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}
+    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}
     dest:  /home/{{gen_user}}/.pkg/elixir_ls/rel
     state: link
     force: yes
