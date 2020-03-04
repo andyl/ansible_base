@@ -11,7 +11,7 @@
 
 - name: get elixir_ls zip file
   get_url: 
-    url: https://github.com/elixir-lsp/elixir-ls/releases/download/v{{els_version}}/elixir-ls.zip
+    url: https://github.com/elixir-lsp/elixir-ls/archive/v{{els_version}}/elixir-ls.zip
     dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_version}}.zip 
     force: no
     validate_certs: false
