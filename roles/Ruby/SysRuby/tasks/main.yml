@@ -13,9 +13,17 @@
   set_fact: ruby_version="2.3"
   when: ansible_distribution_version in ["9.8"]
 
+- name: set ruby version (10)
+  set_fact: ruby_version="2.5"
+  when: ansible_distribution_version in ["10"]
+
 - name: set ruby version (16.04)
   set_fact: ruby_version="2.3"
   when: ansible_distribution_version in ["16.04"]
+
+- name: set ruby version (18.04)
+  set_fact: ruby_version="2.5"
+  when: ansible_distribution_version in ["18.04"]
 
 - name: set ruby version (18.04)
   set_fact: ruby_version="2.5"

@@ -1,6 +1,6 @@
 ---
 
-# CLI/util_code
+# CLI/UtilCode
 
 - name: create a util directory
   become: false
@@ -10,19 +10,18 @@
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: create a util directory
-  become: false
-  file: path=/home/{{gen_user}}/util state=directory group={{gen_user}} owner={{gen_user}}
-  when: lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
-
 - name: install code_util for target user
   become: false
-  synchronize: src=/home/{{lcl_user}}/util/code_util dest=/home/{{gen_user}}/util
+  synchronize: 
+    src: /home/{{gen_user}}/util/code_util 
+    dest: /home/{{gen_user}}/util
+    dirs: yes
+    recursive: yes
   changed_when: false 
-  when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
+  when: lcl_hostname != ansible_hostname and gen_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
 - name: run util init script
   become: false
   shell: /home/{{gen_user}}/util/base_util/init creates=/home/{{gen_user}}/.gitconfig
-  when: lcl_hostname != ansible_hostname and lcl_user == "aleak" #and ansible_bios_version != "VirtualBox"
+  when: lcl_hostname != ansible_hostname and gen_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
