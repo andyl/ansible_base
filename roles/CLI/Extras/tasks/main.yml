@@ -2,10 +2,17 @@
 
 # Extras
 
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: extras for x86_64
-  include: x86_64.yml
+  include: inc_x86_64.yml
   when: is_x86_64
 
 - name: extras for armv7l
-  include: armv7l.yml
+  include: inc_armv7l.yml
   when: is_armv7l
