@@ -38,7 +38,7 @@
 - name: get ruby
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_architecure}}/ruby_{{ruby_vsn}}.tar.gz
+    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_architecture}}/ruby_{{ruby_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}.tar.gz
 
 - name: untar ruby
