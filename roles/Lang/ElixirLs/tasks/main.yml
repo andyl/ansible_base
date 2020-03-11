@@ -22,9 +22,9 @@
   unarchive:
     src:  /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar
     dest: /home/{{gen_user}}/.pkg/elixir_ls/
-    remote_src: true
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
+    remote_src: true
 
 - name: set script permission
   file:
