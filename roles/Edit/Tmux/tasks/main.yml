@@ -2,16 +2,23 @@
 
 # NOTE: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
 
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: install tmux executable
   get_url:
     url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{tmux_vsn}}
-    dest: /usr/bin/tmux-{{tmux_vsn}}
+    dest: /home/{{gen_user}}/.pkg/tmux_{{host_arch}}_{{tmux_vsn}}
     mode: "a+rx"
   become: true
 
 - name: create tmux symlink 
   file: 
-    src:   /usr/bin/tmux-{{tmux_vsn}}
+    src:   /home/{{gen_user}}/.pkg/tmux_{{host_arch}}_{{tmux_vsn}}
     dest:  /usr/bin/tmux
     state: link
     force: yes

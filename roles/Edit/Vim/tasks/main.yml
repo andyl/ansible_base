@@ -27,19 +27,19 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{sys_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg 
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: get deb file
   get_url: 
     url:  http://{{cblob_host}}/vim/vimal_{{vim_version}}-1_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/vimal_{{vim_version}}.deb
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    dest: /home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: install vimal package
   become: true
-  apt: deb=/home/{{sys_user}}/.pkg/vimal_{{vim_version}}.deb     
+  apt: deb=/home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb     
 
