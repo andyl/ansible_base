@@ -36,16 +36,23 @@
 - name: get rg tar file
   get_url: 
     url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
-    dest: /home/{{gen_user}}/.pkg/rg_{{rg_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: unarchive tar file
-  unarchive: 
-
-
+  become_user: "{{gen_user}}"
+  unarchive:
+    remote_src: true
+    src:  /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/
+    creates: /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
 
 - name: create rg symlink
-  apt: deb=/home/{{gen_user}}/.pkg/rg_{{rg_vsn}}.deb
-  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
+    dest:  /usr/bin/rg
+    state: link
+    force: yes
+
