@@ -6,41 +6,46 @@
 
 - name: get bat deb file
   get_url: 
-    url: https://github.com/sharkdp/bat/releases/download/v{{bat_version}}/bat_{{bat_version}}_armhf.deb
-    dest: /home/{{gen_user}}/.pkg/bat_{{bat_version}}.deb
+    url: https://github.com/sharkdp/bat/releases/download/v{{bat_vsn}}/bat_{{bat_vsn}}_armhf.deb
+    dest: /home/{{gen_user}}/.pkg/bat_{{bat_vsn}}.deb
     validate_certs: false
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install bat
-  apt: deb=/home/{{gen_user}}/.pkg/bat_{{bat_version}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/bat_{{bat_vsn}}.deb
   become: true
 
 # ----- fd -----
 
 - name: get fd deb file
   get_url: 
-    url: https://github.com/sharkdp/fd/releases/download/v{{fd_version}}/fd_{{fd_version}}_armhf.deb
-    dest: /home/{{gen_user}}/.pkg/fd_{{fd_version}}.deb
+    url: https://github.com/sharkdp/fd/releases/download/v{{fd_vsn}}/fd_{{fd_vsn}}_armhf.deb
+    dest: /home/{{gen_user}}/.pkg/fd_{{fd_vsn}}.deb
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install fd
-  apt: deb=/home/{{gen_user}}/.pkg/fd_{{fd_version}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/fd_{{fd_vsn}}.deb
   become: true
   
 # ----- rg / ripgrep -----
 
-- name: get rg deb file
+- name: get rg tar file
   get_url: 
-    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_version}}/ripgrep_{{rg_version}}_armhf.deb
-    dest: /home/{{gen_user}}/.pkg/rg_{{rg_version}}.deb
+    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/rg_{{rg_vsn}}.tar.gz
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: install rg
-  apt: deb=/home/{{gen_user}}/.pkg/rg_{{rg_version}}.deb
+- name: unarchive tar file
+  unarchive: 
+
+
+
+- name: create rg symlink
+  apt: deb=/home/{{gen_user}}/.pkg/rg_{{rg_vsn}}.deb
   become: true

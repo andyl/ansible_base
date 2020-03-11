@@ -1,10 +1,10 @@
 ---
-# bat_version: 0.6.1   # superseded 2019 Oct 30
-bat_version: 0.12.1
+# bat_vsn: 0.6.1   # superseded 2019 Oct 30
+bat_vsn: 0.12.1
 
-# fd_version: 7.1.0    # superseded 2019 Oct 30
-fd_version: 7.4.0
+# fd_vsn: 7.1.0    # superseded 2019 Oct 30
+fd_vsn: 7.4.0
 
-# rg_version: 11.0.1   # superseded 2019 Oct 30
-rg_version: 11.0.2
+# rg_vsn: 11.0.1   # superseded 2019 Oct 30
+rg_vsn: 11.0.2
 
