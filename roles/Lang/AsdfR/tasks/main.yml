@@ -38,7 +38,7 @@
 - name: get r
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/asdf_r/{{ansible_distribution_version}}/r_{{r_vsn}}.tar.gz
+    url:  http://{{cblob_host}}/asdf_r/{{ansible_architecture}}/r_{{r_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/r_{{r_vsn}}.tar.gz
 
 - name: untar r
