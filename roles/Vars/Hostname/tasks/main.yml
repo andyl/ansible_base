@@ -23,3 +23,8 @@
     tgt_sysname_reverse: "{{ '-'.join(tgt_basename.split('.')[::-1]) }}"
   changed_when: false
 
+- name: set host_arch
+  set_fact: 
+    host_arch: "{{ ansible_architecture }}"
+  changed_when: false
+

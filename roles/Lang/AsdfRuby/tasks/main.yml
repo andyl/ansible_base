@@ -38,13 +38,13 @@
 - name: get ruby tarfile from cblob host
   become_user: "{{gen_user}}"
   get_url:
-    url:  http://{{cblob_host}}/asdf_ruby/{{ansible_architecture}}/ruby_{{ruby_vsn}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}.tar.gz
+    url:  http://{{cblob_host}}/asdf_ruby/ruby_{{ruby_vsn}}_{{host_arch}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}_{{host_arch}}.tar.gz
 
 - name: untar ruby
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/ruby_{{ruby_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/ruby
     creates: /home/{{gen_user}}/.asdf/installs/ruby/{{ruby_vsn}}
     remote_src: true
