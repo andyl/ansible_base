@@ -45,6 +45,7 @@
     src:  /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/erlang
     creates: /home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}
+    remote_src: true
 
 - name: reshim
   become_user: "{{gen_user}}"
