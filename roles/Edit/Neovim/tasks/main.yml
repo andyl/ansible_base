@@ -1,6 +1,9 @@
 ---
 
 # neovim
+# we compile neovim for each host_arch
+# then push the compiled executable to the cblob host
+# compile script at ~/var/data/cblob/neovim
 
 - name: create pkg dir
   file: 
@@ -11,16 +14,15 @@
 
 - name: get executable file
   get_url: 
-    url:  https://github.com/neovim/neovim/releases/download/v{{nvim_version}}/nvim.appimage
-    dest: /home/{{gen_user}}/.pkg/nvim/nvim_{{nvim_version}}.appimage
-    validate_certs: false
+    url:  http://{{cblob_host}}/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/nvim/nvim_{{nvim_version}}.appimage
+    src:   /home/{{gen_user}}/.pkg/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
     dest:  /usr/local/bin/nvim
     state: link
     force: yes

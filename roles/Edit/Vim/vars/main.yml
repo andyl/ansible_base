@@ -1,5 +1,6 @@
 ---
-# vim_version: 81a  superseded 2018-09-09
-# vim_version: 81b  superseded 2019-02-02
-# vim_version: 81c  superseded 2019-10-08
-vim_version: 81d
+# vim_vsn: 81a  superseded 2018-09-09
+# vim_vsn: 81b  superseded 2019-02-02
+# vim_vsn: 81c  superseded 2019-10-08
+# vim_vsn: 81d
+vim_vsn: 8.2.0373

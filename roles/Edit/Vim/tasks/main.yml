@@ -27,19 +27,28 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/vim
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get deb file
+- name: get deb file for x86_64
   get_url: 
-    url:  http://{{cblob_host}}/vim/vimal_{{vim_version}}-1_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb
+    url:  http://{{cblob_host}}/vim/vim-al_{{vim_vsn}}-1_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/vim/vim-al_{{vim_vsn}}_{{host_arch}}.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_x86
+
+- name: get deb file for armv7l
+  get_url: 
+    url:  http://{{cblob_host}}/vim/vim-al_{{vim_vsn}}-1_armhf.deb
+    dest: /home/{{gen_user}}/.pkg/vim/vim-al_{{vim_vsn}}_{{host_arch}}.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_arm7
 
 - name: install vimal package
   become: true
-  apt: deb=/home/{{gen_user}}/.pkg/vimal_{{vim_version}}.deb     
+  apt: deb=/home/{{gen_user}}/.pkg/vim-al_{{vim_vsn}}_{{host_arch}}.deb     
 
