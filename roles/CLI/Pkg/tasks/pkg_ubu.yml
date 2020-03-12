@@ -78,6 +78,7 @@
     - at                         # process scheduler
     - aptitude                   # package manager
     - fswatch                    # file system watcher
+    - checkinstall               # builds debian packages
 
 - name: remove packages
   become: true

@@ -39,7 +39,7 @@
     - wget                       # cli utility
     - unzip                      # cli utility
     - zip                        # cli utility
-    - vim
+    - checkinstall               # builds debian packages
 
 - name: remove packages
   become: true
