@@ -1,6 +1,6 @@
 ---
 
-# cli_base_rpi
+# packages for RPI
 
 - name: install base packages
   become: true
@@ -40,6 +40,9 @@
     - unzip                      # cli utility
     - zip                        # cli utility
     - checkinstall               # builds debian packages
+    - libxt6                     # needed for VIM
+    - libsm6                     # needed for VIM
+    - libxext6                   # needed for VIM
 
 - name: remove packages
   become: true
