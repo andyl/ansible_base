@@ -16,6 +16,8 @@
     is_rpi:         "'{{ansible_architecture}}' == 'armv7l'"
     is_arm7:        "'{{ansible_architecture}}' == 'armv7l'"
     not_arm7:       "'{{ansible_architecture}}' != 'armv7l'"
+    is_x86:         "'{{ansible_architecture}}' == 'x86_64'"
+    not_x86:        "'{{ansible_architecture}}' != 'x86_64'"
     is_x86_64:      "'{{ansible_architecture}}' == 'x86_64'"
     not_x86_64:     "'{{ansible_architecture}}' != 'x86_64'"
     ansible_local:  "'{{ansible_connection}}'   == 'local'"
