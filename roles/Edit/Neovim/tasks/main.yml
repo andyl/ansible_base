@@ -14,15 +14,15 @@
 
 - name: get executable file
   get_url: 
-    url:  http://{{cblob_host}}/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
-    dest: /home/{{gen_user}}/.pkg/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
+    url:  http://{{cblob_host}}/neovim/neovim-{{host_arch}}-{{nvim_vsn}}
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/nvim/nvim_{{host_arch}}_{{nvim_vsn}}
+    src:   /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
     dest:  /usr/local/bin/nvim
     state: link
     force: yes
