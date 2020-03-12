@@ -21,7 +21,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/asdf_erlang
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -37,12 +37,12 @@
   become_user: "{{gen_user}}"
   get_url:
     url:  http://{{cblob_host}}/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
 
 - name: untar erlang
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/erlang
     creates: /home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}
 

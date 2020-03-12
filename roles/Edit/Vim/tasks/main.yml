@@ -50,5 +50,5 @@
 
 - name: install vimal package
   become: true
-  apt: deb=/home/{{gen_user}}/.pkg/vim-al_{{vim_vsn}}_{{host_arch}}.deb     
+  apt: deb=/home/{{gen_user}}/.pkg/vim/vim-al_{{vim_vsn}}_{{host_arch}}.deb     
 

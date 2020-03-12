@@ -2,19 +2,31 @@
 
 # Extras for armv7l
 
+- name: create pkg dirs
+  file: 
+    path: /home/{{gen_user}}/.pkg/{{item}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  with_items:
+    - bat
+    - fd
+    - rg
+
 # ----- bat -----
+
 
 - name: get bat deb file
   get_url: 
     url: https://github.com/sharkdp/bat/releases/download/v{{bat_vsn}}/bat_{{bat_vsn}}_armhf.deb
-    dest: /home/{{gen_user}}/.pkg/bat_{{bat_vsn}}.deb
+    dest: /home/{{gen_user}}/.pkg/bat/bat_{{bat_vsn}}.deb
     validate_certs: false
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install bat
-  apt: deb=/home/{{gen_user}}/.pkg/bat_{{bat_vsn}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/bat/bat_{{bat_vsn}}.deb
   become: true
 
 # ----- fd -----
@@ -22,13 +34,13 @@
 - name: get fd deb file
   get_url: 
     url: https://github.com/sharkdp/fd/releases/download/v{{fd_vsn}}/fd_{{fd_vsn}}_armhf.deb
-    dest: /home/{{gen_user}}/.pkg/fd_{{fd_vsn}}.deb
+    dest: /home/{{gen_user}}/.pkg/fd/fd_{{fd_vsn}}.deb
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install fd
-  apt: deb=/home/{{gen_user}}/.pkg/fd_{{fd_vsn}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/fd/fd_{{fd_vsn}}.deb
   become: true
   
 # ----- rg / ripgrep -----
@@ -36,7 +48,7 @@
 - name: get rg tar file
   get_url: 
     url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
-    dest: /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -45,13 +57,13 @@
   become_user: "{{gen_user}}"
   unarchive:
     remote_src: true
-    src:  /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
-    dest: /home/{{gen_user}}/.pkg/
-    creates: /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
+    src:  /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/rg
+    creates: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
 
 - name: create rg symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
+    src:   /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
     dest:  /usr/bin/rg
     state: link
     force: yes
