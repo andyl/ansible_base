@@ -17,6 +17,7 @@
     dest: /home/{{gen_user}}/util
     dirs: yes
     recursive: yes
+    times: no
   changed_when: false 
   when: lcl_hostname != ansible_hostname and gen_user == "aleak" #and ansible_bios_version != "VirtualBox"
 
