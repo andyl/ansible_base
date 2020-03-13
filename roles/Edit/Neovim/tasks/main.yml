@@ -12,21 +12,23 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get executable file
+- name: get appimage file
   get_url: 
     url:  http://{{cblob_host}}/neovim/neovim-{{host_arch}}-{{nvim_vsn}}
-    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_x86_64
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
+    src:   /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
     dest:  /usr/local/bin/nvim
     state: link
     force: yes
     mode:  "a+rx"
+  when: is_x86_64
 
 - name: install neovim package for node
   ignore_errors: true

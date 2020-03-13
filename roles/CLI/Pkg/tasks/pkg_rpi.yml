@@ -43,6 +43,8 @@
     - libxt6                     # needed for VIM
     - libsm6                     # needed for VIM
     - libxext6                   # needed for VIM
+    - libtool-bin                # needed to compile Neovim
+    - gettext                    # needed to compile Neovim
 
 - name: remove packages
   become: true
