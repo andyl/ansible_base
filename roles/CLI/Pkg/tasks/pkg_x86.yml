@@ -1,6 +1,6 @@
 ---
 
-# cli_base
+# packages for x86 devices
 
 - name: set python symlink
   file: 
@@ -20,7 +20,6 @@
     - python-pip                 # required by ansible
     - python3-pip                # required by neovim
     - python3-venv               # required by augur
-    - build-essential            # compile tools
     - dnsutils                   # dnsutils
     - git-core                   # git
     - cmake                      # required by libgit2/rugged
@@ -30,8 +29,6 @@
     - imagemagick                # image processing
     - graphviz                   # diagram generation
     - gnuplot                    # graph generation
-    - htop                       # monitoring tool
-    - atop                       # monitoring tool
     - ncdu                       # monitoring tool
     - nmon                       # monitoring tool
     - iftop                      # monitoring tool
@@ -67,11 +64,6 @@
     - encfs                      # file system encryption
     - sshfs                      # file system encryption
     - xvfb                       # X-windows utility tool
-    - tree                       # cli utility
-    - curl                       # cli utility
-    - wget                       # cli utility
-    - unzip                      # cli utility
-    - zip                        # cli utility
     - debian-archive-keyring     # ssh util
     - jq                         # command-line JSON processing
     - rsync                      # file sync
@@ -79,14 +71,3 @@
     - aptitude                   # package manager
     - fswatch                    # file system watcher
     - checkinstall               # builds debian packages
-
-- name: remove packages
-  become: true
-  apt: pkg={{item}} state=absent
-  with_items:
-    - whoopsie                   # ubuntu bug reporter
-
-# - name: upload lang.sh
-#   copy: src=lang.sh dest=/etc/profile.d/lang.sh
-#   become: true
-#   when: lcl_hostname != ansible_hostname

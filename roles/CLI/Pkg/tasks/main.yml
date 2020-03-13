@@ -1,11 +1,32 @@
 ---
 
-# CLI/pkg
+# CLI/Pkg
 
-- name: pkg for ubuntu
-  include: pkg_ubu.yml
-  when: is_ubuntu
+- name: install base packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - build-essential            # compile tools
+    - htop                       # monitoring tool
+    - atop                       # monitoring utility
+    - tree                       # cli utility
+    - curl                       # cli utility
+    - wget                       # cli utility
+    - unzip                      # cli utility
+    - zip                        # cli utility
+    - httpie                     # cli utility
 
-- name: pkg for rpi
-  include: pkg_rpi.yml
-  when: is_rpi
+- name: pkg for x86 systems
+  include: pkg_x86.yml
+  when: is_x86
+
+- name: pkg for ARM7 systems
+  include: pkg_arm7.yml
+  when: is_arm
+
+- name: remove packages
+  become: true
+  apt: pkg={{item}} state=absent
+  with_items:
+    - whoopsie                   # ubuntu bug reporter
+

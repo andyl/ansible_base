@@ -1,6 +1,6 @@
 ---
 
-# packages for RPI
+# packages for ARM7 devices
 
 - name: install base packages
   become: true
@@ -9,14 +9,11 @@
     - python-pip                 # required by ansible
     - python-dev                 # required by ansible
     - python-virtualenv          # required by ansible
-    - build-essential            # compile tools
     - dnsutils                   # dnsutils
     - git-core                   # git
     - aptitude                   # package manager
     - cmake                      # required by libgit2/rugged
     - libicu-dev                 # development lib
-    - htop                       # monitoring utility
-    - atop                       # monitoring utility
     - ncdu                       # monitoring utility
     - nmon                       # monitoring utility
     - iftop                      # monitoring utility
@@ -33,22 +30,10 @@
     - libxslt1-dev               # development lib
     - zlib1g-dev                 # development lib
     - multitail                  # log file monitoring
-    - tree                       # cli utility
-    - curl                       # cli utility
-    - httpie                     # cli utility
-    - wget                       # cli utility
-    - unzip                      # cli utility
-    - zip                        # cli utility
     - checkinstall               # builds debian packages
     - libxt6                     # needed for VIM
     - libsm6                     # needed for VIM
     - libxext6                   # needed for VIM
     - libtool-bin                # needed to compile Neovim
     - gettext                    # needed to compile Neovim
-
-- name: remove packages
-  become: true
-  apt: pkg={{item}} state=absent
-  with_items:
-    - whoopsie        # ubuntu bug reporter
 
