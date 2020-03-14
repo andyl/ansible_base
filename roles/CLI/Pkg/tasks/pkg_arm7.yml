@@ -36,4 +36,6 @@
     - libxext6                   # needed for VIM
     - libtool-bin                # needed to compile Neovim
     - gettext                    # needed to compile Neovim
+    - lsof                       # core tool
+    - net-tools                  # core tool
 
