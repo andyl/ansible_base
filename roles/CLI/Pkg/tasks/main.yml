@@ -22,7 +22,7 @@
 
 - name: pkg for ARM7 systems
   include: pkg_arm7.yml
-  when: is_arm
+  when: is_arm7
 
 - name: remove packages
   become: true
