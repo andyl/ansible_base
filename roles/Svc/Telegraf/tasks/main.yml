@@ -2,55 +2,64 @@
 
 # telegraf
 
-- name: create package cache dir
-  file: path=/home/{{sys_user}}/.pkg state=directory group={{sys_user}} owner={{sys_user}}
+# ----- x86
+
+- name: create package cache dir for x86
+  file: 
+    path: /home/{{gen_user}}/.pkg/telegraf
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_x86_64
 
 - name: get deb file
   become: no
   get_url:
-    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_version}}-1_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
+    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_vsn}}-1_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/telegraf/telegraf_{{telegraf_vsn}}_amd64.deb
     force: no
     validate_certs: no
   when: is_x86_64
 
 - name: install package
-  apt: deb=/home/{{sys_user}}/.pkg/telegraf_{{telegraf_version}}_amd64.deb
+  apt: deb=/home/{{gen_user}}/.pkg/telegraf/telegraf_{{telegraf_vsn}}_amd64.deb
   when: is_x86_64
 
-# - name: get armhf executable
-#   become: no
-#   get_url:
-#     url:  https://dl.influxdata.com/telegraf/releases/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-#     dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-#     force: no
-#     validate_certs: no
-#   when: is_arm7
-#
-# - name: create executable directory
-#   file: 
-#     path:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}} 
-#     state: directory 
-#     group: "{{sys_user}}" 
-#     owner: "{{sys_user}}"
-#   when: is_arm7
-#
-# - name: untar armhf executable
-#   become: no
-#   unarchive:
-#     src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}_linux_armhf.tar.gz
-#     dest: /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}
-#     remote_src: True
-#   when: is_arm7
-#
-# - name: create symlink
-#   become: yes
-#   file:
-#     src:  /home/{{sys_user}}/.pkg/telegraf-{{telegraf_version}}/telegraf/usr/bin/telegraf
-#     dest: /usr/bin/telegraf
-#     state: link 
-#   when: is_arm7
-#
+# ----- arm7
+
+- name: create package cache dir for arm
+  file: 
+    path: /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_arm7
+
+- name: get armhf executable
+  become: no
+  get_url:
+    url:  https://dl.influxdata.com/telegraf/releases/telegraf-{{telegraf_vsn}}_linux_armhf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}/tg_armhf.tar.gz
+    force: no
+    validate_certs: no
+  when: is_arm7
+
+- name: untar armhf executable
+  become: no
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}/tg_armhf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}
+    remote_src: True
+  when: is_arm7
+
+- name: create symlink
+  become: yes
+  file:
+    src:  /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}/telegraf/usr/bin/telegraf
+    dest: /usr/bin/telegraf
+    state: link 
+  when: is_arm7
+
 # - name: install service file
 #   become: true
 #   template: 
@@ -69,15 +78,15 @@
 #     state: directory 
 #   when: is_arm7
 
-- name: install base config
-  become: true
-  template: 
-    src:   telegraf.conf
-    dest:  /etc/telegraf/telegraf.conf 
-    owner: root 
-    group: root
-    mode:  "a+r"
-  notify: restart telegraf
+# - name: install base config
+#   become: true
+#   template: 
+#     src:   telegraf.conf
+#     dest:  /etc/telegraf/telegraf.conf 
+#     owner: root 
+#     group: root
+#     mode:  "a+r"
+#   notify: restart telegraf
 
 # - name: generate process list
 #   live_demons:
