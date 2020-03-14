@@ -60,33 +60,33 @@
     state: link 
   when: is_arm7
 
-# - name: install service file
-#   become: true
-#   template: 
-#     src:   telegraf.service
-#     dest:  /lib/systemd/system
-#     owner: root 
-#     group: root
-#     mode:  "a+r"
-#   notify: restart telegraf
-#   when: is_arm7
-#
-# - name: create config directory
-#   become: true
-#   file: 
-#     path:  /etc/telegraf
-#     state: directory 
-#   when: is_arm7
+- name: install service file
+  become: true
+  template: 
+    src:   telegraf.service
+    dest:  /lib/systemd/system
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
+  when: is_arm7
 
-# - name: install base config
-#   become: true
-#   template: 
-#     src:   telegraf.conf
-#     dest:  /etc/telegraf/telegraf.conf 
-#     owner: root 
-#     group: root
-#     mode:  "a+r"
-#   notify: restart telegraf
+- name: create config directory
+  become: true
+  file: 
+    path:  /etc/telegraf
+    state: directory 
+  when: is_arm7
+
+- name: install base config
+  become: true
+  template: 
+    src:   telegraf.conf
+    dest:  /etc/telegraf/telegraf.conf 
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
 
 # - name: generate process list
 #   live_demons:
