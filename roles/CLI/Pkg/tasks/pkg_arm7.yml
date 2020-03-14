@@ -38,4 +38,5 @@
     - gettext                    # needed to compile Neovim
     - lsof                       # core tool
     - net-tools                  # core tool
+    - rsync                      # core tool
 
