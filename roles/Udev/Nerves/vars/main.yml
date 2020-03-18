@@ -1,5 +1,6 @@
 ---
-# fwup_version: 0.0.0 superseded  2017-04-17
+# fwup_version: 0.0.0  superseded 2017-04-17
 # fwup_version: 0.13.0 superseded 2018-01-01
-fwup_version: 0.19.0
+# fwup_version: 0.19.0 superseded 2020-03-17
+fwup_version: 1.5.1
 
