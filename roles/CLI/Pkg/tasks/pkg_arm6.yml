@@ -1,0 +1,43 @@
+---
+
+# packages for ARM6 devices
+
+- name: install base packages for arm6
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - python-pip                 # required by ansible
+    - python-dev                 # required by ansible
+    - python-virtualenv          # required by ansible
+    - dnsutils                   # dnsutils
+    - aptitude                   # package manager
+    - cmake                      # required by libgit2/rugged
+    - libicu-dev                 # development lib
+    - ncdu                       # monitoring utility
+    - nmon                       # monitoring utility
+    - iftop                      # monitoring utility
+    - dstat                      # monitoring utility
+    - iotop                      # monitoring utility
+    - nload                      # monitoring utility
+    - sysstat                    # monitoring utility
+    - libcurl4-openssl-dev       # development lib
+    - libevent-dev               # development lib
+    - libncurses5-dev            # development lib
+    - libxml2-dev                # development lib
+    - libreadline-dev            # development lib
+    - libssl-dev                 # development lib
+    - libxslt1-dev               # development lib
+    - zlib1g-dev                 # development lib
+    - multitail                  # log file monitoring
+    - checkinstall               # builds debian packages
+    - libxt6                     # needed for VIM
+    - libsm6                     # needed for VIM
+    - libxext6                   # needed for VIM
+    - libtool-bin                # needed to compile Neovim
+    - gettext                    # needed to compile Neovim
+    - m4                         # needed to compile Neovim
+    - automake                   # needed to compile Neovim
+    - lsof                       # core tool
+    - net-tools                  # core tool
+    - rsync                      # core tool
+
