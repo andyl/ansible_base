@@ -2,13 +2,14 @@
 
 # CLI/Pkg
 
-- name: install base packages
+- name: base packages for all platforms
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
     - build-essential            # compile tools
     - htop                       # monitoring tool
     - atop                       # monitoring utility
+    - git-core                   # git
     - tree                       # cli utility
     - curl                       # cli utility
     - wget                       # cli utility

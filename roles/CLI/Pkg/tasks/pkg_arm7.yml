@@ -2,7 +2,7 @@
 
 # packages for ARM7 devices
 
-- name: install base packages
+- name: install base packages for arm7
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
@@ -10,7 +10,6 @@
     - python-dev                 # required by ansible
     - python-virtualenv          # required by ansible
     - dnsutils                   # dnsutils
-    - git-core                   # git
     - aptitude                   # package manager
     - cmake                      # required by libgit2/rugged
     - libicu-dev                 # development lib

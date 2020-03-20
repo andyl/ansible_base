@@ -10,7 +10,7 @@
     force: yes
     mode:  "a+rx"
 
-- name: install base packages
+- name: install base packages for x86
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
@@ -21,7 +21,6 @@
     - python3-pip                # required by neovim
     - python3-venv               # required by augur
     - dnsutils                   # dnsutils
-    - git-core                   # git
     - cmake                      # required by libgit2/rugged
     - libicu-dev                 # development lib
     - libmagickcore-dev          # image processing
