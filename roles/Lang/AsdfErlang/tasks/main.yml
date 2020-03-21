@@ -33,21 +33,30 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get erlang
+- name: get ASDF erlang
   become_user: "{{gen_user}}"
   get_url:
     url:  http://{{cblob_host}}/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
+  when: not_arm6
 
-- name: untar erlang
+- name: untar ASDF erlang
   become_user: "{{gen_user}}"
   unarchive:
     src:  /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.asdf/installs/erlang
     creates: /home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}
     remote_src: true
+  when: not_arm6
 
 - name: reshim
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim erlang {{erlang_vsn}}'"
+  when: not_arm6
 
+- name: install Debian Erlang on ARM6
+  apt: name="{{item}}" state=latest
+  with_items:
+    - erlang
+    - erlang-dev
+  when: is_arm6
