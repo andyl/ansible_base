@@ -11,8 +11,8 @@
 
 - name: expand nvim tar file
   unarchive:
-    src:  /home/{{sys_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
-    dest: /home/{{sys_user}}/.pkg/nvim
+    src:  /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/nvim
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
     remote_src: true
@@ -23,4 +23,5 @@
   command: 
     cmd: "bash -ilc 'make install'"
     creates: /usr/local/bin/nvim
+    chdir: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
 
