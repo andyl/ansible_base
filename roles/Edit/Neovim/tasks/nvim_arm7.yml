@@ -8,6 +8,7 @@
     dest: /home/{{gen_user}}/.pkg/nvim/BuildNvim.sh
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+    mode: "a+rx"
 
 # - name: get nvim build script
 #   get_url: 
