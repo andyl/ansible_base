@@ -23,5 +23,5 @@
   command: 
     cmd: "bash -ilc 'make install'"
     creates: /usr/local/bin/nvim
-    chdir: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}
+    chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
 
