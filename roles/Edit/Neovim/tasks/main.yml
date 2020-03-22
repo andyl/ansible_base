@@ -9,6 +9,13 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/nvim"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: nvim for x86 systems
   include: nvim_x86.yml
   when: is_x86

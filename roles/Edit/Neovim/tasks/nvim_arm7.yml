@@ -1,0 +1,26 @@
+---
+
+# neovim for arm7
+
+- name: get nvim tar file
+  get_url: 
+    url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand nvim tar file
+  unarchive:
+    src:  /home/{{sys_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
+    dest: /home/{{sys_user}}/.pkg/nvim
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: install nvim 
+  become: true
+  command: 
+    cmd: "bash -ilc 'make install'"
+    creates: /usr/local/bin/nvim
+
