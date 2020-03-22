@@ -1,34 +1,25 @@
 ---
 
 # neovim
-# we compile neovim for each host_arch
-# then push the compiled executable to the cblob host
-# compile script at ~/var/data/cblob/neovim
 
-- name: create pkg dir
+- name: create nvim dir
   file: 
-    path:  "/home/{{gen_user}}/.pkg/nvim"
+    path:  "/home/{{gen_user}}/.nvim/nvim"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get appimage file
-  get_url: 
-    url:  http://{{cblob_host}}/neovim/neovim-{{host_arch}}-{{nvim_vsn}}
-    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
-    mode: "a+rx"
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-  when: is_x86_64
+- name: nvim for x86 systems
+  include: nvim_x86.yml
+  when: is_x86
 
-- name: create executable symlink
-  file: 
-    src:   /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
-    dest:  /usr/local/bin/nvim
-    state: link
-    force: yes
-    mode:  "a+rx"
-  when: is_x86_64
+- name: nvim for ARM7 systems
+  include: nvim_arm7.yml
+  when: is_arm7
+
+- name: nvim for ARM6 systems
+  include: nvim_arm6.yml
+  when: is_arm6
 
 - name: install neovim package for node
   ignore_errors: true
