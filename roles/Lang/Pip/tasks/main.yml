@@ -2,13 +2,13 @@
 
 # pip
   
-# - name: install pip
-#   apt: name="{{item}}" state=latest
-#   with_items:
-#     - python-pip
-#     - python3-pip
-#     - python3-setuptools
-#     - libpq-dev
+- name: install pip
+  apt: name="{{item}}" state=latest
+  with_items:
+    - python-pip
+    - python3-pip
+    - python3-setuptools
+    - libpq-dev
 
 - name: install pip modules (all platforms - python2)
   pip: name="{{item}}" state=latest
@@ -20,14 +20,14 @@
     - ipython            # REPL
     - yolk3k             # check versions
     - python-language-server[all]
-    # --------------------------------------
+    # ----- some sort of Py/Py3 problem ... 
     # - mkdocs             # static html documentation
     # - pgcli              # CLI for Postgres
     # - httpie             # command-line http client
 
-# - name:  install pip modules (x86_64)
-#   pip: name="{{item}}" state=latest
-#   when:  is_x86_64
-#   with_items:
-#     - magic-wormhole     # file transfer tool for seed data
+- name:  install pip modules (x86_64)
+  pip: name="{{item}}" state=latest
+  when:  is_x86_64
+  with_items:
+    - magic-wormhole     # file transfer tool for seed data
 
