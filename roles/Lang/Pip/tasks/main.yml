@@ -27,6 +27,8 @@
     #
 - name: install pip modules (python3)
   pip: name="{{item}}" state=latest executable=pip3
+  with_items:
+    - setuptools         # python setuptools
 
 - name:  install pip modules (x86_64)
   pip: name="{{item}}" state=latest
