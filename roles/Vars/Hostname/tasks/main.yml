@@ -28,3 +28,13 @@
     host_arch: "{{ ansible_architecture }}"
   changed_when: false
 
+- name: set host_os
+  set_fact:
+    host_os: "{{ ansible_distribution.lower() }}"
+  changed_when: false
+
+- name: set host_os_rel
+  set_fact:
+    host_os_rel: "{{ ansible_distribution_release.lower() }}"
+  changed_when: false
+
