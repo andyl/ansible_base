@@ -16,6 +16,8 @@
     - unzip                      # cli utility
     - zip                        # cli utility
     - httpie                     # cli utility
+    - cloud-guest-utils          # disk copy util (growpart)
+    - xfsprogs                   # disk copy util
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
