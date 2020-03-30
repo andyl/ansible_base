@@ -6,9 +6,6 @@
   become: true
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
-    - python-pip                 # required by ansible
-    - python-dev                 # required by ansible
-    - python-virtualenv          # required by ansible
     - dnsutils                   # dnsutils
     - aptitude                   # package manager
     - cmake                      # required by libgit2/rugged

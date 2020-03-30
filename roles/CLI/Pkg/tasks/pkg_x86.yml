@@ -15,11 +15,6 @@
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
     - language-pack-en-base      # american time zones
-    - python-dev                 # required by ansible
-    - python3-dev                # required by ansible
-    - python-pip                 # required by ansible
-    - python3-pip                # required by neovim
-    - python3-venv               # required by augur
     - atop                       # monitoring utility
     - dnsutils                   # dnsutils
     - cmake                      # required by libgit2/rugged
