@@ -7,8 +7,8 @@
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
     - build-essential            # compile tools
+    - pkg-config                 # packaging tool
     - htop                       # monitoring tool
-    - atop                       # monitoring utility
     - git-core                   # git
     - tree                       # cli utility
     - curl                       # cli utility
