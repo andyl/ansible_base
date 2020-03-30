@@ -8,7 +8,7 @@
 - name: setup {{sys_user}}
   include: setup.yml alt_user="{{sys_user}}"
 
-- name: setup {{alt_user}}
+- name: setup {{gen_user}}
   include: setup.yml alt_user="{{gen_user}}"
   when: gen_user != sys_user
 
