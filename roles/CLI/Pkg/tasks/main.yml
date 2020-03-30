@@ -18,6 +18,7 @@
     - httpie                     # cli utility
     - cloud-guest-utils          # disk copy util (growpart)
     - xfsprogs                   # disk copy util
+    - hwinfo                     # hardware introspection
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
