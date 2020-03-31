@@ -1,35 +1,34 @@
 ---
 
-# neovim for arm7
+# neovim for arm7 (RPi4, Xu4, HC1)
 
-- name: get nvim build script
+- name: get nvim source tar file
   get_url: 
-    url:  http://{{cblob_host}}/nvim/BuildNvim.sh
-    dest: /home/{{gen_user}}/.pkg/nvim/BuildNvim.sh
+    url:  https://github.com/neovim/neovim/archive/v{{nvim_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-    mode: "a+rx"
 
-# - name: get nvim build script
-#   get_url: 
-#     url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
-#     dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#
-# - name: expand nvim tar file
-#   unarchive:
-#     src:  /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
-#     dest: /home/{{gen_user}}/.pkg/nvim
-#     group: "{{gen_user}}" 
-#     owner: "{{gen_user}}"
-#     remote_src: true
-#     validate_certs: false
-#
+- name: expand nvim tar file
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/nvim
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: compile nvim 
+  become: true
+  command: 
+    cmd: "bash -ilc 'make -j$(nproc)'"
+    chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
+    creates: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}/build/src/nvim
+
 # - name: install nvim 
 #   become: true
 #   command: 
 #     cmd: "bash -ilc 'make install'"
-#     creates: /usr/local/bin/nvim
 #     chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
+#     creates: /usr/local/bin/nvim
 
