@@ -21,14 +21,14 @@
 - name: compile nvim 
   become: true
   command: 
-    cmd: "bash -ilc 'make -j$(nproc)'"
+    cmd: "bash -ilc 'make CMAKE_BUILD_TYPE=Release -j$(nproc)'"
     chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
     creates: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}/build/src/nvim
 
-# - name: install nvim 
-#   become: true
-#   command: 
-#     cmd: "bash -ilc 'make install'"
-#     chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
-#     creates: /usr/local/bin/nvim
+- name: install nvim 
+  become: true
+  command: 
+    cmd: "bash -ilc 'make install'"
+    chdir: /home/{{gen_user}}/.pkg/nvim/neovim-{{nvim_vsn}}
+    creates: /usr/local/bin/nvim
 
