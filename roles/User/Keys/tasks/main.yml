@@ -1,0 +1,35 @@
+---
+
+# User Keys:
+# Provision key on GitHub
+# Copy key to fileserver
+#
+# Note that the pubkey is in gen_user_pubkey
+
+- name: Provision key on GitHub
+  local_action:
+    module: github_key
+    name: "{{hostname}}"
+    token: "{{github_access_token}}"
+    pubkey: "{{gen_user_pubkey}}"
+  when: gen_user_pubfile.stat.exists == true
+
+# - name: get sys_user_pubfile
+#   stat:
+#     path: /home/{{sys_user}}/.ssh/id_rsa.pub
+#   register: sys_user_pubfile
+#
+# - name: get sys_user_pubkey
+#   shell: cat /home/{{sys_user}}/.ssh/id_rsa.pub
+#   register: sys_user_pubkey
+#   when: sys_user_pubfile.stat.exists == true
+#
+# - name: get gen_user_pubfile
+#   stat:
+#     path: /home/{{gen_user}}/.ssh/id_rsa.pub
+#   register: gen_user_pubfile
+#
+# - name: get gen_user_pubkey
+#   shell: cat /home/{{gen_user}}/.ssh/id_rsa.pub
+#   register: gen_user_pubkey
+#   when: gen_user_pubfile.stat.exists == true
