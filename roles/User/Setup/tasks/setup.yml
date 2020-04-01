@@ -62,3 +62,4 @@
     state: present
     key: "{{ lookup('file', '/tmp/hostkey.pub') }}"
   when: host_pubkey.stat.exists
+  

@@ -38,3 +38,6 @@
     host_os_rel: "{{ ansible_distribution_release.lower() }}"
   changed_when: false
 
+- name: register ssh keys
+  include: keys.yml
+
