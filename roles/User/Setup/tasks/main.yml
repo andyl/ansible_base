@@ -23,6 +23,11 @@
   register: sys_user_pubkey
   when: sys_user_pubfile.stat.exists == true
 
+- name: get sys_user_prvkey
+  shell: cat /home/{{sys_user}}/.ssh/id_rsa
+  register: sys_user_prvkey
+  when: sys_user_prvfile.stat.exists == true
+
 - name: get gen_user_pubfile
   stat:
     path: /home/{{gen_user}}/.ssh/id_rsa.pub
@@ -32,4 +37,10 @@
   shell: cat /home/{{gen_user}}/.ssh/id_rsa.pub
   register: gen_user_pubkey
   when: gen_user_pubfile.stat.exists == true
+
+- name: get gen_user_prvkey
+  shell: cat /home/{{gen_user}}/.ssh/id_rsa
+  register: gen_user_prvkey
+  when: gen_user_prvfile.stat.exists == true
+
 
