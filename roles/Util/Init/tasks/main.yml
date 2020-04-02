@@ -1,0 +1,19 @@
+---
+
+# Util/Init
+
+- name: run init script 
+  become_user: "{{gen_user}}"
+  shell: /home/{{gen_user}}/util/base_util/init 
+  args:
+    creates: /home/{{gen_user}}/.hushlogin
+
+- name: add 'source' directive to ~/.bashrc
+  become_user: "{{gen_user}}"
+  blockinfile:
+    create: yes
+    path: /home/{{gen_user}}/.bashrc
+    block: |
+      [ -f ~/.bashrc_base ]                && source ~/.bashrc_base
+      [ -f ~/.asdf/asdf.sh ]               && source ~/.asdf/asdf.sh
+      [ -f ~/.asdf/completions/asdf.bash ] && source ~/.asdf/completions/asdf.bash
