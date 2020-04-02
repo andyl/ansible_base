@@ -13,6 +13,6 @@
 - name: install deck_util for {{gen_user}}
   become_user: "{{gen_user}}"
   git:
-    repo:   "{{filehost}}:GitBase/deck_util.git"
+    repo:   "{{filehost}}:GitBare/deck_util.git"
     dest:   /home/{{gen_user}}/util/deck_util
     update: yes
