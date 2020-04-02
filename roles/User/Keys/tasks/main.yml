@@ -1,7 +1,8 @@
 ---
 
 # User Keys:
-# Provision key on GitHub
+# Fetch key
+# Copy key to GitHub
 # Copy key to fileserver
 #
 # Note that the pubkey is in gen_user_pubkey
@@ -12,36 +13,12 @@
     dest: "{{lcl_keyfile}}"
     flat: yes
 
-# - name: Save ssh pubkey
-#   copy:
-#     content: "{{gen_user_pubkey}}"
-#     dest:    "/tmp/{{gen_user}}_{{tgt_basename}}.pub"
-  # local_action: command echo "{{gen_user_pubkey}}" > /tmp/{{gen_user}}_{{tgt_basename}}.pub
-  # when: gen_user_pubfile.stat.exists == true
+# - name: Copy pubkey to GitHub
+#   local_action: command gh_keycopy {{lcl_keyfile}}
 
-# - name: Provision key on GitHub
-#   local_action:
-#     module: github_key
-#     name: "{{hostname}}"
-#     token: "{{github_access_token}}"
-#     pubkey: "{{gen_user_pubkey}}"
+- name: Fucking fuck
+  local_action: command whoami
 
-# - name: get sys_user_pubfile
-#   stat:
-#     path: /home/{{sys_user}}/.ssh/id_rsa.pub
-#   register: sys_user_pubfile
-#
-# - name: get sys_user_pubkey
-#   shell: cat /home/{{sys_user}}/.ssh/id_rsa.pub
-#   register: sys_user_pubkey
-#   when: sys_user_pubfile.stat.exists == true
-#
-# - name: get gen_user_pubfile
-#   stat:
-#     path: /home/{{gen_user}}/.ssh/id_rsa.pub
-#   register: gen_user_pubfile
-#
-# - name: get gen_user_pubkey
-#   shell: cat /home/{{gen_user}}/.ssh/id_rsa.pub
-#   register: gen_user_pubkey
-#   when: gen_user_pubfile.stat.exists == true
+- name: Copy pubkey to {{filehost}}
+  local_action: command /home/aleak/util/code_util/bin/keycopy {{gen_user}}@{{filehost}} -f {{lcl_keyfile}}
+

@@ -23,15 +23,15 @@
     tgt_sysname_reverse: "{{ '-'.join(tgt_basename.split('.')[::-1]) }}"
   changed_when: false
 
-- name: get lan_filehost name
-  local_action: command SysRole file_host
-  register: lan_filehost
-  changed_when: false
-
-- name: set filehost variable
-  set_fact: 
-    filehost: "{{ lan_filehost.stdout }}"
-  changed_when: false
+# - name: get lan_filehost name
+#   local_action: command SysRole file_host
+#   register: lan_filehost
+#   changed_when: false
+#
+# - name: set filehost variable
+#   set_fact: 
+#     filehost: "{{ lan_filehost.stdout }}"
+#   changed_when: false
 
 - name: set host_arch
   set_fact: 
