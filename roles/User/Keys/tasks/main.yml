@@ -24,7 +24,7 @@
     src:  /home/{{gen_user}}/.ssh/known_hosts
   register: known_hosts
 
-- name: Update known_hosts using ssh_keyscan
+- name: Update known_hosts using ssh-keyscan
   shell:
     cmd: ssh-keyscan {{item}} >> known_hosts
     chdir: /home/{{gen_user}}/.ssh
