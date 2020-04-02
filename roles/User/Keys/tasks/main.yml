@@ -1,11 +1,6 @@
 ---
 
-# User Keys:
-# Fetch key
-# Copy key to GitHub
-# Copy key to fileserver
-#
-# Note that the pubkey is in gen_user_pubkey
+# SSH Key Provisioning for GitHub and Filestore
 
 - name: Fetch ssh pubkey
   fetch:
@@ -15,6 +10,7 @@
 
 - name: Copy pubkey to GitHub
   local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
+  become: false
 
 - name: Copy pubkey to {{filehost}}
   local_action: command keycopy {{gen_user}}@{{filehost}} -f {{lcl_keyfile}}
