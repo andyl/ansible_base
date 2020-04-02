@@ -40,10 +40,10 @@
   become: false
 
 - name: Copy pubkey to {{filehost}}
-  local_action: command keycopy {{gen_user}}@{{filehost}} -f {{lcl_keyfile}}
+  local_action: command keycopy {{gen_user}}@{{filehost}} -k {{lcl_keyfile}}
   become: false
 
 - name: Copy pubkey to {{influxdb_hostname}}
-  local_action: command keycopy {{gen_user}}@{{influxdb_hostname}} -f {{lcl_keyfile}}
+  local_action: command keycopy {{gen_user}}@{{influxdb_hostname}} -k {{lcl_keyfile}}
   become: false
 
