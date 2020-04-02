@@ -6,10 +6,16 @@
 #
 # Note that the pubkey is in gen_user_pubkey
 
-- name: Save ssh pubkey
-  copy:
-    content: "{{gen_user_pubkey}}"
-    dest:    "/tmp/{{gen_user}}_{{tgt_basename}}.pub"
+- name: Fetch ssh pubkey
+  fetch:
+    src: "{{tgt_keyfile}}"
+    dest: "{{lcl_keyfile}}"
+    flat: yes
+
+# - name: Save ssh pubkey
+#   copy:
+#     content: "{{gen_user_pubkey}}"
+#     dest:    "/tmp/{{gen_user}}_{{tgt_basename}}.pub"
   # local_action: command echo "{{gen_user_pubkey}}" > /tmp/{{gen_user}}_{{tgt_basename}}.pub
   # when: gen_user_pubfile.stat.exists == true
 
