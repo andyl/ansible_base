@@ -13,12 +13,10 @@
     dest: "{{lcl_keyfile}}"
     flat: yes
 
-# - name: Copy pubkey to GitHub
-#   local_action: command gh_keycopy {{lcl_keyfile}}
-
-- name: Fucking fuck
-  local_action: command whoami
+- name: Copy pubkey to GitHub
+  local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
 
 - name: Copy pubkey to {{filehost}}
-  local_action: command /home/aleak/util/code_util/bin/keycopy {{gen_user}}@{{filehost}} -f {{lcl_keyfile}}
+  local_action: command keycopy {{gen_user}}@{{filehost}} -f {{lcl_keyfile}}
+  become: false
 
