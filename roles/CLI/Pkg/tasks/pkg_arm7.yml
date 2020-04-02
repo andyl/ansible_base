@@ -37,4 +37,5 @@
     - lsof                       # core tool
     - net-tools                  # core tool
     - rsync                      # core tool
+    - libtinfo-dev               # needed by erlang(?)
 
