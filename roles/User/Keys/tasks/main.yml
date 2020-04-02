@@ -7,8 +7,11 @@
 # Note that the pubkey is in gen_user_pubkey
 
 - name: Save ssh pubkey
-  local_action: command echo "{{gen_user_pubkey}}" > /tmp/{{gen_user}}_{{tgt_basename}}.pub
-  when: gen_user_pubfile.stat.exists == true
+  copy:
+    content: "{{gen_user_pubkey}}"
+    dest:    "/tmp/{{gen_user}}_{{tgt_basename}}.pub"
+  # local_action: command echo "{{gen_user_pubkey}}" > /tmp/{{gen_user}}_{{tgt_basename}}.pub
+  # when: gen_user_pubfile.stat.exists == true
 
 # - name: Provision key on GitHub
 #   local_action:
