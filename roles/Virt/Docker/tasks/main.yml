@@ -43,11 +43,6 @@
   with_items:
     - "{{gen_user}}"
 
-# - name: add repository
-#   apt_repository:
-#     repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable'
-#     update_cache: yes
-
 - name: add repository
   apt_repository:
     repo: 'deb https://download.docker.com/linux/{{host_os}} {{host_os_rel}} stable'
