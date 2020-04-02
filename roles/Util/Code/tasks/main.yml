@@ -13,6 +13,6 @@
 - name: install base_util for {{gen_user}}
   become_user: "{{gen_user}}"
   git:
-    repo:   {{filehost}}:GitBase/code_util.git
+    repo:   "{{filehost}}:GitBase/code_util.git"
     dest:   /home/{{gen_user}}/util/code_util
     update: yes
