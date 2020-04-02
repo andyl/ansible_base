@@ -8,6 +8,17 @@
     dest: "{{lcl_keyfile}}"
     flat: yes
 
+- name: Copy GitHub Configuration
+  copy:
+    src: /home/aleak/{{item}}
+    dest: /home/{{gen_user}}/{{item}}
+    owner: "{{gen_user}}"
+    group: "{{gen_user}}"
+    force: no
+  with_items:
+    - .gitconfig
+    - .gitconfig_user
+
 - name: Copy pubkey to GitHub
   local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
   become: false
