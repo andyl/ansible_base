@@ -2,13 +2,13 @@
 
 # SSH Key Provisioning for GitHub and Filestore
 
-- name: Fetch ssh pubkey
+- name: Fetch ssh pubkey from target_host to local_host
   fetch:
     src: "{{tgt_keyfile}}"
     dest: "{{lcl_keyfile}}"
     flat: yes
 
-- name: Copy GitHub Configuration
+- name: Copy GitHub Configuration from local_host to target_host
   copy:
     src: /home/aleak/{{item}}
     dest: /home/{{gen_user}}/{{item}}
@@ -18,6 +18,22 @@
   with_items:
     - .gitconfig
     - .gitconfig_user
+
+- name: Slurp known_hosts on target_host
+  slurp:
+    src:  /home/{{gen_user}}/.ssh/known_hosts
+  register: known_hosts
+
+- name: Update known_hosts using ssh_keyscan
+  shell:
+    cmd: ssh-keyscan {{item}} >> known_hosts
+    chdir: /home/{{gen_user}}/.ssh
+  become: no
+  when: "item not in known_hosts.content|b64decode"
+  with_items:
+    - github.com
+    - "{{filehost}}"
+    - "{{influxdb_hostname}}"
 
 - name: Copy pubkey to GitHub
   local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
