@@ -9,7 +9,7 @@ Description=DHCP and DNS caching server for %i.
 After=network.target
 
 [Service]
-ExecStart=/usr/sbin/dnsmasq -k --conf-file=/home/aleak/dnsmasq.conf
+ExecStart=/usr/sbin/dnsmasq -k --conf-file=/home/aleak/DnsMasq/dnsmasq.conf
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=5
