@@ -19,6 +19,13 @@
     - .gitconfig
     - .gitconfig_user
 
+- name: Touch known_hosts on target_host
+  file:
+    path: /home/{{gen_user}}/.ssh/known_hosts
+    state: touch
+    owner: "{{gen_user}}"
+    group: "{{gen_user}}"
+
 - name: Slurp known_hosts on target_host
   slurp:
     src:  /home/{{gen_user}}/.ssh/known_hosts
