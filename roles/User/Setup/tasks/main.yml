@@ -2,7 +2,7 @@
 
 # There's two things that we're trying to do here:
 # 1) support a sys_user and an gen_user
-# 2) ssh-copy-id if possible
+# 2) ssh-copy-id from lcl_host to tgt_host
 
 - name: setup {{sys_user}}
   include: setup.yml alt_user="{{sys_user}}"
@@ -11,24 +11,3 @@
   include: setup.yml alt_user="{{gen_user}}"
   when: gen_user != sys_user
 
-# register ssh keys
-
-# - name: get sys_user_pubfile
-#   stat:
-#     path: /home/{{sys_user}}/.ssh/id_rsa.pub
-#   register: sys_user_pubfile
-#
-# - name: get sys_user_pubkey
-#   shell: cat /home/{{sys_user}}/.ssh/id_rsa.pub
-#   register: sys_user_pubkey
-#   when: sys_user_pubfile.stat.exists == true
-#
-# - name: get gen_user_pubfile
-#   stat:
-#     path: /home/{{gen_user}}/.ssh/id_rsa.pub
-#   register: gen_user_pubfile
-#
-# - name: get gen_user_pubkey
-#   shell: cat /home/{{gen_user}}/.ssh/id_rsa.pub
-#   register: gen_user_pubkey
-#   when: gen_user_pubfile.stat.exists == true
