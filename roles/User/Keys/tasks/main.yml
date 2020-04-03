@@ -8,28 +8,28 @@
     dest: "{{lcl_keyfile}}"
     flat: yes
 
-- name: Copy GitHub Configuration from local_host to target_host
-  copy:
-    src: /home/aleak/{{item}}
-    dest: /home/{{gen_user}}/{{item}}
-    owner: "{{gen_user}}"
-    group: "{{gen_user}}"
-    force: no
-  with_items:
-    - .gitconfig
-    - .gitconfig_user
-
-- name: Touch known_hosts on target_host
-  file:
-    path: /home/{{gen_user}}/.ssh/known_hosts
-    state: touch
-    owner: "{{gen_user}}"
-    group: "{{gen_user}}"
-
-- name: Slurp known_hosts on target_host
-  slurp:
-    src:  /home/{{gen_user}}/.ssh/known_hosts
-  register: known_hosts
+# - name: Copy GitHub Configuration from local_host to target_host
+#   copy:
+#     src: /home/aleak/{{item}}
+#     dest: /home/{{gen_user}}/{{item}}
+#     owner: "{{gen_user}}"
+#     group: "{{gen_user}}"
+#     force: no
+#   with_items:
+#     - .gitconfig
+#     - .gitconfig_user
+#
+# - name: Touch known_hosts on target_host
+#   file:
+#     path: /home/{{gen_user}}/.ssh/known_hosts
+#     state: touch
+#     owner: "{{gen_user}}"
+#     group: "{{gen_user}}"
+#
+# - name: Slurp known_hosts on target_host
+#   slurp:
+#     src:  /home/{{gen_user}}/.ssh/known_hosts
+#   register: known_hosts
 
 - name: Update known_hosts using ssh-keyscan
   shell:
@@ -42,15 +42,15 @@
     - "{{filehost}}"
     - "{{influxdb_hostname}}"
 
-- name: Copy pubkey to GitHub
-  local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
-  become: false
+# - name: Copy pubkey to GitHub
+#   local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
+#   become: false
 
 - name: Copy pubkey to {{filehost}}
   local_action: command keycopy {{gen_user}}@{{filehost}} -k {{lcl_keyfile}}
   become: false
 
-- name: Copy pubkey to {{influxdb_hostname}}
-  local_action: command keycopy {{gen_user}}@{{influxdb_hostname}} -k {{lcl_keyfile}}
-  become: false
+# - name: Copy pubkey to {{influxdb_hostname}}
+#   local_action: command keycopy {{gen_user}}@{{influxdb_hostname}} -k {{lcl_keyfile}}
+#   become: false
 
