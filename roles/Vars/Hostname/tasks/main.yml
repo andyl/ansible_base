@@ -7,6 +7,12 @@
   register: hostname
   changed_when: false
 
+- name: get lanpass
+  local_action: command lanpass
+  register: lanpass
+  changed_when: false
+  become: no
+
 - name: set lcl_hostname variable
   set_fact: 
     lcl_hostname: "{{ hostname.stdout }}"

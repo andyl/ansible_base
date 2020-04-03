@@ -2,11 +2,17 @@
 
 # SSH Key Provisioning for GitHub and Filestore
 
+# > GitHub 
+
 - name: Fetch ssh pubkey from target_host to local_host
   fetch:
     src: "{{tgt_keyfile}}"
     dest: "{{lcl_keyfile}}"
     flat: yes
+
+- name: Copy pubkey to GitHub
+  local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
+  become: false
 
 - name: Copy GitHub Configuration from local_host to target_host
   copy:
@@ -19,6 +25,8 @@
     - .gitconfig
     - .gitconfig_user
 
+# > ssh-keyscan
+
 - name: Update known_hosts using ssh-keyscan
   shell:
     cmd: ssh-keyscan {{item}} >> known_hosts && sort -u -o known_hosts known_hosts
@@ -29,15 +37,17 @@
     - "{{filehost}}"
     - "{{influxdb_hostname}}"
 
-- name: Copy pubkey to GitHub
-  local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
-  become: false
+# > ssh-copy-id
 
-- name: Copy pubkey to {{filehost}}
-  local_action: command keycopy {{gen_user}}@{{filehost}} -k {{lcl_keyfile}}
-  become: false
+- name: Create pwd file
+  shell:
+    cmd: echo {{lanpass.stdout}} > /tmp/lanpass.txt
+  become: no
 
-- name: Copy pubkey to {{influxdb_hostname}}
-  local_action: command keycopy {{gen_user}}@{{influxdb_hostname}} -k {{lcl_keyfile}}
-  become: false
-
+- name: Copy pubkey to {{item}}
+  shell:
+    cmd: sshpass -f /tmp/lanpass.txt ssh-copy-id {{item}} 
+  become: no
+  with_items:
+    - "{{filehost}}"
+    - "{{influxdb_hostname}}"
