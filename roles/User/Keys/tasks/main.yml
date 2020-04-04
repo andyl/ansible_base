@@ -31,7 +31,7 @@
   shell:
     cmd: ssh-keyscan {{item}} >> known_hosts && sort -u -o known_hosts known_hosts
     chdir: /home/{{gen_user}}/.ssh
-  become: no
+  become_user: "{{gen_user}}"
   with_items:
     - github.com
     - "{{filehost}}"
@@ -42,12 +42,12 @@
 - name: Create pwd file
   shell:
     cmd: echo {{lanpass.stdout}} > /tmp/lanpass.txt
-  become: no
+  become_user: "{{gen_user}}"
 
 - name: Copy pubkey to {{item}}
   shell:
     cmd: sshpass -f /tmp/lanpass.txt ssh-copy-id {{item}} 
-  become: no
+  become_user: "{{gen_user}}"
   with_items:
     - "{{filehost}}"
     - "{{influxdb_hostname}}"
