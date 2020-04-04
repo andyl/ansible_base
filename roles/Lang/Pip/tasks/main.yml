@@ -17,12 +17,12 @@
   pip: name="{{item}}" state=latest
   with_items:
     - setuptools         # python setuptools
-    - wheel              # pip cache tool
-    - seashells          # pipe CL to browser (http://seashells.io)
-    - flake8             # syntax checker
-    - ipython            # REPL
-    - yolk3k             # check versions
-    - python-language-server[all]
+    # - wheel              # pip cache tool
+    # - seashells          # pipe CL to browser (http://seashells.io)
+    # - flake8             # syntax checker
+    # - ipython            # REPL
+    # - yolk3k             # check versions
+    # - python-language-server[all]
     # ----- some sort of Py/Py3 problem ... 
     # - mkdocs             # static html documentation
     # - pgcli              # CLI for Postgres
