@@ -5,6 +5,8 @@
 - name: install pip
   apt: name="{{item}}" state=latest
   with_items:
+    - python
+    - python3
     - python-pip
     - python-setuptools
     - python3-pip
