@@ -36,7 +36,7 @@
   when: is_arm7
 
 - name: get armhf executable
-  become: no
+  become_user: "{{gen_user}}"
   get_url:
     url:  https://dl.influxdata.com/telegraf/releases/telegraf-{{telegraf_vsn}}_linux_armhf.tar.gz
     dest: /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}/tg_armhf.tar.gz
@@ -45,7 +45,7 @@
   when: is_arm7
 
 - name: untar armhf executable
-  become: no
+  become_user: "{{gen_user}}"
   unarchive:
     src:  /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}/tg_armhf.tar.gz
     dest: /home/{{gen_user}}/.pkg/telegraf/v{{telegraf_vsn}}

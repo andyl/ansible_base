@@ -75,6 +75,7 @@
     dest: /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
     mode: 'a+rx'
     validate_certs: false
+  when: is_x86
 
 - name: create symlink for docker-compose executable
   become: true
@@ -83,6 +84,7 @@
     force: true
     dest:  /usr/local/bin/docker-compose
     src:   /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
+  when: is_x86
 
 # ----- lazy_docker -----
 
@@ -99,6 +101,7 @@
     dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
     mode: 'a+rx'
     validate_certs: false
+  when: is_x86
 
 - name: untar package
   unarchive:
@@ -107,6 +110,7 @@
     remote_src: true
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
+  when: is_x86
 
 - name: create symlink for lazydocker executable
   become: true
@@ -115,6 +119,7 @@
     force: true
     dest:  /usr/local/bin/lazydocker
     src:   /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lazydocker
+  when: is_x86
 
 # ----- docker-gen -----
 
