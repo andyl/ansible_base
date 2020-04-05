@@ -1,0 +1,62 @@
+---
+
+# docker
+# see http://docs.docker.io/en/latest/installation/ubuntulinux/
+
+- name: install base packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - apt-transport-https 
+    - ca-certificates 
+
+- name: remove old docker
+  apt:  pkg={{item}} state=absent purge=true
+  with_items:
+    - docker.io
+    - lxc-docker
+    - docker
+
+- name: add repository key
+  apt_key:
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    state: present
+
+- name: remove old repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    update_cache: yes
+    state: absent
+
+- name: create docker group
+  become: true
+  group:
+    name: docker
+    state: present
+
+- name: add user to docker group
+  become: true
+  user:
+    name: "{{item}}"
+    groups: docker
+    append: yes
+  with_items:
+    - "{{gen_user}}"
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://download.docker.com/linux/{{host_os}} {{host_os_rel}} stable'
+    update_cache: yes
+
+- name: install docker
+  apt: pkg={{item}} state=latest
+  with_items:
+    - docker-ce
+
+- name: create auto-complete symlink for dk alias
+  become: true
+  file: 
+    src:  /usr/share/bash-completion/completions/docker
+    dest: /usr/share/bash-completion/completions/dk
+    state: link 
+
