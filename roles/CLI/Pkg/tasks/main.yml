@@ -25,6 +25,7 @@
     - python3-pip                # required by neovim
     - python-virtualenv          # required by ansible
     - python3-venv               # required by augur
+    - cmatrix                    # terminal screensaver
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
