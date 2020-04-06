@@ -1,0 +1,9 @@
+---
+
+# ----- dockly -----
+
+- name: install dockly
+  npm:
+    name: dockly
+    global: yes
+    state: latest
