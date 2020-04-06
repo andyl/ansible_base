@@ -11,7 +11,7 @@
 
 - name: get elixir_ls release file
   get_url: 
-    url: http://{{cblob_host}}/elixir_ls/vsn_{{els_vsn}}/els_{{els_vsn}}.tar
+    url: http://{{cblob_host}}/elixir_ls/els_{{els_vsn}}.tar
     dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar
     force: no
     validate_certs: false

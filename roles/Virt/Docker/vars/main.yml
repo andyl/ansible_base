@@ -1,10 +1,8 @@
 ---
-# docker_compose_vsn: 1.4.2   superseded 2018-07-10
-# docker_compose_vsn: 1.21.2  superseded 2018-07-29
-# docker_compose_vsn: 1.22.0  superseded 2019-07-11
-# docker_compose_vsn: 1.24.1  superseded 2020-03-28
-docker_compose_vsn: 1.25.4
 
 # lazydocker_vsn: 0.5.5 superseded 2019-10-16
 # lazydocker_vsn: 0.7.4 superseded 2020-03-28
 lazydocker_vsn: 0.8
+
+
+dockergen_vsn:  0.7.4

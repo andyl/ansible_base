@@ -1,65 +1,16 @@
---- 
+---
 
-# ----- docker compose -----
+# docker
 
-- name: download docker_compose package
-  get_url:
-    url: https://github.com/docker/compose/releases/download/{{docker_compose_vsn}}/docker-compose-Linux-x86_64
-    dest: /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
-    mode: 'a+rx'
-    validate_certs: false
-  when: is_x86
+- name: install docker
+  include: docker.yml
 
-- name: create symlink for docker-compose executable
-  become: true
-  file: 
-    state: link 
-    force: true
-    dest:  /usr/local/bin/docker-compose
-    src:   /home/{{gen_user}}/.pkg/docker/docker_compose_{{docker_compose_vsn}}
-  when: is_x86
+- name: install docker_compose
+  include: docker_compose.yml
 
-# ----- lazy_docker -----
+- name: install lazy_docker
+  include: lazy_docker.yml
 
-- name: create pkg dir
-  file: 
-    path: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-
-- name: download lazydocker zip
-  get_url:
-    url: https://github.com/jesseduffield/lazydocker/releases/download/v{{lazydocker_vsn}}/lazydocker_{{lazydocker_vsn}}_Linux_x86_64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
-    mode: 'a+rx'
-    validate_certs: false
-  when: is_x86
-
-- name: untar package
-  unarchive:
-    src:  /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
-    dest: /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}
-    remote_src: true
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-  when: is_x86
-
-- name: create symlink for lazydocker executable
-  become: true
-  file: 
-    state: link 
-    force: true
-    dest:  /usr/local/bin/lazydocker
-    src:   /home/{{gen_user}}/.pkg/lazydocker_{{lazydocker_vsn}}/lazydocker
-  when: is_x86
-
-# ----- docker-gen -----
-
-- name: install docker-gen
-  get_url:
-    url:  http://{{cblob_host}}/docker/docker-gen
-    dest: /usr/local/bin/docker-gen
-    mode: "a+rx"
-  when: is_x86
+- name: install docker_gen
+  include: docker_gen.yml
 

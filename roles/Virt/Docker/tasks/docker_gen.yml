@@ -1,0 +1,18 @@
+---
+
+# ----- docker-gen -----
+# get the dockergen executable from cblob_host
+
+- name: install docker-gen for x86
+  get_url:
+    url:  "http://{{cblob_host}}/docker/docker-gen-arm76-{{dockergen_vsn}}"
+    dest: /usr/local/bin/docker-gen
+    mode: "a+rx"
+  when: is_x86
+
+- name: install docker-gen for arm7
+  get_url:
+    url:  "http://{{cblob_host}}/docker/docker-gen-armhf-{{dockergen_vsn}}"
+    dest: /usr/local/bin/docker-gen
+    mode: "a+rx"
+  when: is_arm7
