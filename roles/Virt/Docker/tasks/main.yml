@@ -11,8 +11,8 @@
 - name: install lazy_docker
   include: lazy_docker.yml
 
-- name: install dockly
-  include: dockly.yml
+# - name: install dockly
+#   include: dockly.yml
 
 - name: install docker_gen
   include: docker_gen.yml
