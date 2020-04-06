@@ -2,12 +2,12 @@
 
 # docker-compose
 
-# - name: install docker-compose support packages
-#   become: true
-#   apt:  pkg={{item}} state=latest install_recommends=yes
-#   with_items:
-#     - libffi-dev
-#     - libssl-dev
+- name: install docker-compose support packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - libffi-dev
+    - libssl-dev
 
 - name: install pip modules (python2)
   pip: name="{{item}}" state=latest
