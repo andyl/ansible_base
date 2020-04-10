@@ -4,13 +4,13 @@
 # see http://wiki.postgresql.org/wiki/Apt
 # see http://wiki.postgresql.org/wiki/Apt/FAQ
 
-- name: postgres for ubuntu
-  include: pg_ubu.yml
-  when: is_ubuntu
+- name: postgres for x86
+  include: pg_x86.yml
+  when: is_x86
 
-- name: postgres for rpi
-  include: pg_rpi.yml
-  when: is_rpi
+- name: postgres for arm7
+  include: pg_arm7.yml
+  when: is_arm7
 
 - name: setup postgres users and template DB
   include: setup.yml
