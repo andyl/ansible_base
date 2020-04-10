@@ -1,6 +1,6 @@
 ---
 
-# Util/Deck
+# Util/Date
 
 - name: create a util directory
   become: false
@@ -10,9 +10,9 @@
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: install deck_util for {{gen_user}}
+- name: install date_util for {{gen_user}}
   become_user: "{{gen_user}}"
   git:
-    repo:   "{{filehost}}:Git/Util/deck_util.git"
-    dest:   /home/{{gen_user}}/util/deck_util
+    repo:   "{{filehost}}:Git/Util/date_util.git"
+    dest:   /home/{{gen_user}}/util/date_util
     update: yes
