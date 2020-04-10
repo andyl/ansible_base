@@ -10,6 +10,11 @@
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
+- name: remove the deck_util directory
+  file:
+    path: /home/{{gen_user}}/util/deck_util
+    state: absent
+
 - name: install date_util for {{gen_user}}
   become_user: "{{gen_user}}"
   git:
