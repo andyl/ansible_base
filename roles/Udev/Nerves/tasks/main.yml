@@ -15,6 +15,7 @@
     - make 
     - unzip 
     - cmake
+    - pkg-config
 
 - name: create pkg dir
   file: 
@@ -36,10 +37,10 @@
   become: no
   get_url:
     url:  https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez
-    dest: /home/{{gen_user}}/.pkg/nerves_bootstrap.ez
+    dest: /home/{{gen_user}}/.pkg/nerves/nerves_bootstrap.ez
     force: yes
 
 - name: install nerves package
   become: no
-  shell: echo Y | mix archive.install /home/{{gen_user}}/.pkg/nerves_bootstrap.ez
+  shell: echo Y | mix archive.install /home/{{gen_user}}/.pkg/nerves/nerves_bootstrap.ez
   
