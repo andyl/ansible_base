@@ -11,14 +11,14 @@
 
 - name: install tmux executable
   get_url:
-    url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{tmux_vsn}}
-    dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{tmux_vsn}}
+    url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}
+    dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
     mode: "a+rx"
-  become: true
+  become: false
 
 - name: create tmux symlink 
   file: 
-    src:   /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{tmux_vsn}}
+    src:   /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
     dest:  /usr/bin/tmux
     state: link
     force: yes
