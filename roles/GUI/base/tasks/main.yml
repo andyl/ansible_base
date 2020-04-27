@@ -7,12 +7,12 @@
   apt:  pkg={{item}} state=latest install_recommends=no
   when: ansible_distribution == "Ubuntu"
   with_items:
-    - libqtwebkit-dev      # required by a testing gem
+    # - libqtwebkit-dev      # required by a testing gem
     - gnome-system-monitor # monitor utility
-    - chromium-browser     # alternate browser
+    # - chromium-browser     # alternate browser
     - vlc                  # remote screen viewer
     - eog                  # image viewer that prints
-    - mpg123               # command-line music player
+    # - mpg123               # command-line music player
     - a2ps                 # needed for vim printing
     - html2ps              # needed for vim printing
     - xclip                # cut/paste from tmux to Xwin
@@ -23,7 +23,7 @@
     - libxmu-dev           # needed by ruby-wmctrl
     - libx11-dev           # needed by ruby-wmctrl
     - libglib2.0-dev       # needed by ruby-wmctrl
-    - libgnome2-bin        # gnome-open
+    # - libgnome2-bin        # gnome-open
     - ntpdate              # ntp date update
     - python-dbus          # dbus tools needed by terminator
     - seahorse             # gui for gnome-keyring
