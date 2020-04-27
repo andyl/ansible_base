@@ -21,9 +21,9 @@
     - hwinfo                     # hardware introspection
     - python-dev                 # required by ansible
     - python3-dev                # required by ansible
-    - python-pip                 # required by ansible
+    # - python-pip                 # required by ansible
     - python3-pip                # required by neovim
-    - python-virtualenv          # required by ansible
+    - virtualenv                 # required by ansible
     - python3-venv               # required by augur
     - cmatrix                    # terminal screensaver
 
