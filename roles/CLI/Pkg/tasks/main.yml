@@ -21,11 +21,16 @@
     - hwinfo                     # hardware introspection
     - python-dev                 # required by ansible
     - python3-dev                # required by ansible
-    # - python-pip                 # required by ansible
+    # - python-pip               # required by ansible
     - python3-pip                # required by neovim
     - virtualenv                 # required by ansible
     - python3-venv               # required by augur
     - cmatrix                    # terminal screensaver
+    - net-tools                  # networking utility
+    - iptraf                     # networking utility
+    - slurm                      # networking utility
+    - bmon                       # networking utility
+    - nmap                       # networking utility
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
