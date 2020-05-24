@@ -1,6 +1,9 @@
 ---
 
 # elixir_ls
+# called in Vim and Nvim by "coc"
+# https://github.com/neoclide/coc.nvim/wiki/Language-servers
+# ~/.config/nvim/coc-settings.json
 
 - name: create pkg dir
   file: 
@@ -34,11 +37,12 @@
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: create elixir_ls symlink
+- name: remove elixir_ls symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
-    dest:  /usr/local/bin/elixir_ls
-    state: link
+    # src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
+    # dest:  /usr/local/bin/elixir_ls
+    path:  /usr/local/bin/elixir_ls
+    state: absent
     force: yes
 
 - name: create release symlink
