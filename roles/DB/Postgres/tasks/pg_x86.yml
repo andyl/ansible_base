@@ -35,7 +35,6 @@
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - libpq-dev 
-    - python-psycopg2
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
     - pgadmin4
@@ -79,3 +78,8 @@
     lc_ctype:   en_US.UTF-8 
     template:   template0
 
+- name: install python utilities
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - psycopg2
