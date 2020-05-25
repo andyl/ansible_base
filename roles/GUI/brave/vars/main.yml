@@ -1,3 +1,4 @@
 ---
 # brave_version: 0.23.79  superseded 2019-05-16
-brave_version: 0.64.76
+# brave_version: 0.64.76  superseded 2020-05-25
+brave_version: 1.9.72

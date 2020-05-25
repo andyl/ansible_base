@@ -9,7 +9,7 @@
   with_items:
     # - libqtwebkit-dev      # required by a testing gem
     - gnome-system-monitor # monitor utility
-    # - chromium-browser     # alternate browser
+    - chromium-browser     # alternate browser
     - vlc                  # remote screen viewer
     - eog                  # image viewer that prints
     # - mpg123               # command-line music player
