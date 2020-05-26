@@ -4,7 +4,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/extras
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"

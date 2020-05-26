@@ -4,7 +4,7 @@
 
 - name: create package cache dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/dbeaver
     state: directory 
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
@@ -12,11 +12,11 @@
 - name: get dbeaver deb file
   get_url: 
     url: https://dbeaver.io/files/{{dbeaver_vsn}}/dbeaver-ce_{{dbeaver_vsn}}_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/dbeaver_{{dbeaver_vsn}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/dbeaver/dbeaver_{{dbeaver_vsn}}_amd64.deb
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
     validate_certs: false
 
 - name: install package
-  apt: deb=/home/{{gen_user}}/.pkg/dbeaver_{{dbeaver_vsn}}_amd64.deb
+  apt: deb=/home/{{gen_user}}/.pkg/dbeaver/dbeaver_{{dbeaver_vsn}}_amd64.deb
 

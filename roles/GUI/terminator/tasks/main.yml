@@ -15,12 +15,12 @@
 - name: get deb file
   get_url:
     url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
-    dest: /home/{{gen_user}}/.pkg/terminator_1.91.deb     
+    dest: /home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install terminator package
-  apt: deb=/home/{{gen_user}}/.pkg/terminator_1.91.deb     
+  apt: deb=/home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
   ignore_errors: true
 
 # Terminator is a python2 script.
