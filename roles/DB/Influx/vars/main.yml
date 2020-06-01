@@ -22,4 +22,5 @@ influx_version: 1.8.0
 
 # chronograf_vsn: 1.7.11  superseded on 2019-08-18
 # chronograf_vsn: 1.7.14  superseded on 2020-01-27
-chronograf_vsn: 1.7.17
+# chronograf_vsn: 1.7.17  superseded on 202o-06-01
+chronograf_vsn: 1.8.4
