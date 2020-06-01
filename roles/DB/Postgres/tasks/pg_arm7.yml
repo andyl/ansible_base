@@ -1,6 +1,6 @@
 ---
 
-# postgres for RPi
+# postgres for arm7
 
 - name: install dependencies
   apt:  pkg=apt-transport-https state=latest force=yes
