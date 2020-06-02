@@ -6,22 +6,36 @@
 # - http://influxdb.com/docs/v0.9/introduction/installation.html
 
 
-https://dl.influxdata.com/influxdb/releases/influxdb-1.8.0_linux_armhf.tar.gz
+# https://dl.influxdata.com/influxdb/releases/influxdb-1.8.0_linux_armhf.tar.gz
+# tar xvfz influxdb-1.8.0_linux_armhf.tar.gz
 
-tar xvfz influxdb-1.8.0_linux_armhf.tar.gz
-
-- name: get influxdb tar file for ARM
+- name: get influxdb tar file for ARM7
   get_url: 
     url: http://dl.influxdata.com/influxdb/releases/influxdb-{{influx_version}}_linux_armhf.tar.gz
-    dest: /home/{{sys_user}}/.pkg/influx/influxdb-{{influx_version}}_linux_armhf.tar.gz
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    dest: /home/{{gen_user}}/.pkg/influx/influxdb-{{influx_version}}_linux_armhf.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
-- name: expand tar file
-  apt: deb=/home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
+- name: untar influxdb for ARM7
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/influx/influxdb-{{influx_version}}_linux_armhf.tar.gz
+    dest: /home/{{gen_user}}/.pkg/influx
+    remote_src: true
 
-- name: create symlinks
+# - name: create symlink for postman executable
+#   become: true
+#   file: 
+#     state: link 
+#     force: true
+#     dest:  /usr/local/bin/postman
+#     src:   /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/Postman/app/Postman
 
-- name: install service file
-
-- name: 
+# - name: expand tar file
+#   apt: deb=/home/{{gen_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
+#
+# - name: create symlinks
+#
+# - name: install service file
+#
+# - name: 
