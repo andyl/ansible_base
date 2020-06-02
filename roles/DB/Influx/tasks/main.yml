@@ -7,8 +7,8 @@
   file: 
     path: /home/{{sys_user}}/.pkg/influx
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 # - name: influx for x86
 #   include: inf_x86.yml
