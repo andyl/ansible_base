@@ -37,7 +37,6 @@
     - libpq-dev 
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
-    - pgadmin4
 
 # - name: force port 5432
 #   lineinfile:
