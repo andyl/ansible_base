@@ -1,9 +1,7 @@
 ---
 
-# influxdb
-# see:
-# - http://influxdb.com/download/
-# - http://influxdb.com/docs/v0.9/introduction/installation.html
+# influx
+# see https://portal.influxdata.com/downloads/
 
 - name: create pkg dir
   file: 
@@ -12,76 +10,13 @@
     group: "{{sys_user}}"
     owner: "{{sys_user}}"
 
-- name: get influxdb deb file
-  get_url: 
-    url: http://dl.influxdata.com/influxdb/releases/influxdb_{{influx_version}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+- name: influx for x86
+  include: inf_x86.yml
+  when: is_x86
 
-- name: install package
-  apt: deb=/home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
+- name: influx for arm7
+  include: inf_arm7.yml
+  when: is_arm7
 
-- name: install python dependencies
-  pip: name={{item}}
-  with_items:
-    - influxdb
-
-- name: setup logrotate
-  template:
-    src: logrotate
-    dest: /etc/logrotate.d/influxdb
-
-- name: install config file
-  template: 
-    src: influxdb.conf
-    dest: /etc/influxdb/influxdb.conf
-    owner: root 
-    group: root
-  notify: restart influxdb
-
-- name: flush all outstanding handlers
-  meta: flush_handlers
-
-- name: setup admin user
-  command: influx -execute "create user admin with password 'admin' with all privileges"
-  ignore_errors: true
-
-- name: create database
-  influxdb_database:
-    username: "admin"
-    password: "admin"
-    hostname: "localhost"
-    database_name: "{{ item }}"
-    state: present
-  with_items:
-    - telegraf
-    - stocks
-    - ping
-    - influx
-    - cronlog
-    - bootlog
-    - backups
-    - weather
-    - bugm_log
-    - bugm_stats
-    - inf_feedex_dev
-    - inf_feedex_prod
-    - inf_crow_dev
-    - inf_crow_prod
-    - inf_purlex_dev
-    - inf_purlex_prod
-    
-# chronograf
-
-- name: get chronograf deb file
-  become: no
-  get_url:
-    url: https://dl.influxdata.com/chronograf/releases/chronograf_{{chronograf_vsn}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/influx/chronograf_{{chronograf_vsn}}_amd64.deb
-    force: no
-    validate_certs: no
-
-- name: install chronograf package
-  apt: deb=/home/{{sys_user}}/.pkg/influx/chronograf_{{chronograf_vsn}}_amd64.deb
-
+- name: setup influx users and template DB
+  include: setup.yml
