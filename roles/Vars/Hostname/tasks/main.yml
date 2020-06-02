@@ -48,6 +48,16 @@
     host_relname: "{{ ansible_distribution_release.lower() }}"
   changed_when: false
 
+- name: set alt_arch (amd64)
+  set_fact:
+    alt_arch: "amd64"
+  when: is_x86
+
+- name: set alt_arch (arm7)
+  set_fact:
+    alt_arch: "armhf"
+  when: is_arm7
+
 - name: ssh pubkey filenames
   set_fact: 
     tgt_keyfile: "/home/{{gen_user}}/.ssh/id_rsa.pub"

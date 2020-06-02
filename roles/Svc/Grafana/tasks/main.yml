@@ -11,24 +11,25 @@
   with_items:
     - adduser
     - libfontconfig
+    - libfontconfig1
   changed_when: false
     
 - name: create pkg dir
   file: 
-    path: /home/{{sys_user}}/.pkg/grafana
+    path: /home/{{gen_user}}/.pkg/grafana
     state: directory 
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: get deb file
   get_url: 
-    url:  https://dl.grafana.com/oss/release/grafana_{{grafana_version}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
-    group: "{{sys_user}}"
-    owner: "{{sys_user}}"
+    url:  https://dl.grafana.com/oss/release/grafana_{{grafana_version}}_{{alt_arch}}.deb
+    dest: /home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_{{alt_arch}}.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: install package
-  apt: deb=/home/{{sys_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
+  apt: deb=/home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_{{alt_arch}}.deb
 
 - name: install config file
   become: true

@@ -5,11 +5,7 @@
 # - http://influxdb.com/download/
 # - http://influxdb.com/docs/v0.9/introduction/installation.html
 
-
-# https://dl.influxdata.com/influxdb/releases/influxdb-1.8.0_linux_armhf.tar.gz
-# tar xvfz influxdb-1.8.0_linux_armhf.tar.gz
-
-- name: install packages for INFLUXDB (ARM)
+- name: install packages (ARM)
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
