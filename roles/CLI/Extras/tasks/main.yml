@@ -2,13 +2,6 @@
 
 # Extras
 
-- name: create pkg dir
-  file: 
-    path: /home/{{gen_user}}/.pkg/extras
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-
 - name: extras for x86_64
   include: inc_x86_64.yml
   when: is_x86_64
