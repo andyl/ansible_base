@@ -5,7 +5,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{sys_user}}/.pkg
+    path: /home/{{sys_user}}/.pkg/keybase
     state: directory 
     group: "{{sys_user}}" 
     owner: "{{sys_user}}"
@@ -14,11 +14,11 @@
   become: no
   get_url: 
     url:  https://s3.amazonaws.com/prerelease.keybase.io/linux_binaries/deb/keybase_{{keybase_version}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/keybase_{{kb_version}}.deb
+    dest: /home/{{sys_user}}/.pkg/keybase/keybase_{{kb_version}}.deb
     force: no
     validate_certs: false
 
 - name: install package
   become: yes
   apt: 
-    deb: /home/{{sys_user}}/.pkg/keybase_{{kb_version}}.deb
+    deb: /home/{{sys_user}}/.pkg/keybase/keybase_{{kb_version}}.deb
