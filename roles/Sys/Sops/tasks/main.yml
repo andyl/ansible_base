@@ -13,12 +13,12 @@
 - name: get deb file
   become: no
   get_url: 
-    url:  https://github.com/mozilla/sops/releases/download/{{sops_version}}/sops_{{sops_version}}_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}.deb
+    url:  https://github.com/mozilla/sops/releases/download/v{{sops_version}}/sops_{{sops_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}_amd64.deb
     force: no
     validate_certs: false
 
 - name: install package
   become: yes
   apt: 
-    deb: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}.deb
+    deb: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}_amd64.deb
