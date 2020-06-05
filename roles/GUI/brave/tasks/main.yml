@@ -2,21 +2,21 @@
 
 # brave
 
-- name: create pkg dir
-  become: no
-  file: 
-    path: /home/{{gen_user}}/.pkg/brave
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-
-- name: get brave package
-  become: no
-  get_url: 
-    url:  https://github.com/brave/brave-browser/releases/download/v{{brave_version}}/brave-browser_{{brave_version}}_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/brave/brave_{{brave_version}}_amd64.deb
-
-- name: install brave
+- name: support tools
   apt: 
-    deb: /home/{{gen_user}}/.pkg/brave/brave_{{brave_version}}_amd64.deb
+    pkg: "{{item}}"
+    state: latest
+  with_items:
+    - curl
+    - apt-transport-https
 
+- name: apt_key
+  apt_key: url=https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+
+- name: repository
+  apt_repository: 
+    repo: 'deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main' 
+    state: present
+
+- name: package
+  apt: pkg=brave-browser state=latest 
