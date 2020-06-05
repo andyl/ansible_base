@@ -11,12 +11,26 @@
     - apt-transport-https
 
 - name: apt_key
-  apt_key: url=https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+  apt_key: 
+    url: "{{item}}"
+  with_items:
+    - https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+    - https://brave-browser-apt-nightly.s3.brave.com/brave-core-nightly.asc
 
 - name: repository
   apt_repository: 
-    repo: 'deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main' 
+    repo: "{{item}}"
     state: present
+  with_items:
+    - "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
+    - "deb [arch=amd64] https://brave-browser-apt-nightly.s3.brave.com/ stable main"
 
-- name: package
-  apt: pkg=brave-browser state=latest 
+- name: install packages
+  apt: 
+    pkg: "{{item}}"
+    state: latest 
+  with_items:
+    - brave-browser
+    - brave-browser-nightly
+
+
