@@ -12,10 +12,18 @@
     - jinja2
     - httplib2
 
+<<<<<<< HEAD
 # Note: in ubuntu 20.04 it seems as if the PPA doesn't work...
 
 # - name: add ansible PPA
 #   apt_repository: repo='ppa:ansible/ansible' state=present
+=======
+- name: add ansible PPA
+  become: yes
+  apt_repository: 
+    repo: 'ppa:ansible/ansible' 
+    state: present
+>>>>>>> e4cc6bc431fab604d1df1f1aa04f5e05df97741a
 
 - name: install ansible package
   apt: 
