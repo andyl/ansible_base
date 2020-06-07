@@ -1,64 +1,9 @@
 ---
  
-# vars_hostname
+# Vars/Base
 
-- name: get local hostname
-  local_action: command hostname
-  register: hostname
-  changed_when: false
+- name: Hostname Vars
+  include: hostname.yml
 
-- name: get lanpass
-  local_action: command lanpass
-  register: lanpass
-  changed_when: false
-  become: no
-
-- name: set lcl_hostname variable
-  set_fact: 
-    lcl_hostname: "{{ hostname.stdout }}"
-  changed_when: false
-
-- name: set tgt_sysname_base
-  set_fact:
-    tgt_basename: "{{ inventory_hostname.replace('.net', '').replace('.com', '').replace('.info', '').replace('.org', '') }}"
-  changed_when: false
-
-- name: set tgt_sysname variable
-  set_fact: 
-    tgt_sysname: "{{ inventory_hostname.replace('.', '-') }}"
-    tgt_sysname_reverse: "{{ '-'.join(tgt_basename.split('.')[::-1]) }}"
-  changed_when: false
-
-# - name: get lan_filehost name
-#   local_action: command SysRole file_host
-#   register: lan_filehost
-#   changed_when: false
-#
-# - name: set filehost variable
-#   set_fact: 
-#     filehost: "{{ lan_filehost.stdout }}"
-#   changed_when: false
-
-# aliases for these variables are defined in ~/.bashrc_base
-- name: set host variables
-  set_fact: 
-    host_arch:    "{{ ansible_architecture }}"
-    host_dist:    "{{ ansible_distribution.lower() }}"
-    host_relvsn:  "{{ ansible_distribution_version.lower() }}"
-    host_relname: "{{ ansible_distribution_release.lower() }}"
-  changed_when: false
-
-- name: set alt_arch (amd64)
-  set_fact:
-    alt_arch: "amd64"
-  when: is_x86
-
-- name: set alt_arch (arm7)
-  set_fact:
-    alt_arch: "armhf"
-  when: is_arm7
-
-- name: ssh pubkey filenames
-  set_fact: 
-    tgt_keyfile: "/home/{{gen_user}}/.ssh/id_rsa.pub"
-    lcl_keyfile: "/tmp/keys/{{gen_user}}_{{tgt_basename}}.pub"
+- name: Predicate Vars
+  include: predicate.yml
