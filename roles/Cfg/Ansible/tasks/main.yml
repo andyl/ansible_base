@@ -13,7 +13,10 @@
     - httplib2
 
 - name: add ansible PPA
-  apt_repository: repo='ppa:ansible/ansible' state=present
+  become: yes
+  apt_repository: 
+    repo: 'ppa:ansible/ansible' 
+    state: present
 
 - name: install ansible package
   apt: 
