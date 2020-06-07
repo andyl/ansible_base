@@ -2,8 +2,9 @@
  
 # Vars/Base
 
+- name: Predicate Vars
+  include: predicate.yml
+
 - name: Hostname Vars
   include: hostname.yml
 
-- name: Predicate Vars
-  include: predicate.yml
