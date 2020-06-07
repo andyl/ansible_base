@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-version = File.read(File.expand_path("~/.ruby-version"))
+# version = File.read(File.expand_path("~/.ruby-version"))
 
 args = File.read(ARGV[0])
 gem  = args.strip
 
 def exit_with(status)
-  puts %Q({"changed":#{status}})
+  puts %({"changed":#{status}})
   exit
 end
 
@@ -22,12 +22,11 @@ def install(gem)
   `gem install -N #{gem}`
 end
 
-raise("no gem found") if gem.nil? || gem == ""
+raise('no gem found') if gem.nil? || gem == ''
 
 if installed(gem)
-  exit_with("false") if at_latest_revision(gem)
-  exit_with("true")
+  exit_with('false') if at_latest_revision(gem)
+  exit_with('true')
 end
 
-install(gem) && exit_with("true") 
-
+install(gem) && exit_with('true')

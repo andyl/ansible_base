@@ -3,4 +3,3 @@
 # Echo input parameters
 
 echo -e "{\"params\":\""$*"\"}"
-
