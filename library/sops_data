@@ -6,7 +6,7 @@ require 'yaml'
 def args
   @args ||= begin
     abort 'Usage: sops_data <argfile>' if (file = ARGV[0]).nil?
-    argfile = file.chomp # argfile is written by ansible into a tmp dir
+    argfile = file.chomp.strip # argfile is written by ansible into a tmp dir
     abort 'Missing arg file (ARGV[0])' unless File.exist?(argfile)
     `cp #{argfile} /tmp/argfile.txt` # for backup and debugging
     args = File.read(argfile).gsub(', ', ',').split(' ')
@@ -20,6 +20,7 @@ end
 
 # Read Data
 path = File.expand_path("~/.sops_data/#{args['path']}.yml")
+puts "SOPS_DATA_PATH: #{path}"
 yaml = `sops --decrypt #{path}`.chomp.strip
 data = YAML.safe_load(yaml)
 

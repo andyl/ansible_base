@@ -1,7 +1,7 @@
 ---
 
 # sops
-# [pgp gpg keys encryption private public]
+# install sops 
 
 - name: create pkg dir
   file: 

@@ -2,19 +2,33 @@
 - hosts: gui64 
   user:  aleak
   tasks:
-    - name: Check uptime local
+
+    - name: Check uptime on the local host
       local_action: ckuptime
       register: uptime_local
 
     - debug: var=uptime_local
 
-    - name: Check uptime remote
+    - name: Check uptime on the remote host
       action: ckuptime
-      register: uptime
+      register: uptime_remote
 
-    - debug: var=uptime
+    - debug: var=uptime_remote
 
-    - name: Show params
+    - name: Show params on the local host
+      local_action:
+        module: base_module
+        param1: bing
+        param2: bong
+        param3:
+          - one
+          - two
+          - three
+      register: params_local
+
+    - debug: var=params_local
+
+    - name: Show params on the remote host
       base_module:
         param1: bing
         param2: bong
@@ -22,7 +36,7 @@
           - one
           - two
           - three
-      register: params
+      register: params_remote
 
-    - debug: var=params
+    - debug: var=params_remote
 
