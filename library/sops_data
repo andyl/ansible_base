@@ -1,23 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'json'
-
-# Ansible writes module arguments into a temp file, then passes a single
-# command-line argument to the module: the name of the temp file.
-#
-# This method grabs the filename from ARGV[0], and returns a hash with
-# the module arguments.
-#
-# Each ansible modlue is copied to the target machine then run.  Therefore,
-# the module has to be a single-file script.  Things like ruby-gems, shared
-# libraries or multi-file utilities won't work.
-#
-# So best practice is to copy this `args` function to whatever
-# module script you create.
+require 'yaml'
 
 def args
   @args ||= begin
-    abort 'Usage: base_module <argfile>' if (file = ARGV[0]).nil?
+    abort 'Usage: sops_data <argfile>' if (file = ARGV[0]).nil?
     argfile = file.chomp # argfile is written by ansible into a tmp dir
     abort 'Missing arg file (ARGV[0])' unless File.exist?(argfile)
     `cp #{argfile} /tmp/argfile.txt` # for backup and debugging
@@ -30,4 +18,10 @@ def args
   end
 end
 
-puts JSON.dump(args)
+# Read Data
+path = File.expand_path("~/.sops_data/#{args['path']}.yml")
+yaml = `sops --decrypt #{path}`.chomp.strip
+data = YAML.safe_load(yaml)
+
+# Dump JSON output
+puts JSON.dump(data)
