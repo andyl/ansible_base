@@ -11,6 +11,9 @@
     - PyYAML
     - jinja2
     - httplib2
+    - boto
+    - boto3
+    - botocore
 
 # Note: in ubuntu 20.04 it seems as if the PPA doesn't work...
 # see https://github.com/ansible/ansible/issues/69414
