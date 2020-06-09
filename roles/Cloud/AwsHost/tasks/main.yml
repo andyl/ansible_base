@@ -1,0 +1,13 @@
+---
+
+# aws host
+# configure a host for AWS access
+
+- name: create an AWS user for the host
+  local_action:
+    module: iam
+    iam_type: user
+    name: "{{ansible_hostname}}"
+    state: present
+    password: "bingo"
+    access_key_state: create
