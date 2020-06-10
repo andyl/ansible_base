@@ -5,11 +5,13 @@
 # see: https://github.com/goantoraio/antora/releases
 
 - name: install antora {{antora_vsn}}
+  become: false
   npm: 
     name: "{{item}}"
     version: "{{antora_vsn}}"
     global: yes
     state: latest
+    # executable: "/home/{{gen_user}}/.asdf/shims/npm"
   with_items:
     - "@antora/cli"
     - "@antora/site-generator-default"

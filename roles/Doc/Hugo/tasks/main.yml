@@ -3,7 +3,7 @@
 # hugo
 #
 # see:
-# - http://docs.hugo.org/installation/debian
+# - https://github.com/gohugoio/hugo/releases
 
 - name: create pkg dir
   file: 
@@ -15,11 +15,11 @@
 - name: get deb file
   get_url: 
     url:  https://dl.hugo.com/oss/release/hugo_{{hugo_vsn}}_{{alt_arch}}.deb
-    url:  https://github.com/gohugoio/hugo/releases/download/v{{hugo_vsn}}/hugo_{{hugo_vsn}}_Linux-ARM64.deb
-    dest: /home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}.deb
+    url:  https://github.com/gohugoio/hugo/releases/download/v{{hugo_vsn}}/hugo_{{hugo_vsn}}_Linux-64bit.deb
+    dest: /home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}_64bit.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install package
-  apt: deb=/home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}_64bit.deb
 
