@@ -1,3 +1,4 @@
 ---
-golang_vsn: 1.13.3
+# golang_vsn: 1.13.3  superseded 2020 Jun 10 
+golang_vsn: 1.14.4 
 
