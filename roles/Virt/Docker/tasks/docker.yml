@@ -45,7 +45,7 @@
 
 - name: add repository
   apt_repository:
-    repo: 'deb https://download.docker.com/linux/{{host_os}} {{host_os_rel}} stable'
+    repo: 'deb https://download.docker.com/linux/{{host_dist}} {{host_relname}} stable'
     update_cache: yes
 
 - name: install docker
