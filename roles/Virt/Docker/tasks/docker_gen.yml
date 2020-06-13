@@ -5,7 +5,7 @@
 
 - name: install docker-gen for x86
   get_url:
-    url:  "http://{{cblob_host}}/docker/docker-gen-arm76-{{dockergen_vsn}}"
+    url:  "http://{{cblob_host}}/docker/docker-gen-amd64-{{dockergen_vsn}}"
     dest: /usr/local/bin/docker-gen
     mode: "a+rx"
   when: is_x86
