@@ -12,5 +12,6 @@
 # erlang_vsn: 22.0.1       superseded 2019-Oct-39
 # erlang_vsn: 22.1.3       superseded 2020-Jan-27
 # erlang_vsn: 22.2.3       superseded 2020-Apr-24
+# erlang_vsn: 22.3.2       superseded 2020-Jun-28
 
-erlang_vsn: 22.3.2
+erlang_vsn: 23.0.2
