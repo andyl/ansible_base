@@ -14,8 +14,8 @@
 
 - name: get elixir_ls release file
   get_url: 
-    url: http://{{cblob_host}}/elixir_ls/els_{{els_vsn}}.tar
-    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar
+    url: https://github.com/elixir-lsp/elixir-ls/archive/v{{els_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar.gz
     force: no
     validate_certs: false
     group: "{{gen_user}}" 
@@ -23,7 +23,7 @@
 
 - name: untar release file
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar
+    src:  /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/elixir_ls/
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
@@ -31,7 +31,7 @@
 
 - name: set script permission
   file:
-    path: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
+    path: /home/{{gen_user}}/.pkg/elixir_ls/elixir-ls-{{els_vsn}}/language_server.sh
     mode:  "a+rx"
     state: touch
     group: "{{gen_user}}" 
@@ -47,7 +47,7 @@
 
 - name: create release symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}
+    src:   /home/{{gen_user}}/.pkg/elixir_ls/elixir-ls-{{els_vsn}}
     dest:  /home/{{gen_user}}/.pkg/elixir_ls/rel
     state: link
     force: yes

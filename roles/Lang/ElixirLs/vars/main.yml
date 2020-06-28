@@ -1,4 +1,6 @@
 ---
+# see https://github.com/elixir-lsp/elixir-ls/releases
+#
 # els_vsn: 0.2.19   superseded 2018-09-09
 # els_vsn: 0.2.23   superseded 2018-11-07
 # els_vsn: 0.2.24   superseded 2019-10-08
@@ -6,4 +8,5 @@
 # els_vsn: 0.3.0    superseded 2020-03-11
 # els_vsn: 0.3.1    superseded 2020-04-18 
 # els_vsn: 0.3.3    superseded 2020-05-23
-els_vsn: 0.4.0
+# els_vsn: 0.4.0    superseded 2020-06-28
+els_vsn: 0.5.0    
