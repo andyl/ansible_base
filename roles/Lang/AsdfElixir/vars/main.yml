@@ -32,5 +32,6 @@
 # elixir_vsn: 1.10.2          superseded 2020-04-16
 # elixir_vsn: 1.10.2-otp-22   superseded 2020-04-25
 # elixir_vsn: 1.10.3-otp-22   superseded 2020-06-28
-elixir_vsn: 1.10.3-otp-23
+# elixir_vsn: 1.10.3-otp-23   superseded 2020-07-05
+elixir_vsn: 1.10.4-otp-23
 
