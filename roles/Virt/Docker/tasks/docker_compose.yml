@@ -9,12 +9,12 @@
     - libffi-dev
     - libssl-dev
 
-- name: install pip modules (python2)
-  pip: name="{{item}}" state=latest
-  become: true
-  with_items:
-    - setuptools         # python setuptools
-    - wheel              # pip cache tool
+# - name: install pip modules (python2)
+#   pip: name="{{item}}" state=latest
+#   become: true
+#   with_items:
+#     - setuptools         # python setuptools
+#     - wheel              # pip cache tool
 
 - name: install pip modules (python3)
   pip: name="{{item}}" state=latest executable=pip3

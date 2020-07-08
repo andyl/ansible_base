@@ -36,6 +36,7 @@
     - github.com
     - "{{filehost}}"
     - "{{influxdb_hostname}}"
+  ignore_errors: yes
 
 # > ssh-copy-id
 
@@ -51,3 +52,4 @@
   with_items:
     - "{{filehost}}"
     - "{{influxdb_hostname}}"
+  ignore_errors: yes

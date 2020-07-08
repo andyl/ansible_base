@@ -6,6 +6,7 @@
   pip: name={{item}}
   with_items:
     - influxdb
+  ignore_errors: true
 
 - name: setup logrotate
   template:

@@ -38,14 +38,14 @@
   become_user: "{{gen_user}}"
   gem: name=neovim state=latest 
 
-- name: install neovim packages for python2
-  become_user: "{{gen_user}}"
-  pip: 
-    name: "{{item}}"
-    state: latest
-  with_items:
-    - neovim
-    - pynvim 
+# - name: install neovim packages for python2
+#   become_user: "{{gen_user}}"
+#   pip: 
+#     name: "{{item}}"
+#     state: latest
+#   with_items:
+#     - neovim
+#     - pynvim 
 
 - name: install neovim packages for python3
   become_user: "{{gen_user}}"

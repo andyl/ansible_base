@@ -49,6 +49,5 @@
     owner: "{{gen_user}}"
     force: no
   with_items:
-    - { src: 'cblob_readme.md', dest: 'cblob/README.md' }
     - { src: 'html_index.html', dest: 'html/index.html' }
 
