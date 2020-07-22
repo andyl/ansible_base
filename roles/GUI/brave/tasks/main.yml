@@ -23,6 +23,7 @@
     state: present
   with_items:
     - "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
+    - "deb [arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"
     - "deb [arch=amd64] https://brave-browser-apt-nightly.s3.brave.com/ stable main"
 
 - name: install packages
@@ -31,6 +32,7 @@
     state: latest 
   with_items:
     - brave-browser
+    - brave-browser-beta
     - brave-browser-nightly
 
 
