@@ -18,9 +18,10 @@
 # influx_version: 1.7.6      superseded on 2019-08-18
 # influx_version: 1.7.8      superseded on 2020-01-27
 # influx_version: 1.7.9      superseded on 2020-04-27
-influx_version: 1.8.0
+# influx_version: 1.8.0      superseded on 2020-07-23
+influx_version: 1.8.1
 
 # chronograf_vsn: 1.7.11  superseded on 2019-08-18
 # chronograf_vsn: 1.7.14  superseded on 2020-01-27
-# chronograf_vsn: 1.7.17  superseded on 202o-06-01
+# chronograf_vsn: 1.7.17  superseded on 2020-06-01
 chronograf_vsn: 1.8.4
