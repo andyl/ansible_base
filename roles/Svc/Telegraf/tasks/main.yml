@@ -88,26 +88,3 @@
     mode:  "a+r"
   notify: restart telegraf
 
-# - name: generate process list
-#   live_demons:
-#     candidates:
-#       - postgres
-#       - redis
-#       # - nginx
-#       # - memcached
-#       # - grafana
-#   register: live_procs
-
-# - name: install demon configs
-#   become: true
-#   template: 
-#     src:   telegraf_{{item}}.conf
-#     dest:  /etc/telegraf/telegraf.d/telegraf_{{item}}.conf 
-#     owner: root 
-#     group: root
-#     mode:  "a+r"
-#   notify: restart telegraf
-#   with_items:    "{{ live_procs.list }}"
-#   failed_when:   false
-#   ignore_errors: true
-

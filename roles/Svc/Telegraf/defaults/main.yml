@@ -1,3 +1,3 @@
 ---
-influxdb_hostname: influx_host
+influx_udp_host: influx-udp.casmacc.net
 
