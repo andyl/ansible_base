@@ -36,4 +36,5 @@
 # grafana_version: 6.7.3 superseded 2020-06-01
 # grafana_version: 7.0.1 superseded 2020-06-03
 # grafana_version: 7.0.2 superseded 2020-07-08
-grafana_version: 7.0.5
+# grafana_version: 7.0.5 superseded 2020-07-27
+grafana_version: 7.1.1
