@@ -14,12 +14,10 @@
 
 - name: get deb file
   get_url: 
-    url:  https://dl.hugo.com/oss/release/hugo_{{hugo_vsn}}_{{alt_arch}}.deb
-    url:  https://github.com/gohugoio/hugo/releases/download/v{{hugo_vsn}}/hugo_{{hugo_vsn}}_Linux-64bit.deb
-    dest: /home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}_64bit.deb
+    url:  https://github.com/gohugoio/hugo/releases/download/v{{hugo_vsn}}/hugo_extended_{{hugo_vsn}}_Linux-64bit.deb
+    dest: /home/{{gen_user}}/.pkg/hugo/hugo_extended_{{hugo_vsn}}_64bit.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install package
-  apt: deb=/home/{{gen_user}}/.pkg/hugo/hugo_{{hugo_vsn}}_64bit.deb
-
+  apt: deb=/home/{{gen_user}}/.pkg/hugo/hugo_extended_{{hugo_vsn}}_64bit.deb
