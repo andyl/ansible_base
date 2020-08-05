@@ -8,12 +8,12 @@
 - name: install docker_compose
   include: docker_compose.yml
 
-- name: install lazy_docker
-  include: lazy_docker.yml
-
-# - name: install dockly
-#   include: dockly.yml
+- name: install lazydocker
+  include: lazydocker.yml
 
 - name: install docker_gen
   include: docker_gen.yml
+  
+# - name: install dockly
+#   include: dockly.yml
 
