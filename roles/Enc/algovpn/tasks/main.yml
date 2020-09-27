@@ -1,0 +1,31 @@
+---
+
+# AlgoVpn
+
+- name: create algo directory
+  file: 
+    path: /home/{{gen_user}}/zz
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: clone algo repo
+  become_user: "{{gen_user}}"
+  git: 
+    repo: 'https://github.com/trailofbits/algo.git'
+    dest: /home/{{gen_user}}/zz/algo
+    update: yes
+
+- name: copy algo setup script
+  copy: 
+    src: "Setup.sh"
+    dest: /home/{{gen_user}}/zz/algo/configs
+    mode: a+rx
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    force: yes
+
+- name: setup reminder
+  debug:
+    msg: "Run 'configs/Setup.sh' to install dependencies."
+
