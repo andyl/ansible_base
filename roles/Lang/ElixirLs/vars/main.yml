@@ -9,4 +9,5 @@
 # els_vsn: 0.3.1    superseded 2020-04-18 
 # els_vsn: 0.3.3    superseded 2020-05-23
 # els_vsn: 0.4.0    superseded 2020-06-28
-els_vsn: 0.5.0    
+# els_vsn: 0.5.0    superseded 2020-10-19
+els_vsn: 0.6.0
