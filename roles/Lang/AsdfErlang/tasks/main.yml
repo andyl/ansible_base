@@ -11,7 +11,10 @@
 #     chdir: "/home/{{ gen_user }}"
 #   become_user: "{{ gen_user }}"
 
-# Accelerate with pre-cached language versions 
+# Accelerate with pre-cached language versions.
+#
+# Before ASDF INSTALL, install compile support for `:observer.start()`.  See
+# `https://github.com/asdf-vm/asdf-erlang#before-asdf-install`.
 #
 # Approach:
 # - manually install on a base machine
@@ -54,9 +57,9 @@
   command: "bash -ilc 'asdf reshim erlang {{erlang_vsn}}'"
   when: not_arm6
 
-- name: install Debian Erlang on ARM6
-  apt: name="{{item}}" state=latest
-  with_items:
-    - erlang
-    - erlang-dev
-  when: is_arm6
+# - name: install Debian Erlang on ARM6
+#   apt: name="{{item}}" state=latest
+#   with_items:
+#     - erlang
+#     - erlang-dev
+#   when: is_arm6
