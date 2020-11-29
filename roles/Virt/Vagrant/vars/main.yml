@@ -8,4 +8,5 @@
 # vagrant_version: 2.2.0    superseded 2018 Dec 18
 # vagrant_version: 2.2.2    superseded 2018 Jan 14
 # vagrant_version: 2.2.3    superseded 2019 Oct 17
-vagrant_version: 2.2.6
+# vagrant_version: 2.2.6    superseded 2020 Nov 25
+vagrant_version: 2.2.14
