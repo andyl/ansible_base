@@ -21,35 +21,35 @@
     group: root
   notify: restart influxdb
 
-- name: flush all outstanding handlers
-  meta: flush_handlers
-
-- name: setup admin user
-  command: influx -execute "create user admin with password 'admin' with all privileges"
-  ignore_errors: true
-
-- name: create database
-  influxdb_database:
-    username: "admin"
-    password: "admin"
-    hostname: "localhost"
-    database_name: "{{ item }}"
-    state: present
-  with_items:
-    - telegraf
-    - stocks
-    - ping
-    - influx
-    - cronlog
-    - bootlog
-    - backups
-    - weather
-    - bugm_log
-    - bugm_stats
-    - inf_feedex_dev
-    - inf_feedex_prod
-    - inf_crow_dev
-    - inf_crow_prod
-    - inf_purlex_dev
-    - inf_purlex_prod
-    
+# - name: flush all outstanding handlers
+#   meta: flush_handlers
+#
+# - name: setup admin user
+#   command: influx -execute "create user admin with password 'admin' with all privileges"
+#   ignore_errors: true
+#
+# - name: create database
+#   influxdb_database:
+#     username: "admin"
+#     password: "admin"
+#     hostname: "localhost"
+#     database_name: "{{ item }}"
+#     state: present
+#   with_items:
+#     - telegraf
+#     - stocks
+#     - ping
+#     - influx
+#     - cronlog
+#     - bootlog
+#     - backups
+#     - weather
+#     - bugm_log
+#     - bugm_stats
+#     - inf_feedex_dev
+#     - inf_feedex_prod
+#     - inf_crow_dev
+#     - inf_crow_prod
+#     - inf_purlex_dev
+#     - inf_purlex_prod
+#     

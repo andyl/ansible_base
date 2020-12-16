@@ -7,24 +7,12 @@
 
 - name: get influxdb deb file
   get_url: 
-    url: http://dl.influxdata.com/influxdb/releases/influxdb_{{influx_version}}_amd64.deb
+    url: https://dl.influxdata.com/influxdb/releases/influxdb2_{{influx_version}}_amd64.deb
+
     dest: /home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
     group: "{{sys_user}}"
     owner: "{{sys_user}}"
 
 - name: install package
   apt: deb=/home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
-
-# chronograf
-
-- name: get chronograf deb file
-  become: no
-  get_url:
-    url: https://dl.influxdata.com/chronograf/releases/chronograf_{{chronograf_vsn}}_amd64.deb
-    dest: /home/{{sys_user}}/.pkg/influx/chronograf_{{chronograf_vsn}}_amd64.deb
-    force: no
-    validate_certs: no
-
-- name: install chronograf package
-  apt: deb=/home/{{sys_user}}/.pkg/influx/chronograf_{{chronograf_vsn}}_amd64.deb
 
