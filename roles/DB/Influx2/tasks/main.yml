@@ -10,6 +10,13 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
+- name: create config dir
+  file: 
+    path: /etc/influxdb
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: influx for x86
   include: inf_x86.yml
   when: is_x86
