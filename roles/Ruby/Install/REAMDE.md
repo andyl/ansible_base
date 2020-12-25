@@ -8,3 +8,4 @@ vars:
   chruby_global: 2.4.0
   chruby_rubies: ["2.4.0", "1.9.3"]
 
+NOTE: Ruby/Install has been superseded by AsdfRuby
