@@ -4,4 +4,5 @@
 # see: https://github.com/gohugoio/hugo/releases
 
 # hugo_vsn: 0.72.0  superseded on 2020-Jul-29
-hugo_vsn: 0.74.3
+# hugo_vsn: 0.74.3  superseded on 2021-Jan-25
+hugo_vsn: 0.80.0
