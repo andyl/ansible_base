@@ -32,6 +32,8 @@
     - slurm                      # networking utility
     - bmon                       # networking utility
     - nmap                       # networking utility
+    - nfs-utils                  # file sharing
+    - nfs-server                 # file sharing
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
