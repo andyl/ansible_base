@@ -13,22 +13,22 @@
 - name: download influx2 tarfile (x86)
   get_url:
     url: https://dl.influxdata.com/influxdb/releases/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/influx/cli2/influx2_client_{{influx_cli_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
     mode: 'a+rx'
     validate_certs: false
 
 - name: untar package
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/influx/cli2/influx2_client_{{influx_cli_vsn}}.tar.gz
+    src:  /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
     dest: /home/{{gen_user}}/.pkg/influx/cli2
     remote_src: true
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-# - name: create symlink for influx2 executable
-#   become: true
-#   file: 
-#     state: link 
-#     force: true
-#     dest:  /usr/local/bin/influx2
-#     src:   /home/{{gen_user}}/.pkg/git/influx2_{{influx2_vsn}}/influx2
+- name: create symlink for influx2 executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/influx2
+    src:   /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64/influx
