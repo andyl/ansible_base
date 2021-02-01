@@ -14,9 +14,9 @@
   include: inf_x86.yml
   when: is_x86
 
-- name: influx for arm7
-  include: inf_arm7.yml
-  when: is_arm7
-
+# - name: influx for arm7
+#   include: inf_arm7.yml
+#   when: is_arm7
+#
 - name: setup influx users and template DB
   include: setup.yml
