@@ -1,0 +1,10 @@
+---
+
+# GUI/git
+
+- name: install Ubuntu packages for git
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - gitk

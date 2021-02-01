@@ -9,7 +9,6 @@
     - build-essential            # compile tools
     - pkg-config                 # packaging tool
     - htop                       # monitoring tool
-    - git-core                   # git
     - tree                       # cli utility
     - curl                       # cli utility
     - wget                       # cli utility
