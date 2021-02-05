@@ -1,4 +1,7 @@
 ---
+
+# see https://grafana.com/grafana/download
+
 # grafana_version: 2.0.2 superseded 2015-08-18
 # grafana_version: 2.1.1 superseded 2015-10-28
 # grafana_version: 2.5.0 superseded 2015-12-14
@@ -39,4 +42,5 @@
 # grafana_version: 7.0.5 superseded 2020-07-27
 # grafana_version: 7.1.1 superseded 2020-12-16
 # grafana_version: 7.3.5 superseded 2021-01-31
-grafana_version: 7.3.7
+# grafana_version: 7.3.7 superseded 2021-02-04
+grafana_version: 7.4.0
