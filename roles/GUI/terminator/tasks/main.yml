@@ -12,16 +12,16 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get deb file
-  get_url:
-    url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
-    dest: /home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-
-- name: install terminator package
-  apt: deb=/home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
-  ignore_errors: true
+# - name: get deb file
+#   get_url:
+#     url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
+#     dest: /home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: install terminator package
+#   apt: deb=/home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
+#   ignore_errors: true
 
 # Terminator is a python2 script.
 # The deb packages installs an executable that references
@@ -29,24 +29,31 @@
 # This breaks terminator when python3 is default.
 # To fix this, we install an executable which uses /usr/bin/python2
 
+# - name: get tar file
+#   get_url:
+#     url:  http://{{cblob_host}}/terminator/terminator-1.91.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+
 - name: get tar file
   get_url:
-    url:  http://{{cblob_host}}/terminator/terminator-1.91.tar.gz
-    dest: /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
+    url:  https://github.com/gnome-terminator/terminator/releases/download/v{{terminator_vsn}}/terminator-{{terminator_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}.tar.gz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: untar 
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
+    src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/terminator
-    creates: /home/{{gen_user}}/.pkg/terminator/terminator-1.91
+    creates: /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}
 
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{gen_user}}/.pkg/terminator/terminator-1.91/terminator
+    src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{termaintor_vsn}}/terminator
     dest: /usr/bin/terminator
     state: link 
     force: yes
