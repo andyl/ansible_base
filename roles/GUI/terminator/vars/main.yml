@@ -1,2 +1,3 @@
 ---
-terminator_vsn: 1.9.1
+# terminator_vsn: 1.9.1 superseded 2021 Mar 10
+terminator_vsn: 2.1.0

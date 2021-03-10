@@ -53,7 +53,7 @@
 - name: create symlink
   become: yes
   file:
-    src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{termaintor_vsn}}/terminator
+    src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}/terminator
     dest: /usr/bin/terminator
     state: link 
     force: yes
