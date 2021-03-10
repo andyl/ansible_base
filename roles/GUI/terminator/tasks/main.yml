@@ -12,30 +12,6 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-# - name: get deb file
-#   get_url:
-#     url:  http://{{cblob_host}}/terminator/terminator_1.91.deb
-#     dest: /home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#
-# - name: install terminator package
-#   apt: deb=/home/{{gen_user}}/.pkg/terminator/terminator_1.91.deb     
-#   ignore_errors: true
-
-# Terminator is a python2 script.
-# The deb packages installs an executable that references
-# /usr/bin/python instead of /usr/bin/python2
-# This breaks terminator when python3 is default.
-# To fix this, we install an executable which uses /usr/bin/python2
-
-# - name: get tar file
-#   get_url:
-#     url:  http://{{cblob_host}}/terminator/terminator-1.91.tar.gz
-#     dest: /home/{{gen_user}}/.pkg/terminator/terminator-1.91.tar.gz
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-
 - name: get tar file
   get_url:
     url:  https://github.com/gnome-terminator/terminator/releases/download/v{{terminator_vsn}}/terminator-{{terminator_vsn}}.tar.gz
