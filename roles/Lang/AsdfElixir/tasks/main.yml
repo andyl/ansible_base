@@ -2,6 +2,8 @@
 
 # AsdfElixir
 
+# Set global version in ~/.tool-versions
+
 - name: install asdf_elixir
   command: "bash -ilc '.asdf/bin/asdf install elixir {{ elixir_vsn }}'"
   args:
@@ -9,8 +11,3 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
-# - name: set global elixir version
-#   command: "bash -lc 'asdf global elixir {{ elixir_vsn }}'"
-#   args:
-#     chdir: "/home/{{ gen_user }}"
-#   become_user: "{{ gen_user }}"
