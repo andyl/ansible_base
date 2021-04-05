@@ -8,4 +8,5 @@
 # dbeaver_vsn: 6.2.3   superseded 2020 Jan 09
 # dbeaver_vsn: 6.3.2   superseded 2020 May 24
 # dbeaver_vsn: 7.0.5   superseded 2020 Jun 20
-dbeaver_vsn: 7.1.0
+# dbeaver_vsn: 7.1.0   superseded 2021 Apr 02
+dbeaver_vsn: 21.0.1
