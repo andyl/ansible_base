@@ -1,0 +1,26 @@
+---
+
+# VMware Workstation Player
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/vmware
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install vmware executable
+  get_url:
+    url:  http://{{cblob_host}}/vmware/VMware-Player-{{vmware_vsn}}.x86_64.bundle
+    dest: /home/{{gen_user}}/.pkg/vmware/vmware_{{vmware_vsn}}
+    mode: "a+rx"
+  become: false
+
+- name: install package
+  apt: 
+    pkg: "{{item}}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - virtualbox-6.1
+
