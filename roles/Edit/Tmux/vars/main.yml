@@ -5,7 +5,8 @@
 # tmux_vsn: 2.8 superseded 2019-Nov-08
 # tmux_vsn: 2.9 superseded 2020-Feb-06
 # tmux_vsn: 3.0 superseded 2020-Apr-27
-tmux_vsn: 3.1
+# tmux_vsn: 3.1 superseded 2021-05-26
+tmux_vsn: 3.2
 
 # tmate_vsn: 2.2.1  superseded 2020-Feb-06
 tmate_vsn: 2.4.0
