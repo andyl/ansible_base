@@ -13,3 +13,12 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
+- name: npm packages
+  become: yes
+  npm: name={{item}} state=latest global=yes
+  with_items:
+    - tree-sitter-cli
+    - fkill-cli 
+    - graphqurl
+
+
