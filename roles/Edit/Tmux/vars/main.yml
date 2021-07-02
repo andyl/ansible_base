@@ -1,12 +1,12 @@
 ---
-# tmux_vsn: 2.4 superseded 2018-May-19
-# tmux_vsn: 2.6 superseded 2018-Jul-31
-# tmux_vsn: 2.7 superseded 2019-Mar-10
-# tmux_vsn: 2.8 superseded 2019-Nov-08
-# tmux_vsn: 2.9 superseded 2020-Feb-06
-# tmux_vsn: 3.0 superseded 2020-Apr-27
+# tmux_vsn: 2.4 superseded 2018-05-19
+# tmux_vsn: 2.6 superseded 2018-07-31
+# tmux_vsn: 2.7 superseded 2019-03-10
+# tmux_vsn: 2.8 superseded 2019-11-08
+# tmux_vsn: 2.9 superseded 2020-02-06
+# tmux_vsn: 3.0 superseded 2020-04-27
 # tmux_vsn: 3.1 superseded 2021-05-26
-tmux_vsn: 3.2
+tmux_vsn: 3.2 
 
 # tmate_vsn: 2.2.1  superseded 2020-Feb-06
 tmate_vsn: 2.4.0
