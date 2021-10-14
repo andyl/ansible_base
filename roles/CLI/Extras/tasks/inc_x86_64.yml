@@ -55,3 +55,27 @@
 - name: install rg
   apt: deb=/home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
   become: true
+
+# ----- btop / bashtop -----
+
+- name: get btop tar file
+  get_url: 
+    url: https://github.com/aristocratos/btop/releases/download/v{{btop_vsn}}/btop-{{btop_vsn}}-linux-x86_64.tbz
+    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar btop
+  become_user: "{{gen_user}}"
+  unarchive:
+    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
+    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}
+    remote_src: true
+
+- name: install btop
+  command:
+    cmd: "bash -ilc 'make install'"
+    chdir: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}
+  become: true
+

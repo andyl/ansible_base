@@ -11,3 +11,5 @@ fd_vsn: 8.1.1
 # rg_vsn: 11.0.2   # superseded 2020 May 26
 rg_vsn: 12.1.0
 
+btop_vsn: 1.0.15
+
