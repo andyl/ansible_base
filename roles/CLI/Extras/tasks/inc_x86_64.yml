@@ -12,6 +12,8 @@
     - bat
     - fd
     - rg
+    - btop
+    - btop/btop_{{btop_vsn}}
 
 # ----- bat -----
 
@@ -69,7 +71,7 @@
 - name: untar btop
   become_user: "{{gen_user}}"
   unarchive:
-    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
+    src: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
     dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}
     remote_src: true
 
