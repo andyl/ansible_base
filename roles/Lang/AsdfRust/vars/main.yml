@@ -8,5 +8,6 @@
 # rust_vsn: 1.17.0    superseded 2018 Jul 30
 # rust_vsn: 1.27.2    superseded 2019 Jun 23
 # rust_vsn: 1.35.0    superseded 2020 Feb 06
-rust_vsn: 1.41.0
+# rust_vsn: 1.41.0    superseded 2021 Nov 03
+rust_vsn: 1.56.1
 
