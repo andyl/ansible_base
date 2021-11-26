@@ -4,7 +4,7 @@
  
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/vscode 
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -12,11 +12,11 @@
 - name: get deb file
   get_url: 
     url:  http://{{cblob_host}}/vscode/code_{{vscode_vsn}}.deb
-    dest: /home/{{gen_user}}/.pkg/code_{{vscode_vsn}}.deb
+    dest: /home/{{gen_user}}/.pkg/vscode/code_{{vscode_vsn}}.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install package
   apt: 
-    deb: /home/{{gen_user}}/.pkg/code_{{vscode_vsn}}.deb
+    deb: /home/{{gen_user}}/.pkg/vscode/code_{{vscode_vsn}}.deb
 
