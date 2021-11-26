@@ -64,5 +64,4 @@
     - rsync                      # file sync
     - at                         # process scheduler
     - aptitude                   # package manager
-    - fswatch                    # file system watcher
     - checkinstall               # builds debian packages
