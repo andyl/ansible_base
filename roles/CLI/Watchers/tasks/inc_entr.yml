@@ -1,0 +1,26 @@
+---
+
+# entr
+
+- name: create entr pkg dir 
+  file: 
+    path: "/home/{{gen_user}}/.pkg/entr/{{entr_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get entr executable
+  get_url: 
+    url:  http://{{cblob_host}}/entr/entr-{{entr_vsn}}/entr
+    dest: /home/{{gen_user}}/.pkg/entr/{{entr_vsn}}/entr
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode:  "a+rx"
+
+- name: create entr symlink 
+  file: 
+    src:   /home/{{gen_user}}/.pkg/entr/{{entr_vsn}}/entr
+    dest:  /usr/bin/entr
+    state: link
+    force: yes
+
