@@ -6,7 +6,7 @@
   apt:  pkg={{item}} state=latest 
   become: yes
   with_items:
-    - clang 
+    # - clang 
     - cmake 
     - ninja-build 
     - pkg-config 
