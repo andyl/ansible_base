@@ -27,4 +27,5 @@
     - { name: rust   , repo: ""}
     - { name: lua    , repo: ""}
     - { name: R      , repo: ""}
+    - { name: dart   , repo: ""}
 
