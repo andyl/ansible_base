@@ -1,0 +1,12 @@
+---
+
+# AsdfDart
+
+- name: install asdf_dart
+  command: "bash -ilc 'asdf install dart {{ dart_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/dart/{{ dart_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
+
