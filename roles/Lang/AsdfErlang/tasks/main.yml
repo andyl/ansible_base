@@ -36,6 +36,11 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
+- name: add support packages
+  apt: pkg={{item}} state=latest force=yes
+  with_items:
+    - libwxgtk-webview3.0-gtk3-0v5
+
 - name: get ASDF erlang
   become_user: "{{gen_user}}"
   get_url:
