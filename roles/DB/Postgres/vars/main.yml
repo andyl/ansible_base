@@ -1,14 +1,18 @@
 ---
-# postgres_version: 9.4    superseded 07 Jan 2016
-# postgres_version: 9.5    superseded 27 Feb 2017
-# postgres_version: 9.6    superseded 21 Nov 2017
-# postgres_version: 10     superseded 07 Nov 2018
-# postgres_version: 11     superseded 09 Oct 2019
-# postgres_version: 12     superseded 01 Jun 2020
+# postgres_version: 9.4  superseded  2016 Jan 07
+# postgres_version: 9.5  superseded  2017 Feb 27
+# postgres_version: 9.6  superseded  2017 Nov 21
+# postgres_version: 10   superseded  2018 Nov 07
+# postgres_version: 11   superseded  2019 Oct 09
+# postgres_version: 12   superseded  2020 Jun 01
+# postgres_version: 13   superseded  2021 Dec 05 
 
-postgres_version: 11
+postgres_version: 14
+
 old_postgres_versions:
   - 10
+  - 11 
   - 12
+  - 13
 
 # Note: as of 2020 Jun 01, ArmbianOS only has PG11
