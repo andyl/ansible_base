@@ -12,4 +12,5 @@
 # phoenix_vsn: 1.5.1   superseded 17 Feb 2021
 # phoenix_vsn: 1.5.7   superseded 01 Mar 2021
 # phoenix_vsn: 1.5.8   superseded 14 Dec 2021
-phoenix_vsn: 1.6.4
+# phoenix_vsn: 1.6.4   superseded 04 Jan 2022
+phoenix_vsn: 1.6.6
