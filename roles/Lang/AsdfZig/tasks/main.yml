@@ -1,0 +1,11 @@
+---
+
+# AsdfZig
+
+- name: install asdf_zig
+  command: "bash -ilc 'asdf install zig {{ zig_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/zig/{{ zig_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
