@@ -43,5 +43,6 @@
 # elixir_vsn: 1.12.2-otp-24  superseded 2021-10-12
 # elixir_vsn: 1.12.3-otp-24  superseded 2021-12-03
 # elixir_vsn: 1.13.0-otp-24  superseded 2021-12-14
-elixir_vsn: 1.13.1-otp-24
+# elixir_vsn: 1.13.1-otp-24  superseded 2021-02-10 
+elixir_vsn: 1.13.3-otp-24
 
