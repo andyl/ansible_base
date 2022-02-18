@@ -5,9 +5,41 @@
 # Set global version in ~/.tool-versions
 
 - name: install asdf_elixir
-  command: "bash -ilc '.asdf/bin/asdf install elixir {{ elixir_vsn }}'"
+  command: "bash -ilc '.asdf/bin/asdf install elixir {{ex_vsn}}'"
   args:
-    creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ elixir_vsn }}"
+    creates: "/home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}"
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
+
+- name: install hex 
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'mix local.hex --force --if-missing'"
+  ignore_errors: true 
+
+- name: install rebar
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'mix local.rebar --force --if-missing'"
+  ignore_errors: true 
+
+- name: install ex_server
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'mix archive.install hex ex_server {{exsrv_vsn}} --force'"
+  ignore_errors: true 
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
+    chdir: "/home/{{gen_user}}"
+
+# phoenix
+# http://www.phoenixframework.org/docs/installation
+
+- name: install inotify
+  apt: pkg=inotify-tools state=latest install_recommends=yes
+
+- name: install phx_new
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install hex phx_new {{phx_vsn}} --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/phx_new-{{phx_vsn}}
+    chdir: "/home/{{gen_user}}"
 
