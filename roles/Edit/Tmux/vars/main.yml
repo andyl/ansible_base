@@ -10,3 +10,7 @@ tmux_vsn: 3.2
 
 # tmate_vsn: 2.2.1  superseded 2020-Feb-06
 tmate_vsn: 2.4.0
+
+upterm_vsn: 0.7.3
+
+
