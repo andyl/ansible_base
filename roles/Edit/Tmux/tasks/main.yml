@@ -69,7 +69,7 @@
 
 - name: create upterm symlink 
   file: 
-    src:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}/upterm_linux_amd64.tar.gz
+    src:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}/upterm
     dest:  /usr/bin/upterm
     state: link
     force: yes
