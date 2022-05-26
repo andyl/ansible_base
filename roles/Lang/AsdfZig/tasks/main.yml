@@ -2,6 +2,12 @@
 
 # AsdfZig
 
+# Set global version in ~/.tool-versions
+
+- name: update asdf zig plugin 
+  command: "bash -ilc 'asdf plugin update zig'"
+  become_user: "{{ gen_user }}"
+
 - name: install asdf_zig
   command: "bash -ilc 'asdf install zig {{ zig_vsn }}'"
   args:

@@ -4,6 +4,10 @@
 
 # Set global version in ~/.tool-versions
 
+- name: update asdf elixir plugin 
+  command: "bash -ilc 'asdf plugin update elixir'"
+  become_user: "{{ gen_user }}"
+
 - name: install asdf_elixir
   command: "bash -ilc '.asdf/bin/asdf install elixir {{ex_vsn}}'"
   args:
