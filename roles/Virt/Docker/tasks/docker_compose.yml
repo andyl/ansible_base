@@ -1,6 +1,7 @@
 ---
 
 # docker-compose
+# this is not used after docker-compose V2 (2022 May 30 Mon)
 
 - name: install docker-compose support packages
   become: true

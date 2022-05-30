@@ -17,6 +17,10 @@
     - lxc-docker
     - docker
 
+- name: remove old docker-compose
+  pip: name="docker-compose" state=absent executable=pip3
+  become: true
+
 - name: add repository key
   apt_key:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
@@ -48,10 +52,11 @@
     repo: 'deb https://download.docker.com/linux/{{host_dist}} {{host_relname}} stable'
     update_cache: yes
 
-- name: install docker
+- name: install docker-ce and docker-compose-plugin
   apt: pkg={{item}} state=latest
   with_items:
     - docker-ce
+    - docker-compose-plugin
 
 - name: create auto-complete symlink for dk alias
   become: true
