@@ -40,16 +40,16 @@
 
 # > ssh-copy-id
 
-- name: Create pwd file
-  shell:
-    cmd: echo {{lanpass.stdout}} > /tmp/lanpass.txt
-  become_user: "{{gen_user}}"
+# - name: Create pwd file
+#   shell:
+#     cmd: echo {{lanpass.stdout}} > /tmp/lanpass.txt
+#   become_user: "{{gen_user}}"
 
-- name: Copy pubkey to remote host
-  shell:
-    cmd: sshpass -f /tmp/lanpass.txt ssh-copy-id {{item}} 
-  become_user: "{{gen_user}}"
-  with_items:
-    - "{{filehost}}"
-    - "{{influxdb_hostname}}"
-  ignore_errors: yes
+# - name: Copy pubkey to remote host
+#   shell:
+#     cmd: sshpass -f /tmp/lanpass.txt ssh-copy-id {{item}} 
+#   become_user: "{{gen_user}}"
+#   with_items:
+#     - "{{filehost}}"
+#     - "{{influxdb_hostname}}"
+#   ignore_errors: yes

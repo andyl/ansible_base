@@ -11,8 +11,8 @@
   include: setup.yml alt_user="{{gen_user}}"
   when: gen_user != sys_user
 
-- name: base packages for all users
-  become: true
-  apt:  pkg={{item}} state=latest install_recommends=no
-  with_items:
-    - sshpass                    # key management utility
+# - name: base packages for all users
+#   become: true
+#   apt:  pkg={{item}} state=latest install_recommends=no
+#   with_items:
+#     - sshpass                    # key management utility
