@@ -1,0 +1,77 @@
+---
+
+# sdra - sdrangel  
+# https://github.com/f4exb/sdrangel/releases
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url:
+    url:  https://github.com/f4exb/sdrangel/releases/download/v{{sdra_vsn}}/sdrangel-{{sdra_bld}}-master.tar.gz
+    dest: /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}/sdra_{{sdra_vsn}}.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar package
+  unarchive:
+    src:     /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}/sdra_{{sdra_vsn}}.tar.gz 
+    dest:    /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}
+    creates: /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}/sdrangel-{{sdra_bld}}-master
+    group:   "{{gen_user}}"
+    owner:   "{{gen_user}}"
+
+- name: install dependencies
+  become: true
+  apt:  pkg={{item}} install_recommends=yes
+  with_items:
+    - ffmpeg
+    - libairspy0
+    - libavdevice58
+    - libavresample4
+    - libboost-chrono1.71.0
+    - libboost-regex1.71.0
+    - libboost-serialization1.71.0
+    - libgl1-mesa-glx
+    - libhackrf0
+    - libqt5charts5
+    - libqt5location5
+    - libqt5location5-plugins
+    - libqt5multimedia5
+    - libqt5multimedia5-plugins
+    - libqt5multimediagsttools5
+    - libqt5multimediawidgets5
+    - libqt5positioning5-plugins
+    - libqt5positioningquick5
+    - libqt5quickcontrols2-5
+    - libqt5quicktemplates2-5
+    - libqt5quickwidgets5
+    - libqt5serialport5
+    - libqt5texttospeech5
+    - libqt5webengine-data
+    - libqt5webenginecore5
+    - libqt5webenginewidgets5
+    - libqt5websockets5
+    - libre2-5
+    - libuhd3.15.0
+    - qml-module-qtgraphicaleffects
+    - qml-module-qtlocation
+    - qml-module-qtpositioning
+    - qml-module-qtquick-controls
+    - qml-module-qtquick-controls2
+    - qml-module-qtquick-dialogs
+    - qml-module-qtquick-layouts
+    - qml-module-qtquick-privatewidgets
+    - qml-module-qtquick-templates2
+    - qml-module-qtquick-window2
+    - qml-module-qtquick2
+    - qtspeech5-speechd-plugin
+
+- name: install package
+  apt: 
+    deb: /home/{{gen_user}}/.pkg/sdra/{{sdra_bld}}/sdrangel-{{sdra_bld}}-master/sdrangel_{{sdra_vsn}}-1_amd64.deb
+
