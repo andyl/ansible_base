@@ -7,7 +7,7 @@
 
 - name: get influxdb deb file
   get_url: 
-    url: https://dl.influxdata.com/influxdb/releases/influxdb2_{{influx_version}}_amd64.deb
+    url: https://dl.influxdata.com/influxdb/releases/influxdb2-{{influx_version}}-amd64.deb
     dest: /home/{{sys_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
     group: "{{sys_user}}"
     owner: "{{sys_user}}"
