@@ -20,13 +20,13 @@
   include: nvim_x86.yml
   when: is_x86
 
-- name: nvim for ARM7 systems
-  include: nvim_arm7.yml
-  when: is_arm7
-
-- name: nvim for ARM6 systems
-  include: nvim_arm6.yml
-  when: is_arm6
+# - name: nvim for ARM7 systems
+#   include: nvim_arm7.yml
+#   when: is_arm7
+#
+# - name: nvim for ARM6 systems
+#   include: nvim_arm6.yml
+#   when: is_arm6
 
 - name: install neovim package for node
   ignore_errors: true
