@@ -23,13 +23,13 @@
 
 - name: get deb file
   get_url: 
-    url:  https://dl.grafana.com/oss/release/grafana_{{grafana_version}}_{{alt_arch}}.deb
-    dest: /home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_{{alt_arch}}.deb
+    url:  https://dl.grafana.com/oss/release/grafana_{{grafana_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install package
-  apt: deb=/home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_{{alt_arch}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
 
 - name: install config file
   become: true
