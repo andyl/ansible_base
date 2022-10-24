@@ -44,4 +44,5 @@
 # grafana_version: 7.3.5 superseded 2021-01-31
 # grafana_version: 7.3.7 superseded 2021-02-04
 # grafana_version: 7.4.0 superseded 2022-10-02
-grafana_version: 9.1.6
+# grafana_version: 9.1.6 superseded 2022-10-13
+grafana_version: 9.2.0
