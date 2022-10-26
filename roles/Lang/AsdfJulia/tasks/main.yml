@@ -1,0 +1,11 @@
+---
+
+# AsdfJulia
+
+- name: install asdf_julia
+  command: "bash -ilc 'asdf install julia {{ julia_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/julia/{{ julia_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

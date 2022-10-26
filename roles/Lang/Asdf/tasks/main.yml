@@ -22,6 +22,7 @@
     - { name: erlang , repo: ""} 
     - { name: elixir , repo: ""}
     - { name: golang , repo: ""}
+    - { name: java   , repo: ""}
     - { name: nodejs , repo: ""}
     - { name: ruby   , repo: ""}
     - { name: rust   , repo: ""}

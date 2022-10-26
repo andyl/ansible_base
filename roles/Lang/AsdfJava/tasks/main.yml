@@ -1,0 +1,11 @@
+---
+
+# AsdfJava 
+
+- name: install asdf_java
+  command: "bash -ilc 'asdf install java {{ java_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/java/{{ java_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

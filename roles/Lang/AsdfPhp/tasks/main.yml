@@ -1,0 +1,55 @@
+---
+
+# AsdfPhp
+#
+# This works but compiles php from scratch - SLOW
+
+# - name: install asdf_php
+#   command: "bash -ilc 'asdf install php {{ php_vsn }}'"
+#   args:
+#     creates: "/home/{{gen_user}}/.asdf/installs/php/{{ php_vsn }}"
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"
+
+# Accelerate with pre-cached language versions 
+#
+# Approach:
+# - manually install on a base machine
+# - copy the language image to `cblob`
+# - then make the ansible role download rather than compile
+# - then re-shim to create language shims
+#
+# Cblob utils at ~/var/data/cblob/asdf_php
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/asdf_php
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create installs dir
+  file: 
+    path: /home/{{gen_user}}/.asdf/installs/php
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get php tarfile from cblob host
+  become_user: "{{gen_user}}"
+  get_url:
+    url:  http://{{cblob_host}}/asdf_php/php_{{php_vsn}}_{{host_arch}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/asdf_php/php_{{php_vsn}}_{{host_arch}}.tar.gz
+
+- name: untar php
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/asdf_php/php_{{php_vsn}}_{{host_arch}}.tar.gz
+    dest: /home/{{gen_user}}/.asdf/installs/php
+    creates: /home/{{gen_user}}/.asdf/installs/php/{{php_vsn}}
+    remote_src: true
+
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim php {{php_vsn}}'"
+
