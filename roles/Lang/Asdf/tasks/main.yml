@@ -18,16 +18,18 @@
   become_user: "{{ gen_user }}"
   ignore_errors: true
   with_items:
+    - { name: R      , repo: ""}
     - { name: crystal, repo: ""}  
-    - { name: erlang , repo: ""} 
+    - { name: dart   , repo: ""}
     - { name: elixir , repo: ""}
+    - { name: erlang , repo: ""} 
     - { name: golang , repo: ""}
     - { name: java   , repo: ""}
+    - { name: julia  , repo: ""}
+    - { name: lua    , repo: ""}
     - { name: nodejs , repo: ""}
+    - { name: php    , repo: ""}
     - { name: ruby   , repo: ""}
     - { name: rust   , repo: ""}
-    - { name: lua    , repo: ""}
-    - { name: R      , repo: ""}
-    - { name: dart   , repo: ""}
     - { name: zig    , repo: ""}
 
