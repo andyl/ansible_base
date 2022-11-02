@@ -1,4 +1,3 @@
----
 
 # displaylink
 
@@ -17,7 +16,12 @@
 
 - name: get driver file
   get_url:
-    url:  http://{{cblob_host}}/displaylink/5.5.0.tar
+    url:  http://{{cblob_host}}/displaylink/5.6.1.zip 
     dest: /home/{{gen_user}}/.pkg/displaylink
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+
+# To finish the install: 
+# - cd ~/.pkg/displaylink 
+# - unzip xf 5.6.1.zip
+# - ./displaylink-driver-5.6.1.run

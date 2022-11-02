@@ -18,7 +18,7 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: install gh
-  apt: deb=/home/{{gen_user}}/.pkg/github/gh_{{gh_vsn}}.deb
-  become: true
+# - name: install gh
+#   apt: deb=/home/{{gen_user}}/.pkg/github/gh_{{gh_vsn}}.deb
+#   become: true
 

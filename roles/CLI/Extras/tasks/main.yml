@@ -6,6 +6,6 @@
   include: inc_x86_64.yml
   when: is_x86_64
 
-- name: extras for arm7
-  include: inc_arm7.yml
-  when: is_arm7
+# - name: extras for arm7
+#   include: inc_arm7.yml
+#   when: is_arm7

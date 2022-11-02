@@ -2,9 +2,9 @@
 
 # AsdfNode
 
-- name: get node keys
-  command: "/home/{{gen_user}}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
-  become_user: "{{ gen_user }}"
+# - name: get node keys
+#   command: "/home/{{gen_user}}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
+#   become_user: "{{ gen_user }}"
 
 - name: install asdf_nodejs
   command: "bash -ilc 'asdf install nodejs {{ node_vsn }}'"
@@ -14,7 +14,7 @@
   become_user: "{{ gen_user }}"
 
 - name: npm packages
-  become: yes
+  become: true
   npm: name={{item}} state=latest global=yes
   with_items:
     - tree-sitter-cli

@@ -18,7 +18,6 @@
     - cloud-guest-utils          # disk copy util (growpart)
     - xfsprogs                   # disk copy util
     - hwinfo                     # hardware introspection
-    - python-dev                 # required by ansible
     - python3-dev                # required by ansible
     - python3-pip                # required by neovim
     - virtualenv                 # required by ansible

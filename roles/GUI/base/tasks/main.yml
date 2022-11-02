@@ -16,14 +16,14 @@
     - html2ps              # needed for vim printing
     - xclip                # cut/paste from tmux to Xwin
     - xfce4-goodies        # xfce utilities
-    - wmctrl               # xfce window scripting
+    - wmctrl               # xfce windllow scripting
     - xdotool              # xfce window scripting
     - libgsl0-dev          # needed by 'rb-gsl' gem
     - libxmu-dev           # needed by ruby-wmctrl
     - libx11-dev           # needed by ruby-wmctrl
     - libglib2.0-dev       # needed by ruby-wmctrl
     - ntpdate              # ntp date update
-    - python-dbus          # dbus tools needed by terminator
+    - python3-dbus         # dbus tools needed by terminator
     - seahorse             # gui for gnome-keyring
     - bluez                # bluetooth
     - bluez-tools          # bluetooth 
