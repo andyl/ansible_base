@@ -1,0 +1,26 @@
+---
+
+# tailwind cli 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/tailwind 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tailwind executable 
+  get_url:
+    url:  https://github.com/tailwindlabs/tailwindcss/releases/download/v{{tailwind_vsn}}/tailwindcss-linux-x64
+    dest: /home/{{gen_user}}/.pkg/tailwind/tailwind_{{tailwind_vsn}}
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode:  "a+rx"
+
+- name: installation symlink
+  become: true
+  file: 
+    src:  /home/{{gen_user}}/.pkg/tailwind/tailwind_{{tailwind_vsn}}
+    dest: /usr/local/bin/tailwind
+    state: link
+
