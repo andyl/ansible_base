@@ -7,4 +7,5 @@
 # hugo_vsn: 0.74.3  superseded on 2021-Jan-25
 # hugo_vsn: 0.80.0  superseded on 2022-May-29
 # hugo_vsn: 0.99.1  superseded on 2022-May-31
-hugo_vsn: 0.100.0
+# hugo_vsn: 0.100.0 superseded on 2023-Jan-04
+hugo_vsn: 0.109.0
