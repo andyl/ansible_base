@@ -1,0 +1,40 @@
+---
+
+# Unison - https://www.unison-lang.org/
+#
+# 2023 Jan 06 Fri
+# - language is experimental 
+# - no support for ASDF 
+# - no support for Mason (language server) 
+# - no support for Treesitter (syntax highlighting)
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}} 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get unison tar file 
+  become_user: "{{gen_user}}"
+  get_url:
+    url:  https://github.com/unisonweb/unison/releases/download/release%2F{{ucm_vsn}}/ucm-linux.tar.gz
+    dest: /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}}.tar.gz
+
+- name: untar unison 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:     /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}}.tar.gz
+    dest:    /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}}
+    creates: /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}}/ucm
+    remote_src: true
+
+- name: create release symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/unison/ucm_{{ucm_vsn}}/ucm
+    dest:  /usr/local/bin/ucm
+    state: link
+    force: yes
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
