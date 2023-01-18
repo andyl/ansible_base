@@ -47,7 +47,8 @@
 # ex_vsn: 1.13.3-otp-24  superseded 2022-09-09
 # ex_vsn: 1.14.0-otp-25  superseded 2022-11-07
 # ex_vsn: 1.14.1-otp-25  superseded 2022-11-23
-ex_vsn: 1.14.2-otp-25
+# ex_vsn: 1.14.2-otp-25  superseded 2023-01-18 
+ex_vsn: 1.14.3-otp-25
 
 # phx_vsn: 1.0.3   superseded 29 Sep 2015
 # phx_vsn: 1.0.4   superseded 16 Dec 2015
