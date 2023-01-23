@@ -67,7 +67,8 @@ ex_vsn: 1.14.3-otp-25
 # phx_vsn: 1.6.6   superseded 09 Sep 2022
 # phx_vsn: 1.6.12  superseded 06 Nov 2022
 # phx_vsn: 1.7.0-rc.0 superseded 07 Jan 2023
-phx_vsn: 1.7.0-rc.1
+# phx_vsn: 1.7.0-rc.1 superseded 20 Jan 2023 
+phx_vsn: 1.7.0-rc.2
 
 exsrv_vsn: 0.2.0 
 
