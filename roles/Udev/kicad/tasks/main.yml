@@ -2,10 +2,17 @@
 
 # kicad
 
-# see http://kicad-pcb.org/download/ubuntu/
+# see http://kicad.org/download/ubuntu/
 
-- name: add PPA
-  apt_repository: repo=ppa:js-reynaud/kicad-5.1
+- name: remove old PPA
+  apt_repository: 
+    repo: ppa:js-reynaud/kicad-5.1
+    state: absent
+
+# doesn't work - 2023 Jan 26 Thu
+# - name: add PPA
+#   ansible.builtin.apt_repository: 
+#     repo: ppa:kicad/kicad-6.0-releases
 
 - name: add kicad
   apt: 
