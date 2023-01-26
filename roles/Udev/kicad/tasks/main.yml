@@ -22,5 +22,4 @@
     install_recommends: yes
   with_items:
     - kicad
-    - kicad-demo
 
