@@ -1,17 +1,12 @@
 ---
 
-# kicad
+# inkscape - SVG editor 
 
-# see http://kicad.org/download/ubuntu/
-
-- name: remove old PPA
-  apt_repository: 
-    repo: ppa:js-reynaud/kicad-5.1
-    state: absent
+# https://inkscape.org/release/inkscape-1.2.2/gnulinux/ubuntu/ppa/dl/
 
 - name: add PPA
   ansible.builtin.apt_repository: 
-    repo: ppa:kicad/kicad-6.0-releases
+    repo: ppa:inkscape.dev/stable
     update-cache: false 
 
 # this can fail if update-cache emits warnings ;-(
@@ -20,12 +15,11 @@
   ansible.builtin.apt: 
     update-cache: true
       
-- name: add kicad
-  apt: 
+- name: add inkscape
+  ansible.builtin.apt: 
     pkg: "{{item}}" 
     state: latest 
     force: yes
     install_recommends: yes
   with_items:
-    - kicad
-
+    - inkscape
