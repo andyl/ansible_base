@@ -2,11 +2,12 @@
 
 # git
 
-# - name: base git packages
-#   become: true
-#   apt:  pkg={{item}} state=latest install_recommends=no
-#   with_items:
-#     - git-core          
+- name: base git packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - git
+    # - git-core          
 
 - name: install lazygit
   include: lazygit.yml
