@@ -21,6 +21,13 @@
 # - copy the language image to `cblob`
 # - then make the ansible role download rather than compile
 # - then re-shim to create language shims
+#
+# Compiling Erlang using ASDF on a new Ubuntu machine - dependencies.
+#
+# apt-get -y install build-essential autoconf m4 libncurses5-dev
+# libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev
+# libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop
+# libxml2-utils libncurses-dev openjdk-11-jdk
 
 - name: create pkg dir
   file: 
