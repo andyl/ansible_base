@@ -28,6 +28,8 @@
 # libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev
 # libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop
 # libxml2-utils libncurses-dev openjdk-11-jdk
+#
+# apt-get -y install erlang-wx xsltproc libglut3-dev libxml2-utils openssl libcrypto 
 
 - name: create pkg dir
   file: 

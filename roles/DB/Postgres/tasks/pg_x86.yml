@@ -10,5 +10,5 @@
     - libpq-dev 
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
-    - pgadmin4
+    # - pgadmin4
 
