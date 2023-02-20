@@ -50,25 +50,26 @@
 # ex_vsn: 1.14.2-otp-25  superseded 2023-01-18 
 ex_vsn: 1.14.3-otp-25
 
-# phx_vsn: 1.0.3   superseded 29 Sep 2015
-# phx_vsn: 1.0.4   superseded 16 Dec 2015
-# phx_vsn: 1.1.0   superseded 08 Jan 2016
-# phx_vsn: 1.1.2   superseded 21 Feb 2016
-# phx_vsn: 1.1.4   superseded 23 Jun 2016
-# phx_vsn: 1.2.0   superseded 25 Apr 2017
-# phx_vsn: 1.3.0   superseded 07 Nov 2018
-# phx_vsn: 1.4.0   superseded 29 Apr 2019
-# phx_vsn: 1.4.3   superseded 08 May 2019
-# phx_vsn: 1.4.4   superseded 23 Apr 2020
-# phx_vsn: 1.5.1   superseded 17 Feb 2021
-# phx_vsn: 1.5.7   superseded 01 Mar 2021
-# phx_vsn: 1.5.8   superseded 14 Dec 2021
-# phx_vsn: 1.6.4   superseded 04 Jan 2022
-# phx_vsn: 1.6.6   superseded 09 Sep 2022
-# phx_vsn: 1.6.12  superseded 06 Nov 2022
+# phx_vsn: 1.0.3      superseded 29 Sep 2015
+# phx_vsn: 1.0.4      superseded 16 Dec 2015
+# phx_vsn: 1.1.0      superseded 08 Jan 2016
+# phx_vsn: 1.1.2      superseded 21 Feb 2016
+# phx_vsn: 1.1.4      superseded 23 Jun 2016
+# phx_vsn: 1.2.0      superseded 25 Apr 2017
+# phx_vsn: 1.3.0      superseded 07 Nov 2018
+# phx_vsn: 1.4.0      superseded 29 Apr 2019
+# phx_vsn: 1.4.3      superseded 08 May 2019
+# phx_vsn: 1.4.4      superseded 23 Apr 2020
+# phx_vsn: 1.5.1      superseded 17 Feb 2021
+# phx_vsn: 1.5.7      superseded 01 Mar 2021
+# phx_vsn: 1.5.8      superseded 14 Dec 2021
+# phx_vsn: 1.6.4      superseded 04 Jan 2022
+# phx_vsn: 1.6.6      superseded 09 Sep 2022
+# phx_vsn: 1.6.12     superseded 06 Nov 2022
 # phx_vsn: 1.7.0-rc.0 superseded 07 Jan 2023
 # phx_vsn: 1.7.0-rc.1 superseded 20 Jan 2023 
-phx_vsn: 1.7.0-rc.2
+# phx_vsn: 1.7.0-rc.2 superseded 19 Jan 2023 
+phx_vsn: 1.7.0-rc.3 
 
 exsrv_vsn: 0.2.0 
 
