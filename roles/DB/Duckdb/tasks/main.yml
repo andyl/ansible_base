@@ -1,0 +1,33 @@
+---
+
+# DuckDB
+
+- name: create duckdb pkg dir
+  file: 
+    path: /home/{{sys_user}}/.pkg/duckdb/{{duckdb_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get duckdb zip file 
+  get_url: 
+    url: https://github.com/duckdb/duckdb/releases/download/v{{duckdb_vsn}}/duckdb_cli-linux-amd64.zip
+    dest: /home/{{sys_user}}/.pkg/duckdb/{{duckdb_vsn}}/duckdb_{{duckdb_vsn}}.zip 
+    group: "{{sys_user}}"
+    owner: "{{sys_user}}"
+
+- name: unzip package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/duckdb/{{duckdb_vsn}}/duckdb_{{duckdb_vsn}}.zip 
+    dest: /home/{{gen_user}}/.pkg/duckdb/{{duckdb_vsn}}/
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for duckdb2 executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/duckdb
+    src:   /home/{{gen_user}}/.pkg/duckdb/{{duckdb_vsn}}/duckdb 
