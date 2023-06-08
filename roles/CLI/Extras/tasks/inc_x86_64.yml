@@ -62,7 +62,7 @@
 
 - name: get btop tar file
   get_url: 
-    url: https://github.com/aristocratos/btop/releases/download/v{{btop_vsn}}/btop-{{btop_vsn}}-linux-x86_64.tbz
+    url: https://github.com/aristocratos/btop/releases/download/v{{btop_vsn}}/btop-x86_64-linux-musl.tbz
     dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
     force: no
     group: "{{gen_user}}"
@@ -78,6 +78,6 @@
 - name: install btop
   command:
     cmd: "bash -ilc 'make install'"
-    chdir: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}
+    chdir: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop
   become: true
 
