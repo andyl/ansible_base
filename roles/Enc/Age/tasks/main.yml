@@ -1,0 +1,40 @@
+---
+
+# age - file encryption 
+# https://github.com/FiloSottile
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/age/{{age_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url: 
+    url: https://github.com/FiloSottile/age/releases/download/v{{age_vsn}}/age-v{{age_vsn}}-linux-amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age-amd64.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tar file
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age-amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/age/{{age_vsn}}
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: create executable symlinks
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age/{{item}}
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - age
+    - age-keygen 
+
