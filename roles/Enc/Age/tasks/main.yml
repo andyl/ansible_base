@@ -3,14 +3,14 @@
 # age - file encryption 
 # https://github.com/FiloSottile
 
-- name: create pkg dir
+- name: create age pkg dir
   file: 
     path:  "/home/{{gen_user}}/.pkg/age/{{age_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get tar file
+- name: get age tar file
   get_url: 
     url: https://github.com/FiloSottile/age/releases/download/v{{age_vsn}}/age-v{{age_vsn}}-linux-amd64.tar.gz
     dest: /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age-amd64.tar.gz
@@ -18,7 +18,7 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: expand tar file
+- name: expand age tar file
   unarchive:
     src:  /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age-amd64.tar.gz
     dest: /home/{{gen_user}}/.pkg/age/{{age_vsn}}
@@ -27,7 +27,7 @@
     remote_src: true
     validate_certs: false
 
-- name: create executable symlinks
+- name: create age executable symlinks
   become: true
   file: 
     src:   /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age/{{item}}
@@ -37,4 +37,32 @@
   with_items:
     - age
     - age-keygen 
+
+# agebox - filesystem encryption 
+# https://github.com/slok/agebox 
+
+- name: create agebox pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get agebox executable file
+  get_url: 
+    url: https://github.com/slok/agebox/releases/download/v{{agebox_vsn}}/agebox-linux-amd64
+    dest: /home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}/agebox
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create agebox executable symlinks
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}/{{item}}
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - agebox
 
