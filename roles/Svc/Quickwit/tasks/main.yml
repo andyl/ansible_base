@@ -31,7 +31,7 @@
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit
+    src:   /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit-v{{qw_vsn}}/quickwit 
     dest:  /usr/local/bin/quickwit 
     state: link
     force: yes
