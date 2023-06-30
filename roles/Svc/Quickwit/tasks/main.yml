@@ -1,0 +1,39 @@
+---
+
+# quickwit 
+
+- name: create quickwit dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/quickwit"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create quickwit pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get quickwit tar file 
+  get_url: 
+    url:  https://github.com/quickwit-oss/quickwit/releases/download/v{{qw_vsn}}/quickwit-v{{qw_vsn}}-x86_64-unknown-linux-gnu.tar.gz
+    dest: /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit-{{qw_vsn}}.tar.gz 
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand quickwit tarfile 
+  unarchive: 
+    src: /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit-{{qw_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit
+    dest:  /usr/local/bin/quickwit 
+    state: link
+    force: yes
+    mode:  "a+rx"
+
