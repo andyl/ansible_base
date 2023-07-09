@@ -1,0 +1,27 @@
+---
+
+# obsidian
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/obsidian"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get appimage file
+  get_url: 
+    url: https://github.com/obsidianmd/obsidian-releases/releases/download/v{{obs_vsn}}/Obsidian-{{obs_vsn}}.AppImage
+    dest: /home/{{gen_user}}/.pkg/obsidian/obsidian-{{obs_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/obsidian/obsidian-{{obs_vsn}}.appimage
+    dest:  /usr/local/bin/obsidian
+    state: link
+    force: yes
+    mode:  "a+rx"
+
