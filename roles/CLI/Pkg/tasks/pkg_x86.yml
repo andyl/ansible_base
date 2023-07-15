@@ -65,3 +65,11 @@
     - at                         # process scheduler
     - aptitude                   # package manager
     - checkinstall               # builds debian packages
+    - libtesseract-dev           # OCR library 
+    - libtesseract4              # OCR library 
+    - tesseract-ocr              # OCR library 
+    - ocrmypdf                   # OCR application 
+    - gimagereader               # GUI for tesseract-ocr
+    - texlive-extra-utils        # pdfcrop 
+    - exactimage                 # pdfdeskew
+
