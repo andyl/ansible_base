@@ -25,6 +25,11 @@
   command: "bash -ilc 'mix local.rebar --force --if-missing'"
   ignore_errors: true 
 
+- name: install mix_completions 
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'mix archive.install hex mix_completions --force'"
+  ignore_errors: true 
+
 - name: install ex_server
   become_user: "{{gen_user}}"
   command: "bash -ilc 'mix archive.install hex ex_server {{exsrv_vsn}} --force'"
@@ -32,7 +37,7 @@
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
     chdir: "/home/{{gen_user}}"
-
+    
 # phoenix
 # http://www.phoenixframework.org/docs/installation
 
