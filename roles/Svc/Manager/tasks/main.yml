@@ -1,0 +1,34 @@
+---
+
+# manager
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/manager/{{man_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install dependencies 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - libwebkit2gtk-4.0-37 
+    - libwebkit2gtk-4.0-dev
+
+- name: get appimage file
+  get_url: 
+    url: https://github.com/Manager-io/Manager/releases/download/{{man_vsn}}/Manager-linux-x64.AppImage
+    dest: /home/{{gen_user}}/.pkg/manager/manager-{{man_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/manager/manager-{{man_vsn}}.appimage
+    dest:  /usr/local/bin/manager
+    state: link
+    force: yes
+    mode:  "a+rx"
+
