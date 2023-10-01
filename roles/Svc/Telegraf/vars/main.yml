@@ -23,4 +23,5 @@
 # telegraf_vsn: 1.16.3    superseded on 2021-01-31
 # telegraf_vsn: 1.17.2    superseded on 2022-09-13
 # telegraf_vsn: 1.24.0    superseded on 2022-10-02
-telegraf_vsn: 1.24.1
+# telegraf_vsn: 1.24.1    superseded on 2023-09-30 
+telegraf_vsn: 1.28.1
