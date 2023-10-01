@@ -1,4 +1,4 @@
 ---
-influx_tcp_host: influx_host
-influx_udp_host: influx_host
+influx_tcp_host: lark 
+influx_udp_host: lark 
 
