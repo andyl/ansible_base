@@ -4,13 +4,13 @@
 #
 # on x86 we use the pre-compiled appimage
 
-# - name: get appimage file
-#   get_url: 
-#     url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
-#     dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
-#     mode: "a+rx"
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
+- name: get appimage file
+  get_url: 
+    url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
+    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
 - name: create executable symlink
   file: 
