@@ -21,6 +21,7 @@
     - { name: R      , repo: ""}
     - { name: crystal, repo: ""}  
     - { name: dart   , repo: ""}
+    - { name: deno   , repo: ""}
     - { name: elixir , repo: ""}
     - { name: erlang , repo: ""} 
     - { name: golang , repo: ""}
