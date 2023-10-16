@@ -54,9 +54,9 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-# - name: install rg
-#   apt: deb=/home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
-#   become: true
+- name: install rg
+  apt: deb=/home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
+  become: true
 
 # ----- btop / bashtop -----
 
