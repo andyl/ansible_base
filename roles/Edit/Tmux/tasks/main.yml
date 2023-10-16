@@ -9,12 +9,12 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-# - name: install tmux executable
-#   get_url:
-#     url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}
-#     dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
-#     mode: "a+rx"
-#   become: false
+- name: install tmux executable
+  get_url:
+    url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}
+    dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
+    mode: "a+rx"
+  become: false
 
 - name: create tmux symlink 
   file: 
