@@ -1,6 +1,6 @@
 ---
 
-# dt - DuctTape https://dt.plumbing/
+# DuctTape https://dt.plumbing/
 
 - name: create pkg dir
   file: 
