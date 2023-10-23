@@ -11,6 +11,7 @@
   with_items:
     - bat
     - fd
+    - rg
     - btop
     - btop/btop_{{btop_vsn}}
 
