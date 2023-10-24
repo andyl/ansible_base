@@ -1,23 +1,32 @@
 ---
 
 # packer
-# see https://learn.hashicorp.com/tutorials/packer/getting-started-install
 
-- name: add apt key
-  apt_key: 
-    url: https://apt.releases.hashicorp.com/gpg
-    state: present
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
-- name: add repository
-  apt_repository: 
-    repo: 'deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release}} main'
-    state: present
+- name: get zip file
+  get_url:
+    url:  https://releases.hashicorp.com/packer/{{pkr_vsn}}/packer_{{pkr_vsn}}_linux_amd64.zip 
+    dest: /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}/packer-{{pkr_vsn}}.zip 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
-- name: install package
-  apt: 
-    pkg: "{{item}}"
-    state: latest
-    update_cache: yes
-  with_items:
-    - packer
+- name: unzip 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}/packer-{{pkr_vsn}}.zip 
+    dest: /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}
+    creates: /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}/packer 
 
+- name: create symlink
+  become: true 
+  file:
+    src:  /home/{{gen_user}}/.pkg/packer/{{pkr_vsn}}/packer
+    dest: /usr/bin/packer
+    state: link 
+    force: yes
