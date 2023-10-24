@@ -1,15 +1,17 @@
 [Unit]
-Description=Server agent for reporting metrics into InfluxDB
+Description=Telegraf
 Documentation=https://github.com/influxdata/telegraf
-After=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
+Type=notify 
 EnvironmentFile=-/etc/default/telegraf
 User=aleak 
 ExecStart=/usr/bin/telegraf -config /etc/telegraf/telegraf.conf 
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
-KillMode=control-group
+KillMode=mixed
 
 [Install]
 WantedBy=multi-user.target

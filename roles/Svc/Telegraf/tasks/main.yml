@@ -2,9 +2,7 @@
 
 # telegraf
 
-# ----- x86
-
-- name: create package cache dir for x86
+- name: create package cache dir 
   file: 
     path: /home/{{gen_user}}/.pkg/telegraf
     state: directory 
@@ -24,6 +22,16 @@
 - name: install package
   apt: deb=/home/{{gen_user}}/.pkg/telegraf/telegraf_{{telegraf_vsn}}_amd64.deb
   when: is_x86_64
+
+- name: install systemd service file 
+  become: true
+  template: 
+    src:   telegraf.service
+    dest:  /lib/systemd/system/telegraf.service
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
 
 - name: install base config
   become: true
