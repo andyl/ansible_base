@@ -58,6 +58,17 @@
     - docker-ce
     - docker-compose-plugin
 
+- name: install /etc/docker/daemon.json 
+  become: true 
+  template: 
+    src:   daemon.json 
+    dest:  /etc/docker/daemon.json 
+    owner: root 
+    group: root
+    mode:  "a+rw"
+  notify: restart docker 
+
+
 - name: create auto-complete symlink for dk alias
   become: true
   file: 
