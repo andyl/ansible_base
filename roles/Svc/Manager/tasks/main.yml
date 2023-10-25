@@ -43,15 +43,15 @@
 
 - name: get tar file
   get_url: 
-    url: https://github.com/Manager-io/Manager/releases/download/{{man_vsn}}/ManagerServer-linux-arm64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-arm64.tar.gz
+    url: https://github.com/Manager-io/Manager/releases/download/{{man_vsn}}/ManagerServer-linux-x64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-x64.tar.gz
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: expand tarfile 
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-arm64.tar.gz
+    src:  /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-x64.tar.gz
     dest: /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/bin
     remote_src: true
     group: "{{gen_user}}" 
