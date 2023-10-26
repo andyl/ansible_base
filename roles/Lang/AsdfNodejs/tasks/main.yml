@@ -6,6 +6,16 @@
 #   command: "/home/{{gen_user}}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
 #   become_user: "{{ gen_user }}"
 
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: nodejs , repo: ""}
+
 - name: install asdf_nodejs
   command: "bash -ilc 'asdf install nodejs {{ node_vsn }}'"
   args:

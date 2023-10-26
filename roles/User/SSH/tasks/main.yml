@@ -1,0 +1,70 @@
+---
+
+# Multi-host SSH Key Provisioning
+
+# --------------------------------------------------
+# ----- KNOWN_HOSTS (prevents MITM attacks) 
+
+- name: Reset /tmp/known_hosts 
+  local_action: command rm -f /tmp/known_hosts
+  run_once: true 
+
+- name: Build /tmp/known_hosts 
+  delegate_to: localhost 
+  shell: 
+    cmd: ssh-keyscan {{item}} >> /tmp/known_hosts 
+  become: false 
+  run_once: true 
+  ignore_errors: true
+  with_inventory_hostnames: 
+    - app 
+    - dev  
+    - gui 
+    - cname 
+    - services
+
+- name: Copy /tmp/known_hosts to local
+  delegate_to: localhost 
+  shell: 
+    cmd: sort -u /tmp/known_hosts > ~/.ssh/known_hosts
+  become: false 
+  run_once: true 
+
+- name: Copy /tmp/known_hosts to remote 
+  copy:  
+    src:  /tmp/known_hosts 
+    dest: /home/{{gen_user}}/.ssh/known_hosts 
+
+# --------------------------------------------------
+# ----- AUTHORIZED_KEYS (allow connections w/o passwords) 
+
+- name: Reset /tmp/authorized_keys
+  local_action: command rm -f /tmp/authorized_keys
+  run_once: true 
+
+- name: Build /tmp/authorized_keys
+  delegate_to: localhost 
+  shell: 
+    cmd: ssh {{item}} cat ~/.ssh/id_rsa.pub >> /tmp/authorized_keys
+  become: false 
+  ignore_errors: true 
+  run_once: true 
+  with_inventory_hostnames: 
+    - app 
+    - dev  
+    - gui 
+    - cname 
+
+- name: Copy /tmp/authorized_keys
+  copy:  
+    src: /tmp/authorized_keys
+    dest: /home/{{gen_user}}/.ssh/authorized_keys
+
+# --------------------------------------------------
+# ----- CONFIG
+
+- name: Copy config
+  copy:  
+    src: ~/.ssh/config 
+    dest: /home/{{gen_user}}/.ssh/config
+

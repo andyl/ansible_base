@@ -2,6 +2,16 @@
 
 # AsdfLua
 
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: lua    , repo: ""}
+
 - name: install asdf_lua
   command: "bash -ilc 'asdf install lua {{ lua_vsn }}'"
   args:

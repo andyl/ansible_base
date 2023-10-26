@@ -31,6 +31,16 @@
 #
 # apt-get -y install erlang-wx xsltproc libglut3-dev libxml2-utils openssl libcrypto 
 
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: erlang , repo: ""} 
+
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/asdf_erlang

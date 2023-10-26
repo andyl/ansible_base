@@ -2,8 +2,6 @@
 
 # SSH Key Provisioning for GitHub and Filestore
 
-# > GitHub 
-
 - name: Fetch ssh pubkey from target_host to local_host
   fetch:
     src: "{{tgt_keyfile}}"
@@ -25,18 +23,14 @@
     - .gitconfig
     - .gitconfig_user
 
-- name: Update known_hosts using ssh-keyscan
-  shell:
-    cmd: ssh-keyscan {{item}} >> known_hosts && sort -u -o known_hosts known_hosts
-    chdir: /home/{{gen_user}}/.ssh
-  become_user: "{{gen_user}}"
-  with_items:
-    - github.com
-    - "{{filehost}}"
-    - "{{influxdb_hostname}}"
-  ignore_errors: true
-
-# > ssh-copy-id
+# - name: Update known_hosts using ssh-keyscan
+#   shell:
+#     cmd: ssh-keyscan {{item}} >> known_hosts && sort -u -o known_hosts known_hosts
+#     chdir: /home/{{gen_user}}/.ssh
+#   become_user: "{{gen_user}}"
+#   with_items:
+#     - github.com
+#   ignore_errors: true
 
 # - name: Create pwd file
 #   shell:
@@ -49,5 +43,4 @@
 #   become_user: "{{gen_user}}"
 #   with_items:
 #     - "{{filehost}}"
-#     - "{{influxdb_hostname}}"
 #   ignore_errors: yes
