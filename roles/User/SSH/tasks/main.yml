@@ -53,11 +53,17 @@
     - app 
     - dev  
     - gui 
-    - cname 
+
+- name: Copy /tmp/known_hosts to local
+  delegate_to: localhost 
+  shell: 
+    cmd: sort -u /tmp/authorized_keys > ~/.ssh/authorized_keys
+  become: false 
+  run_once: true 
 
 - name: Copy /tmp/authorized_keys
   copy:  
-    src: /tmp/authorized_keys
+    src:  ~/.ssh/authorized_keys
     dest: /home/{{gen_user}}/.ssh/authorized_keys
 
 # --------------------------------------------------
