@@ -8,7 +8,7 @@
 
 - name: set cblob_host
   set_fact:
-    cblob_host: cblob_host
+    cblob_host: cblob-host
 
 - name: set base predicates
   set_fact:
