@@ -1,0 +1,39 @@
+---
+
+# docker data
+
+# clone dks/base_util 
+# clone dks/code_util 
+# clone util/pdk_data 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/{{item}}
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+  with_items: 
+    - dks 
+    - util
+
+- name: clone dks/base_dks 
+  become_user: "{{gen_user}}"
+  git: 
+    repo: 'git@github.com:andyl/base_dks.git' 
+    dest: /home/{{gen_user}}/dks/base_dks
+    update: yes
+
+- name: clone dks/code_dks 
+  become_user: "{{gen_user}}"
+  git: 
+    repo: 'git-host:Git/Dks/code_dks.git' 
+    dest: /home/{{gen_user}}/dks/code_dks
+    update: yes
+
+- name: clone util/pdk_data
+  become_user: "{{gen_user}}"
+  git: 
+    repo: 'git-host:Git/Util/pdk_data.git' 
+    dest: /home/{{gen_user}}/util/pdk_data
+    update: yes
+
