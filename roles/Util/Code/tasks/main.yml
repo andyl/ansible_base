@@ -15,4 +15,6 @@
   git:
     repo:   "{{filehost}}:Git/Util/code_util.git"
     dest:   /home/{{gen_user}}/util/code_util
-    update: yes
+    depth:  1 
+    force:  true
+    update: true

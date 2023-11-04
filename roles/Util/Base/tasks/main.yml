@@ -15,5 +15,6 @@
     repo:   git@github.com:andyl/base_util.git
     dest:   /home/{{gen_user}}/util/base_util
     depth:  1
-    update: yes
+    force:  true
+    update: true
 
