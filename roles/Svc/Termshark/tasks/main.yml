@@ -1,0 +1,39 @@
+---
+
+# tshark
+
+- name: remove apt package 
+  apt: 
+    state: absent 
+    pkg: tshark 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file 
+  get_url: 
+    url:  https://github.com/gcla/termshark/releases/download/v{{tshark_vsn}}/termshark_{{tshark_vsn}}_linux_arm64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/tshark.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tar file 
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/tshark.tar.gz
+    dest: /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}
+    remote_src: true
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/termshark_{{tshark_vsn}}_linux_arm64/termshark 
+    dest:  /usr/local/bin/tshark
+    state: link
+    force: yes
+    mode:  "a+rx"
+

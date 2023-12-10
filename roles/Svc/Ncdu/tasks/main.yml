@@ -1,0 +1,39 @@
+---
+
+# ncdu
+
+- name: remove apt package 
+  apt: 
+    state: absent 
+    pkg: ncdu 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/ncdu/{{ncdu_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file 
+  get_url: 
+    url:  https://dev.yorhel.nl/download/ncdu-{{ncdu_vsn}}-linux-x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ncdu/{{ncdu_vsn}}/ncdu.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tar file 
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/ncdu/{{ncdu_vsn}}/ncdu.tar.gz
+    dest: /home/{{gen_user}}/.pkg/ncdu/{{ncdu_vsn}}
+    remote_src: true
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/ncdu/{{ncdu_vsn}}/ncdu
+    dest:  /usr/local/bin/ncdu
+    state: link
+    force: yes
+    mode:  "a+rx"
+

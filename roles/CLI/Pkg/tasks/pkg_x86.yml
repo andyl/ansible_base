@@ -24,14 +24,12 @@
     - imagemagick                # image processing
     - graphviz                   # diagram generation
     - gnuplot                    # graph generation
-    - ncdu                       # monitoring tool
     - nmon                       # monitoring tool
     - iftop                      # monitoring tool
     - dstat                      # monitoring tool
     - iotop                      # monitoring tool
     - nload                      # monitoring tool
     - sysstat                    # monitoring tool
-    - ncdu                       # monitoring tool
     - multitail                  # monitoring tool - log file 
     - iperf                      # monitoring tool - network performance 
     - patch                      # build tool
@@ -72,4 +70,6 @@
     - gimagereader               # GUI for tesseract-ocr
     - texlive-extra-utils        # pdfcrop 
     - exactimage                 # pdfdeskew
+    - exfat-utils                # partition formatting utility
+    - exfat-fuse                 # partition formatting utility
 

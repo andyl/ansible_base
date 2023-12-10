@@ -31,6 +31,7 @@
     - nmap                       # networking utility
     - nfs-common                 # file sharing
     - nfs-server                 # file sharing
+    - autofs                     # file sharing 
 
 - name: pkg for x86 systems
   include: pkg_x86.yml
