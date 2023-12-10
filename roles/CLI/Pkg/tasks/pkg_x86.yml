@@ -70,6 +70,6 @@
     - gimagereader               # GUI for tesseract-ocr
     - texlive-extra-utils        # pdfcrop 
     - exactimage                 # pdfdeskew
-    - exfat-utils                # partition formatting utility
-    - exfat-fuse                 # partition formatting utility
+    - exfatprogs                 # tools to create, check and label exFAT filesystems
+    - exfat-fuse                 # read and write exFAT driver for FUSE
 
