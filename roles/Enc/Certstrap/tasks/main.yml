@@ -1,0 +1,27 @@
+---
+
+# certstrap - OpenSSL Cert Tools 
+# https://github.com/square/certstrap
+
+- name: create certstrap pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/certstrap"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get certstrap executable  
+  get_url: 
+    url: https://github.com/square/certstrap/releases/download/v{{cstrap_vsn}}/certstrap-linux-amd64
+    dest: /home/{{gen_user}}/.pkg/certstrap/certstrap_{{cstrap_vsn}}
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create certstrap executable symlink
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/certstrap/certstrap_{{cstrap_vsn}}
+    dest:  /usr/local/bin/certstrap 
+    state: link
+    force: yes
