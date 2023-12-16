@@ -72,4 +72,5 @@
     - exactimage                 # pdfdeskew
     - exfatprogs                 # tools to create, check and label exFAT filesystems
     - exfat-fuse                 # read and write exFAT driver for FUSE
+    - ssldump                    # ssh debug utility 
 
