@@ -4,3 +4,8 @@
 
 cstrap_vsn: 1.3.0 
 
+
+# https://github.com/square/certigo/releases
+
+certigo_vsn: 1.16.0 
+

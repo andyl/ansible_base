@@ -1,6 +1,7 @@
 ---
 
 # certstrap - OpenSSL Cert Tools 
+
 # https://github.com/square/certstrap
 
 - name: create certstrap pkg dir
@@ -25,3 +26,31 @@
     dest:  /usr/local/bin/certstrap 
     state: link
     force: yes
+      
+
+# https://github.com/square/certigo 
+
+- name: create certigo pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/certigo"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get certigo executable  
+  get_url: 
+    url: https://github.com/square/certigo/releases/download/v{{certigo_vsn}}/certigo-linux-amd64
+    dest: /home/{{gen_user}}/.pkg/certigo/certigo_{{certigo_vsn}}
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create certigo executable symlink
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/certigo/certigo_{{certigo_vsn}}
+    dest:  /usr/local/bin/certigo 
+    state: link
+    force: yes
+      
+
