@@ -1,10 +1,9 @@
 ---
 
 # AsdfNode
-
-# - name: get node keys
-#   command: "/home/{{gen_user}}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
-#   become_user: "{{ gen_user }}"
+# If there are install problems, delete the nodejs plugin and re-install 
+# > asdf plugin remove nodejs 
+# > asdf plugin install nodejs 
 
 - name: "install plugins for {{gen_user}}"
   command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
