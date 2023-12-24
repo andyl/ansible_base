@@ -24,4 +24,5 @@
 # vscode_vsn: 1.67.2    superseded 2022-06-28 
 # vscode_vsn: 1.68.1    superseded 2022-09-09
 # vscode_vsn: 1.71.0    superseded 2022-11-08
-vscode_vsn: 1.73.0
+# vscode_vsn: 1.73.0    superseded 2023-12-22
+vscode_vsn: 1.85.1 
