@@ -35,11 +35,15 @@
   command: "bash -ilc 'mix local.rebar --force --if-missing'"
   ignore_errors: true 
 
+  # bash completions for mix
+  # https://github.com/erikareads/mix_completions 
 - name: install mix_completions 
   become_user: "{{gen_user}}"
   command: "bash -ilc 'mix archive.install hex mix_completions --force'"
   ignore_errors: true 
 
+  # a web-app file server
+  # https://github.com/akoutmos/ex_server 
 - name: install ex_server
   become_user: "{{gen_user}}"
   command: "bash -ilc 'mix archive.install hex ex_server {{exsrv_vsn}} --force'"
