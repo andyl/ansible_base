@@ -29,18 +29,3 @@
     src: /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit-{{qw_vsn}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/
 
-- name: create executable symlink
-  file: 
-    src:   /home/{{gen_user}}/.pkg/quickwit/{{qw_vsn}}/quickwit-v{{qw_vsn}}/quickwit 
-    dest:  /usr/local/bin/quickwit 
-    state: link
-    force: yes
-    mode:  "a+rx"
-
-# tantivy 
-
-- name: "install tantivy-cli using cargo"
-  community.general.cargo: 
-    name: tantivy-cli
-    state: latest 
-

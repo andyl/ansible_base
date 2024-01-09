@@ -1,4 +1,10 @@
-# Quickwit / Tantivy 
+# Quickwit 
 
-Search engines: Quickwit and Tantivy 
+Search engine: Quickwit
+
+## Tantivy 
+
+Could not get tantivy to auto-install with Ansible... 
+
+To install tantivy-cli: `> install_tantivy`
 

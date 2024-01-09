@@ -23,14 +23,10 @@
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim rust {{rust_vsn}}'"
 
-- name: find the path of 'cargo'
-  command: which cargo
-  register: cargo_path
-
 - name: create cargo symlink 
   become: true
   file:
-    src: "{{ cargo_path.stdout }}"
+    src: /home/aleak/.asdf/shims/cargo 
     dest: /usr/local/bin/cargo 
     state: link
 
