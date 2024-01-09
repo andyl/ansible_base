@@ -37,3 +37,10 @@
     force: yes
     mode:  "a+rx"
 
+# tantivy 
+
+- name: "install tantivy-cli using cargo"
+  community.general.cargo: 
+    name: tantivy-cli
+    state: latest 
+

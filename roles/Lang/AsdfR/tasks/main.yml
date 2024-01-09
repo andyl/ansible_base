@@ -30,7 +30,6 @@
   ignore_errors: true
   with_items:
     - { name: R      , repo: ""}
-
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg 

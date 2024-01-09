@@ -19,3 +19,18 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim rust {{rust_vsn}}'"
+
+- name: find the path of 'cargo'
+  command: which cargo
+  register: cargo_path
+
+- name: create cargo symlink 
+  become: true
+  file:
+    src: "{{ cargo_path.stdout }}"
+    dest: /usr/local/bin/cargo 
+    state: link
+
