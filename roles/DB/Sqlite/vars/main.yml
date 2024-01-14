@@ -5,5 +5,5 @@ sqlite_vsn: 3440200
 
 # see https://github.com/asg017/sqlite-vss/releases
 
-sql_vss_vsn: v0.1.2
+sqlvss_vsn: v0.1.2
 
