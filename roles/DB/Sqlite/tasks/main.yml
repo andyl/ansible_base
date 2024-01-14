@@ -2,14 +2,55 @@
 
 # sqlite3
 
-- name: install sqlite packages
+# ----- sqlite and support tools 
+
+- name: remove sqlite apt package 
+  apt:  pkg={{item}} state=absent
+  with_items:
+    - sqlite 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/sqlite/{{sqlite_vsn}}" 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file
+  get_url: 
+    url:  http://{{cblob_host}}/sqlite/sqlite-{{host_arch}}-{{sqlite_vsn}}.appimage
+    dest: /home/{{gen_user}}/.pkg/sqlite/sqlite-{{host_arch}}-{{sqlite_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/sqlite/sqlite-{{host_arch}}-{{sqlite_vsn}}.appimage
+    dest:  /usr/local/bin/sqlite
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+- name: download zip file 
+
+- name: expand zip file 
+
+- name: make symlink 
+
+- name: install sqlite developer tools 
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
-    - sqlite3                    # sqlite3 database
     - libsqlite3-dev             # developer tools
+
+# ----- sqlite browser 
 
 - name: install sqlite browser
   apt:  pkg={{item}} state=latest install_recommends=no
   with_items:
     - sqlitebrowser              # sqlite browser
   when: is_x86_64
+
+# ----- vector-search (vss) extensions 
+
+https://github.com/asg017/sqlite-vss/releases/download/v0.1.2/sqlite-vss-v0.1.2-loadable-linux-x86_64.tar.gz
