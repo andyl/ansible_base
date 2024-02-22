@@ -35,6 +35,7 @@
   command: "bash -ilc 'mix local.rebar --force --if-missing'"
   ignore_errors: true 
 
+  # -------------------------------------------------------
   # bash completions for mix
   # https://github.com/erikareads/mix_completions 
 - name: install mix_completions 
@@ -42,6 +43,7 @@
   command: "bash -ilc 'mix archive.install hex mix_completions --force'"
   ignore_errors: true 
 
+  # -------------------------------------------------------
   # a web-app file server
   # https://github.com/akoutmos/ex_server 
 - name: install ex_server
@@ -52,9 +54,9 @@
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
     chdir: "/home/{{gen_user}}"
     
-# phoenix
-# http://www.phoenixframework.org/docs/installation
-
+  # -------------------------------------------------------
+  # phoenix
+  # http://www.phoenixframework.org/docs/installation
 - name: install inotify
   apt: pkg=inotify-tools state=latest install_recommends=yes
 
@@ -64,5 +66,16 @@
   ignore_errors: true
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/phx_new-{{phx_vsn}}
+    chdir: "/home/{{gen_user}}"
+
+  # -------------------------------------------------------
+  # tableau 
+  # https://github.com/elixir-tools/tableau 
+- name: install tableau_new
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install tableau_new {{tblu_vsn}} --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_new-{{tblu_vsn}}
     chdir: "/home/{{gen_user}}"
 
