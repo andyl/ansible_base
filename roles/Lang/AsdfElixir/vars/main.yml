@@ -88,7 +88,8 @@ ex_vsn: 1.16.1-otp-26
 phx_vsn: 1.7.11  
 
 # ----- TABLEAU
-tblu_vsn: 1.0.2
+# tblu_vsn: 1.0.2
+tblu_vsn: 1.1.0
   
 # ----- EX_SERVER
 exsrv_vsn: 0.2.0 

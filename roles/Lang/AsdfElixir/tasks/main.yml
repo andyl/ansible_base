@@ -73,7 +73,7 @@
   # https://github.com/elixir-tools/tableau 
 - name: install tableau_new
   become_user: "{{gen_user}}"
-  shell: "bash -ilc 'mix archive.install tableau_new {{tblu_vsn}} --force'"
+  shell: "bash -ilc 'mix archive.install hex tableau_new {{tblu_vsn}} --force'"
   ignore_errors: true
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_new-{{tblu_vsn}}
