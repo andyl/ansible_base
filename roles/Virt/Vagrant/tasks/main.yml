@@ -16,7 +16,7 @@
   file: path=/home/{{sys_user}}/.pkg/vagrant state=directory group={{sys_user}} owner={{sys_user}}
 
 - name: get deb file
-  become: no
+  become: false
   get_url: 
     url: https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}_x86_64.deb
     dest: /home/{{sys_user}}/.pkg/vagrant/vagrant_{{vagrant_version}}.deb
