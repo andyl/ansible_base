@@ -22,6 +22,7 @@
     - virtualbox
     - virtualbox-5.2
     - virtualbox-6.0
+    - virtualbox-6.1
 
 - name: install package
   apt: 
@@ -29,5 +30,5 @@
     state: latest
     update_cache: yes
   with_items:
-    - virtualbox-6.1
+    - virtualbox-7.0
 
