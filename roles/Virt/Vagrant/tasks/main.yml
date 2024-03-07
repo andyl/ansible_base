@@ -18,7 +18,8 @@
 - name: get deb file
   become: false
   get_url: 
-    url: https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}_x86_64.deb
+    # url: https://releases.hashicorp.com/vagrant/2.4.1/vagrant_2.4.1-1_amd64.deb
+    url: https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}-1_amd64.deb
     dest: /home/{{sys_user}}/.pkg/vagrant/vagrant_{{vagrant_version}}.deb
 
 - name: install package

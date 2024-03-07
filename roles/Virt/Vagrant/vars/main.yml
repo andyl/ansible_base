@@ -1,4 +1,5 @@
 ---
+
 # https://www.vagrantup.com/downloads
 
 # vagrant_version: 1.7.2    superseded 2015 Dec 07
@@ -12,3 +13,4 @@
 # vagrant_version: 2.2.3    superseded 2019 Oct 17
 # vagrant_version: 2.2.6    superseded 2020 Nov 25
 # vagrant_version: 2.2.14   superseded 2024 Mar 06
+vagrant_version: 2.4.1
