@@ -23,3 +23,9 @@
     mode: "a+rx"
   become: false
 
+- name: display install instructions
+  debug:
+    msg: |
+      VMware has to be installed manually! 
+      You must install 'Vix' before 'Workstation Player' !!
+
