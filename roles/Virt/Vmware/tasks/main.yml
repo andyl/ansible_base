@@ -12,15 +12,14 @@
 - name: download vmware installer
   get_url:
     url:  http://{{cblob_host}}/vmware/VMware-Player-{{vmware_vsn}}.x86_64.bundle
-    dest: /home/{{gen_user}}/.pkg/vmware/vmware_{{vmware_vsn}}
+    dest: /home/{{gen_user}}/.pkg/vmware/vmware-player-{{vmware_vsn}}
     mode: "a+rx"
   become: false
 
-# - name: install package
-#   apt: 
-#     pkg: "{{item}}"
-#     state: latest
-#     update_cache: yes
-#   with_items:
-#     - virtualbox-6.1
+- name: download vmware vix api & vmrun command
+  get_url:
+    url:  http://{{cblob_host}}/vmware/VMware-VIX-{{vmvix_vsn}}.x86_64.bundle
+    dest: /home/{{gen_user}}/.pkg/vmware/vmware-vix-{{vmvix_vsn}}
+    mode: "a+rx"
+  become: false
 
