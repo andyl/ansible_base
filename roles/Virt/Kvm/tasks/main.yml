@@ -13,7 +13,6 @@
     - qemu-utils
     - qemu
     - libvirt-clients
-    - libvirt-bin 
     - libvirt-dev
     - libvirt-daemon-system
     - virtinst 
