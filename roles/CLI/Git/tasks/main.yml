@@ -2,13 +2,37 @@
 
 # git
 
+- name: update apt cache 
+  become: true
+  apt: 
+    update_cache: true 
+    cache_valid_time: 3600 
+  changed_when: false
+
+- name: install required packages
+  apt:
+    name:
+      - software-properties-common
+    state: present
+
+- name: add PPA
+  ansible.builtin.apt_repository: 
+    repo: ppa:git-core/ppa
+    update-cache: false 
+
+- name: update cache 
+  ignore_errors: true 
+  ansible.builtin.apt: 
+    update-cache: true
+    cache_valid_time: 3600 
+
 - name: base git packages
   become: true
-  apt:  pkg={{item}} state=latest install_recommends=no
-  with_items:
-    - git
-    # - git-core          
+  apt:  
+    name: git
+    state: latest 
+    install_recommends: yes
 
 - name: install lazygit
-  include: lazygit.yml
+  include_tasks: lazygit.yml
 
