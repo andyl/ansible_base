@@ -15,7 +15,6 @@
     url: "{{item}}"
   with_items:
     - https://brave-browser-apt-release.s3.brave.com/brave-core.asc
-    - https://brave-browser-apt-nightly.s3.brave.com/brave-core-nightly.asc
 
 - name: repository
   apt_repository: 
@@ -23,8 +22,6 @@
     state: present
   with_items:
     - "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
-    - "deb [arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"
-    - "deb [arch=amd64] https://brave-browser-apt-nightly.s3.brave.com/ stable main"
 
 - name: install packages
   apt: 
@@ -32,7 +29,4 @@
     state: latest 
   with_items:
     - brave-browser
-    - brave-browser-beta
-    - brave-browser-nightly
-
 
