@@ -19,4 +19,5 @@
 # nvim_vsn: v0.9.1  superseded 2023-09-07
 # nvim_vsn: v0.9.2  superseded 2023-10-09 
 # nvim_vsn: v0.9.4  superseded 2024-01-03
-nvim_vsn: v0.9.5
+# nvim_vsn: v0.9.5  superseded 2024-05-16
+nvim_vsn: v0.10.0
