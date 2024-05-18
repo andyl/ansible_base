@@ -2,4 +2,5 @@
 # terminator_vsn: 1.9.1 superseded 2021 Mar 10
 # terminator_vsn: 2.1.0 superseded 2021 May 07
 # terminator_vsn: 2.1.1 superseded 2023 Feb 18 
-terminator_vsn: 2.1.2
+# terminator_vsn: 2.1.2 superseded 2024 May 17
+terminator_vsn: 2.1.3
