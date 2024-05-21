@@ -4,24 +4,24 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg/kitty
+    path: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: get tar file
   get_url:
-    url:  https://github.com/kovidgoyal/kitty/releases/download/v{{kitty_vsn}}/kitty-{{kitty_vsn))-i686.txz
-    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}.tar.xz
+    url:  https://github.com/kovidgoyal/kitty/releases/download/v{{kitty_vsn}}/kitty-{{kitty_vsn}}-x86_64.txz
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/release.tar.xz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: untar 
   become_user: "{{gen_user}}"
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}.tar.xz
+    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/release.tar.xz
     dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
-    creates: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
+    creates: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin
 
 - name: create symlink
   become: true
