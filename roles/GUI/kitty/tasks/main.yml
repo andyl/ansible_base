@@ -23,10 +23,36 @@
     dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
     creates: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin
 
-- name: create symlink
+- name: create executable symlink
   become: true
   file:
-    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin/kitty
-    dest: /usr/bin/kitty
+    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin/{{item}}
+    dest: /usr/bin/{{item}}
     state: link 
     force: yes
+  with_items: 
+    - kitty 
+    - kitten
+
+- name: create application symlink
+  become: true
+  file:
+    src:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/{{item}}.desktop 
+    dest:  /home/{{gen_user}}/.local/share/applications/{{item}}.desktop
+    state: link 
+    force: yes
+  with_items: 
+    - kitty 
+    - kitty-open
+
+- name: update application icon
+  lineinfile:
+    path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
+    regexp: '^Icon=kitty'
+    line:   "Icon=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/icons/hicolor/256x256/apps/kitty.png"
+
+- name: update application exec
+  lineinfile:
+    path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
+    regexp: '^Exec=kitty'
+    line:   "Exec=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin/kitty"
