@@ -60,9 +60,10 @@
 # ex_vsn: 1.15.7-otp-26  superseded 2023-12-22
 # ex_vsn: 1.16.0-otp-26  superseded 2024-01-31
 # ex_vsn: 1.16.1-otp-26  superseded 2024-03-10
-ex_vsn: 1.16.2-otp-26  
+# ex_vsn: 1.16.2-otp-26  superseded 2024-05-20 
+ex_vsn: 1.16.3-otp-26  
 
-# ----- PHOENIX
+# ----- PHOENIX / mix hex.info phx_new
 # phx_vsn: 1.0.3      superseded 29 Sep 2015
 # phx_vsn: 1.0.4      superseded 16 Dec 2015
 # phx_vsn: 1.1.0      superseded 08 Jan 2016
@@ -86,12 +87,13 @@ ex_vsn: 1.16.2-otp-26
 # phx_vsn: 1.7.8      superseded 12 Oct 2023 
 # phx_vsn: 1.7.9      superseded 14 Nov 2023
 # phx_vsn: 1.7.10     superseded 09 Feb 2024
-phx_vsn: 1.7.11  
+# phx_vsn: 1.7.11     superseded 20 May 2024
+phx_vsn: 1.7.12  
 
-# ----- TABLEAU
+# ----- TABLEAU / mix hex.info tableau_new 
 # tblu_vsn: 1.0.2
 tblu_vsn: 1.1.0
   
-# ----- EX_SERVER
+# ----- EX_SERVER / mix hex.info ex_server
 exsrv_vsn: 0.2.0 
 
