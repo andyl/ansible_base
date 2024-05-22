@@ -45,11 +45,19 @@
     - kitty 
     - kitty-open
 
-- name: update application icon
-  lineinfile:
-    path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
-    regexp: '^Icon=kitty'
-    line:   "Icon=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/icons/hicolor/256x256/apps/kitty.png"
+- name: copy application icon 
+  copy: 
+    src: /home/{{gen_user}}/code_util/data/appicons/sport.png 
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/lib/icons/{{item}}.png 
+  with_items: 
+    - kitty 
+    - kitty-128
+
+# - name: update application icon
+#   lineinfile:
+#     path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
+#     regexp: '^Icon=kitty'
+#     line:   "Icon=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/icons/hicolor/256x256/apps/kitty.png"
 
 - name: update application exec
   lineinfile:
