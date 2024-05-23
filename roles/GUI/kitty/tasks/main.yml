@@ -47,17 +47,11 @@
 
 - name: copy application icon 
   copy: 
-    src: /home/{{gen_user}}/util/code_util/data/appicons/sports.png 
+    src: /home/{{gen_user}}/util/code_util/data/appicons/target.png 
     dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/lib/kitty/logo/{{item}}.png 
   with_items: 
     - kitty 
     - kitty-128
-
-# - name: update application icon
-#   lineinfile:
-#     path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
-#     regexp: '^Icon=kitty'
-#     line:   "Icon=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/icons/hicolor/256x256/apps/kitty.png"
 
 - name: update application exec
   lineinfile:
