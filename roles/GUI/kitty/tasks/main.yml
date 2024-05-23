@@ -47,8 +47,8 @@
 
 - name: copy application icon 
   copy: 
-    src: /home/{{gen_user}}/code_util/data/appicons/sport.png 
-    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/lib/icons/{{item}}.png 
+    src: /home/{{gen_user}}/util/code_util/data/appicons/sports.png 
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/lib/kitty/logo/{{item}}.png 
   with_items: 
     - kitty 
     - kitty-128
