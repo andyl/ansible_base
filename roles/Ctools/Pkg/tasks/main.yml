@@ -9,6 +9,8 @@
     - ranger                     # file manager 
     - nnn                        # file manager 
     - unar                       # archive tool 
+    - poppler-utils              # PDF viewer 
+    - libpoppler-cpp-dev         # PDF libraries 
 
 - name: install pip modules (python3)
   pip: name="{{item}}" state=latest executable=pip3

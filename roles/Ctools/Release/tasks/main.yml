@@ -23,17 +23,15 @@
   unarchive:
     src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
     dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}
-    creates: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/bin
+    creates: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
 
 - name: create executable symlink
   become: true
   file:
-    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/bin/{{item}}
-    dest: /usr/bin/{{item}}
+    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
+    dest: /usr/bin/mdcat
     state: link 
     force: yes
-  with_items: 
-    - mdcat 
 
 # ----- yazi / file manager 
 
@@ -56,15 +54,16 @@
   unarchive:
     src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/release.zip
     dest: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}
-    creates: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/bin
+    creates: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/yazi
 
 - name: create executable symlink
   become: true
   file:
-    src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/bin/{{item}}
+    src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/{{item}}
     dest: /usr/bin/{{item}}
     state: link 
     force: yes
   with_items: 
     - yazi 
+    - ya
 
