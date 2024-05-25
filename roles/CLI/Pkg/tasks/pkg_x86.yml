@@ -12,7 +12,7 @@
 
 - name: install base packages for x86
   become: true
-  apt:  pkg={{item}} state=latest install_recommends=no
+  apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - language-pack-en-base      # american time zones
     - atop                       # monitoring utility
