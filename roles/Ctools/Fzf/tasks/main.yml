@@ -2,7 +2,7 @@
 
 # fzf
 
-- name: clone dks/base_dks 
+- name: clone fzf repo 
   become_user: "{{gen_user}}"
   git: 
     repo: https://github.com/junegunn/fzf.git 
