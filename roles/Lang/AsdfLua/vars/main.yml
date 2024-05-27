@@ -1,3 +1,7 @@
 ---
-lua_vsn: 5.3.5
+# lua_vsn: 5.3.5    superseded 2024 May 26 Sun
+lua_vsn: 5.4,6
+
+
+luajit_vsn: 2.2.2
 

@@ -11,6 +11,7 @@
   ignore_errors: true
   with_items:
     - { name: lua    , repo: ""}
+    - { name: luajit , repo: ""}
 
 - name: install asdf_lua
   command: "bash -ilc 'asdf install lua {{ lua_vsn }}'"
@@ -18,4 +19,12 @@
     creates: "/home/{{gen_user}}/.asdf/installs/lua/{{ lua_vsn }}"
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
+
+- name: install asdf_luajit
+  command: "bash -ilc 'asdf install lua {{ luajit_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/luajit/{{ luajit_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
 
