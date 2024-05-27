@@ -81,9 +81,3 @@
   command: "bash -ilc 'asdf reshim erlang {{erlang_vsn}}'"
   when: not_arm6
 
-# - name: install Debian Erlang on ARM6
-#   apt: name="{{item}}" state=latest
-#   with_items:
-#     - erlang
-#     - erlang-dev
-#   when: is_arm6

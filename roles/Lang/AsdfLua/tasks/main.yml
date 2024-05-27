@@ -1,6 +1,6 @@
 ---
 
-# AsdfLua
+# ----- AsdfLua
 
 - name: "install plugins for {{gen_user}}"
   command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
@@ -11,7 +11,6 @@
   ignore_errors: true
   with_items:
     - { name: lua    , repo: ""}
-    - { name: luajit , repo: ""}
 
 - name: install asdf_lua
   command: "bash -ilc 'asdf install lua {{ lua_vsn }}'"
@@ -20,11 +19,35 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
-- name: install asdf_luajit
-  command: "bash -ilc 'asdf install lua {{ luajit_vsn }}'"
-  args:
-    creates: "/home/{{gen_user}}/.asdf/installs/luajit/{{ luajit_vsn }}"
-    chdir: "/home/{{ gen_user }}"
-  become_user: "{{ gen_user }}"
+# ----- Luarocks 
 
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file
+  get_url:
+    url:  https://luarocks.github.io/luarocks/releases/luarocks-{{luarocks_vsn}}-linux-x86_64.zip
+    dest: /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}/release.zip
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: unzip
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}/release.zip
+    dest: /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}
+    creates: /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}/luarocks-{{luarocks_vsn}}-linux-x86_64/luarocks
+    remote_src: yes 
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/luarocks/luarocks-{{luarocks_vsn}}/luarocks-{{luarocks_vsn}}-linux-x86_64/luarocks
+    dest: /usr/bin/luarocks 
+    state: link 
+    force: yes
 
