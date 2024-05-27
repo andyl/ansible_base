@@ -4,5 +4,5 @@
 lua_vsn: 5.4.6
 
 # ----- luarocks 
-luarocks_vsn: 3.11.0
+luarocks_vsn: 3.7.0
 

@@ -1,0 +1,27 @@
+---
+
+# AsdfTreesitter
+
+# Set global version in ~/.tool-versions
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: tree-sitter , repo: ""}
+
+- name: update asdf tree-sitter plugin 
+  command: "bash -ilc 'asdf plugin update tree-sitter'"
+  become_user: "{{ gen_user }}"
+
+- name: install asdf_treesitter
+  command: "bash -ilc '.asdf/bin/asdf install tree-sitter {{tsit_vsn}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/tree-sitter/{{tsit_vsn}}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
