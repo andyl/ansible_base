@@ -62,7 +62,8 @@
 # ex_vsn: 1.16.1-otp-26  superseded 2024-03-10
 # ex_vsn: 1.16.2-otp-26  superseded 2024-05-20 
 # ex_vsn: 1.16.3-otp-26  superseded 2024-05-24
-ex_vsn: 1.17.0-rc.0-otp-27
+# ex_vsn: 1.17.0-rc.0--otp-27 superseded 2024-06-03
+ex_vsn: 1.17.0-rc.1-otp-27
 
 # ----- PHOENIX / mix hex.info phx_new
 # phx_vsn: 1.0.3      superseded 29 Sep 2015
