@@ -3,7 +3,8 @@
 # bat_vsn: 0.12.1  # superseded 2020 May 26
 # bat_vsn: 0.15.3  # superseded 2021 Nov 21 
 # bat_vsn: 0.18.3  # superseded 2023 Jun 08
-bat_vsn: 0.23.0 
+# bat_vsn: 0.23.0  # superseded 2024 Jun 03 
+bat_vsn: 0.24.0 
 
 # fd_vsn: 7.1.0    # superseded 2019 Oct 30
 # fd_vsn: 7.4.0    # superseded 2020 May 26
@@ -13,7 +14,8 @@ fd_vsn: 8.7.0
 # rg_vsn: 11.0.1   # superseded 2019 Oct 30
 # rg_vsn: 11.0.2   # superseded 2020 May 26
 # rg_vsn: 12.1.0   # superseded 2022 Jan 03
-rg_vsn: 13.0.0
+# rg_vsn: 13.0.0   # superseded 2024 Jun 03 
+rg_vsn: 14.1.0
 
 # btop_vsn: 1.0.15 # superseded 2023 Jun 08
 btop_vsn: 1.2.13 
