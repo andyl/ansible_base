@@ -1,6 +1,7 @@
 ---
 
 # obsidian
+# https://github.com/obsidianmd/obsidian-releases/releases 
 
 - name: create pkg dir
   file: 
