@@ -1,31 +1,31 @@
 ---
 
-# arduino
+# arduino - arduino.cc
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg 
+    path: /home/{{gen_user}}/.pkg/arduino
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get tar file
+- name: get Arduino AppImage
   get_url: 
-    url: http://downloads.arduino.cc/arduino-{{arduino_version}}-linux64.tar.xz
-    dest: /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}.tar.xz
+    url:  https://github.com/arduino/arduino-ide/releases/download/{{arduino_vsn}}/arduino-ide_{{arduino_vsn}}_Linux_64bit.AppImage
+    dest: /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: untar package
-  unarchive:
-    src:     /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}.tar.xz 
-    dest:    /home/{{gen_user}}/.pkg
-    creates: /home/{{gen_user}}/.pkg/arduino-{{arduino_version}}
-    group:   "{{gen_user}}"
-    owner:   "{{gen_user}}"
+- name: set AppImage permissions
+  file: 
+    path: /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
+    mode: 'a+rx'
 
-- name: install packagae
-  command: "/home/{{gen_user}}/.pkg/arduino-{{arduino_version}}/install.sh"
+- name: create executable symlink
+  file: 
+    dest:  /usr/bin/arduino 
+    src:   /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
+    state: link 
 
 - name: install pip modules 
   pip: name="{{item}}" state=latest

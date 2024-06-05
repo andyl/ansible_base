@@ -1,4 +1,8 @@
 ---
 
-arduino_version: 1.8.9
+# http://arduino.cc
+# https://github.com/arduino/arduino-ide/releases
+
+# arduino_vsn: 1.8.9  superseded 2024 Jun 05 Wed
+arduino_vsn: 2.3.2
 
