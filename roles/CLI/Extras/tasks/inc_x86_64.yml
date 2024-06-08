@@ -12,6 +12,7 @@
     - bat
     - fd
     - rg
+    - gum
     - btop
     - btop/btop_{{btop_vsn}}
 
@@ -48,14 +49,29 @@
 
 - name: get rg deb file
   get_url: 
-    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep_{{rg_vsn}}-1_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
+    url:   https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep_{{rg_vsn}}-1_amd64.deb
+    dest:  /home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install rg
   apt: deb=/home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
+  become: true
+  ignore_errors: true 
+  
+# ----- gum -----
+
+- name: get gum deb file
+  get_url: 
+    url:   https://github.com/charmbracelet/gum/releases/download/v{{gum_vsn}}/gum_{{gum_vsn}}_amd64.deb 
+    dest:  /home/{{gen_user}}/.pkg/gum/gum_{{gum_vsn}}.deb
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install gum
+  apt: deb=/home/{{gen_user}}/.pkg/gum/gum_{{gum_vsn}}.deb
   become: true
   ignore_errors: true 
 
