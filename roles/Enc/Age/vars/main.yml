@@ -1,10 +1,7 @@
 ---
 
 # https://github.com/FiloSottile/age/releases
-
 age_vsn: 1.1.1 
 
-
 # https://github.com/slok/agebox/releases 
-
 agebox_vsn: 0.6.1 

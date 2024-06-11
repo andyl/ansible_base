@@ -1,0 +1,5 @@
+---
+# https://developer.hashicorp.com/packer/downloads 
+
+# pkr_vsn: 1.9.4  superseded 2024 Jun 11 Tue
+pkr_vsn: 1.11.0

@@ -20,14 +20,14 @@
     owner: "{{gen_user}}"
 
 - name: unzip AWS-CLI file
-  become: no
+  become: false
   unarchive:
     src:  /home/{{gen_user}}/.pkg/aws/awscliv2.zip
     dest: /home/{{gen_user}}/.pkg/aws
     remote_src: true
 
 - name:  install AWS-CLI
-  become:  yes
+  become:  true
   shell:   ./install
   args:
     chdir:   /home/{{gen_user}}/.pkg/aws/aws
