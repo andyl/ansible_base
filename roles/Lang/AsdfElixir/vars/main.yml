@@ -65,6 +65,8 @@
 ex_vsn: 1.17.0-otp-27
 
 # ----- PHOENIX / mix hex.info phx_new
+# https://github.com/phoenixframework/phoenix/tags
+#
 # phx_vsn: 1.0.3      superseded 29 Sep 2015
 # phx_vsn: 1.0.4      superseded 16 Dec 2015
 # phx_vsn: 1.1.0      superseded 08 Jan 2016
