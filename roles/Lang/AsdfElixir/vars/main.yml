@@ -96,7 +96,8 @@ phx_vsn: 1.7.12
 
 # ----- TABLEAU / mix hex.info tableau_new 
 # tblu_vsn: 1.0.2     superseded 20 May 2024
-tblu_vsn: 1.1.0
+# tblu_vsn: 1.1.0     superseded 18 Jun 2024
+tblu_vsn: 1.2.0
   
 # ----- EX_SERVER / mix hex.info ex_server
 exsrv_vsn: 0.2.0 
