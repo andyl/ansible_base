@@ -36,3 +36,5 @@
 - name: install lazygit
   include_tasks: lazygit.yml
 
+- name: install act
+  include_tasks: act.yml
