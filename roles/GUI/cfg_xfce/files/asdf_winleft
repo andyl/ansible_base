@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# INSTALLED BY ANSIBLE
+# SOURCE IN `files/asdf_winleft`
+
+# For use with XFCE keyboard shortcuts
+# asdf_winleft 
+
+bash -ic "/home/aleak/util/code_util/bin/winleft"

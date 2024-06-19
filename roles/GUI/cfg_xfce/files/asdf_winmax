@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # INSTALLED BY ANSIBLE
-# SOURCE IN `Lang/AsdfRuby/files/asdf_winmax`
+# SOURCE IN `files/asdf_winmax`
 
 # For use with XFCE keyboard shortcuts
 # asdf_winmax 

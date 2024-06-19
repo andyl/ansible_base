@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# INSTALLED BY ANSIBLE
+# SOURCE IN `files/asdf_winright`
+
+# For use with XFCE keyboard shortcuts
+# asdf_winright 
+
+bash -ic "/home/aleak/util/code_util/bin/winright"

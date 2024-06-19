@@ -43,4 +43,6 @@
     - asdf_xftile 
     - asdf_winmax 
     - asdf_winfull
+    - asdf_winright
+    - asdf_winleft
 

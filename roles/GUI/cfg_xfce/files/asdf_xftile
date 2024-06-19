@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # INSTALLED BY ANSIBLE
-# SOURCE IN `Lang/AsdfRuby/files/asdf_xftile`
+# SOURCE IN `files/asdf_xftile`
 
 # For use with XFCE keyboard shortcuts
 # asdf_xftile left
