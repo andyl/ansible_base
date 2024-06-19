@@ -2,6 +2,10 @@
 
 # gui_cfg_xfce
 
+# relevant tools
+# 1. xfconf-query 
+# 2. xfce4-manager-editor
+
 - name: create a config directory
   file: path=/home/{{sys_user}}/.config state=directory group={{sys_user}} owner={{sys_user}}
 
@@ -30,6 +34,13 @@
   lineinfile: dest=/home/{{sys_user}}/.config/xfce4/panel/whiskermenu-1.rc regexp="^button-title=" line="button-title={{ansible_hostname}}"
   changed_when: false
 
-# relevant tools
-# 1. xfconf-query 
-# 2. xfce4-manager-editor
+- name: install shims for keyboard accelerators
+  copy:
+    src:  {{item}}
+    dest: /usr/local/bin/{{item}}
+    mode: 'a+rx'
+  with_items: 
+    - asdf_xftile 
+    - asdf_winmax 
+    - asdf_winfull
+
