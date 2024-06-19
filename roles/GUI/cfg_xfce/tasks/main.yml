@@ -25,10 +25,10 @@
   synchronize: src=/home/{{lcl_user}}/.config/user-dirs.dirs dest=/home/{{sys_user}}/.config
   when: lcl_hostname != ansible_hostname
 
-- name: rsync .local/share/applications
-  become: false
-  synchronize: src=/home/{{lcl_user}}/.local/share/applications dest=/home/{{sys_user}}/.local/share
-  when: lcl_hostname != ansible_hostname
+# - name: rsync .local/share/applications
+#   become: false
+#   synchronize: src=/home/{{lcl_user}}/.local/share/applications dest=/home/{{sys_user}}/.local/share
+#   when: lcl_hostname != ansible_hostname
 
 - name: add hostname to panel
   lineinfile: dest=/home/{{sys_user}}/.config/xfce4/panel/whiskermenu-1.rc regexp="^button-title=" line="button-title={{ansible_hostname}}"
@@ -36,7 +36,7 @@
 
 - name: install shims for keyboard accelerators
   copy:
-    src:  {{item}}
+    src:  "{{item}}"
     dest: /usr/local/bin/{{item}}
     mode: 'a+rx'
   with_items: 
