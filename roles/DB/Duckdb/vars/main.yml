@@ -1,3 +1,7 @@
 ---
 
-duckdb_vsn: 0.7.1
+# https://github.com/duckdb/duckdb/releases
+
+# duckdb_vsn: 0.7.1     superseded 2024 Jun 20 Thu
+duckdb_vsn: 1.0.0
+
