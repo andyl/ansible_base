@@ -79,3 +79,14 @@
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_new-{{tblu_vsn}}
     chdir: "/home/{{gen_user}}"
 
+  # -------------------------------------------------------
+  # igniter 
+  # https://github.com/ash-project/igniter
+- name: install igniter_new
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install hex igniter_new {{igniter_vsn}} --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/igniter_new-{{igniter_vsn}}
+    chdir: "/home/{{gen_user}}"
+

@@ -102,3 +102,5 @@ tblu_vsn: 1.2.0
 # ----- EX_SERVER / mix hex.info ex_server
 exsrv_vsn: 0.2.0 
 
+# ----- IGNITER / mix hex.info igniter_new
+igniter_vsn: 0.2.1 
