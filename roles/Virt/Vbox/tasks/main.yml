@@ -30,4 +30,5 @@
   become: true
   with_items:
     - virtualbox-7.0
+    - virtualbox-guest-additions-iso
 
