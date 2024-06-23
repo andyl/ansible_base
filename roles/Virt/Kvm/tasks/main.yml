@@ -1,10 +1,6 @@
 ---
 
 # kvm
-# 
-# after installing:
-# vagrant plugin install vagrant-libvirt
-# vagrant plugin install vagrant-mutate
 
 - name: install support packages
   apt: pkg={{item}} state=latest install_recommends=yes
