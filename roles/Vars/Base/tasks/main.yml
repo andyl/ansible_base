@@ -3,8 +3,8 @@
 # Vars/Base
 
 - name: Predicate Vars
-  include: predicate.yml
+  include_tasks: predicate.yml
 
 - name: Hostname Vars
-  include: hostname.yml
+  include_tasks: hostname.yml
 
