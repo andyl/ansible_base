@@ -1,7 +1,9 @@
-# The ANSIBLE Directory
+# The ANS_VVM Directory
 
 This directory is READ-ONLY, intended for use with Vagrant/Ansible
 provisioning.
+
+Working files are on the host at ~/VVM/<myimage>. 
 
 The contents here will be over-written every time the Vagrant/Ansible
 provisioner runs.
