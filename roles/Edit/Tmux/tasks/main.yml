@@ -58,21 +58,20 @@
 #   become: true
 #   when: is_x86_64
 
-- name: create tmate symlink 
-  file: 
-    src:   /home/{{gen_user}}/.pkg/tmux/tmate-{{tmate_vsn}}
-    dest:  /usr/bin/tmate
-    state: link
-    force: yes
-  become: true
-  when: is_x86_64
+# - name: create tmate symlink 
+#   file: 
+#     src:   /home/{{gen_user}}/.pkg/tmux/tmate-{{tmate_vsn}}
+#     dest:  /usr/bin/tmate
+#     state: link
+#     force: yes
+#   become: true
+#   when: is_x86_64
 
-- name: create upterm symlink 
-  file: 
-    src:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}/upterm
-    dest:  /usr/bin/upterm
-    state: link
-    force: yes
-  become: true
-  when: is_x86_64
-
+# - name: create upterm symlink 
+#   file: 
+#     src:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}/upterm
+#     dest:  /usr/bin/upterm
+#     state: link
+#     force: yes
+#   become: true
+#   when: is_x86_64
