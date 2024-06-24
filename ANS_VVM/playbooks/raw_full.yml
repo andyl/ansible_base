@@ -22,20 +22,20 @@
   roles:
     - Vars/Base          # variables
     - User/Setup         # gen user account and SSH keys
-    # - Lang/Ruby/SysRuby  # install system ruby 
-    # - Cli/Pkg            # install common packages
-    # - Cli/Extras         # install extra tools 
-    # - Cli/Tzone          # setup timezone 
-    # - Cli/Git            # install and configure git 
-    # - Cicd/Github        # install Github cli 
-    # - Util/Base          # install base utilities 
-    # - Util/Init          # initialize bash shell 
-    # - Lang/Asdf          # install asdf version manager
-    # - Lang/AsdfErlang    # install erlang 
+    - Lang/Ruby/SysRuby  # install system ruby 
+    - Cli/Pkg            # install common packages
+    - Cli/Extras         # install extra tools 
+    - Cli/Tzone          # setup timezone 
+    - Cli/Git            # install and configure git 
+    - Cicd/Github        # install Github cli 
+    - Util/Base          # install base utilities 
+    - Util/Init          # initialize bash shell 
+    - Lang/Asdf          # install asdf version manager
+    - Lang/AsdfErlang    # install erlang 
     - Lang/AsdfElixir    # install elixir 
-    # - Lang/Pip           # python package manager 
-    # - Edit/Tmux          # terminal multiplexer
-    # - Edit/Neovim        # editor
-    # - Enc/Age            # encryption tool
-    # - Enc/SopsPkg        # encryption tool 
-    # - Virt/Docker        # container execution
+    - Lang/Pip           # python package manager 
+    - Edit/Tmux          # terminal multiplexer
+    - Edit/Neovim        # editor
+    - Enc/Age            # encryption tool
+    - Enc/SopsPkg        # encryption tool 
+    - Virt/Docker        # container execution
