@@ -2,19 +2,29 @@
 
 # NOTE: tmux.conf is in ~/util/base_util/cfg/_tmux.conf
 
+# ----- for LAN hosts
+- name: remove APT tmux
+  become: true
+  apt:  
+    pkg: tmux 
+    state: absent
+  when: is_lanhost
+
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/tmux
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_lanhost
 
-- name: install tmux executable
+- name: install cached tmux executable
   get_url:
     url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}
     dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
     mode: "a+rx"
   become: false
+  when: is_lanhost
 
 - name: create tmux symlink 
   file: 
@@ -23,6 +33,17 @@
     state: link
     force: yes
   become: true
+  when: is_lanhost
+
+# ----- off-LAN hosts
+
+- name: install tmux from APT
+  become: true
+  apt:  
+    pkg: tmux 
+    state: latest 
+    install_recommends: yes
+  when: not is_lanhost
 
 # tmate 
 # https://tmate.io
