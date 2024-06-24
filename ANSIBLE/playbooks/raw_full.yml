@@ -23,11 +23,11 @@
     - Vars/Base        # variables
     - User/Setup       # gen_user account and SSH keys
     - Lang/Ruby/SysRuby     
-    - CLI/Pkg        
-    - CLI/Extras  
-    - CLI/Tzone    
-    - CLI/Github
-    - CLI/Git
+    - Cli/Pkg        
+    - Cli/Extras  
+    - Cli/Tzone    
+    - Cli/Github
+    - Cli/Git
     - Util/Base
     - Util/Code
     - Util/Date
