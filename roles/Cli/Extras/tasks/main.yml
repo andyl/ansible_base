@@ -3,7 +3,7 @@
 # Extras
 
 - name: extras for x86_64
-  include: inc_x86_64.yml
+  include_tasks: inc_x86_64.yml
   when: is_x86_64
 
 # - name: extras for arm7

@@ -3,5 +3,5 @@
 # nginx
 
 - name: nginx base tasks
-  include: base.yml
+  include_tasks: base.yml
 

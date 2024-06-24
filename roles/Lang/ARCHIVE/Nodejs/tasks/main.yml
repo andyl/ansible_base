@@ -3,10 +3,10 @@
 # nodejs
 
 - name: node for ubuntu
-  include: node_ubu.yml
+  include_tasks: node_ubu.yml
   when: is_ubuntu
 
 - name: node for rpi
-  include: node_rpi.yml
+  include_tasks: node_rpi.yml
   when: is_rpi
 

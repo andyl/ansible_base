@@ -3,11 +3,11 @@
 # docker
 
 - name: install docker and docker-compose
-  include: docker.yml
+  include_tasks: docker.yml
 
 - name: install lazydocker
-  include: lazydocker.yml
+  include_tasks: lazydocker.yml
 
 - name: install docker_gen
-  include: docker_gen.yml
+  include_tasks: docker_gen.yml
 

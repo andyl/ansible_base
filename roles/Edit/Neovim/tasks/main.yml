@@ -17,7 +17,7 @@
     owner: "{{gen_user}}"
 
 - name: nvim for x86 systems
-  include: nvim_x86.yml
+  include_tasks: nvim_x86.yml
   when: is_x86
 
 # - name: nvim for ARM7 systems

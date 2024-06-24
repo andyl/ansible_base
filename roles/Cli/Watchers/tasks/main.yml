@@ -6,7 +6,7 @@
 #   include: inc_fswatch.yml
 
 - name: entr
-  include: inc_entr.yml
+  include_tasks: inc_entr.yml
 
 # - name: watchexec
 #   include: inc_watchexec.yml
