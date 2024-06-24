@@ -41,12 +41,19 @@
   with_items:
     - { name: erlang , repo: ""} 
 
+- name: add support packages
+  apt: pkg={{item}} state=latest force=yes
+  with_items:
+    - libwxgtk-webview3.0-gtk3-0v5
+
+# ----- Use cached version of ruby
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/asdf_erlang
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_lanhost
 
 - name: create installs dir
   file: 
@@ -54,11 +61,7 @@
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-
-- name: add support packages
-  apt: pkg={{item}} state=latest force=yes
-  with_items:
-    - libwxgtk-webview3.0-gtk3-0v5
+  when: is_lanhost
 
 - name: get ASDF erlang
   become_user: "{{gen_user}}"
@@ -66,6 +69,7 @@
     url:  http://{{cblob_host}}/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
   when: not_arm6
+  when: is_lanhost
 
 - name: untar ASDF erlang
   become_user: "{{gen_user}}"
@@ -74,10 +78,20 @@
     dest: /home/{{gen_user}}/.asdf/installs/erlang
     creates: /home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}
     remote_src: true
-  when: not_arm6
+  when: is_lanhost
+  
+# ----- Install erlang from scratch 
+- name: install erlang from scratch 
+  command: "bash -ilc '.asdf/bin/asdf install erlang {{erlang_vsn}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+  when: not is_lanhost
 
+# ----- Common Tasks 
 - name: reshim
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim erlang {{erlang_vsn}}'"
-  when: not_arm6
+  when: is_lanhost
 

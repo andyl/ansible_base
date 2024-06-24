@@ -31,12 +31,14 @@
   with_items:
     - { name: ruby   , repo: ""}
 
+# ----- Use cached version of ruby
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/asdf_ruby
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_lanhost
 
 - name: create installs dir
   file: 
@@ -44,12 +46,14 @@
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: is_lanhost
 
 - name: get ruby tarfile from cblob host
   become_user: "{{gen_user}}"
   get_url:
     url:  http://{{cblob_host}}/asdf_ruby/ruby_{{ruby_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/asdf_ruby/ruby_{{ruby_vsn}}_{{host_arch}}.tar.gz
+  when: is_lanhost
 
 - name: untar ruby
   become_user: "{{gen_user}}"
@@ -58,7 +62,18 @@
     dest: /home/{{gen_user}}/.asdf/installs/ruby
     creates: /home/{{gen_user}}/.asdf/installs/ruby/{{ruby_vsn}}
     remote_src: true
+  when: is_lanhost
 
+# ----- Install ruby from scratch 
+- name: install ruby from scratch 
+  command: "bash -ilc '.asdf/bin/asdf install ruby {{ruby_vsn}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ruby_vsn}}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+  when: not is_lanhost
+
+# ----- Common Task 
 - name: reshim
   become_user: "{{gen_user}}"
   command: "bash -ilc 'asdf reshim ruby {{ruby_vsn}}'"

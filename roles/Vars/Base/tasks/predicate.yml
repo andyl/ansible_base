@@ -31,6 +31,4 @@
     is_debian_10:      "'{{ansible_distribution_version}}' == '10' and {{is_debian|bool}}"
     is_ubuntu_1804:    "'{{ansible_distribution_version}}' == '18.04' and {{is_ubuntu|bool}}"
     is_ubuntu_2004:    "'{{ansible_distribution_version}}' == '20.04' and {{is_ubuntu|bool}}"
-    # is_xu4:            "'{{ansible_processor_count}}'      == '8'     and {{is_arm7|bool}}"
-    # not_xu4:           "'{{ansible_processor_count}}'      != '8'     or  {{not_arm7|bool}}"
     copyable_hostkey:  "{{ansible_remote}} and {{hostkey.stat.exists}}"
