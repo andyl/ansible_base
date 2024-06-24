@@ -5,5 +5,5 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR
 
-ANSIBLE_ROLES_DIR=~/util/x-ansible/roles ansible-playbook -i "localhost," -c local /vagrant/ANSIBLE/playbooks/raw_base.yml
+ANSIBLE_ROLES_PATH=~/util/x-ansible/roles ansible-playbook -i "localhost," -c local /vagrant/ANSIBLE/playbooks/raw_base.yml
 

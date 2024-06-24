@@ -14,9 +14,9 @@
 
 - hosts: all
   vars:
-    - sys_user: vagrant
-    - gen_user: vagrant
-    - lcl_user: "{{ lookup('env', 'USER') }}"
+    sys_user: vagrant
+    gen_user: vagrant
+    lcl_user: "{{ lookup('env', 'USER') }}"
   remote_user:  "{{sys_user}}"
   become: true
   roles:
