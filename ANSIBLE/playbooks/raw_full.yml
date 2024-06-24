@@ -26,6 +26,7 @@
     - Cli/Pkg        
     - Cli/Extras  
     - Cli/Tzone    
+    - Cli/Github
     - Cli/Git
     - Util/Base
     - Util/Code
