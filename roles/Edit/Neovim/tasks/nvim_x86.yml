@@ -6,7 +6,8 @@
 
 - name: get appimage file
   get_url: 
-    url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
+   #url:  http://{{cblob_host}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
+    url:  https://github.com/neovim/neovim/releases/download/{{nvim_vsn}}/nvim.appimage
     dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
     mode: "a+rx"
     group: "{{gen_user}}"
