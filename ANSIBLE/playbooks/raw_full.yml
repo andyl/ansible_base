@@ -1,5 +1,5 @@
 --- 
-# VAGRANT/ANSIBLE PROVISIONING - UBUNTU 18.04 SERVER
+# VAGRANT/ANSIBLE PROVISIONING - UBUNTU 22.04 SERVER
 #
 # TO BRING UP A NEW MACHINE
 # create deploy user on new ubuntu machine:
@@ -20,32 +20,25 @@
   remote_user:  "{{sys_user}}"
   become: true
   roles:
-    - Vars/Predicates
-    - Vars/Hostname
-    - Vars/Dump
-    - User/Setup
-    - Ruby/SysRuby     
-    - Ruby/Gems     
+    - Vars/Base        # variables
+    - User/Setup       # gen_user account and SSH keys
+    - Lang/Ruby/SysRuby     
     - CLI/Pkg        
-    - CLI/UtilBase  
-    - CLI/UtilCode 
     - CLI/Extras  
     - CLI/Tzone    
+    - CLI/Github
+    - CLI/Git
+    - Util/Base
+    - Util/Code
+    - Util/Date
+    - Util/Init
     - Lang/Asdf          
     - Lang/AsdfRuby     
     - Lang/AsdfErlang
     - Lang/AsdfElixir  
-    - Lang/AsdfRust   
-    - Lang/AsdfLua
-    - Lang/AsdfGolang
     - Lang/Pip        
-    - Lang/ElixirLs
-    - Lang/Phoenix
     - Edit/Tmux     
     - Edit/Neovim  
-    - Edit/Vim    
-    - DB/Sqlite        
-    - DB/Influx     
-    - DB/Postgres  
-    - Sys/Sops          
+    - Enc/Age
+    - Enc/SopsPkg
     - Virt/Docker     
