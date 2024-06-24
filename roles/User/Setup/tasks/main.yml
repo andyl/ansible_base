@@ -5,10 +5,10 @@
 # 2) ssh-copy-id from lcl_host to tgt_host
 
 - name: setup {{sys_user}}
-  include: setup.yml alt_user="{{sys_user}}"
+  include_tasks: setup.yml alt_user="{{sys_user}}"
 
 - name: setup {{gen_user}}
-  include: setup.yml alt_user="{{gen_user}}"
+  include_tasks: setup.yml alt_user="{{gen_user}}"
   when: gen_user != sys_user
 
 # - name: base packages for all users
