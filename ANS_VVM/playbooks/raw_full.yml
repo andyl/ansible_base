@@ -31,8 +31,8 @@
     # - Util/Base          # install base utilities 
     # - Util/Init          # initialize bash shell 
     # - Lang/Asdf          # install asdf version manager
-    - Lang/AsdfErlang    # install erlang 
-    # - Lang/AsdfElixir    # install elixir 
+    # - Lang/AsdfErlang    # install erlang 
+    - Lang/AsdfElixir    # install elixir 
     # - Lang/Pip           # python package manager 
     # - Edit/Tmux          # terminal multiplexer
     # - Edit/Neovim        # editor

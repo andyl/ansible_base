@@ -29,11 +29,13 @@
   become_user: "{{gen_user}}"
   command: "bash -ilc 'mix local.hex --force --if-missing'"
   ignore_errors: true 
+  when: is_lanhost
 
 - name: install rebar
   become_user: "{{gen_user}}"
   command: "bash -ilc 'mix local.rebar --force --if-missing'"
   ignore_errors: true 
+  when: is_lanhost
 
   # -------------------------------------------------------
   # bash completions for mix
@@ -53,6 +55,7 @@
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
     chdir: "/home/{{gen_user}}"
+  when: is_lanhost
     
   # -------------------------------------------------------
   # phoenix
@@ -67,6 +70,7 @@
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/phx_new-{{phx_vsn}}
     chdir: "/home/{{gen_user}}"
+  when: is_lanhost
 
   # -------------------------------------------------------
   # tableau 
@@ -78,6 +82,7 @@
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_new-{{tblu_vsn}}
     chdir: "/home/{{gen_user}}"
+  when: is_lanhost
 
   # -------------------------------------------------------
   # igniter 
@@ -89,4 +94,5 @@
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/igniter_new-{{igniter_vsn}}
     chdir: "/home/{{gen_user}}"
+  when: is_lanhost
 
