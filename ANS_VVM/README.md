@@ -1,5 +1,21 @@
 # The ANS_VVM Directory
 
+## About Vagrant 
+
+Vagrant is an Infrastructure-As-Code tool for generating a virtual machine.
+Vagrant is simple, works best on a single desktop using VirtualBox to build and
+test.
+
+We also use Packer to generate machine images.  Packer is more complicated, but
+is well suited to generate machine images for cloud services like Proxmox, AWS
+and Digital Ocean.
+
+## The purpose of ANS_VVM 
+
+
+
+Vagrant is simpler 
+
 This directory is READ-ONLY, intended for use with Vagrant/Ansible
 provisioning.
 
