@@ -10,14 +10,17 @@ We also use Packer to generate machine images.  Packer is more complicated, but
 is well suited to generate machine images for cloud services like Proxmox, AWS
 and Digital Ocean.
 
-## The purpose of ANS_VVM 
+Use Vagrant 
+
+## About ANS_VVM 
 
 This Vagrant tooling is organized under two directories:  
 
-| Path               | Purpose                                           |
-|--------------------|---------------------------------------------------|
-| `~/VVM`            | Vagrantfiles to generate various virtual machines |
-| `~/util/x-ansible` | ansible configuration playbooks and roles         |
+| Path                       | Purpose                                   |
+|----------------------------|-------------------------------------------|
+| `~/VVM`                    | Vagrantfiles to build virtual machines    |
+| `~/util/x-ansible`         | ansible configuration playbooks and roles |
+| `~/util/x-ansible/ANS_VVM` | configs for Vagrant auto-provision        |
 
 The Vagrantfile mounts these directories:
 
