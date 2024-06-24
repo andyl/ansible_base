@@ -12,24 +12,19 @@ and Digital Ocean.
 
 ## The purpose of ANS_VVM 
 
+This Vagrant tooling is organized under two directories:  
 
+| Path               | Purpose                                           |
+|--------------------|---------------------------------------------------|
+| `~/VVM`            | Vagrantfiles to generate various virtual machines |
+| `~/util/x-ansible` | ansible configuration playbooks and roles         |
 
-Vagrant is simpler 
+The Vagrantfile mounts these directories:
 
-This directory is READ-ONLY, intended for use with Vagrant/Ansible
-provisioning.
+| Guest Target     | Host Source         |
+|------------------|---------------------|
+| `/vvm/config`    | `~/VVM/<my_vm_dir>` |
+| `/vvm/x-ansible` | `~/util/x-ansible`  |
 
-Working files are on the host at ~/VVM/<myimage>. 
-
-The contents here will be over-written every time the Vagrant/Ansible
-provisioner runs.
-
-To customize the Vagrant/Ansible provisioning:
-
-- copy this directory to an alternative directory (like `ansible`)
-- update the `Vagrantfile` to point to the new directory
-- edit the playbook and config file to your desires and re-run the provisioner
-
-Note: on the guest, the host directory (with the `Vagrantfile` is mounted at
-`/vagrant`)
+Ansible playbooks and config scripts are located in `/vvm/x-ansible/ANS_VVM`
 

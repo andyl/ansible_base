@@ -21,16 +21,16 @@
   become: true
   roles:
     - Vars/Base        # variables
-    - User/Setup       # gen_user account and SSH keys
-    - User/Keys
-    - Lang/Ruby/SysRuby     
-    - Cli/Pkg        
-    - Cli/Extras  
-    - Cli/Tzone    
-    - Cli/Git
-    - Cicd/Github
+    # - User/Setup       # gen_user account and SSH keys
+    # - Lang/Ruby/SysRuby     
+    # - Cli/Pkg        
+    # - Cli/Extras  
+    # - Cli/Tzone    
+    # - Cli/Git
+    # - Cicd/Github
+
     - Util/Base
-    - Util/Code
+    # - Util/Code
     - Lang/Asdf          
     - Lang/AsdfRuby     
     - Lang/AsdfErlang
