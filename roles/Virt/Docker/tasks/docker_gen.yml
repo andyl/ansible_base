@@ -8,11 +8,5 @@
     url:  "http://{{cblob_host}}/docker/docker-gen-amd64-{{dockergen_vsn}}"
     dest: /usr/local/bin/docker-gen
     mode: "a+rx"
-  when: is_x86
+  when: is_lanhost
 
-- name: install docker-gen for arm7
-  get_url:
-    url:  "http://{{cblob_host}}/docker/docker-gen-armhf-{{dockergen_vsn}}"
-    dest: /usr/local/bin/docker-gen
-    mode: "a+rx"
-  when: is_arm7
