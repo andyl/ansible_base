@@ -10,4 +10,3 @@
     update: yes
     version: "v{{asdf_vsn}}"
 
-

@@ -32,3 +32,8 @@
     is_ubuntu_1804:    "'{{ansible_distribution_version}}' == '18.04' and {{is_ubuntu|bool}}"
     is_ubuntu_2004:    "'{{ansible_distribution_version}}' == '20.04' and {{is_ubuntu|bool}}"
     copyable_hostkey:  "{{ansible_remote}} and {{hostkey.stat.exists}}"
+
+- name: default values
+  set_fact: 
+    is_lanhost: false 
+  when: is_lanhost is undefined

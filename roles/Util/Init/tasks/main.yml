@@ -26,4 +26,5 @@
 - name: run set_zhosts 
   become_user: "{{gen_user}}" 
   shell: /home/{{gen_user}}/util/code_util/bin/set_zhosts
+  when: is_lanhost
 
