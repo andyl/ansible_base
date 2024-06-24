@@ -26,8 +26,8 @@
     - Cli/Pkg        
     - Cli/Extras  
     - Cli/Tzone    
-    - Cli/Github
     - Cli/Git
+    - Cicd/Github
     - Util/Base
     - Util/Code
     - Lang/Asdf          
