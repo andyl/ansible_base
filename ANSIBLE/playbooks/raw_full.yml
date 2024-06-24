@@ -22,6 +22,7 @@
   roles:
     - Vars/Base        # variables
     - User/Setup       # gen_user account and SSH keys
+    - User/Keys
     - Lang/Ruby/SysRuby     
     - Cli/Pkg        
     - Cli/Extras  
