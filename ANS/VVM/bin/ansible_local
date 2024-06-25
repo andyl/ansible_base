@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Run ansible on localhost
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR
+
+ANSIBLE_ROLES_PATH=/vvm/x-ansible/roles ansible-playbook -i "localhost," -c local /vvm/x-ansible/ANS_VVM/playbooks/raw_full.yml -vvv
+

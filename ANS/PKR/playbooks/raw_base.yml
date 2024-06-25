@@ -1,0 +1,24 @@
+--- 
+# VAGRANT/ANSIBLE PROVISIONING - UBUNTU 22.04 SERVER
+#
+# TO BRING UP A NEW MACHINE
+# create deploy user on new ubuntu machine:
+# > sudo useradd -m <username>
+# > sudo su
+# $ passwd <username>            # update <passwd>
+# $ usermod -aG sudo <username>  # add to admin or sudo group 
+# $ exit
+#
+# DNS Setup: update /etc/hosts OR local DNSMASQ
+#
+
+- hosts: all
+  vars:
+    sys_user: vagrant
+    gen_user: vagrant
+    lcl_user: "{{ lookup('env', 'USER') }}"
+  remote_user:  "{{sys_user}}"
+  become: true
+  roles:
+    - Vars/Base        # variables
+    - User/Setup       # gen_user account and SSH keys
