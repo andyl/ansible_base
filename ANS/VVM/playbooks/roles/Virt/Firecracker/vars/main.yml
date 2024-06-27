@@ -1,0 +1,4 @@
+---
+# firecracker_vsn: 0.11.0    # superseded 2018 Dec 18
+# firecracker_vsn: 0.12.0    # superseded 2019 Oct 17
+firecracker_vsn: 0.19.0

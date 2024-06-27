@@ -1,0 +1,21 @@
+---
+
+# AsdfGolang
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: golang , repo: ""}
+
+- name: install asdf_golang
+  command: "bash -ilc 'asdf install golang {{ golang_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/golang/{{ golang_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

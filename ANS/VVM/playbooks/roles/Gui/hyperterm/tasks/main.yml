@@ -1,0 +1,22 @@
+---
+
+# hyper
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/hyper
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get deb file
+  get_url:
+    url:  https://github.com/vercel/hyper/releases/download/{{hyper_vsn}}/hyper_{{hyper_vsn}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/hyper/hyper_{{hyper_vsn}}_amd64.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install hyper package
+  apt: 
+    deb: /home/{{gen_user}}/.pkg/hyper/hyper_{{hyper_vsn}}_amd64.deb
+

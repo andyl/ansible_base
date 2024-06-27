@@ -1,0 +1,37 @@
+---
+
+# sdrpp - SDR++
+# https://github.com/AlexandreRouma/SDRPlusPlus/releases
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/sdrpp
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get deb file
+  get_url:
+    url:  https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/{{sdrpp_vsn}}/sdrpp_ubuntu_focal_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/sdrpp/sdrpp_{{sdrpp_vsn}}_amd64.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install dependencies
+  become: true
+  apt:  pkg={{item}} install_recommends=yes
+  with_items:
+    - libfftw3-dev 
+    - libglfw3-dev 
+    - libvolk2-dev 
+    - libsoapysdr-dev 
+    - libairspyhf-dev 
+    - libiio-dev 
+    - libad9361-dev 
+    - librtaudio-dev 
+    - libhackrf-dev
+
+- name: install sdrpp package
+  apt: 
+    deb: /home/{{gen_user}}/.pkg/sdrpp/sdrpp_{{sdrpp_vsn}}_amd64.deb
+

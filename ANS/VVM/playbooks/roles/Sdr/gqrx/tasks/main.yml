@@ -1,0 +1,27 @@
+---
+
+# gqrx
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/gqrx"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get appimage file
+  get_url: 
+    url: https://github.com/gqrx-sdr/gqrx/releases/download/v{{gqrx_vsn}}/Gqrx-{{gqrx_vsn}}-x86_64.AppImage
+    dest: /home/{{gen_user}}/.pkg/gqrx/gqrx-{{gqrx_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/gqrx/gqrx-{{gqrx_vsn}}.appimage
+    dest:  /usr/local/bin/gqrx
+    state: link
+    force: yes
+    mode:  "a+rx"
+

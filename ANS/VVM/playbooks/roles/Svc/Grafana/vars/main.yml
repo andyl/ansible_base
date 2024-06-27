@@ -1,0 +1,48 @@
+---
+
+# see https://grafana.com/grafana/download
+
+# grafana_version: 2.0.2 superseded 2015-08-18
+# grafana_version: 2.1.1 superseded 2015-10-28
+# grafana_version: 2.5.0 superseded 2015-12-14
+# grafana_version: 2.6.0 superseded 2016-04-02
+# grafana_version: 3.0.0 superseded 2016-05-12
+# grafana_version: 3.0.1 superseded 2016-05-23
+# grafana_version: 3.0.3 superseded 2016-07-12
+# grafana_version: 3.1.0 superseded 2016-11-09
+# grafana_version: 3.1.1 superseded 2016-11-22
+# grafana_version: 4.0.B superseded 2016-11-29
+# grafana_version: 4.0.0 superseded 2016-12-08
+# grafana_version: 4.0.2 superseded 2017-03-22
+# grafana_version: 4.2.0 superseded 2017-05-24
+# grafana_version: 4.3.1 superseded 2017-11-02
+# grafana_version: 4.6.1 superseded 2017-11-16
+# grafana_version: 4.6.2 superseded 2018-02-08
+# grafana_version: 5.0.b superseded 2018-03-01
+# grafana_version: 5.0.0 superseded 2018-06-27
+# grafana_version: 5.2.0 superseded 2018-07-27
+# grafana_version: 5.2.2 superseded 2018-10-10
+# grafana_version: 5.3.0 superseded 2018-10-16
+# grafana_version: 5.3.1 superseded 2018-10-24
+# grafana_version: 5.3.2 superseded 2018-12-11
+# grafana_version: 5.4.1 superseded 2019-01-30
+# grafana_version: 6.0.0 superseded 2019-04-09
+# grafana_version: 6.1.3 superseded 2019-05-27
+# grafana_version: 6.2.1 superseded 2019-07-11
+# grafana_version: 6.2.5 superseded 2019-08-06
+# grafana_version: 6.3.0 superseded 2019-08-15
+# grafana_version: 6.3.3 superseded 2019-08-30
+# grafana_version: 6.3.4 superseded 2019-10-02
+# grafana_version: 6.4.0 superseded 2019-12-06
+# grafana_version: 6.5.1 superseded 2020-01-27
+# grafana_version: 6.6.0 superseded 2020-04-27
+# grafana_version: 6.7.3 superseded 2020-06-01
+# grafana_version: 7.0.1 superseded 2020-06-03
+# grafana_version: 7.0.2 superseded 2020-07-08
+# grafana_version: 7.0.5 superseded 2020-07-27
+# grafana_version: 7.1.1 superseded 2020-12-16
+# grafana_version: 7.3.5 superseded 2021-01-31
+# grafana_version: 7.3.7 superseded 2021-02-04
+# grafana_version: 7.4.0 superseded 2022-10-02
+# grafana_version: 9.1.6 superseded 2022-10-13
+grafana_version: 9.2.0

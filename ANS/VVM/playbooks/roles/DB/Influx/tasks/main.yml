@@ -1,0 +1,22 @@
+---
+
+# influx
+# see https://portal.influxdata.com/downloads/
+
+- name: create pkg dir
+  file: 
+    path: /home/{{sys_user}}/.pkg/influx
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: influx for x86
+  include: inf_x86.yml
+  when: is_x86
+
+# - name: influx for arm7
+#   include: inf_arm7.yml
+#   when: is_arm7
+#
+- name: setup influx users and template DB
+  include: setup.yml

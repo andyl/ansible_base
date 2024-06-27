@@ -1,0 +1,47 @@
+---
+
+# fswatch 
+
+- name: create fswatch pkg dir 
+  file: 
+    path: "/home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: remove fswatch debian package
+  become: true
+  apt: pkg=fswatch state=absent purge=yes
+
+- name: get fswatch tarfile
+  get_url: 
+    url:  http://{{cblob_host}}/fswatch/fswatch-{{fswatch_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}/fswatch-{{fswatch_vsn}}.tar
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand fswatch tarfile
+  unarchive: 
+    src:  /home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}/fswatch-{{fswatch_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create fswatch symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}/fswatch-{{fswatch_vsn}}/fswatch
+    dest:  /usr/bin/fswatch
+    state: link
+    force: yes
+
+- name: create libfswatch symlinks 
+  file: 
+    src:   /home/{{gen_user}}/.pkg/fswatch/{{fswatch_vsn}}/fswatch-{{fswatch_vsn}}/libfswatch.so.11.0.3
+    dest:  /usr/lib/{{item}}
+    state: link
+    force: yes
+  with_items:
+    - libfswatch.so
+    - libfswatch.so.11
+    - libfswatch.so.11.0.3
+

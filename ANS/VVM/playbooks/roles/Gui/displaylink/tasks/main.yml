@@ -1,0 +1,27 @@
+
+# displaylink
+
+- name: install Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - dkms      # displaylink driver
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/displaylink
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get driver file
+  get_url:
+    url:  http://{{cblob_host}}/displaylink/5.6.1.zip 
+    dest: /home/{{gen_user}}/.pkg/displaylink
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+# To finish the install: 
+# - cd ~/.pkg/displaylink 
+# - unzip xf 5.6.1.zip
+# - ./displaylink-driver-5.6.1.run

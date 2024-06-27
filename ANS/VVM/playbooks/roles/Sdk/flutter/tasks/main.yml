@@ -1,0 +1,17 @@
+---
+
+# flutter sdk 
+
+- name: install support software
+  apt:  pkg={{item}} state=latest 
+  become: yes
+  with_items:
+    - libglu1-mesa
+
+- name: install flutter snap 
+  snap: 
+    name: flutter
+    state: present 
+    classic: yes 
+  become: yes 
+

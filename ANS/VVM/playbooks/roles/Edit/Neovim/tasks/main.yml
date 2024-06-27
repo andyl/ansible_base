@@ -1,0 +1,51 @@
+---
+
+# neovim
+
+- name: create nvim dir
+  file: 
+    path:  "/home/{{gen_user}}/.nvim/nvim"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/nvim"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: nvim for x86 systems
+  include_tasks: nvim_x86.yml
+  when: is_x86
+
+# - name: nvim for ARM7 systems
+#   include: nvim_arm7.yml
+#   when: is_arm7
+#
+# - name: nvim for ARM6 systems
+#   include: nvim_arm6.yml
+#   when: is_arm6
+
+- name: install neovim package for node
+  ignore_errors: true
+  become_user: "{{gen_user}}"
+  npm: name=neovim state=latest global=yes
+
+- name: install neovim gem for ruby
+  ignore_errors: true
+  become_user: "{{gen_user}}"
+  gem: name=neovim state=latest 
+
+- name: install neovim packages for python3
+  become_user: "{{gen_user}}"
+  pip: 
+    name: "{{item}}"
+    state: latest
+    executable: pip3
+  with_items:
+    - neovim
+    - neovim-remote
+    - pynvim
+

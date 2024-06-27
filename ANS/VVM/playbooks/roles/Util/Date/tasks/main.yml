@@ -1,0 +1,23 @@
+---
+
+# Util/Date
+
+- name: create a util directory
+  become: false
+  file: 
+    path: /home/{{gen_user}}/util 
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: remove the deck_util directory
+  file:
+    path: /home/{{gen_user}}/util/deck_util
+    state: absent
+
+- name: install date_util for {{gen_user}}
+  become_user: "{{gen_user}}"
+  git:
+    repo:   "{{filehost}}:Git/Util/date_util.git"
+    dest:   /home/{{gen_user}}/util/date_util
+    update: yes

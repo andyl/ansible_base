@@ -1,0 +1,17 @@
+---
+
+# emacs
+
+- name: remove old emacs packages
+  become: yes
+  apt: pkg={{item}} state=absent 
+  with_items:
+    - emacs
+    - emacs24
+
+- name: install emacs25
+  become: yes
+  apt: pkg={{item}} state=latest
+  with_items:
+    - emacs25
+

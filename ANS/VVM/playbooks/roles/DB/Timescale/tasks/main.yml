@@ -1,0 +1,14 @@
+---
+
+# timescale db
+
+- name: add timescale PPA
+  become: true
+  apt_repository: repo='ppa:timescale/timescaledb-ppa' state='present'
+
+- name: add timescale
+  become: true
+  apt:  pkg={{item}} state=latest
+  with_items:
+    - timescaledb-postgresql-10
+

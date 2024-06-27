@@ -1,0 +1,97 @@
+---
+
+# collectd
+
+- name: remove outdated packages
+  become: true
+  apt:  pkg={{item}} state=absent
+  with_items:
+    - collectd
+    - collectd-utils
+
+#- name: create package cache dir
+#  file: path=/home/{{sys_user}}/.pkg state=directory group={{sys_user}} owner={{sys_user}}
+#
+#- name: get package
+#  become: no
+#  get_url:
+#    url:  https://collectd.org/files/collectd-{{collectd_version}}.tar.gz
+#    dest: /home/{{sys_user}}/.pkg/collectd-{{collectd_version}}.tar.gz
+#    force: no
+#
+#- name: unzip package
+#  become: no
+#  shell: tar -xf collectd-{{collectd_version}}.tar.gz
+#  args: 
+#    chdir: /home/{{sys_user}}/.pkg 
+#    creates: /home/{{sys_user}}/.pkg/collectd-{{collectd_version}}
+#
+#- name: compile/install package
+#  become: yes
+#  shell: ./configure && make && make install
+#  args: 
+#    chdir:   /home/{{sys_user}}/.pkg/collectd-{{collectd_version}}
+#    creates: /home/{{sys_user}}/.pkg/collectd-{{collectd_version}}/src/daemon/collectd
+#
+#- name: create symlinks
+#  become: true
+#  file:
+#    src:   /opt/collectd/sbin/{{item}}
+#    dest:  /usr/sbin/{{item}}
+#    state: link
+#    force: yes
+#  with_items:
+#    - collectd
+#    - collectdmon
+#
+#- name: install init.d script
+#  become: true
+#  template:
+#    src:   collectd.j2
+#    dest:  /etc/init.d/collectd
+#    owner: root
+#    group: root
+#  notify: restart collectd
+#
+#- name: create directory
+#  become: true
+#  file: 
+#    path: /etc/collectd/collectd.conf.d
+#    owner: root 
+#    group: root
+#    state: directory
+#
+#- name: install base config
+#  become: true
+#  template: 
+#    src:   collectd.conf.j2 
+#    dest:  /etc/collectd/collectd.conf 
+#    owner: root 
+#    group: root
+#  notify: restart collectd
+#
+#- name: write alt configs
+#  template: 
+#    src:   collectd.conf.d/{{ item }}.conf.j2 
+#    dest:  /etc/collectd/collectd.conf.d/{{ item }}.conf 
+#    owner: root 
+#    group: root
+#  with_items: collectd_cfgs
+#  notify: restart collectd
+#
+#- name: list cfgs
+#  shell: ls -1 /etc/collectd/collectd.conf.d
+#  register: old_cfgs
+#  changed_when: false
+#
+#- name: remove unused cfgs
+#  file: 
+#    path:  /etc/collectd/collectd.conf.d/{{ item }} 
+#    state: absent
+#  with_items: old_cfgs.stdout_lines
+#  when: item not in collectd_cfgs 
+#  notify: restart collectd
+
+- name: setup service
+  service: name=collectd enabled=no
+

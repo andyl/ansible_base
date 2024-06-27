@@ -1,0 +1,59 @@
+---
+
+# manager desktop gui 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/manager/gui"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install dependencies 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - libwebkit2gtk-4.0-37 
+    - libwebkit2gtk-4.0-dev
+
+- name: get appimage file
+  get_url: 
+    url: https://github.com/Manager-io/Manager/releases/download/{{man_vsn}}/Manager-linux-x64.AppImage
+    dest: /home/{{gen_user}}/.pkg/manager/gui/manager-{{man_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/manager/gui/manager-{{man_vsn}}.appimage
+    dest:  /usr/local/bin/manager-gui 
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+# manager web server 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/bin"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url: 
+    url: https://github.com/Manager-io/Manager/releases/download/{{man_vsn}}/ManagerServer-linux-x64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-x64.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tarfile 
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/ManagerServer.linux-x64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/manager/server/{{man_vsn}}/bin
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+

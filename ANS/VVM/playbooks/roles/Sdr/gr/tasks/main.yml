@@ -1,0 +1,16 @@
+---
+
+# gr - GnuRadio 
+# https://gnuradio.org 
+# https://wiki.gnuradio.org 
+# https://wiki.gnuradio.org/index.php/InstallingGR
+
+- name: add PPA
+  apt_repository: repo={{item}}
+  with_items:
+    - ppa:gnuradio/gnuradio-releases-3.9
+
+- name: install packages
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - gnuradio 

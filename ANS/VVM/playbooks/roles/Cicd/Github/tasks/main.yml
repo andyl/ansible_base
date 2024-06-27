@@ -1,0 +1,24 @@
+---
+
+# Github CLI
+
+- name: create pkg directory
+  file: 
+    path: /home/{{gen_user}}/.pkg/github
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get github executable
+  get_url: 
+    url: https://github.com/cli/cli/releases/download/v{{gh_vsn}}/gh_{{gh_vsn}}_linux_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/github/gh_{{gh_vsn}}.deb
+    validate_certs: false
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install gh
+  apt: deb=/home/{{gen_user}}/.pkg/github/gh_{{gh_vsn}}.deb
+  become: true
+

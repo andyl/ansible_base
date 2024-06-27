@@ -1,0 +1,28 @@
+---
+
+# AsdfCrystal
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: crystal, repo: ""}  
+
+- name: install asdf_crystal
+  command: "bash -ilc 'asdf install crystal {{ item }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/crystal/{{ item }}"
+    chdir: "/home/{{ gen_user }}"
+  with_items:
+    - 0.29.0
+  become_user: "{{ gen_user }}"
+
+# - name: set global crystal version
+#   command: "bash -lc 'asdf global crystal {{ crystal_vsn }}'"
+#   args:
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"

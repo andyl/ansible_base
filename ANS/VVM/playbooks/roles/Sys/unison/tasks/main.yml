@@ -1,0 +1,22 @@
+---
+
+# unison - large file sync
+
+- name: remove apt packages
+  apt:
+    name:  "{{item}}"
+    state: absent
+    purge: yes
+  with_items:
+    - unison
+    - unison-gtk
+
+- name: install executable
+  get_url:
+    url:  http://{{cblob_host}}/unison/x86_64/{{item}}-{{unison_vsn}}
+    dest: /usr/bin/{{item}}
+    mode: "a+rx"
+  with_items:
+    - unison
+    - unison-gtk
+

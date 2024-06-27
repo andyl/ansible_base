@@ -1,0 +1,23 @@
+---
+
+# dissenter
+
+- name: create pkg dir
+  become: no
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get dissenter package
+  become: no
+  get_url: 
+    # url:  https://github.com/dissenter/browser-laptop/releases/download/v{{dissenter_version}}dev/dissenter_{{dissenter_version}}_amd64.deb
+    url:  https://t.co/PnzQbfF0Ws
+    dest: /home/{{gen_user}}/.pkg/dissenter_{{dissenter_version}}_amd64.deb
+
+- name: install dissenter
+  apt: 
+    deb: /home/{{gen_user}}/.pkg/dissenter_{{dissenter_version}}_amd64.deb
+

@@ -1,0 +1,13 @@
+---
+
+# watchers
+
+# - name: fswatch
+#   include: inc_fswatch.yml
+
+- name: entr
+  include_tasks: inc_entr.yml
+
+# - name: watchexec
+#   include: inc_watchexec.yml
+

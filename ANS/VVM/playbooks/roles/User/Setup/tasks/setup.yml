@@ -1,0 +1,65 @@
+---
+
+- name: create user {{alt_user}}
+  become: true
+  user: 
+    name: "{{alt_user}}" 
+    shell: /bin/bash 
+    password: $6$5WhqbRWhmf$k5xvagkoif0j3y6jggZ.La.YZuE1.VCSP2f3KXzTCmNeD0VSZo/srlkYm0HxA8kP3HW75yltrom5sHdOL5jbz.
+    update_password: on_create
+    generate_ssh_key: yes 
+
+- name: test sudoers for {{alt_user}}
+  stat: path=/etc/sudoers.d/{{alt_user}}
+  become: true
+  register: sudoer_file
+
+- name: config sudoers for {{alt_user}}
+  become: true
+  template:
+    src: sudoer_line.j2
+    dest: /etc/sudoers.d/{{alt_user}}
+    validate: 'visudo -cf %s'
+  when: not sudoer_file.stat.exists
+
+- name: set permissions on common directories
+  file: 
+    path: "/home/{{item}}"
+    state: directory 
+    group: "{{alt_user}}" 
+    owner: "{{alt_user}}"
+  with_items:
+    - "{{alt_user}}"
+    - "{{alt_user}}/.pkg"
+    - "{{alt_user}}/.ansible_tmp"
+
+# --------------------------------------------------
+# SSH Provisioning
+
+# copyable_hostkey
+# - running ansible remotely (not locally)
+# - the file exists (aka not on windows or mac)
+- name: copy public key for {{alt_user}}
+  copy:
+    src: "~/.ssh/id_rsa.pub"
+    dest: /tmp/host.pubkey
+    force: true
+  when: copyable_hostkey
+
+# /tmp/hostkey.pub can be written in the 'copy public key' task 
+# or in a provisioning step in the Vagrantfile
+- name: test for pubkey for {{alt_user}}
+  stat: 
+    path: /tmp/hostkey.pub
+  register: host_pubkey
+
+# does the same thing as 'ssh-copy-id'
+# appends the pubkey to ~/.ssh/authorized_keys
+# once this is done you can SSH to the VM w/o password
+- name: set ssh key for {{alt_user}} 
+  authorized_key:
+    user: "{{alt_user}}"
+    state: present
+    key: "{{ lookup('file', '/tmp/hostkey.pub') }}"
+  when: host_pubkey.stat.exists
+  

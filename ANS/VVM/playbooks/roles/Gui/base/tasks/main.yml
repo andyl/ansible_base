@@ -1,0 +1,71 @@
+---
+
+# GUI/base
+
+- name: install Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    # - libqtwebkit-dev      # required by a testing gem
+    - gnome-system-monitor # monitor utility
+    - chromium-browser     # alternate browser
+    - vlc                  # remote screen viewer
+    - eog                  # image viewer that prints
+    - a2ps                 # needed for vim printing
+    - html2ps              # needed for vim printing
+    - xclip                # cut/paste from tmux to Xwin
+    - xfce4-goodies        # xfce utilities
+    - wmctrl               # xfce windllow scripting
+    - xdotool              # xfce window scripting
+    - libgsl0-dev          # needed by 'rb-gsl' gem
+    - libxmu-dev           # needed by ruby-wmctrl
+    - libx11-dev           # needed by ruby-wmctrl
+    - libglib2.0-dev       # needed by ruby-wmctrl
+    - ntpdate              # ntp date update
+    - python3-dbus         # dbus tools needed by terminator
+    - seahorse             # gui for gnome-keyring
+    - bluez                # bluetooth
+    - bluez-tools          # bluetooth 
+    - bluetooth            # bluetooth servivce
+    - rfkill               # bluetooth diagnostics
+
+- name: remove Ubuntu packages
+  become: true
+  apt:  pkg={{item}} state=absent
+  when: ansible_distribution == "Ubuntu"
+  with_items:
+    - update-manager
+    - gmusicbrowser
+    - pidgin
+
+# every day at midnight
+- name: update system time
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron:
+    name:   'ntp_update'
+    hour:   0
+    minute: 0
+    job:    '/usr/sbin/ntpdate -s ntp.ubuntu.com'
+
+# every day at 1am
+- name: cron auto-update packages
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron: 
+    name:   'apt_update' 
+    hour:   '1' 
+    minute: '0' 
+    job:    'apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y'
+
+# every saturday at 5am
+- name: cron weekly reboot
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  cron: 
+    name:    'weekly_reboot' 
+    hour:    '5' 
+    minute:  '0' 
+    weekday: '6' 
+    job:     '/sbin/shutdown -r +55'

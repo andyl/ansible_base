@@ -1,0 +1,17 @@
+---
+
+# golang 
+
+- name: add PPA
+  apt_repository: repo=ppa:longsleep/golang-backports
+
+- name: remove old
+  apt:  pkg={{item}} state=absent
+  with_items:
+    - golang
+
+- name: install latest
+  apt:  pkg={{item}} state=latest 
+  with_items:
+    - golang-go
+

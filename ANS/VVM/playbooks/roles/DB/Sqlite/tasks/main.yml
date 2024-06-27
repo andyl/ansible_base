@@ -1,0 +1,91 @@
+---
+
+# sqlite3
+
+# ----- sqlite and support tools 
+
+- name: remove sqlite apt package 
+  apt:  pkg={{item}} state=absent
+  with_items:
+    - sqlite 
+    - sqlite3
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/sqlite/{{sqlite_vsn}}" 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file
+  get_url: 
+    url:  http://{{cblob_host}}/sqlite/sqlite-tools-linux-x64-{{sqlite_vsn}}.zip 
+    dest: /home/{{gen_user}}/.pkg/sqlite/{{sqlite_vsn}}/sqlite-{{sqlite_vsn}}.zip 
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: unzip file
+  become: false
+  unarchive:
+    src:  /home/{{sys_user}}/.pkg/sqlite/{{sqlite_vsn}}/sqlite-{{sqlite_vsn}}.zip 
+    dest: /home/{{sys_user}}/.pkg/sqlite/{{sqlite_vsn}}/
+    remote_src: true
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/sqlite/{{sqlite_vsn}}/sqlite3
+    dest:  /usr/local/bin/sqlite3
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+- name: install sqlite developer tools 
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - libsqlite3-dev             
+
+# ----- sqlite browser 
+
+- name: install sqlite browser
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - sqlitebrowser              # sqlite browser
+  when: is_x86_64
+
+# ----- vector-search (vss) extensions 
+
+# https://github.com/asg017/sqlite-vss/releases
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url: 
+    url:  https://github.com/asg017/sqlite-vss/releases/download/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}-loadable-linux-x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar file
+  become: false
+  unarchive:
+    src:  /home/{{sys_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}.tar.gz
+    dest: /home/{{sys_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}
+
+- name: create executable symlinks
+  file: 
+    src:   /home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/{{item}}
+    dest:  /home/{{gen_user}}/.pkg/sqlite/{{item}}
+    state: link
+    force: true
+    mode:  "a+rx"
+  with_items: 
+    - vss0.so 
+    - vector0.so 
+

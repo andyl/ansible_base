@@ -1,0 +1,37 @@
+---
+
+# testssl - SSL Testing 
+# https://github.com/drwetter/testssl.sh 
+
+- name: create testssl pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/testssl/{{tssl_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get testssl tar file
+  get_url: 
+    url: https://github.com/drwetter/testssl.sh/archive/refs/tags/v{{tssl_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/testssl/{{tssl_vsn}}/testssl-amd64.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand testssl tar file
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/testssl/{{tssl_vsn}}/testssl-amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/testssl/{{tssl_vsn}}
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: create testssl executable symlinks
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/testssl/{{tssl_vsn}}/testssl.sh-3.0.8/testssl.sh 
+    dest:  /usr/local/bin/testssl
+    state: link
+    force: yes
+

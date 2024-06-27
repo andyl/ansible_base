@@ -1,0 +1,9 @@
+---
+
+# LimeSDR
+
+- name: Install LimeSuite and GQRX
+  include: lime_gqrx.yml
+
+- name: Install GnuRadio
+  include: gnu_radio.yml

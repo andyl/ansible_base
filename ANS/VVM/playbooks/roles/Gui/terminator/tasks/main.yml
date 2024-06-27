@@ -1,0 +1,50 @@
+---
+
+# terminator
+#
+# see github.com/gnome-terminator/terminator/blob/master/INSTALL.md 
+# sudo add-apt-repository ppa:mattrose/terminator 
+# sudo apt update 
+# sudo apt install terminator 
+
+# 2023 Feb 18 Sat - this is broken in Ansible !!!
+# - name: remove old terminator PPA
+#   apt_repository: repo='ppa:gnome-terminator' state='absent'
+#
+# - name: add new terminator PPA
+#   apt_repository: 
+#     repo: ppa:gnome-terminator
+
+- name: install terminator 
+  apt: 
+    pkg: terminator 
+    state: latest
+
+# - name: create pkg dir
+#   file: 
+#     path: /home/{{gen_user}}/.pkg/terminator
+#     state: directory 
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: get tar file
+#   get_url:
+#     url:  https://github.com/gnome-terminator/terminator/releases/download/v{{terminator_vsn}}/terminator-{{terminator_vsn}}.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}.tar.gz
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: untar 
+#   become_user: "{{gen_user}}"
+#   unarchive:
+#     src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/terminator
+#     creates: /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}
+#
+# - name: create symlink
+#   become: yes
+#   file:
+#     src:  /home/{{gen_user}}/.pkg/terminator/terminator-{{terminator_vsn}}/terminator
+#     dest: /usr/bin/terminator
+#     state: link 
+#     force: yes

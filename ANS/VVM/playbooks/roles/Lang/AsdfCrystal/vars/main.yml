@@ -1,0 +1,11 @@
+---
+# rust_vsn: 1.0.0
+# rust_vsn: 1.1.0     # superseded 29 Sep 2015
+# rust_vsn: 1.3.0     # superseded 13 Sep 2016
+# rust_vsn: 1.11.0    # superseded 30 Sep 2016
+# rust_vsn: 1.12.0    # superseded 06 Feb 2017
+# rust_vsn: 1.15.0    # superseded 27 Apr 2017
+# rust_vsn: 1.17.0    # superseded 30 Jul 2018
+# rust_vsn: 1.27.2    # superseded 23 Jun 2019
+rust_vsn: 1.35.0
+

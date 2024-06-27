@@ -1,0 +1,32 @@
+---
+
+# brave
+
+- name: support tools
+  apt: 
+    pkg: "{{item}}"
+    state: latest
+  with_items:
+    - curl
+    - apt-transport-https
+
+- name: apt_key
+  apt_key: 
+    url: "{{item}}"
+  with_items:
+    - https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+
+- name: repository
+  apt_repository: 
+    repo: "{{item}}"
+    state: present
+  with_items:
+    - "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
+
+- name: install packages
+  apt: 
+    pkg: "{{item}}"
+    state: latest 
+  with_items:
+    - brave-browser
+

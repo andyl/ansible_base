@@ -1,0 +1,21 @@
+---
+
+# AsdfJulia
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: julia  , repo: ""}
+
+- name: install asdf_julia
+  command: "bash -ilc 'asdf install julia {{ julia_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/julia/{{ julia_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+

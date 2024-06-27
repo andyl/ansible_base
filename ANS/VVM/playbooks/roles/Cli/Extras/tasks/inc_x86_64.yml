@@ -1,0 +1,100 @@
+---
+
+# Extras for x86_64
+
+- name: create pkg dirs
+  file: 
+    path: /home/{{gen_user}}/.pkg/{{item}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  with_items:
+    - bat
+    - fd
+    - rg
+    - gum
+    - btop
+    - btop/btop_{{btop_vsn}}
+
+# ----- bat -----
+
+- name: get bat deb file
+  get_url: 
+    url: https://github.com/sharkdp/bat/releases/download/v{{bat_vsn}}/bat-musl_{{bat_vsn}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/bat/bat_{{bat_vsn}}.deb
+    validate_certs: false
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install bat
+  apt: deb=/home/{{gen_user}}/.pkg/bat/bat_{{bat_vsn}}.deb
+  become: true
+
+# ----- fd -----
+
+- name: get fd deb file
+  get_url: 
+    url: https://github.com/sharkdp/fd/releases/download/v{{fd_vsn}}/fd-musl_{{fd_vsn}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/fd/fd_{{fd_vsn}}.deb
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install fd
+  apt: deb=/home/{{gen_user}}/.pkg/fd/fd_{{fd_vsn}}.deb
+  become: true
+  
+# ----- rg / ripgrep -----
+
+- name: get rg deb file
+  get_url: 
+    url:   https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep_{{rg_vsn}}-1_amd64.deb
+    dest:  /home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install rg
+  apt: deb=/home/{{gen_user}}/.pkg/rg/rg_{{rg_vsn}}.deb
+  become: true
+  ignore_errors: true 
+  
+# ----- gum -----
+
+- name: get gum deb file
+  get_url: 
+    url:   https://github.com/charmbracelet/gum/releases/download/v{{gum_vsn}}/gum_{{gum_vsn}}_amd64.deb 
+    dest:  /home/{{gen_user}}/.pkg/gum/gum_{{gum_vsn}}.deb
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install gum
+  apt: deb=/home/{{gen_user}}/.pkg/gum/gum_{{gum_vsn}}.deb
+  become: true
+  ignore_errors: true 
+
+# ----- btop / bashtop -----
+
+- name: get btop tar file
+  get_url: 
+    url: https://github.com/aristocratos/btop/releases/download/v{{btop_vsn}}/btop-x86_64-linux-musl.tbz
+    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar btop
+  become_user: "{{gen_user}}"
+  unarchive:
+    src: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop_{{btop_vsn}}.tbz
+    dest: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}
+    remote_src: true
+
+- name: install btop
+  command:
+    cmd: "bash -ilc 'make install'"
+    chdir: /home/{{gen_user}}/.pkg/btop/btop_{{btop_vsn}}/btop
+  become: true
+

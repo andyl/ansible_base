@@ -1,0 +1,43 @@
+---
+
+# LimeSuite and GQRX
+
+- name: add PPAs
+  apt_repository: repo={{item}}
+  with_items:
+    - ppa:myriadrf/drivers
+    - ppa:myriadrf/gnuradio
+    - ppa:bladerf/bladerf
+    - ppa:gqrx/gqrx-sdr
+
+- name: install packages
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - limesuite
+    - liblimesuite-dev
+    - limesuite-udev
+    - limesuite-images
+    - soapysdr
+    - soapysdr-tools
+    - soapysdr-module-lms7
+    - doxygen
+    - libvolk1-bin
+    - libgnuradio-osmosdr0.1.4
+    - gqrx-sdr
+
+# - name: clone Udev rules
+#   git:
+#     repo:   'https://github.com/myriadrf/LimeSuite.git'
+#     depth:  1
+#     dest:   /home/{{gen_user}}/.pkg/LimeSuite
+#     update: yes
+#
+# - name: set executable permissions
+#   file:
+#     path: /home/{{gen_user}}/.pkg/LimeSuite/dev-rules/install.sh
+#     mode: "a+rx"
+#
+# - name: install Udev rules
+#   become: yes
+#   local_action: /home/{{gen_user}}/.pkg/LimeSuite/dev-rules/install.sh
+

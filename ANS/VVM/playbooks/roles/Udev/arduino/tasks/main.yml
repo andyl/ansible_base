@@ -1,0 +1,34 @@
+---
+
+# arduino - arduino.cc
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/arduino
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get Arduino AppImage
+  get_url: 
+    url:  https://github.com/arduino/arduino-ide/releases/download/{{arduino_vsn}}/arduino-ide_{{arduino_vsn}}_Linux_64bit.AppImage
+    dest: /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: set AppImage permissions
+  file: 
+    path: /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
+    mode: 'a+rx'
+
+- name: create executable symlink
+  file: 
+    dest:  /usr/bin/arduino 
+    src:   /home/{{gen_user}}/.pkg/arduino/arduino-{{arduino_vsn}}.AppImage
+    state: link 
+
+- name: install pip modules 
+  pip: name="{{item}}" state=latest
+  with_items:
+    - pyserial
+    - esptool

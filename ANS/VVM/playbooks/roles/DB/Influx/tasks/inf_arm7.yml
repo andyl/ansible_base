@@ -1,0 +1,47 @@
+---
+
+# influxdb
+# see:
+# - http://influxdb.com/download/
+# - http://influxdb.com/docs/v0.9/introduction/installation.html
+
+- name: install packages (ARM)
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - influxdb
+    - influxdb-client
+    - python-influxdb
+    - python3-influxdb
+
+# - name: get influxdb tar file for ARM7
+#   get_url: 
+#     url:  https://dl.influxdata.com/influxdb/releases/influxdb-{{influx_version}}_linux_armhf.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/influx/influxdb-{{influx_version}}_linux_armhf.tar.gz
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: untar influxdb for ARM7
+#   become_user: "{{gen_user}}"
+#   unarchive:
+#     src:  /home/{{gen_user}}/.pkg/influx/influxdb-{{influx_version}}_linux_armhf.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/influx
+#     creates: /home/{{gen_user}}/.pkg/influx/influxdb-{{influx_version}}-1
+#     remote_src: true
+
+# - name: create symlink for postman executable
+#   become: true
+#   file: 
+#     state: link 
+#     force: true
+#     dest:  /usr/local/bin/postman
+#     src:   /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/Postman/app/Postman
+
+# - name: expand tar file
+#   apt: deb=/home/{{gen_user}}/.pkg/influx/influxdb_{{influx_version}}_amd64.deb
+#
+# - name: create symlinks
+#
+# - name: install service file
+#
+# - name: 

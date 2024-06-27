@@ -1,0 +1,33 @@
+---
+
+# DuctTape https://dt.plumbing/
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/dt/{{dt_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get dt tarfile 
+  get_url:
+    url:  https://github.com/booniepepper/dt/releases/download/v{{dt_vsn}}/x86_64-linux-gnu.tgz
+    dest: /home/{{gen_user}}/.pkg/dt/{{dt_vsn}}/dt_{{dt_vsn}}.tgz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand dt tarfile 
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/dt/{{dt_vsn}}/dt_{{dt_vsn}}.tgz
+    dest: /home/{{gen_user}}/.pkg/dt/{{dt_vsn}}/
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: installation symlink
+  become: true
+  file: 
+    src:  /home/aleak/.pkg/dt/{{dt_vsn}}/x86_64-linux-gnu/bin/dt
+    dest: /usr/local/bin/dt
+    state: link
+

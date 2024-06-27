@@ -1,0 +1,24 @@
+---
+ 
+# host_keys
+
+- name: get sys_user_pubfile
+  stat:
+    path: /.ssh/id_rsa.pub
+  register: sys_user_pubfile
+
+- name: get sys_user_pubkey
+  shell: cat /home/{{sys_user}}/.ssh/id_rsa.pub
+  register: sys_user_pubkey
+  when: sys_user_pubfile.stat.exists == true
+
+- name: get gen_user_pubfile
+  stat:
+    path: /home/{{gen_user}}/.ssh/id_rsa.pub
+  register: gen_user_pubfile
+
+- name: get gen_user_pubkey
+  shell: cat /home/{{gen_user}}/.ssh/id_rsa.pub
+  register: gen_user_pubkey
+  when: gen_user_pubfile.stat.exists == true
+

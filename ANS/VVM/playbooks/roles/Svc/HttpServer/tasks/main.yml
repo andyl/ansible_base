@@ -1,0 +1,38 @@
+---
+
+# http-server 
+# https://github.com/patrickdappollonio/http-server
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/http_server/{{http_srv_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url: 
+    url: https://github.com/patrickdappollonio/http-server/releases/download/v{{http_srv_vsn}}/http-server_linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/http_server/{{http_srv_vsn}}/http-server.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tar file
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/http_server/{{http_srv_vsn}}/http-server.tar.gz
+    dest: /home/{{gen_user}}/.pkg/http_server/{{http_srv_vsn}}
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/http_server/{{http_srv_vsn}}/http-server
+    dest:  /usr/local/bin/http-server
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+

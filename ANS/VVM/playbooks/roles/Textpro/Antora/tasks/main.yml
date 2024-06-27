@@ -1,0 +1,17 @@
+---
+
+# antora
+#
+# see https://docs.antora.org/antora/latest/install/install-antora/
+
+- name: install antora {{antora_vsn}}
+  become: false
+  npm: 
+    name: "{{item}}"
+    version: "{{antora_vsn}}"
+    global: yes
+    state: latest
+  with_items:
+    - "@antora/cli"
+    - "@antora/site-generator-default"
+

@@ -1,0 +1,10 @@
+---
+
+# ----- dockly -----
+
+- name: install dockly
+  become_user: "{{gen_user}}"
+  npm:
+    name: dockly
+    global: yes
+    state: latest

@@ -1,0 +1,63 @@
+---
+
+# AsdfR
+#
+# This works but compiles r from scratch - SLOW
+
+# - name: install asdf_r
+#   command: "bash -ilc 'asdf install r {{ r_vsn }}'"
+#   args:
+#     creates: "/home/{{gen_user}}/.asdf/installs/r/{{ r_vsn }}"
+#     chdir: "/home/{{ gen_user }}"
+#   become_user: "{{ gen_user }}"
+
+# Accelerate with pre-cached language versions 
+#
+# Approach:
+# - manually install on a base machine
+# - copy the language image to `cblob`
+# - then make the ansible role download rather than compile
+# - then re-shim to create language shims
+#
+# R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib=yes' asdf install R 3.6.2
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: R      , repo: ""}
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create installs dir
+  file: 
+    path: /home/{{gen_user}}/.asdf/installs/R
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get r
+  become_user: "{{gen_user}}"
+  get_url:
+    url:  http://{{cblob_host}}/asdf_r/{{ansible_architecture}}/r_{{r_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/r_{{r_vsn}}.tar.gz
+
+- name: untar r
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/r_{{r_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.asdf/installs/R
+    creates: /home/{{gen_user}}/.asdf.installs/R/{{r_vsn}}
+
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim R {{r_vsn}}'"
+

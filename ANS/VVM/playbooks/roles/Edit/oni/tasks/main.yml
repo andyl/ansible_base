@@ -1,0 +1,23 @@
+---
+
+# oni
+
+- name: create pkg dir
+  file: 
+    path: /home/{{alt_user}}/.pkg 
+    state: directory 
+    group: "{{alt_user}}"
+    owner: "{{alt_user}}"
+
+- name: get deb file
+  become: no
+  get_url: 
+    url:  https://github.com/onivim/oni/releases/download/v{{oni_version}}/Oni-{{oni_version}}-amd64-linux.deb
+    dest: /home/{{alt_user}}/.pkg/oni_{{oni_version}}.deb
+    validate_certs: false
+  when: is_x86_64
+
+- name: install oni package
+  apt: deb=/home/{{alt_user}}/.pkg/oni_{{oni_version}}.deb
+  when: is_x86_64
+

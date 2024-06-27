@@ -1,0 +1,32 @@
+---
+
+# AsdfRust
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: rust   , repo: ""}
+
+- name: install asdf_rust
+  command: "bash -ilc 'asdf install rust {{ rust_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/rust/{{ rust_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim rust {{rust_vsn}}'"
+
+- name: create cargo symlink 
+  become: true
+  file:
+    src: /home/aleak/.asdf/shims/cargo 
+    dest: /usr/local/bin/cargo 
+    state: link
+

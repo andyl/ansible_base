@@ -1,0 +1,12 @@
+---
+
+# fzf
+
+- name: clone fzf repo 
+  become_user: "{{gen_user}}"
+  git: 
+    repo: https://github.com/junegunn/fzf.git 
+    dest: /home/{{gen_user}}/.fzf
+    depth: 1
+    update: yes
+

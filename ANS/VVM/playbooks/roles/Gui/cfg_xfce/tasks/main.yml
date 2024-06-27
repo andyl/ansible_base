@@ -1,0 +1,48 @@
+---
+
+# gui_cfg_xfce
+
+# relevant tools
+# 1. xfconf-query 
+# 2. xfce4-manager-editor
+
+- name: create a config directory
+  file: path=/home/{{sys_user}}/.config state=directory group={{sys_user}} owner={{sys_user}}
+
+- name: rsync .config/xfce4/xfconf
+  become: false
+  synchronize: src=/home/{{lcl_user}}/.config/xfce4/xfconf dest=/home/{{sys_user}}/.config/xfce4
+  changed_when: false
+  when: lcl_hostname != ansible_hostname
+
+- name: rsync .config/terminator
+  become: false
+  synchronize: src=/home/{{lcl_user}}/.config/terminator dest=/home/{{sys_user}}/.config
+  when: lcl_hostname != ansible_hostname
+
+- name: rsync .config/user-dirs.dirs
+  become: false
+  synchronize: src=/home/{{lcl_user}}/.config/user-dirs.dirs dest=/home/{{sys_user}}/.config
+  when: lcl_hostname != ansible_hostname
+
+# - name: rsync .local/share/applications
+#   become: false
+#   synchronize: src=/home/{{lcl_user}}/.local/share/applications dest=/home/{{sys_user}}/.local/share
+#   when: lcl_hostname != ansible_hostname
+
+- name: add hostname to panel
+  lineinfile: dest=/home/{{sys_user}}/.config/xfce4/panel/whiskermenu-1.rc regexp="^button-title=" line="button-title={{ansible_hostname}}"
+  changed_when: false
+
+- name: install shims for keyboard accelerators
+  copy:
+    src:  "{{item}}"
+    dest: /usr/local/bin/{{item}}
+    mode: 'a+rx'
+  with_items: 
+    - asdf_xftile 
+    - asdf_winmax 
+    - asdf_winfull
+    - asdf_winright
+    - asdf_winleft
+

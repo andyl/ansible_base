@@ -1,0 +1,41 @@
+---
+
+# android studio 
+
+- name: install support software
+  apt:  pkg={{item}} state=latest 
+  become: true
+  with_items:
+    # - clang 
+    - cmake 
+    - ninja-build 
+    - pkg-config 
+    - libgtk-3-dev
+
+- name: create android pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/android/{{android_vsn}} 
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}" 
+
+- name: get android tarfile
+  get_url: 
+    url:  http://{{cblob_host}}/android/android-studio-{{android_vsn}}-linux.tar.gz 
+    dest: /home/{{gen_user}}/.pkg/android/{{android_vsn}}/android-{{android_vsn}}.tar.gz 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand android tarfile
+  unarchive: 
+    src:  /home/{{gen_user}}/.pkg/android/{{android_vsn}}/android-{{android_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/android/{{android_vsn}}
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create symlink to install directory 
+  file:
+    src:  /home/{{gen_user}}/.pkg/android/{{android_vsn}}/android-studio 
+    dest: /home/{{gen_user}}/.pkg/android/current
+    state: link
+

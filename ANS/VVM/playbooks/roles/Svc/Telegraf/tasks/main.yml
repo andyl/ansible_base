@@ -1,0 +1,45 @@
+---
+
+# telegraf
+
+- name: create package cache dir 
+  file: 
+    path: /home/{{gen_user}}/.pkg/telegraf
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_x86_64
+
+- name: get deb file
+  become: false 
+  get_url:
+    url:  https://dl.influxdata.com/telegraf/releases/telegraf_{{telegraf_vsn}}-1_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/telegraf/telegraf_{{telegraf_vsn}}_amd64.deb
+    force: no
+    validate_certs: no
+  when: is_x86_64
+
+- name: install package
+  apt: deb=/home/{{gen_user}}/.pkg/telegraf/telegraf_{{telegraf_vsn}}_amd64.deb
+  when: is_x86_64
+
+- name: install systemd service file 
+  become: true
+  template: 
+    src:   telegraf.service
+    dest:  /lib/systemd/system/telegraf.service
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
+
+- name: install base config
+  become: true
+  template: 
+    src:   telegraf.conf
+    dest:  /etc/telegraf/telegraf.conf 
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart telegraf
+

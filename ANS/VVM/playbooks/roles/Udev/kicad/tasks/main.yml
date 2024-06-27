@@ -1,0 +1,31 @@
+---
+
+# kicad
+
+# see http://kicad.org/download/ubuntu/
+
+- name: remove old PPA
+  apt_repository: 
+    repo: ppa:js-reynaud/kicad-5.1
+    state: absent
+
+- name: add PPA
+  ansible.builtin.apt_repository: 
+    repo: ppa:kicad/kicad-6.0-releases
+    update-cache: false 
+
+# this can fail if update-cache emits warnings ;-(
+- name: update cache 
+  ignore_errors: true 
+  ansible.builtin.apt: 
+    update-cache: true
+      
+- name: add kicad
+  apt: 
+    pkg: "{{item}}" 
+    state: latest 
+    force: yes
+    install_recommends: yes
+  with_items:
+    - kicad
+

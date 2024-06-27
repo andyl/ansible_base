@@ -1,0 +1,17 @@
+---
+
+# video
+# this adds video utilities necessary to play videos from amazon prime
+
+# - name: add PPA
+#   become: true
+#   apt_repository: repo=ppa:mjblenner/ppa-hal
+#
+# - name: install 
+#   become: true
+#   apt:  pkg={{item}} state=latest install_recommends=yes
+#   with_items:
+#     - hal
+#
+# - name: cleanup   
+#   shell: rm -rf .adobe removes=/home/{{sys_user}}/.adobe chdir=/home/{{sys_user}}

@@ -1,0 +1,60 @@
+---
+
+# kitty
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url:
+    url:  https://github.com/kovidgoyal/kitty/releases/download/v{{kitty_vsn}}/kitty-{{kitty_vsn}}-x86_64.txz
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/release.tar.xz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/release.tar.xz
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
+    creates: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin/{{item}}
+    dest: /usr/bin/{{item}}
+    state: link 
+    force: yes
+  with_items: 
+    - kitty 
+    - kitten
+
+- name: create application symlink
+  become: true
+  file:
+    src:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/{{item}}.desktop 
+    dest:  /home/{{gen_user}}/.local/share/applications/{{item}}.desktop
+    state: link 
+    force: yes
+  with_items: 
+    - kitty 
+    - kitty-open
+
+- name: copy application icon 
+  copy: 
+    src: /home/{{gen_user}}/util/code_util/data/appicons/blue.png 
+    dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/lib/kitty/logo/{{item}}.png 
+  with_items: 
+    - kitty 
+    - kitty-128
+
+- name: update application exec
+  lineinfile:
+    path:   /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/share/applications/kitty.desktop
+    regexp: '^Exec=kitty'
+    line:   "Exec=/home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin/kitty"

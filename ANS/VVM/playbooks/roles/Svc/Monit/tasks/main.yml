@@ -1,0 +1,39 @@
+---
+
+# monit
+
+- name: install 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - monit
+
+- name: install base config
+  become: true
+  template: 
+    src:   monitrc.j2 
+    dest:  /etc/monit/monitrc 
+    owner: root 
+    group: root
+  notify: restart monit
+
+- name: write alt configs
+  become: true
+  template: 
+    src:   conf.d/{{ item }}.conf.j2 
+    dest:  /etc/monit/conf.d/{{ item }}.conf 
+    owner: root 
+    group: root
+  with_items: monit_cfgs
+  notify: restart monit
+
+- name: list cfgs
+  shell: ls -1 /etc/monit/conf.d
+  register: old_cfgs
+  changed_when: false
+
+- name: remove unused cfgs
+  file: path=/etc/monit/conf.d/{{ item }} state=absent
+  with_items: old_cfgs.stdout_lines
+  when: item.split('.')[0] not in monit_cfgs
+  notify: restart monit

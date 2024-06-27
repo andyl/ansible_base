@@ -1,0 +1,34 @@
+---
+
+# influx2 CLI
+# https://docs.influxdata.com/influxdb/cloud/get-started/#optional-download-install-and-use-the-influx-cli
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/influx/cli2
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download influx2 tarfile (x86)
+  get_url:
+    url: https://dl.influxdata.com/influxdb/releases/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
+    mode: 'a+rx'
+    validate_certs: false
+
+- name: untar package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/influx/cli2
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for influx2 executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/influx2
+    src:   /home/{{gen_user}}/.pkg/influx/cli2/influxdb2_client_{{influx_cli_vsn}}_linux_amd64/influx

@@ -1,0 +1,15 @@
+---
+
+# register values from encrypted sops files
+# uses the 'sops_data' module in `x-ansible/library/sops_data`
+
+- name: read test values
+  become: false
+  local_action:
+    module: sops_data
+    path:   test1
+  register: test1
+
+- debug: var=test1
+- debug: var=test1.element1
+- debug: var=test1.element2

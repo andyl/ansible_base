@@ -1,0 +1,56 @@
+---
+
+# elixir_ls
+# called in Vim and Nvim by "coc"
+# https://github.com/neoclide/coc.nvim/wiki/Language-servers
+# ~/.config/nvim/coc-settings.json
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/elixir_ls
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: get elixir_ls release file
+  get_url: 
+    url: https://github.com/elixir-lsp/elixir-ls/archive/v{{els_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar.gz
+    force: no
+    validate_certs: false
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: untar release file
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/elixir_ls/
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+
+- name: set script permission
+  file:
+    path: /home/{{gen_user}}/.pkg/elixir_ls/elixir-ls-{{els_vsn}}/language_server.sh
+    mode:  "a+rx"
+    state: touch
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: remove elixir_ls symlink
+  file: 
+    # src:   /home/{{gen_user}}/.pkg/elixir_ls/els_{{els_vsn}}/language_server.sh
+    # dest:  /usr/local/bin/elixir_ls
+    path:  /usr/local/bin/elixir_ls
+    state: absent
+    force: yes
+
+- name: create release symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/elixir_ls/elixir-ls-{{els_vsn}}
+    dest:  /home/{{gen_user}}/.pkg/elixir_ls/rel
+    state: link
+    force: yes
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+

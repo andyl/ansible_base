@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# INSTALLED BY ANSIBLE
+# SOURCE IN `files/asdf_xftile`
+
+# For use with XFCE keyboard shortcuts
+# asdf_xftile left
+# asdf_xftile right
+# asdf_xftile ...
+
+bash -ic "/home/aleak/util/code_util/bin/xftile $*"

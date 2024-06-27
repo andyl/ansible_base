@@ -1,0 +1,33 @@
+---
+
+# postman
+
+- name: create pkg dir
+  become: no
+  file: 
+    path: /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get postman tar file
+  become: no
+  get_url: 
+    url: https://dl.pstmn.io/download/version/{{postman_vsn}}/linux64
+    dest: /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/post.tar.gz
+
+- name: untar postman
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/post.tar.gz
+    dest: /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}
+    remote_src: true
+
+- name: create symlink for postman executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/postman
+    src:   /home/{{gen_user}}/.pkg/postman_{{postman_vsn}}/Postman/app/Postman
+

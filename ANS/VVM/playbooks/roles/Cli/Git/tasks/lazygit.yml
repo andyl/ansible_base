@@ -1,0 +1,42 @@
+---
+
+# ----- lazy_git -----
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download lazygit tarfile (x86)
+  get_url:
+    url: https://github.com/jesseduffield/lazygit/releases/download/v{{lazygit_vsn}}/lazygit_{{lazygit_vsn}}_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}/lzg.tar.gz
+    mode: 'a+rx'
+    validate_certs: false
+  when: is_x86
+
+# - name: download lazygit tarfile (arm7)
+#   get_url:
+#     url: https://github.com/jesseduffield/lazygit/releases/download/v{{lazygit_vsn}}/lazygit_{{lazygit_vsn}}_Linux_armv7.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}/lzg.tar.gz
+#     mode: 'a+rx'
+#     validate_certs: false
+#   when: is_arm7
+
+- name: untar package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}/lzg.tar.gz
+    dest: /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for lazygit executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/lazygit
+    src:   /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}/lazygit

@@ -1,0 +1,34 @@
+---
+
+# rclone
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/rclone"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file 
+  get_url: 
+    url:  https://downloads.rclone.org/v{{rclone_vsn}}/rclone-v{{rclone_vsn}}-linux-amd64.zip 
+    dest: /home/{{gen_user}}/.pkg/rclone/rclone-{{rclone_vsn}}.zip 
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand zip file 
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/rclone/rclone-{{rclone_vsn}}.zip 
+    dest: /home/{{gen_user}}/.pkg/rclone
+    remote_src: true
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/rclone/rclone-v{{rclone_vsn}}-linux-amd64/rclone
+    dest:  /usr/local/bin/rclone
+    state: link
+    force: yes
+    mode:  "a+rx"
+

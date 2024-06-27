@@ -1,0 +1,35 @@
+---
+
+# ----- act -----
+# https://github.com/nektos/act/releases 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/git/act_{{act_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download act tarfile (x86)
+  get_url:
+    url:  https://github.com/nektos/act/releases/download/v{{act_vsn}}/act_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/git/act_{{act_vsn}}/act.tar.gz
+    mode: 'a+r'
+    validate_certs: false
+  when: is_x86
+
+- name: untar package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/git/act_{{act_vsn}}/act.tar.gz
+    dest: /home/{{gen_user}}/.pkg/git/act_{{act_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for act executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/act
+    src:   /home/{{gen_user}}/.pkg/git/act_{{act_vsn}}/act

@@ -1,0 +1,20 @@
+---
+
+# Util/Code
+
+- name: create a util directory
+  become: false
+  file: 
+    path: /home/{{gen_user}}/util 
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: install code_util for {{gen_user}}
+  become_user: "{{gen_user}}"
+  git:
+    repo:   "{{filehost}}:Git/Util/code_util.git"
+    dest:   /home/{{gen_user}}/util/code_util
+    depth:  1 
+    force:  true
+    update: true

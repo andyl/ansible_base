@@ -1,0 +1,25 @@
+---
+
+# inkscape - SVG editor 
+
+# https://inkscape.org/release/inkscape-1.2.2/gnulinux/ubuntu/ppa/dl/
+
+- name: add PPA
+  ansible.builtin.apt_repository: 
+    repo: ppa:inkscape.dev/stable
+    update-cache: false 
+
+# this can fail if update-cache emits warnings ;-(
+- name: update cache 
+  ignore_errors: true 
+  ansible.builtin.apt: 
+    update-cache: true
+      
+- name: add inkscape
+  ansible.builtin.apt: 
+    pkg: "{{item}}" 
+    state: latest 
+    force: yes
+    install_recommends: yes
+  with_items:
+    - inkscape

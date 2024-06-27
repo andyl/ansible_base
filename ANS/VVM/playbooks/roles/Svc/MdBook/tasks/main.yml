@@ -1,0 +1,39 @@
+---
+
+# MdBook 
+
+- name: create mdbook dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/mdbook"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create mdbook pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/mdbook/{{mdb_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get mdbook tar file 
+  get_url: 
+    url:  https://github.com/rust-lang/mdBook/releases/download/v{{mdb_vsn}}/mdbook-v{{mdb_vsn}}-x86_64-unknown-linux-gnu.tar.gz
+    dest: /home/{{gen_user}}/.pkg/mdbook/{{mdb_vsn}}/mdbook-{{mdb_vsn}}.tar.gz 
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand mdbook tarfile 
+  unarchive: 
+    src: /home/{{gen_user}}/.pkg/mdbook/{{mdb_vsn}}/mdbook-{{mdb_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/mdbook/{{mdb_vsn}}/
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/mdbook/{{mdb_vsn}}/mdbook 
+    dest:  /usr/local/bin/mdbook 
+    state: link
+    force: yes
+    mode:  "a+rx"
+

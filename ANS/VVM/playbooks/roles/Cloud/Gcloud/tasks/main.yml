@@ -1,0 +1,20 @@
+---
+
+# gcloud - google cloud
+# see https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu
+
+- name: add repository
+  become: true
+  apt_repository:
+    repo: deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner
+    state: present
+    
+- name: install package
+  become: true
+  apt: 
+    pkg: "{{item}}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - google-cloud-sdk
+

@@ -1,0 +1,53 @@
+---
+
+# nginx
+
+- name: install 
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - nginx
+
+- name: create cfg directory
+  file: 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    path:  /etc/nginx/conf.d 
+    state: directory
+    
+- name: create html directories
+  file: 
+    path: /usr/share/{{item}} 
+    state: directory
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+  with_items:
+    - nginx
+    - nginx/cblob
+    - nginx/html
+
+- name: install nginx config
+  template: 
+    src:   nginx.conf.j2 
+    dest:  /etc/nginx/nginx.conf
+    owner: root 
+    group: root
+  notify: restart nginx
+
+- name: install base config
+  template: 
+    src:   base.conf.j2 
+    dest:  /etc/nginx/conf.d/base.conf
+    owner: root 
+    group: root
+  notify: restart nginx
+
+- name: create INDEX files
+  copy: 
+    src: "{{ item.src }}"
+    dest: /usr/share/nginx/{{ item.dest }} 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    force: no
+  with_items:
+    - { src: 'html_index.html', dest: 'html/index.html' }
+

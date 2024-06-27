@@ -1,0 +1,76 @@
+---
+
+# packages for x86 devices
+
+- name: set python symlink
+  file: 
+    src:   /usr/bin/python3
+    dest:  /usr/bin/python
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+- name: install base packages for x86
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - language-pack-en-base      # american time zones
+    - atop                       # monitoring utility
+    - dnsutils                   # dnsutils
+    - cmake                      # required by libgit2/rugged
+    - libicu-dev                 # development lib
+    - libmagickcore-dev          # image processing
+    - libmagickwand-dev          # image processing
+    - imagemagick                # image processing
+    - graphviz                   # diagram generation
+    - gnuplot                    # graph generation
+    - nmon                       # monitoring tool
+    - iftop                      # monitoring tool
+    - dstat                      # monitoring tool
+    - iotop                      # monitoring tool
+    - nload                      # monitoring tool
+    - sysstat                    # monitoring tool
+    - multitail                  # monitoring tool - log file 
+    - iperf                      # monitoring tool - network performance 
+    - patch                      # build tool
+    - autoconf                   # build tool
+    - automake                   # build tool
+    - pkg-config                 # build tool
+    - make                       # build tool
+    - gcc                        # build tool
+    - g++                        # build tool
+    - binutils                   # build tool
+    - libtool                    # build tool
+    - bison                      # build tool
+    - libcurl4                   # development lib
+    - libcurl4-openssl-dev       # development lib
+    - libevent-dev               # development lib
+    - libncurses5-dev            # development lib
+    - libxml2-dev                # development lib
+    - libreadline-dev            # development lib
+    - libssl-dev                 # development lib
+    - libxslt1-dev               # development lib
+    - zlib1g-dev                 # development lib
+    - liblzma-dev                # development lib
+    - wkhtmltopdf                # pdf generation
+    - ecryptfs-utils             # file system encryption
+    - encfs                      # file system encryption
+    - sshfs                      # file system encryption
+    - xvfb                       # X-windows utility tool
+    - debian-archive-keyring     # ssh util
+    - jq                         # command-line JSON processing
+    - rsync                      # file sync
+    - at                         # process scheduler
+    - aptitude                   # package manager
+    - checkinstall               # builds debian packages
+    - libtesseract-dev           # OCR library 
+    - libtesseract4              # OCR library 
+    - tesseract-ocr              # OCR library 
+    - ocrmypdf                   # OCR application 
+    - gimagereader               # GUI for tesseract-ocr
+    - texlive-extra-utils        # pdfcrop 
+    - exactimage                 # pdfdeskew
+    - exfatprogs                 # tools to create, check and label exFAT filesystems
+    - exfat-fuse                 # read and write exFAT driver for FUSE
+    - ssldump                    # ssh debug utility 
+

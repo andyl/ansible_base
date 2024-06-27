@@ -1,0 +1,7 @@
+---
+
+# NOTE: `influxdb_hostname` defined in `group_vars`
+
+collectd_cfgs: []
+
+collectd_version: 5.5.0

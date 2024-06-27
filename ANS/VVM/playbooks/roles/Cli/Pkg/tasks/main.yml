@@ -1,0 +1,53 @@
+---
+
+# CLI/Pkg
+
+- name: base packages for all platforms
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - build-essential            # compile tools
+    - pkg-config                 # packaging tool
+    - htop                       # monitoring tool
+    - tree                       # cli utility
+    - curl                       # cli utility
+    - wget                       # cli utility
+    - unzip                      # cli utility
+    - zip                        # cli utility
+    - httpie                     # cli utility
+    - cloud-guest-utils          # disk copy util (growpart)
+    - xfsprogs                   # disk copy util
+    - hwinfo                     # hardware introspection
+    - python3-dev                # required by ansible
+    - python3-pip                # required by neovim
+    - virtualenv                 # required by ansible
+    - python3-virtualenv         # required by algo
+    - python3-venv               # required by augur
+    - cmatrix                    # terminal screensaver
+    - net-tools                  # networking utility
+    - iptraf                     # networking utility
+    - slurm                      # networking utility
+    - bmon                       # networking utility
+    - nmap                       # networking utility
+    - nfs-common                 # file sharing
+    - nfs-server                 # file sharing
+    - autofs                     # file sharing 
+
+- name: pkg for x86 systems
+  include_tasks: pkg_x86.yml
+  when: is_x86
+
+# - name: pkg for ARM7 systems
+#   include_tasks: pkg_arm7.yml
+#   when: is_arm7
+#
+# - name: pkg for ARM6 systems
+#   include_tasks: pkg_arm6.yml
+#   when: is_arm6
+
+- name: remove packages
+  become: true
+  apt: pkg={{item}} state=absent
+  with_items:
+    - whoopsie                   # ubuntu bug reporter
+

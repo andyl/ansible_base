@@ -1,0 +1,21 @@
+---
+
+# watchexec
+
+- name: create watchexec pkg dir 
+  file: 
+    path: "/home/{{gen_user}}/.pkg/watchexec/{{watchexec_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get watchexec debfile
+  get_url: 
+    url:  https://github.com/watchexec/watchexec/releases/download/cli-v{{watchexec_vsn}}/watchexec-{{watchexec_vsn}}-x86_64-unknown-linux-gnu.deb
+    dest: /home/{{gen_user}}/.pkg/watchexec/watchexec-{{watchexec_vsn}}.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install watchexec package
+  apt: deb=/home/{{gen_user}}/.pkg/watchexec/watchexec-{{watchexec_vsn}}.deb
+  become: true

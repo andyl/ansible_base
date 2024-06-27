@@ -1,0 +1,31 @@
+---
+
+# VMware Workstation Player
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/vmware
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download vmware installer
+  get_url:
+    url:  http://{{cblob_host}}/vmware/VMware-Player-{{vmware_vsn}}.x86_64.bundle
+    dest: /home/{{gen_user}}/.pkg/vmware/vmware-player-{{vmware_vsn}}
+    mode: "a+rx"
+  become: false
+
+- name: download vmware vix api & vmrun command
+  get_url:
+    url:  http://{{cblob_host}}/vmware/VMware-VIX-{{vmvix_vsn}}.x86_64.bundle
+    dest: /home/{{gen_user}}/.pkg/vmware/vmware-vix-{{vmvix_vsn}}
+    mode: "a+rx"
+  become: false
+
+- name: display install instructions
+  debug:
+    msg: |
+      VMware has to be installed manually! 
+      You must install 'Vix' before 'Workstation Player' !!
+

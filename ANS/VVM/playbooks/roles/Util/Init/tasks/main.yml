@@ -1,0 +1,30 @@
+---
+
+# Util/Init
+
+- name: run init script 
+  become_user: "{{gen_user}}"
+  shell: /home/{{gen_user}}/util/base_util/init 
+  args:
+    creates: /home/{{gen_user}}/.hushlogin
+
+- name: update .bashrc 
+  become_user: "{{gen_user}}"
+  template: 
+    src: bashrc 
+    dest: /home/{{gen_user}}/.bashrc 
+    backup: true
+
+- name: set ownership of /etc/hosts
+  become: true 
+  file: 
+    path: /etc/hosts
+    owner: "{{gen_user}}"
+    group: "{{gen_user}}"
+    state: file 
+  
+- name: run set_zhosts 
+  become_user: "{{gen_user}}" 
+  shell: /home/{{gen_user}}/util/code_util/bin/set_zhosts
+  when: is_lanhost
+

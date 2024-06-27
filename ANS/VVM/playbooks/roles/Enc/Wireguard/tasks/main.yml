@@ -1,0 +1,20 @@
+---
+
+# wireguard
+
+# sudo apt install software-properties-common
+# sudo add-apt-repository ppa:wireguard/wireguard
+# sudo apt install wireguard
+
+- name: wireguard server for x86 systems
+  include: wg_server_x86.yml
+  when: 
+    - is_x86
+    - ansible_hostname == wireguard_hostname
+
+- name: wireguard server for ARM7 systems
+  include: wg_server_arm7.yml
+  when: 
+    - is_arm7
+    - ansible_hostname == wireguard_hostname
+

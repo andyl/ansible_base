@@ -1,0 +1,34 @@
+---
+
+# wireguard for arm7 (RPi4, Xu4, HC1)
+
+# - name: get wireguard source tar file
+#   get_url: 
+#     url:  https://github.com/wireguard/wireguard/archive/v{{wireguard_vsn}}.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/wireguard/wireguard-{{host_arch}}-{{wireguard_vsn}}.tar.gz
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: expand wireguard tar file
+#   unarchive:
+#     src:  /home/{{gen_user}}/.pkg/wireguard/wireguard-{{host_arch}}-{{wireguard_vsn}}.tar.gz
+#     dest: /home/{{gen_user}}/.pkg/wireguard
+#     group: "{{gen_user}}" 
+#     owner: "{{gen_user}}"
+#     remote_src: true
+#     validate_certs: false
+#
+# - name: compile wireguard 
+#   become: true
+#   command: 
+#     cmd: "bash -ilc 'make CMAKE_BUILD_TYPE=Release -j$(nproc)'"
+#     chdir: /home/{{gen_user}}/.pkg/wireguard/wireguard-{{wireguard_vsn}}
+#     creates: /home/{{gen_user}}/.pkg/wireguard/wireguard-{{wireguard_vsn}}/build/src/wireguard
+#
+# - name: install wireguard 
+#   become: true
+#   command: 
+#     cmd: "bash -ilc 'make install'"
+#     chdir: /home/{{gen_user}}/.pkg/wireguard/wireguard-{{wireguard_vsn}}
+#     creates: /usr/local/bin/wireguard
+#

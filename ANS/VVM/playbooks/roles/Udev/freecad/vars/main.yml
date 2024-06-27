@@ -1,0 +1,9 @@
+# note: must update `fcad_vsn` and `fcad_date` at the same time!
+# see: https://github.com/FreeCAD/FreeCAD/releases
+
+---
+
+fcad_vsn: 0.20.2
+
+fcad_date: 2022-12-27
+

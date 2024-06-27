@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# INSTALLED BY ANSIBLE
+# SOURCE IN `files/asdf_winmax`
+
+# For use with XFCE keyboard shortcuts
+# asdf_winmax 
+
+bash -ic "/home/aleak/util/code_util/bin/winmax"

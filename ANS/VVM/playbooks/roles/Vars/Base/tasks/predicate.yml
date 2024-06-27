@@ -1,0 +1,39 @@
+---
+ 
+# predicates
+
+- name: test for hostkey
+  local_action: stat path="~/.ssh/id_rsa.pub"
+  register: hostkey
+
+- name: set cblob_host
+  set_fact:
+    cblob_host: cblob-host
+
+- name: set base predicates
+  set_fact:
+    is_debian:      "'Debian' in '{{ansible_distribution}}'"
+    is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
+    is_arm6:        "'{{ansible_architecture}}' == 'armv6l'"
+    not_arm6:       "'{{ansible_architecture}}' != 'armv6l'"
+    is_arm7:        "'{{ansible_architecture}}' == 'armv7l'"
+    not_arm7:       "'{{ansible_architecture}}' != 'armv7l'"
+    is_x86:         "'{{ansible_architecture}}' == 'x86_64'"
+    not_x86:        "'{{ansible_architecture}}' != 'x86_64'"
+    is_x86_64:      "'{{ansible_architecture}}' == 'x86_64'"
+    not_x86_64:     "'{{ansible_architecture}}' != 'x86_64'"
+    ansible_local:  "'{{ansible_connection}}'   == 'local'"
+    ansible_remote: "'{{ansible_connection}}'   != 'local'"
+    gen_user_loop:  "{{gen_loop is defined}}"
+
+- name: set dependent predicates
+  set_fact:
+    is_debian_10:      "'{{ansible_distribution_version}}' == '10' and {{is_debian|bool}}"
+    is_ubuntu_1804:    "'{{ansible_distribution_version}}' == '18.04' and {{is_ubuntu|bool}}"
+    is_ubuntu_2004:    "'{{ansible_distribution_version}}' == '20.04' and {{is_ubuntu|bool}}"
+    copyable_hostkey:  "{{ansible_remote}} and {{hostkey.stat.exists}}"
+
+- name: default values
+  set_fact: 
+    is_lanhost: false 
+  when: is_lanhost is undefined

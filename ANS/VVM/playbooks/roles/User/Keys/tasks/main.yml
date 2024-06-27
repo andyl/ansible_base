@@ -1,0 +1,46 @@
+---
+
+# SSH Key Provisioning for GitHub and Filestore
+
+- name: Fetch ssh pubkey from target_host to local_host
+  fetch:
+    src: "{{tgt_keyfile}}"
+    dest: "{{lcl_keyfile}}"
+    flat: yes
+
+- name: Copy pubkey to GitHub
+  local_action: command gh_keycopy {{tgt_basename}} {{lcl_keyfile}}
+  become: false
+
+- name: Copy GitHub Configuration from local_host to target_host
+  copy:
+    src: /home/aleak/{{item}}
+    dest: /home/{{gen_user}}/{{item}}
+    owner: "{{gen_user}}"
+    group: "{{gen_user}}"
+    force: no
+  with_items:
+    - .gitconfig
+    - .gitconfig_user
+
+# - name: Update known_hosts using ssh-keyscan
+#   shell:
+#     cmd: ssh-keyscan {{item}} >> known_hosts && sort -u -o known_hosts known_hosts
+#     chdir: /home/{{gen_user}}/.ssh
+#   become_user: "{{gen_user}}"
+#   with_items:
+#     - github.com
+#   ignore_errors: true
+
+# - name: Create pwd file
+#   shell:
+#     cmd: echo {{lanpass.stdout}} > /tmp/lanpass.txt
+#   become_user: "{{gen_user}}"
+
+# - name: Copy pubkey to remote host
+#   shell:
+#     cmd: sshpass -f /tmp/lanpass.txt ssh-copy-id {{item}} 
+#   become_user: "{{gen_user}}"
+#   with_items:
+#     - "{{filehost}}"
+#   ignore_errors: yes

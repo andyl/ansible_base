@@ -1,0 +1,19 @@
+---
+
+# CouchDB
+
+- name: add repository key
+  apt_key: 
+    url:   'https://couchdb.apache.org/repo/bintray-pubkey.asc'
+    state: present
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://apache.bintray.com/couchdb-deb {{ansible_distribution_release}} main'
+    state: present
+    update_cache: yes
+
+# - name: add couchdb
+#   apt: pkg={{item}} state=latest force=yes
+#   with_items:
+#     - couchdb

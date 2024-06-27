@@ -1,0 +1,17 @@
+---
+
+# cli_tzone
+ 
+- name: get current timezone
+  shell: cat /etc/timezone
+  register: current_zone
+  changed_when: false
+ 
+- name: update timezone 
+  copy: 
+    content: "{{my_tzone}}"
+    dest:    /etc/timezone
+    backup:  yes
+  notify:
+    - update timezone
+

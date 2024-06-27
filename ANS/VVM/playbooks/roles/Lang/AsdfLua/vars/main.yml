@@ -1,0 +1,8 @@
+---
+# ----- lua 
+# lua_vsn: 5.3.5    superseded 2024 May 26 Sun
+lua_vsn: 5.4.6
+
+# ----- luarocks 
+luarocks_vsn: 3.7.0
+

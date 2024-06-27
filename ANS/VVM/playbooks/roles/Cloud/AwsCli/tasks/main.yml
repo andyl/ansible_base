@@ -1,0 +1,34 @@
+---
+
+# aws cli
+# install the AWS-CLI
+# https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
+
+- name: create aws directory 
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/aws"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file for AWS-CLI
+  get_url: 
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: "/home/{{gen_user}}/.pkg/aws/awscliv2.zip"
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: unzip AWS-CLI file
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/aws/awscliv2.zip
+    dest: /home/{{gen_user}}/.pkg/aws
+    remote_src: true
+
+- name:  install AWS-CLI
+  become:  true
+  shell:   ./install
+  args:
+    chdir:   /home/{{gen_user}}/.pkg/aws/aws
+    creates: /usr/local/bin/aws

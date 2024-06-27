@@ -1,0 +1,69 @@
+---
+
+# Ctools/Release
+
+# ----- mdcat / markdown previewer 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url:
+    url:  https://github.com/swsnr/mdcat/releases/download/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl.tar.gz
+    dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
+    dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}
+    creates: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
+    dest: /usr/bin/mdcat
+    state: link 
+    force: yes
+
+# ----- yazi / file manager 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url:
+    url:  https://github.com/sxyazi/yazi/releases/download/v{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu.zip
+    dest: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/release.zip
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/release.zip
+    dest: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}
+    creates: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/yazi
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/{{item}}
+    dest: /usr/bin/{{item}}
+    state: link 
+    force: yes
+  with_items: 
+    - yazi 
+    - ya
+

@@ -1,0 +1,14 @@
+auto lo
+
+iface lo inet loopback     # outbound ethernet connection
+iface eth0 inet dhcp
+
+iface wlan0 inet static    # inbound WIFI connection
+  address 192.168.40.1
+  netmask 255.255.255.0
+
+iface wlan1 inet dhcp      # outbound ethernet connection
+  wpa-ssid "Singularity University"
+  wpa-psk  "12481632"
+
+up iptables-restore < /etc/iptables.ipv4.nat

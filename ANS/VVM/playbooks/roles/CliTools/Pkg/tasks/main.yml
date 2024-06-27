@@ -1,0 +1,21 @@
+---
+
+# Ctools/Pkg
+
+- name: install tools with apt 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - ranger                     # file manager 
+    - nnn                        # file manager 
+    - unar                       # archive tool 
+    - poppler-utils              # PDF viewer 
+    - libpoppler-cpp-dev         # PDF libraries 
+
+- name: install pip modules (python3)
+  pip: name="{{item}}" state=latest executable=pip3
+  become: true
+  with_items:
+    - term-image   # displays images in kitty terminal 
+  
+

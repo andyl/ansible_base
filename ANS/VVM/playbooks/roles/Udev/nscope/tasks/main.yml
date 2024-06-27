@@ -1,0 +1,39 @@
+---
+
+# nScope
+# the executable is called 'nScope'
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg 
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get deb file
+  get_url: 
+    url: https://www.nscope.org/v081/linux/nscope_{{nscope_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/nscope_{{nscope_version}}_amd64.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: add archive package repo
+  copy: 
+    src: libpng12.list
+    dest: /etc/apt/sources.list.d/libpng12.list
+  become: true
+  notify: 
+      - apt-cache update
+
+- name: prep for installation
+  meta: flush_handlers
+
+- name: install nScope package
+  apt:
+    deb: /home/{{gen_user}}/.pkg/nscope_{{nscope_version}}_amd64.deb
+
+- name: install support software
+  apt: pkg={{item}} state=latest
+  with_items:
+    - libpng12-0
+

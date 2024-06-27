@@ -1,0 +1,33 @@
+---
+
+# restic
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/restic"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get executable file 
+  get_url: 
+    url: https://github.com/restic/restic/releases/download/v{{restic_vsn}}/restic_{{restic_vsn}}_linux_amd64.bz2
+    dest: /home/{{gen_user}}/.pkg/restic/restic-{{restic_vsn}}.bz2
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: decompress executable file 
+  command: 
+    cmd: bunzip2 -k restic-{{restic_vsn}}.bz2
+    chdir: /home/{{gen_user}}/.pkg/restic
+    creates: restic-{{restic_vsn}} 
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/restic/restic-v{{restic_vsn}}
+    dest:  /usr/local/bin/restic
+    state: link
+    force: yes
+    mode:  "a+rx"
+

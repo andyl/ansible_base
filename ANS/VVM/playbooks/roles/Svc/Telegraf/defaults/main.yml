@@ -1,0 +1,4 @@
+---
+influx_tcp_host: influx-host
+influx_udp_host: influx-host
+

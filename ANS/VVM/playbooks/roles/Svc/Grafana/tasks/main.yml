@@ -1,0 +1,49 @@
+---
+
+# grafana
+#
+# see:
+# - http://docs.grafana.org/installation/debian
+
+- name: install support software
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - adduser
+    - libfontconfig
+    - libfontconfig1
+  changed_when: false
+    
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/grafana
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get deb file
+  get_url: 
+    url:  https://dl.grafana.com/oss/release/grafana_{{grafana_version}}_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: install package
+  apt: deb=/home/{{gen_user}}/.pkg/grafana/grafana_{{grafana_version}}_amd64.deb
+
+- name: install config file
+  become: true
+  template: 
+    src: grafana.ini
+    dest: /etc/grafana/grafana.ini
+    owner: root 
+    group: root
+    mode:  "a+r"
+  notify: restart grafana
+
+# - name: setup s3 configuration
+#   become: true
+#   blockinfile:
+#     block: "{{ lookup('file', '/home/aleak/util/code_util/inc/ansible/grafana_s3.inc') }}"
+#     dest:  /etc/grafana/grafana.ini
+

@@ -1,0 +1,7 @@
+---
+
+# nginx
+
+- name: nginx base tasks
+  include_tasks: base.yml
+

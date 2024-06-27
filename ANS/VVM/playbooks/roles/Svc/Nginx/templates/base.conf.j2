@@ -1,0 +1,15 @@
+server {
+
+  listen 8080;
+  root /usr/share/nginx;
+
+	location /cblob {
+	  autoindex on;
+	}
+
+	location /html {
+	  index index.html index.htm;
+	}
+}
+
+

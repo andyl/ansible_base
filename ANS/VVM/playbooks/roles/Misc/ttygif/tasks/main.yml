@@ -1,0 +1,22 @@
+---
+
+# ttygif
+# use ttygif to make animated gifs of console sessions
+# see https://github.com/icholy/ttygif for usage instructions
+# should be installed on Ubuntu 64 bit intel machines
+
+- name: apt support packages
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - imagemagick
+    - ttyrec
+    - gcc
+
+- name: copy ttygif executable
+  become: true
+  copy:
+    src: ttygif
+    dest: /usr/bin/ttygif
+    mode: "a+rx"

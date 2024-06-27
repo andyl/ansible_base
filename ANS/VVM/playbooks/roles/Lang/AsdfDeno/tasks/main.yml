@@ -1,0 +1,28 @@
+---
+
+# AsdfDeno 
+
+# Set global version in ~/.tool-versions
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: deno   , repo: ""}
+
+- name: update asdf deno plugin 
+  command: "bash -ilc 'asdf plugin update deno'"
+  become_user: "{{ gen_user }}"
+
+- name: install asdf_deno
+  command: "bash -ilc 'asdf install deno {{ deno_vsn }}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/deno/{{ deno_vsn }}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
+

@@ -1,0 +1,13 @@
+---
+
+# postgres
+# see http://wiki.postgresql.org/wiki/Apt
+# see http://wiki.postgresql.org/wiki/Apt/FAQ
+
+- name: install postgres packages
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - libpq-dev 
+    - postgresql-{{postgres_version}}
+    - postgresql-contrib-{{postgres_version}}
+
