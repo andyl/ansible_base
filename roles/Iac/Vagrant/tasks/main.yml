@@ -1,0 +1,31 @@
+---
+
+# vagrant
+#
+# see:
+# - https://docs.vagrantup.com/v2/installation/index.html
+# - https://www.vagrantup.com/downloads
+
+- name: create pkg dir
+  file: path=/home/{{sys_user}}/.pkg/vagrant state=directory group={{sys_user}} owner={{sys_user}}
+
+- name: get deb file
+  become: false
+  get_url: 
+    url: https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}-1_amd64.deb
+    dest: /home/{{sys_user}}/.pkg/vagrant/vagrant_{{vagrant_version}}.deb
+
+- name: install package
+  apt: deb=/home/{{sys_user}}/.pkg/vagrant/vagrant_{{vagrant_version}}.deb
+
+# https://github.com/hashicorp/vagrant/wiki/Available-Vagrant-Plugins
+- name: install plugins 
+  shell: "vagrant plugin install {{item}}"
+  with_items:
+    - vagrant-libvirt 
+    - vagrant-aws 
+    - vagrant-proxmox 
+    - vagrant-ansible-local 
+    - vagrant-hostmanager
+    - vagrant-mutate
+

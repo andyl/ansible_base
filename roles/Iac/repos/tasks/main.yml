@@ -1,0 +1,55 @@
+---
+
+# IAC/repos
+
+- name: create a iac directory
+  file: 
+    path: /home/{{gen_user}}/iac
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: repo lists 
+  set_fact:
+    base_repos:
+      - ansible_base 
+      - docker_base 
+      - vagrant_base 
+    code_repos: 
+      - docker_code 
+      - packer_code 
+      - terraform_code 
+
+- name: install base_repos (GIT)
+  become_user: "{{gen_user}}"
+  git:
+    repo:   git@github.com:andyl/{{item}}.git
+    dest:   /home/{{gen_user}}/iac/{{item}}
+    depth:  1
+    force:  true
+    update: true
+  with_items: "{{base_repos}}"
+  when: is_lanhost
+
+- name: install base_repos (HTTPS)
+  become_user: "{{gen_user}}"
+  git:
+    repo:   https://github.com/andyl/{{item}}.git
+    dest:   /home/{{gen_user}}/iac/{{item}}
+    depth:  1
+    force:  true
+    update: true
+  with_items: "{{base_repos}}"
+  when: not is_lanhost
+
+- name: install code_repos
+  become_user: "{{gen_user}}"
+  git:
+    repo:   git-host:Git/Iac/{{item}}.git
+    dest:   /home/{{gen_user}}/iac/{{item}}
+    depth:  1
+    force:  true
+    update: true
+  with_items: "{{code_repos}}"
+  when: is_lanhost
+

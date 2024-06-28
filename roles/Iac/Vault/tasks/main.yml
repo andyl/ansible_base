@@ -1,0 +1,35 @@
+---
+
+# vault
+
+- name: create pkg dir
+  file: 
+    path: /home/{{sys_user}}/.pkg/vault_{{vault_version}}
+    state: directory 
+    group: "{{sys_user}}" 
+    owner: "{{sys_user}}"
+
+- name: get zip file
+  become: no
+  get_url: 
+    url:  https://releases.hashicorp.com/vault/{{vault_version}}/vault_{{vault_version}}_linux_amd64.zip
+    dest: /home/{{sys_user}}/.pkg/vault_{{vault_version}}.zip 
+    force: no
+    validate_certs: false
+
+- name: unzip file
+  become: no
+  unarchive:
+    src:  /home/{{sys_user}}/.pkg/vault_{{vault_version}}.zip
+    dest: /home/{{sys_user}}/.pkg/vault_{{vault_version}}
+    remote_src: true
+
+- name: installation symlinks
+  become: yes
+  file: 
+    src:   /home/{{sys_user}}/.pkg/vault_{{vault_version}}/{{item}} 
+    dest:  /usr/local/bin/{{item}} 
+    state: link
+    force: yes
+  with_items:
+    - vault
