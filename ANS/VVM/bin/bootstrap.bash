@@ -40,6 +40,6 @@ function writekey() {
 # [ -z $NOANSIBLE ] && cp -r x-ansible/ANSIBLE /vagrant
 
 echo "=== INSTALL ANSIBLE EXECUTABLE"
-cd /vvm/x-ansible/ANS/VVM/bin
+cd /iac/ansible_base/ANS/VVM/bin
 ./install_ansible
 
