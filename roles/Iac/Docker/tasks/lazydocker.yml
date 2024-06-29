@@ -1,0 +1,42 @@
+---
+
+# ----- lazy_docker -----
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: download lazydocker tarfile (x86)
+  get_url:
+    url: https://github.com/jesseduffield/lazydocker/releases/download/v{{lazydocker_vsn}}/lazydocker_{{lazydocker_vsn}}_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
+    mode: 'a+rx'
+    validate_certs: false
+  when: is_x86
+
+- name: download lazydocker tarfile (arm7)
+  get_url:
+    url: https://github.com/jesseduffield/lazydocker/releases/download/v{{lazydocker_vsn}}/lazydocker_{{lazydocker_vsn}}_Linux_armv7.tar.gz
+    dest: /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
+    mode: 'a+rx'
+    validate_certs: false
+  when: is_arm7
+
+- name: untar package
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}/lzd.tar.gz
+    dest: /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: create symlink for lazydocker executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/lazydocker
+    src:   /home/{{gen_user}}/.pkg/docker/lazydocker_{{lazydocker_vsn}}/lazydocker

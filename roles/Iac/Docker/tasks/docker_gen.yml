@@ -1,0 +1,12 @@
+---
+
+# ----- docker-gen -----
+# get the dockergen executable from cblob_host
+
+- name: install docker-gen for x86
+  get_url:
+    url:  "http://{{cblob_host}}/docker/docker-gen-amd64-{{dockergen_vsn}}"
+    dest: /usr/local/bin/docker-gen
+    mode: "a+rx"
+  when: is_lanhost
+

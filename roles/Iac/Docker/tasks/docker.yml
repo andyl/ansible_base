@@ -1,0 +1,77 @@
+---
+
+# docker
+# see http://docs.docker.io/en/latest/installation/ubuntulinux/
+
+- name: install base packages
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=no
+  with_items:
+    - apt-transport-https 
+    - ca-certificates 
+
+- name: remove old docker
+  apt:  pkg={{item}} state=absent purge=true
+  with_items:
+    - docker.io
+    - lxc-docker
+    - docker
+
+- name: remove old docker-compose
+  pip: name="docker-compose" state=absent executable=pip3
+  become: true
+
+- name: add repository key
+  apt_key:
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    state: present
+
+- name: remove old repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    update_cache: yes
+    state: absent
+
+- name: create docker group
+  become: true
+  group:
+    name: docker
+    state: present
+
+- name: add user to docker group
+  become: true
+  user:
+    name: "{{item}}"
+    groups: docker
+    append: yes
+  with_items:
+    - "{{gen_user}}"
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://download.docker.com/linux/{{host_dist}} {{host_relname}} stable'
+    update_cache: yes
+
+- name: install docker-ce and docker-compose-plugin
+  apt: pkg={{item}} state=latest
+  with_items:
+    - docker-ce
+    - docker-compose-plugin
+
+- name: install /etc/docker/daemon.json 
+  become: true 
+  template: 
+    src:   daemon.json 
+    dest:  /etc/docker/daemon.json 
+    owner: root 
+    group: root
+    mode:  "a+rw"
+  notify: restart docker 
+
+- name: create auto-complete symlink for dk alias
+  become: true
+  file: 
+    src:  /usr/share/bash-completion/completions/docker
+    dest: /usr/share/bash-completion/completions/dk
+    state: link 
+
