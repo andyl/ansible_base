@@ -68,31 +68,32 @@ ex_vsn: 1.17.1-otp-27
 # ----- PHOENIX / mix hex.info phx_new
 # https://github.com/phoenixframework/phoenix/tags
 #
-# phx_vsn: 1.0.3      superseded 29 Sep 2015
-# phx_vsn: 1.0.4      superseded 16 Dec 2015
-# phx_vsn: 1.1.0      superseded 08 Jan 2016
-# phx_vsn: 1.1.2      superseded 21 Feb 2016
-# phx_vsn: 1.1.4      superseded 23 Jun 2016
-# phx_vsn: 1.2.0      superseded 25 Apr 2017
-# phx_vsn: 1.3.0      superseded 07 Nov 2018
-# phx_vsn: 1.4.0      superseded 29 Apr 2019
-# phx_vsn: 1.4.3      superseded 08 May 2019
-# phx_vsn: 1.4.4      superseded 23 Apr 2020
-# phx_vsn: 1.5.1      superseded 17 Feb 2021
-# phx_vsn: 1.5.7      superseded 01 Mar 2021
-# phx_vsn: 1.5.8      superseded 14 Dec 2021
-# phx_vsn: 1.6.4      superseded 04 Jan 2022
-# phx_vsn: 1.6.6      superseded 09 Sep 2022
-# phx_vsn: 1.6.12     superseded 06 Nov 2022
-# phx_vsn: 1.7.0      superseded 11 Mar 2023 
-# phx_vsn: 1.7.1      superseded 21 Mar 2023 
-# phx_vsn: 1.7.2      superseded 31 Jul 2023 
-# phx_vsn: 1.7.7      superseded 10 Oct 2023
-# phx_vsn: 1.7.8      superseded 12 Oct 2023 
-# phx_vsn: 1.7.9      superseded 14 Nov 2023
-# phx_vsn: 1.7.10     superseded 09 Feb 2024
-# phx_vsn: 1.7.11     superseded 20 May 2024
-phx_vsn: 1.7.12  
+# phx_vsn: 1.0.3      superseded 2015 Sep 29
+# phx_vsn: 1.0.4      superseded 2015 Dec 16
+# phx_vsn: 1.1.0      superseded 2016 Jan 08
+# phx_vsn: 1.1.2      superseded 2016 Feb 21
+# phx_vsn: 1.1.4      superseded 2016 Jun 23
+# phx_vsn: 1.2.0      superseded 2017 Apr 25
+# phx_vsn: 1.3.0      superseded 2018 Nov 07
+# phx_vsn: 1.4.0      superseded 2019 Apr 29
+# phx_vsn: 1.4.3      superseded 2019 May 08
+# phx_vsn: 1.4.4      superseded 2020 Apr 23
+# phx_vsn: 1.5.1      superseded 2021 Feb 17
+# phx_vsn: 1.5.7      superseded 2021 Mar 01
+# phx_vsn: 1.5.8      superseded 2021 Dec 14
+# phx_vsn: 1.6.4      superseded 2022 Jan 04
+# phx_vsn: 1.6.6      superseded 2022 Sep 09
+# phx_vsn: 1.6.12     superseded 2022 Nov 06
+# phx_vsn: 1.7.0      superseded 2023 Mar 11 
+# phx_vsn: 1.7.1      superseded 2023 Mar 21 
+# phx_vsn: 1.7.2      superseded 2023 Jul 31 
+# phx_vsn: 1.7.7      superseded 2023 Oct 10
+# phx_vsn: 1.7.8      superseded 2023 Oct 12 
+# phx_vsn: 1.7.9      superseded 2023 Nov 14
+# phx_vsn: 1.7.10     superseded 2024 Feb 09
+# phx_vsn: 1.7.11     superseded 2024 May 20
+# phx_vsn: 1.7.12     superseded 2024 Jun 28 Fri
+phx_vsn: 1.7.14  
 
 # ----- TABLEAU / mix hex.info tableau_new 
 # tblu_vsn: 1.0.2     superseded 20 May 2024
