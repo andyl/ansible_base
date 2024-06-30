@@ -2,5 +2,6 @@
 
 # see https://github.com/tailwindlabs/tailwindcss/releases
 
-# tailwind_vsn: 3.2.4  # superseded 2023-03-05
-tailwind_vsn: 3.2.7  
+# tailwind_vsn: 3.2.4  superseded 2023 Mar 05 Tue
+# tailwind_vsn: 3.2.7  superseded 2024 Jun 29 Sat
+tailwind_vsn: 3.4.4  
