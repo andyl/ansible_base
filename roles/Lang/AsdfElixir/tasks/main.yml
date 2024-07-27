@@ -96,3 +96,13 @@
     chdir: "/home/{{gen_user}}"
   when: is_lanhost
 
+  # -------------------------------------------------------
+  # livescript 
+  # https://github.com/thmsmlr/livescript
+- name: install igniter_new
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install github thmsmlr/livescript --force'"
+  ignore_errors: true
+  args:
+    chdir: "/home/{{gen_user}}"
+  when: is_lanhost
