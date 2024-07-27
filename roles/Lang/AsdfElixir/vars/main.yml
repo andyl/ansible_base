@@ -104,4 +104,5 @@ tblu_vsn: 1.2.0
 exsrv_vsn: 0.2.0 
 
 # ----- IGNITER / mix hex.info igniter_new
-igniter_vsn: 0.2.1 
+# igniter_vsn: 0.2.1  superseded 2024 Jul 25 Thu
+igniter_vsn: 0.3.0
