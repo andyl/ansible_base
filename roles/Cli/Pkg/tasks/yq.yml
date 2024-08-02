@@ -1,0 +1,23 @@
+# yq
+
+- name: create yq pkg dir 
+  file: 
+    path: "/home/{{gen_user}}/.pkg/yq/{{yq_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get yq executable
+  get_url: 
+    url:  https://github.com/mikefarah/yq/releases/download/v{{yq_vsn}}/yq_linux_arm64
+    dest: /home/{{gen_user}}/.pkg/yq/{{yq_vsn}}/yq_linux_arm64
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create symlink for yq executable
+  become: true
+  file: 
+    state: link 
+    force: true
+    dest:  /usr/local/bin/yq
+    src:  /home/{{gen_user}}/.pkg/yq/{{yq_vsn}}/yq_linux_arm64

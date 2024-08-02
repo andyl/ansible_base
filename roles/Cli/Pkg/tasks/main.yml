@@ -37,13 +37,9 @@
   include_tasks: pkg_x86.yml
   when: is_x86
 
-# - name: pkg for ARM7 systems
-#   include_tasks: pkg_arm7.yml
-#   when: is_arm7
-#
-# - name: pkg for ARM6 systems
-#   include_tasks: pkg_arm6.yml
-#   when: is_arm6
+- name: install yq package 
+  include_tasks: yq.yml
+  when: is_x86
 
 - name: remove packages
   become: true
