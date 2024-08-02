@@ -27,4 +27,5 @@
 # erlang_vsn: 26.1     superseded 2024 Jan 18 Mon
 # erlang_vsn: 26.2.1   superseded 2024 May 24 Mon
 # erlang_vsn: 26.2.5   superseded 2024 Jun 24 Mon
-erlang_vsn: 27.0
+# erlang_vsn: 27.0     superseded 2024 Aug 02 Fri
+erlang_vsn: 27.0.1
