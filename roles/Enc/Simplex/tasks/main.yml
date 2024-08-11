@@ -1,0 +1,30 @@
+--- 
+
+# SimpleX Chat 
+# SimpleX CLI Client 
+# https://github.com/simplex-chat/simplex-chat 
+# https://simplex.chat/ 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/simplex/{{smx_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get executable
+  get_url: 
+    url:  https://github.com/simplex-chat/simplex-chat/releases/download/v{{smx_vsn}}/simplex-chat-ubuntu-22_04-x86-64 
+    dest: /home/{{gen_user}}/.pkg/simplex/{{smx_vsn}}/simplex-chat
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/simplex/{{smx_vsn}}/simplex-chat 
+    dest:  /usr/local/bin/simplex
+    state: link
+    force: yes
+    mode:  "a+rx"
+
