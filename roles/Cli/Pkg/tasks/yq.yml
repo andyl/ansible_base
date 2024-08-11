@@ -9,10 +9,11 @@
 
 - name: get yq executable
   get_url: 
-    url:  https://github.com/mikefarah/yq/releases/download/v{{yq_vsn}}/yq_linux_arm64
+    url:  https://github.com/mikefarah/yq/releases/download/v{{yq_vsn}}/yq_linux_amd64
     dest: /home/{{gen_user}}/.pkg/yq/{{yq_vsn}}/yq_linux_arm64
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+    mode:  "a+rx"
 
 - name: create symlink for yq executable
   become: true
