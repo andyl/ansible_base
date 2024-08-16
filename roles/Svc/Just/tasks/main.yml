@@ -31,11 +31,35 @@
     dest: /home/{{gen_user}}/.pkg/just/{{just_vsn}}
     remote_src: true
 
-# - name: create executable symlink
-#   file: 
-#     src:   /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just_{{just_vsn}}_linux_x64/just 
-#     dest:  /usr/local/bin/just 
-#     state: link
-#     force: yes
-#     mode:  "a+rx"
+- name: create executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just 
+    dest:  /usr/local/bin/just 
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+- name: create completion symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/just/{{just_vsn}}/completions/just.bash 
+    dest:  /etc/bash_completion.d/just.bash 
+    state: link
+    force: yes
+    mode:  "a+r"
+
+- name: create manpage directory
+  file: 
+    path:  /usr/local/share/man/man1
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode:  "a+rx"
+
+- name: create manpage symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just.1
+    dest:  /usr/local/share/man/man1/just.1
+    state: link
+    force: yes
+    mode:  "a+r"
 
