@@ -1,24 +1,30 @@
 ---
 
-# tshark
+# termshark
 # https://github.com/gcla/termshark
 
 - name: remove apt package 
   apt: 
     state: absent 
+    pkg: termshark 
+
+- name: add tshark 
+  become: true
+  apt:  
     pkg: tshark 
+    state: latest
 
 - name: create pkg dir
   file: 
-    path:  "/home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}"
+    path:  "/home/{{gen_user}}/.pkg/termshark/{{termshark_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: get tar file 
   get_url: 
-    url:  https://github.com/gcla/termshark/releases/download/v{{tshark_vsn}}/termshark_{{tshark_vsn}}_linux_x64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/tshark.tar.gz
+    url:  https://github.com/gcla/termshark/releases/download/v{{termshark_vsn}}/termshark_{{termshark_vsn}}_linux_x64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/termshark/{{termshark_vsn}}/termshark.tar.gz
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -26,14 +32,14 @@
 - name: expand tar file 
   become: false
   unarchive:
-    src:  /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/tshark.tar.gz
-    dest: /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}
+    src:  /home/{{gen_user}}/.pkg/termshark/{{termshark_vsn}}/termshark.tar.gz
+    dest: /home/{{gen_user}}/.pkg/termshark/{{termshark_vsn}}
     remote_src: true
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/tshark/{{tshark_vsn}}/termshark_{{tshark_vsn}}_linux_x64/termshark 
-    dest:  /usr/local/bin/tshark
+    src:   /home/{{gen_user}}/.pkg/termshark/{{termshark_vsn}}/termshark_{{termshark_vsn}}_linux_x64/termshark 
+    dest:  /usr/local/bin/termshark 
     state: link
     force: yes
     mode:  "a+rx"
