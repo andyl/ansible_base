@@ -1,0 +1,41 @@
+---
+
+# just
+# https://github.com/casey/just
+# command-runner
+
+- name: remove apt package 
+  apt: 
+    state: absent 
+    pkg: just 
+
+- name: create pkg dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/just/{{just_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file 
+  get_url: 
+    url:  https://github.com/casey/just/releases/download/{{just_vsn}}/just-{{just_vsn}}-x86_64-unknown-linux-musl.tar.gz
+    dest: /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just.tar.gz
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand tar file 
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just.tar.gz
+    dest: /home/{{gen_user}}/.pkg/just/{{just_vsn}}
+    remote_src: true
+
+# - name: create executable symlink
+#   file: 
+#     src:   /home/{{gen_user}}/.pkg/just/{{just_vsn}}/just_{{just_vsn}}_linux_x64/just 
+#     dest:  /usr/local/bin/just 
+#     state: link
+#     force: yes
+#     mode:  "a+rx"
+
