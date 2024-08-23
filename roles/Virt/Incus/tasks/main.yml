@@ -1,0 +1,29 @@
+---
+
+# incus
+# https://linuxcontainers.org/incus/introduction/ 
+# https://github.com/lxc/incus
+# https://github.com/zabbly/incus 
+
+- name: add incus apt key
+  apt_key: 
+    url: https://pkgs.zabbly.com/key.asc 
+    state: present
+
+- name: add incus repository
+  apt_repository: 
+    repo: 'deb https://pkgs.zabbly.com/incus/stable {{ ansible_distribution_release }} main'
+    state: present
+    update_cache: false
+
+- name: install incus packages 
+  apt: 
+    pkg: "{{item}}"
+    state: latest
+    update_cache: false
+  become: true
+  with_items:
+    - incus 
+    - incus-client
+    - incus-extra
+    - incus-ui-canonical
