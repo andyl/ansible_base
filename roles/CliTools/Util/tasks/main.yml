@@ -67,3 +67,28 @@
     - yazi 
     - ya
 
+# ----- direnv 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get executable
+  get_url:
+    url:  https://github.com/direnv/direnv/releases/download/v{{direnv_vsn}}/direnv.linux-amd64
+    dest: /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}/direnv.linux-amd64
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}/direnv.linux-amd64
+    dest: /usr/bin/direnv
+    state: link 
+    force: yes
+    mode:  "a+rx"
