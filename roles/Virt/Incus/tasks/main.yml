@@ -27,3 +27,22 @@
     - incus-client
     - incus-extra
     - incus-ui-canonical
+    - openvswitch-switch 
+    - zfsutils-linux
+
+- name: create incus-admin group 
+  group: 
+    name: "{{item}}"
+    state: present
+  with_items: 
+    - incus 
+    - incus-admin
+
+- name: add user to incus-admin 
+  user: 
+    name: "{{gen_user}}" 
+    groups: "{{item}}"
+    append: yes
+  with_items: 
+    - incus 
+    - incus-admin
