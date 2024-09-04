@@ -1,0 +1,4 @@
+--- 
+
+ovs_name: "ovsbr0" 
+ovs_interface: "eth0"

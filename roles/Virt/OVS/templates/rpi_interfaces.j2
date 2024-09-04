@@ -1,0 +1,12 @@
+auto lo
+iface lo inet loopback
+
+auto {{ ovs_interface }}
+allow-hotplug {{ ovs_interface }}
+iface {{ ovs_interface }} inet manual
+
+auto {{ ovs_name }}
+allow-hotplug {{ ovs_name }}
+iface {{ ovs_name }} inet dhcp
+    bridge_ports {{ ovs_interface }}
+    ovs_type OVSBridge

@@ -1,0 +1,77 @@
+---
+
+# ----- exit if wired ethernet is not present 
+
+- name: Detect wired Ethernet interface
+  shell: |
+    ip -o link show | awk -F': ' '{print $2}' | grep -E '^(eth|ens|enp)'
+  register: ethernet_detection
+  changed_when: false
+  failed_when: false
+
+- name: Set detected Ethernet interface
+  set_fact:
+    ethernet_interface: "{{ ethernet_detection.stdout_lines[0] }}"
+  when: ethernet_detection.stdout_lines | length > 0
+
+- name: Check if wired Ethernet is present
+  fail:
+    msg: "No wired Ethernet interface detected. Exiting playbook."
+  when: ethernet_detection.stdout_lines | length == 0
+
+# ----- standard install 
+
+- name: Install Open vSwitch
+  package:
+    name: openvswitch-switch
+    state: present
+
+- name: Ensure OVS service is started and enabled
+  systemd:
+    name: openvswitch-switch
+    state: started
+    enabled: yes
+
+- name: Create OVS bridge
+  openvswitch_bridge:
+    bridge: "{{ ovs_name }}"
+    state: present
+
+- name: Add ethernet interface to bridge
+  openvswitch_port:
+    bridge: "{{ ovs_name }}"
+    port: "{{ ovs_interface }}"
+    state: present
+
+- name: Detect network management system
+  command: which netplan
+  register: netplan_check
+  ignore_errors: true
+  changed_when: false
+
+- name: Configure networking based on system type
+  block:
+    - name: Configure for Netplan (Ubuntu 22.04+)
+      template:
+        src: netplan_config.yaml.j2
+        dest: /etc/netplan/99-ovs-bridge.yaml
+      when: netplan_check.rc == 0
+      notify: Apply Netplan changes
+
+    - name: Configure for traditional networking
+      template:
+        src: interfaces_config.j2
+        dest: /etc/network/interfaces.d/ovs-bridge
+      when: netplan_check.rc != 0
+      notify: Restart networking
+
+    - name: Configure for Raspberry Pi (if-up/if-down)
+      template:
+        src: rpi_interfaces.j2
+        dest: /etc/network/interfaces
+      when: 
+        - netplan_check.rc != 0
+        - ansible_facts['distribution'] == "Debian"
+        - ansible_facts['architecture'] == "armv7l" or ansible_facts['architecture'] == "aarch64"
+      notify: Restart networking
+

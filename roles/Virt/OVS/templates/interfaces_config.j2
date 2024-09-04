@@ -1,0 +1,11 @@
+auto {{ ovs_name }}
+allow-ovs {{ ovs_name }}
+iface {{ ovs_name }} inet dhcp
+    ovs_type OVSBridge
+    ovs_ports {{ ovs_interface }}
+
+auto {{ ovs_interface }}
+allow-{{ ovs_name }} {{ ovs_interface }}
+iface {{ ovs_interface }} inet manual
+    ovs_bridge {{ ovs_name }}
+    ovs_type OVSPort
