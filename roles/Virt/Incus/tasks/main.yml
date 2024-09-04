@@ -27,7 +27,6 @@
     - incus-client
     - incus-extra
     - incus-ui-canonical
-    - openvswitch-switch 
     - zfsutils-linux
 
 - name: create incus-admin group 
