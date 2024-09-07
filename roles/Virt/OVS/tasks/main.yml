@@ -36,51 +36,60 @@
     state: started
     enabled: yes
 
-- name: Exit 
-  fail: 
-    msg: "Exiting now"
+# ----- Create OVS Bridge 
 
-# - name: Create OVS bridge
-#   openvswitch_bridge:
-#     bridge: "{{ ovs_name }}"
-#     fail_mode: standalone
-#     state: present
-#
+- name: Create OVS bridge
+  openvswitch_bridge:
+    bridge: "{{ ovs_name }}"
+    state: present
+
 # - name: Add ethernet interface to bridge
 #   openvswitch_port:
 #     bridge: "{{ ovs_name }}"
 #     port: "{{ ovs_interface }}"
 #     state: present
-#
-# - name: Detect network management system
-#   command: which netplan
-#   register: netplan_check
-#   ignore_errors: true
-#   changed_when: false
-#
-# - name: Configure networking based on system type
-#   block:
-#     - name: Configure for Netplan (Ubuntu 22.04+)
-#       template:
-#         src: netplan_config.yaml.j2
-#         dest: /etc/netplan/99-ovs-bridge.yaml
-#       when: netplan_check.rc == 0
-#       notify: Apply Netplan changes
-#
-#     - name: Configure for traditional networking
-#       template:
-#         src: interfaces_config.j2
-#         dest: /etc/network/interfaces.d/ovs-bridge
-#       when: netplan_check.rc != 0
-#       notify: Restart networking
-#
-#     - name: Configure for Raspberry Pi (if-up/if-down)
-#       template:
-#         src: rpi_interfaces.j2
-#         dest: /etc/network/interfaces
-#       when: 
-#         - netplan_check.rc != 0
-#         - ansible_facts['distribution'] == "Debian"
-#         - ansible_facts['architecture'] == "armv7l" or ansible_facts['architecture'] == "aarch64"
-#       notify: Restart networking
+
+# ----- Write config files 
+
+- name: create netconf directory
+  file: 
+    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: Detect network management system
+  command: which netplan
+  register: netplan_check
+  ignore_errors: true
+  changed_when: false
+
+- name: Configure networking based on system type
+  block:
+    - name: Configure for Netplan (Ubuntu 22.04+)
+      template:
+        src: netplan2.yaml.j2
+        # dest: /etc/netplan/99-ovs-bridge.yaml
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+      when: netplan_check.rc == 0
+      # notify: Apply Netplan changes
+
+    - name: Configure for traditional networking
+      template:
+        src: interfaces_config.j2
+        # dest: /etc/network/interfaces.d/ovs-bridge
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/ovs_bridge
+      when: netplan_check.rc != 0
+      # notify: Restart networking
+
+    - name: Configure for Raspberry Pi (if-up/if-down)
+      template:
+        src: rpi_interfaces.j2
+        # dest: /etc/network/interfaces
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/rpi_interfaces
+      when: 
+        - netplan_check.rc != 0
+        - ansible_facts['distribution'] == "Debian"
+        - ansible_facts['architecture'] == "armv7l" or ansible_facts['architecture'] == "aarch64"
+      # notify: Restart networking
 
