@@ -25,10 +25,14 @@
 
 # ----- OpenVSwitch install 
 
-- name: Install Open vSwitch
-  package:
-    name: openvswitch-switch
-    state: present
+- name: Install Open vSwitch Dependencies 
+  apt:
+    pkg: "{{item}}"
+    state: latest
+  with_items: 
+    - openvswitch-switch 
+    - netplan.io 
+    - net-tools
 
 - name: Ensure OVS service is started and enabled
   systemd:
@@ -47,7 +51,7 @@
 
 - name: create netconf directory
   file: 
-    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}"
+    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/backup"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -58,12 +62,15 @@
   ignore_errors: true
   changed_when: false
 
+# netconf script 
+# create /etc/netplan owned by root
+# move every file (not symlink) to backup directory
+
 - name: Configure networking based on system type
   block:
     - name: Configure for Netplan (Ubuntu 22.04+)
       template:
         src: netplan2.yaml.j2
-        # dest: /etc/netplan/99-ovs-bridge.yaml
         dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
       when: netplan_check.rc == 0
       # notify: Apply Netplan changes
