@@ -2,24 +2,13 @@
 
 network: 
   version: 2
-
   renderer: networkd 
-
   ethernets: 
     {{ovs_interface}}: 
-      dhcp4: false 
-      dhcp6: false 
-
+      dhcp4: no
+      dhcp6: no
   bridges: 
     {{ovs_name}}: 
       interfaces: [{{ovs_interface}}] 
-      # addresses: [192.168.8.53/24] 
-      # routes: 
-      #   - to: default 
-      #     via: 192.168.8.1 
-      # nameservers: 
-      #   addresses: [192.168.8.1] 
-      # parameters: 
-      #   stp: true 
-      #   forward-delay: 4 
-      dhcp4: true
+      dhcp4: yes 
+      openvswitch: {}

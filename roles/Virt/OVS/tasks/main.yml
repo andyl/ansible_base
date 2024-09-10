@@ -38,15 +38,9 @@
 
 # ----- Create OVS Bridge 
 
-- name: Create OVS bridge
-  openvswitch_bridge:
-    bridge: "{{ ovs_name }}"
-    state: present
-
-# - name: Add ethernet interface to bridge
-#   openvswitch_port:
+# - name: Create OVS bridge
+#   openvswitch_bridge:
 #     bridge: "{{ ovs_name }}"
-#     port: "{{ ovs_interface }}"
 #     state: present
 
 # ----- Write config files 
