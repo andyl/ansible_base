@@ -1,0 +1,14 @@
+# Written by Ansible (Virt/OVS/templates/netplan_wired.yaml.j2)
+
+network: 
+  version: 2
+  renderer: networkd 
+  ethernets: 
+    {{ovs_interface}}: 
+      dhcp4: no
+      dhcp6: no
+  bridges: 
+    {{ovs_name}}: 
+      interfaces: [{{ovs_interface}}] 
+      dhcp4: yes 
+      openvswitch: {}
