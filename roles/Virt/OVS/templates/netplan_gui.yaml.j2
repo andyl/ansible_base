@@ -1,8 +1,8 @@
-# Written by Ansible (Virt/OVS/templates/netplan2.j2)
+# Written by Ansible (Virt/OVS/templates/netplan_gui.j2)
 
 network: 
   version: 2
-  renderer: networkd 
+  renderer: NetworkManager
   ethernets: 
     {{ovs_interface}}: 
       dhcp4: no
