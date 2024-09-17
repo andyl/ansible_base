@@ -4,11 +4,11 @@ network:
   version: 2
   renderer: NetworkManager
   ethernets: 
-    {{ovs_interface}}: 
+    {{eth_interface}}: 
       dhcp4: no
       dhcp6: no
   bridges: 
     {{ovs_name}}: 
-      interfaces: [{{ovs_interface}}] 
+      interfaces: [{{eth_interface}}] 
       dhcp4: yes 
       openvswitch: {}

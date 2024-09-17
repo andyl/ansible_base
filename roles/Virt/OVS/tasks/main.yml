@@ -69,11 +69,11 @@
       template:
         src: netplan_gui.yaml.j2 
         dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
-      when: netplan_check.rc == 0
+      when: nmcli_check.rc == 0
 
     - name: Configure for networkd 
       template:
         src: netplan_cli.yaml.j2 
         dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
-      when: netplan_check.rc != 0
+      when: nmcli_check.rc != 0
 

@@ -42,6 +42,7 @@
     - binutils                   # build tool
     - libtool                    # build tool
     - bison                      # build tool
+    - direnv                     # directory environment tools
     - libcurl4                   # development lib
     - libcurl4-openssl-dev       # development lib
     - libevent-dev               # development lib

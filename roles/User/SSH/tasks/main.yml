@@ -17,11 +17,10 @@
   run_once: true 
   ignore_errors: true
   with_inventory_hostnames: 
-    - app 
+    - ovs
+    - app
     - dev  
-    - gui 
     - cname 
-    - services
 
 - name: Copy /tmp/known_hosts to local
   delegate_to: localhost 
@@ -50,9 +49,10 @@
   ignore_errors: true 
   run_once: true 
   with_inventory_hostnames: 
-    - app 
+    - ovs
+    - app
     - dev  
-    - gui 
+    - cname 
 
 - name: Copy /tmp/known_hosts to local
   delegate_to: localhost 
