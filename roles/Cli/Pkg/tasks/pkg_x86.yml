@@ -15,7 +15,6 @@
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
     - language-pack-en-base      # american time zones
-    - atop                       # monitoring utility
     - dnsutils                   # dnsutils
     - cmake                      # required by libgit2/rugged
     - libicu-dev                 # development lib
