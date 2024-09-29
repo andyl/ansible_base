@@ -1,0 +1,64 @@
+---
+
+# AsdfPython
+
+# Set global version in ~/.tool-versions
+
+- name: "install plugins for {{gen_user}}"
+  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
+    chdir: "/home/{{gen_user}}"
+  become_user: "{{ gen_user }}"
+  ignore_errors: true
+  with_items:
+    - { name: python , repo: ""}
+
+- name: update asdf python plugin 
+  command: "bash -ilc 'asdf plugin update python'"
+  become_user: "{{ gen_user }}"
+
+- name: install asdf_python
+  command: "bash -ilc '.asdf/bin/asdf install python {{py_vsn}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/python/{{py_vsn}}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
+- name: Update .tool-versions 
+  lineinfile:
+    path: "~/.tool-versions"
+    regexp: '^python '
+    line: "python {{ py_vsn }}"
+    create: yes
+
+# ----- update ansible venv 
+
+- name: Check existing venv Python version
+  command: grep "{{ py_vsn }}" ~/.ansible_venv/pyvenv.cfg
+  register: venv_current
+  changed_when: false
+  failed_when: false
+
+- name: Remove existing venv if Python version changed
+  file:
+    path: "{{ ans_venv_dir }}"
+    state: absent
+  when: venv_current.rc != 0
+
+- name: Create new venv if it doesn't exist or was removed
+  command: "python -m venv {{ ans_venv_dir }}"
+  args:
+    creates: "{{ ans_venv_dir }}"
+
+- name: Update pip in the new venv
+  pip:
+    name: pip
+    state: latest
+    virtualenv: "{{ ans_venv_dir }}"
+
+- name: Install or upgrade ansible in the venv
+  pip:
+    name: ansible
+    state: latest
+    virtualenv: "{{ ans_venv_dir }}"

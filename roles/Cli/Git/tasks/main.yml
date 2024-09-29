@@ -35,6 +35,8 @@
 
 - name: install lazygit
   include_tasks: lazygit.yml
+  when: is_x86
 
 - name: install act
   include_tasks: act.yml
+  when: is_x86

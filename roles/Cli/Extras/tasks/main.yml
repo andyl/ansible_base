@@ -2,10 +2,10 @@
 
 # Extras
 
-- name: extras for x86_64
-  include_tasks: inc_x86_64.yml
-  when: is_x86_64
+- name: extras for x86
+  include_tasks: inc_x86.yml
+  when: is_x86
 
-# - name: extras for arm7
-#   include: inc_arm7.yml
-#   when: is_arm7
+- name: extras for aarch64
+  include_tasks: inc_aarch64.yml
+  when: is_aarch64

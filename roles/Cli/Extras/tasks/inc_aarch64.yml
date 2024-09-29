@@ -47,8 +47,8 @@
 
 - name: get rg tar file
   get_url: 
-    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
-    dest: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    url: https://github.com/BurntSushi/ripgrep/releases/download/{{rg_vsn}}/ripgrep-{{rg_vsn}}-aarch64-unknown-linux-gnu.tar.gz
+    dest: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-aarch64-unknown-linux-gnu.tar.gz
     force: no
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -57,13 +57,13 @@
   become_user: "{{gen_user}}"
   unarchive:
     remote_src: true
-    src:  /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf.tar.gz
+    src:  /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-aarch64-unknown-linux-gnu.tar.gz
     dest: /home/{{gen_user}}/.pkg/rg
-    creates: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
+    creates: /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-aarch64-unknown-linux-gnu/rg
 
 - name: create rg symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-arm-unknown-linux-gnueabihf/rg
+    src:   /home/{{gen_user}}/.pkg/rg/ripgrep-{{rg_vsn}}-aarch64-unknown-linux-gnu/rg
     dest:  /usr/bin/rg
     state: link
     force: yes

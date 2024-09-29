@@ -1,0 +1,40 @@
+---
+
+# rm_docker
+# remove docker 
+
+- name: remove docker-ce and docker-compose-plugin
+  apt: pkg={{item}} state=absent purge=true
+  with_items:
+    - docker-ce
+    - docker-compose-plugin
+    - docker 
+
+- name: remove old docker
+  apt:  pkg={{item}} state=absent purge=true
+  with_items:
+    - docker.io
+    - lxc-docker
+    - docker
+
+- name: remove old docker-compose
+  pip: name="docker-compose" state=absent executable=pip3
+  become: true
+
+- name: remove repository key
+  apt_key:
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    state: absent
+
+- name: remove old repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main'
+    update_cache: yes
+    state: absent
+
+- name: remove docker group
+  become: true
+  group:
+    name: docker
+    state: absent
+

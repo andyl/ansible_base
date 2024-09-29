@@ -37,13 +37,13 @@
 
 # ----- off-LAN hosts
 
-- name: install tmux from APT
-  become: true
-  apt:  
-    pkg: tmux 
-    state: latest 
-    install_recommends: yes
-  when: not is_lanhost
+# - name: install tmux from APT
+#   become: true
+#   apt:  
+#     pkg: tmux 
+#     state: latest 
+#     install_recommends: yes
+#   when: not is_lanhost
 
 # tmate 
 # https://tmate.io

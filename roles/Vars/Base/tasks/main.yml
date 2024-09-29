@@ -8,3 +8,17 @@
 - name: Hostname Vars
   include_tasks: hostname.yml
 
+- name: Ansible Architecure
+  debug:
+    msg: "value: {{ ansible_architecture }}"
+
+# TEST VALUES...
+#
+# - name: is_x86
+#   debug:
+#     msg: "value: {{ is_x86 }}"
+#
+# - name: is_aarch64
+#   debug:
+#     msg: "value: {{ is_aarch64 }}"
+

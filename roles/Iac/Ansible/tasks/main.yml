@@ -4,7 +4,7 @@
 # http://docs.ansible.com/intro_installation.html
 
 - name: install python dependencies
-  become: yes
+  become: true
   pip: name={{item}}
   with_items:
     - paramiko

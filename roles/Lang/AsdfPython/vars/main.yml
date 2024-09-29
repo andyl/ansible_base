@@ -1,0 +1,8 @@
+---
+
+# ----- ANSIBLE_VENV 
+ans_venv_dir: "~/.ansible_venv"
+
+# ----- PYTHON
+py_vsn: 3.10.12 
+

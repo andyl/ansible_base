@@ -32,6 +32,7 @@
     - nfs-common                 # file sharing
     - nfs-server                 # file sharing
     - autofs                     # file sharing 
+    - direnv                     # auto-set environment variables
 
 - name: pkg for x86 systems
   include_tasks: pkg_x86.yml

@@ -43,10 +43,11 @@
 
 - name: add support packages
   apt: pkg={{item}} state=latest force=yes
+  ignore_errors: true
   with_items:
     - libwxgtk-webview3.0-gtk3-0v5
 
-# ----- Use cached version of ruby
+# ----- Use cached version of erlang
 - name: create pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/asdf_erlang
@@ -68,7 +69,6 @@
   get_url:
     url:  http://{{cblob_host}}/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
     dest: /home/{{gen_user}}/.pkg/asdf_erlang/erlang_{{erlang_vsn}}_{{host_arch}}.tar.gz
-  when: not_arm6
   when: is_lanhost
 
 - name: untar ASDF erlang
@@ -80,6 +80,13 @@
     remote_src: true
   when: is_lanhost
   
+- name: Update .tool-versions 
+  lineinfile:
+    path: "~/.tool-versions"
+    regexp: '^erlang '
+    line: "erlang {{ erlang_vsn }}"
+    create: yes
+
 # ----- Install erlang from scratch 
 - name: install erlang from scratch 
   command: "bash -ilc '.asdf/bin/asdf install erlang {{erlang_vsn}}'"

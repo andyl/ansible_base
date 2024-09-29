@@ -37,6 +37,13 @@
   ignore_errors: true 
   when: is_lanhost
 
+- name: Update .tool-versions 
+  lineinfile:
+    path: "~/.tool-versions"
+    regexp: '^elixir '
+    line: "elixir {{ ex_vsn }}"
+    create: yes
+
   # -------------------------------------------------------
   # bash completions for mix
   # https://github.com/erikareads/mix_completions 
