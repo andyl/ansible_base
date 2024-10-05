@@ -50,7 +50,9 @@
     - libwxgtk-webview3.0-gtk3-dev  # wxWidgets
     - default-jdk                   # jdk 
     - unixodbc-dev                  # odbc 
-    - xsltproc fop libxml2-utils    # documentation 
+    - xsltproc                      # documentation 
+    - fop                           # documentation
+    - libxml2-utils                 # documentation 
 
 # ----- Use cached version of erlang
 - name: create pkg dir
