@@ -31,6 +31,7 @@
     regexp: '^python '
     line: "python {{ py_vsn }}"
     create: yes
+  delegate_to: localhost
 
 # ----- update ansible venv 
 
