@@ -37,12 +37,13 @@
   ignore_errors: true 
   when: is_lanhost
 
-- name: Update .tool-versions 
+- name: Update .tool-versions (only on the control host) 
   lineinfile:
     path: "~/.tool-versions"
     regexp: '^elixir '
     line: "elixir {{ ex_vsn }}"
     create: yes
+  delegate_to: localhost
 
   # -------------------------------------------------------
   # bash completions for mix

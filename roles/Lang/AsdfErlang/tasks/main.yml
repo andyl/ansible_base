@@ -41,11 +41,16 @@
   with_items:
     - { name: erlang , repo: ""} 
 
+# https://blog.differentpla.net/blog/2019/01/30/erlang-build-prerequisites/
 - name: add support packages
   apt: pkg={{item}} state=latest force=yes
   ignore_errors: true
   with_items:
-    - libwxgtk-webview3.0-gtk3-0v5
+    - libwxgtk-webview3.0-gtk3-0v5  # wxWidgets 
+    - libwxgtk-webview3.0-gtk3-dev  # wxWidgets
+    - default-jdk                   # jdk 
+    - unixodbc-dev                  # odbc 
+    - xsltproc fop libxml2-utils    # documentation 
 
 # ----- Use cached version of erlang
 - name: create pkg dir
@@ -80,12 +85,13 @@
     remote_src: true
   when: is_lanhost
   
-- name: Update .tool-versions 
+- name: Update .tool-versions (only on the control host)
   lineinfile:
     path: "~/.tool-versions"
     regexp: '^erlang '
     line: "erlang {{ erlang_vsn }}"
     create: yes
+  delegate_to: localhost
 
 # ----- Install erlang from scratch 
 - name: install erlang from scratch 
