@@ -22,6 +22,7 @@
     src:  /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/release.tar.xz
     dest: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}
     creates: /home/{{gen_user}}/.pkg/kitty/kitty-{{kitty_vsn}}/bin
+    remote_src: yes
 
 - name: create executable symlink
   become: true
