@@ -39,8 +39,8 @@
 
 - name: Update .tool-versions (only on the control host) 
   lineinfile:
-    path: "~/.tool-versions"
-    regexp: '^elixir '
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^elixir'
     line: "elixir {{ ex_vsn }}"
     create: yes
   delegate_to: localhost
@@ -107,7 +107,7 @@
   # -------------------------------------------------------
   # livescript 
   # https://github.com/thmsmlr/livescript
-- name: install igniter_new
+- name: install livescript
   become_user: "{{gen_user}}"
   shell: "bash -ilc 'mix archive.install github thmsmlr/livescript --force'"
   ignore_errors: true

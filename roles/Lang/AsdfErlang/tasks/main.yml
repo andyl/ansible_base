@@ -89,8 +89,8 @@
   
 - name: Update .tool-versions (only on the control host)
   lineinfile:
-    path: "~/.tool-versions"
-    regexp: '^erlang '
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^erlang'
     line: "erlang {{ erlang_vsn }}"
     create: yes
   delegate_to: localhost

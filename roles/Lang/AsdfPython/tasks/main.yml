@@ -27,7 +27,7 @@
 
 - name: Update .tool-versions 
   lineinfile:
-    path: "~/.tool-versions"
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
     regexp: '^python '
     line: "python {{ py_vsn }}"
     create: yes
