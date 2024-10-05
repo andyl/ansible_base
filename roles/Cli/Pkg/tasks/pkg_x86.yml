@@ -63,14 +63,10 @@
     - at                         # process scheduler
     - aptitude                   # package manager
     - checkinstall               # builds debian packages
-    # - libtesseract-dev           # OCR library 
-    # - libtesseract4              # OCR library 
-    # - tesseract-ocr              # OCR library 
-    # - ocrmypdf                   # OCR application 
-    # - gimagereader               # GUI for tesseract-ocr
     - texlive-extra-utils        # pdfcrop 
     - exactimage                 # pdfdeskew
     - exfatprogs                 # tools to create, check and label exFAT filesystems
     - exfat-fuse                 # read and write exFAT driver for FUSE
     - ssldump                    # ssh debug utility 
+    - vnstat                     # traffic monitor 
 
