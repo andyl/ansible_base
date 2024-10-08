@@ -22,6 +22,14 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
+- name: Update .tool-versions (only on the control host) 
+  lineinfile:
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^nodejs'
+    line: "nodejs {{ node_vsn }}"
+    create: yes
+  delegate_to: localhost
+
 # - name: npm packages
 #   become: true
 #   npm: name={{item}} state=latest global=yes
