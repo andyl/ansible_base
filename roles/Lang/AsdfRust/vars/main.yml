@@ -1,17 +1,21 @@
 ---
+
+# asdf update plugin rust && asdf list all rust 
+
 # rust_vsn: 1.0.0
-# rust_vsn: 1.1.0     superseded 2015 Sep 29
-# rust_vsn: 1.3.0     superseded 2016 Sep 13
-# rust_vsn: 1.11.0    superseded 2016 Sep 30
-# rust_vsn: 1.12.0    superseded 2017 Feb 06
-# rust_vsn: 1.15.0    superseded 2017 Apr 27
-# rust_vsn: 1.17.0    superseded 2018 Jul 30
-# rust_vsn: 1.27.2    superseded 2019 Jun 23
-# rust_vsn: 1.35.0    superseded 2020 Feb 06
-# rust_vsn: 1.41.0    superseded 2021 Nov 03
-# rust_vsn: 1.56.1    superseded 2022 Oct 25 
-# rust_vsn: 1.64.0    superseded 2023 Jun 03
-# rust_vsn: 1.70.0    superseded 2023 Oct 20 
-# rust_vsn: 1.73.0    superseded 2024 Jan 08
-rust_vsn: 1.75.0
+# rust_vsn: 1.1.0     superseded 2015 Sep 29 Tue   
+# rust_vsn: 1.3.0     superseded 2016 Sep 13 Tue 
+# rust_vsn: 1.11.0    superseded 2016 Sep 30 Fri 
+# rust_vsn: 1.12.0    superseded 2017 Feb 06 Mon 
+# rust_vsn: 1.15.0    superseded 2017 Apr 27 Thu 
+# rust_vsn: 1.17.0    superseded 2018 Jul 30 Mon 
+# rust_vsn: 1.27.2    superseded 2019 Jun 23 Sun 
+# rust_vsn: 1.35.0    superseded 2020 Feb 06 Thu 
+# rust_vsn: 1.41.0    superseded 2021 Nov 03 Wed 
+# rust_vsn: 1.56.1    superseded 2022 Oct 25 Tue
+# rust_vsn: 1.64.0    superseded 2023 Jun 03 Sat 
+# rust_vsn: 1.70.0    superseded 2023 Oct 20 Fri
+# rust_vsn: 1.73.0    superseded 2024 Jan 08 Mon
+# rust_vsn: 1.75.0    superseded 2024 Oct 09 Wed
+rust_vsn: 1.81.0
 

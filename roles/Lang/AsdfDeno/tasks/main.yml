@@ -25,4 +25,14 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
+- name: Update .tool-versions (only on the control host) 
+  lineinfile:
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^deno'
+    line: "deno {{ deno_vsn }}"
+    create: yes
+  delegate_to: localhost
 
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim deno {{deno_vsn}}'"

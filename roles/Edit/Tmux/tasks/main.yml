@@ -45,32 +45,24 @@
 #     install_recommends: yes
 #   when: not is_lanhost
 
-# tmate 
-# https://tmate.io
-# https://github.com/tmate-io/tmate
-# https://github.com/tmate-io/tmate/releases
+# upterm 
+# https://owenou.com/upterm/ 
+# https://upterm.dev/ 
+# https://github.com/owenthereal/upterm 
+# https://github.com/owenthereal/upterm/releases 
 
-# - name: install tmate executable
-#   get_url:
-#     url:  http://{{cblob_host}}/tmux/tmate-{{tmate_vsn}}
-#     dest: /home/{{gen_user}}/.pkg/tmux/tmate-{{tmate_vsn}}
-#     mode: "a+rx"
-#   become: true
-#   when: is_x86_64
+- name: download upterm package
+  get_url:
+    url:   https://github.com/owenthereal/upterm/releases/download/v{{upterm_vsn}}/upterm_linux_amd64.deb
+    dest: /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
+    mode: "a+rx"
+  become: true
+  when: is_x86_64
 
-# - name: create tmate symlink 
-#   file: 
-#     src:   /home/{{gen_user}}/.pkg/tmux/tmate-{{tmate_vsn}}
-#     dest:  /usr/bin/tmate
-#     state: link
-#     force: yes
-#   become: true
-#   when: is_x86_64
+- name: install upterm package
+  apt: 
+    deb:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
+    force: yes
+  become: true
+  when: is_x86_64
 
-# - name: create upterm symlink 
-#   file: 
-#     src:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}/upterm
-#     dest:  /usr/bin/upterm
-#     state: link
-#     force: yes
-#   become: true

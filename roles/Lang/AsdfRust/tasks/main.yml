@@ -19,9 +19,13 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
-- name: reshim
-  become_user: "{{gen_user}}"
-  command: "bash -ilc 'asdf reshim rust {{rust_vsn}}'"
+- name: Update .tool-versions (only on the control host) 
+  lineinfile:
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^rust'
+    line: "rust {{ rust_vsn }}"
+    create: yes
+  delegate_to: localhost
 
 - name: create cargo symlink 
   become: true
@@ -29,4 +33,8 @@
     src: /home/aleak/.asdf/shims/cargo 
     dest: /usr/local/bin/cargo 
     state: link
+
+- name: reshim
+  become_user: "{{gen_user}}"
+  command: "bash -ilc 'asdf reshim rust {{rust_vsn}}'"
 

@@ -14,6 +14,5 @@
 # tmux_vsn: 3.4  superseded 2024 Oct 04 Fri
 tmux_vsn: 3.5
 
-# tmate_vsn: 2.2.1  superseded 2020-Feb-06
-tmate_vsn: 2.4.0
-
+# https://github.com/owenthereal/upterm/releases 
+upterm_vsn: 0.14.3 
