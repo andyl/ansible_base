@@ -1,0 +1,9 @@
+---
+
+# Aider - https://aider.chat/ 
+
+- name: Install/upgrade aider-chat package
+  pip:
+    name: aider-chat
+    state: latest
+
