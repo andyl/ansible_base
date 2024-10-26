@@ -8,9 +8,9 @@
 - name: Hostname Vars
   include_tasks: hostname.yml
 
-- name: Ansible Architecure
-  debug:
-    msg: "value: {{ ansible_architecture }}"
+# - name: Ansible Architecure
+#   debug:
+#     msg: "value: {{ ansible_architecture }}"
 
 # TEST VALUES...
 #
