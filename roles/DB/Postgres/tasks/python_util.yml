@@ -1,12 +1,5 @@
 ---
 
-- name: install utilities for python2 
-  become: true
-  pip:
-    name: "{{ item }}"
-  with_items:
-    - psycopg2-binary
-
 - name: install utilities for python3
   become: true
   pip:
