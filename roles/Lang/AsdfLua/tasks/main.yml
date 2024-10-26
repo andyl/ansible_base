@@ -19,7 +19,16 @@
     chdir: "/home/{{ gen_user }}"
   become_user: "{{ gen_user }}"
 
+- name: Update .tool-versions (only on the control host) 
+  lineinfile:
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^lua'
+    line: "lua {{ lua_vsn }}"
+    create: yes
+  delegate_to: localhost
+
 # ----- Luarocks 
+# https://luarocks.github.io/luarocks/releases
 
 - name: create pkg dir
   file: 
