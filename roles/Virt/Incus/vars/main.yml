@@ -1,0 +1,8 @@
+---
+
+# distrobuilder 
+# https://github.com/lxc/distrobuilder/releases 
+# https://linuxcontainers.org/distrobuilder/downloads/ 
+
+dbld_vsn: 3.1
+

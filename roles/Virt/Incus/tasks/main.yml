@@ -45,3 +45,37 @@
   with_items: 
     - incus 
     - incus-admin
+
+# distrobuilder 
+# https://linuxcontainers.org/distrobuilder/downloads/ 
+# https://linuxcontainers.org/distrobuilder/
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/dbld/{{dbld_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get dbld tarfile 
+  get_url:
+    krl:  https://linuxcontainers.org/downloads/distrobuilder/distrobuilder-{{dbld_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/dbld/{{dbld_vsn}}/dbld_{{dbld_vsn}}.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: expand dbld tarfile 
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/dbld/{{dbld_vsn}}/dbld_{{dbld_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/dbld/{{dbld_vsn}}/
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+# - name: installation symlink
+#   become: true
+#   file: 
+#     src:  /home/aleak/.pkg/dbld/{{dbld_vsn}}/x86_64-linux-gnu/bin/dbld
+#     dest: /usr/local/bin/dbld
+#     state: link
+#
