@@ -1,4 +1,5 @@
 ---
 # https://developer.hashicorp.com/terraform/downloads 
 
-tfm_vsn: 1.8.5
+# tfm_vsn: 1.8.5    # superseded 2024 Oct 30 Wed
+tfm_vsn: 1.9.8
