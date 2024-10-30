@@ -28,6 +28,7 @@
     - incus-extra
     - incus-ui-canonical
     - zfsutils-linux
+    - debootstrap
 
 - name: create incus-admin group 
   group: 
@@ -57,18 +58,6 @@
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
 
-- name: create bin directory
-  file: 
-    path:  /home/{{gen_user}}/.go/bin
-    state: directory 
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-
-- name: clear old executable 
-  file: 
-    path:  /usr/{{gen_user}}/.go/bin/distrobuilder
-    state: absent
- 
 - name: get executable
   get_url:
     url:  http://{{cblob_host}}/distrobuilder/distrobuilder-{{dbld_vsn}} 
@@ -79,9 +68,47 @@
     owner: "{{gen_user}}"
     validate_certs: no
 
-- name: install symlinks
+- name: install symlink
+  become: true
   file: 
-    dest:  /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
-    src:   /usr/{{gen_user}}/.go/bin/distrobuilder
+    src:   /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
+    dest:  /usr/local/bin/distrobuilder
     state: link
     force: yes
+    mode: 'a+rx'
+
+# incus-compose 
+# https://github.com/bketelsen/incus-compose
+# https://github.com/bketelsen/incus-compose/releases 
+
+- name: create pkg directory
+  file: 
+    path:  /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: get executable
+  get_url:
+    url:  https://github.com/bketelsen/incus-compose/releases/download/{{incom_vsn}}/incus-compose_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: expand tarfile 
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: install symlink
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/incus-compose/{{incom_vsn}}/incus-compose
+    dest:  /usr/local/bin/incus-compose
+    state: link
+    force: yes
+    mode: 'a+rx'
+
