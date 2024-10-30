@@ -13,15 +13,6 @@
     repo: 'deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib' 
     state: present
 
-# - name: remove old packages
-#   apt: 
-#     pkg: "{{item}}"
-#     state: absent
-#     update_cache: yes
-#   become: true
-#   with_items:
-#     - virtualbox-6.1
-
 - name: install package
   apt: 
     pkg: "{{item}}"
