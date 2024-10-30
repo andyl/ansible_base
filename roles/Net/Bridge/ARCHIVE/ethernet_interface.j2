@@ -1,0 +1,6 @@
+auto {{ ovs_interface }}
+allow-{{ bridge_name }} {{ ovs_interface }}
+iface {{ ovs_interface }} inet manual
+    ovs_bridge {{ bridge_name }}
+    ovs_type OVSPort
+

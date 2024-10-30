@@ -1,0 +1,62 @@
+---
+
+# ----- exit if wired ethernet is not present 
+
+- name: Detect wired Ethernet interface
+  shell: |
+    ip -o link show | awk -F': ' '{print $2}' | grep -E '^(eno|eth|ens|enp)'
+  register: ethernet_detection
+  changed_when: false
+  failed_when: false
+
+- name: Set detected Ethernet interface
+  set_fact:
+    eth_interface: "{{ ethernet_detection.stdout_lines[0] }}"
+  when: ethernet_detection.stdout_lines | length > 0
+
+- name: Check if wired Ethernet is present
+  fail:
+    msg: "No wired Ethernet interface detected. Exiting playbook."
+  when: ethernet_detection.stdout_lines | length == 0
+
+- name: Echo ethernet interface 
+  debug: 
+    msg: "The eth_interface is: {{ eth_interface }}"
+
+# ----- Write config files 
+
+- name: create netconf directory
+  file: 
+    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/backup"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create netplan directory 
+  file: 
+    path: /etc/netplan 
+    state: directory
+    owner: root 
+    group: root 
+  become: true 
+  
+- name: Look for the presence of NetworkManager (nmcli)
+  command: which nmcli
+  register: nmcli_check
+  ignore_errors: true
+  changed_when: false
+
+- name: Configure networking based on system type
+  block:
+    - name: Configure for NetworkManager
+      template:
+        src: netplan_gui.yaml.j2 
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+      when: nmcli_check.rc == 0
+
+    - name: Configure for networkd 
+      template:
+        src: netplan_cli.yaml.j2 
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+      when: nmcli_check.rc != 0
+

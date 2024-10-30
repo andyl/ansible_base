@@ -1,0 +1,43 @@
+---
+
+# - name: Configure OVS Bridge with DHCP
+
+- name: Install Open vSwitch
+  package:
+    name: openvswitch
+    state: present
+
+- name: Ensure OVS service is started and enabled
+  systemd:
+    name: openvswitch
+    state: started
+    enabled: yes
+
+- name: Create OVS bridge
+  openvswitch_bridge:
+    bridge: "{{ bridge_name }}"
+    state: present
+
+- name: Add ethernet interface to bridge
+  openvswitch_port:
+    bridge: "{{ bridge_name }}"
+    port: "{{ ovs_interface }}"
+    state: present
+
+- name: Configure bridge for DHCP
+  template:
+    src: bridge_interface.j2
+    dest: /etc/network/interfaces.d/{{ bridge_name }}
+  notify: Restart networking
+
+- name: Remove IP from ethernet interface
+  template:
+    src: ovs_interface.j2
+    dest: /etc/network/interfaces.d/{{ ovs_interface }}
+  notify: Restart networking
+
+  handlers:
+    - name: Restart networking
+      systemd:
+        name: networking
+        state: restarted 
