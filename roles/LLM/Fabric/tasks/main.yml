@@ -1,0 +1,30 @@
+---
+
+# Fabric AI 
+
+- name: create pkg directory
+  file: 
+    path: /home/{{gen_user}}/.pkg/fabric
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get fabric executable
+  get_url: 
+    url: https://github.com/danielmiessler/fabric/releases/download/v{{fab_vsn}}/fabric-linux-amd64
+    dest: /home/{{gen_user}}/.pkg/fabric/fabric-{{fab_vsn}}
+    validate_certs: false
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode: "a+rx"
+
+- name: create executable symlink
+  become: true
+  file: 
+    dest:  /usr/local/bin/fabric
+    src:   /home/{{gen_user}}/.pkg/fabric/fabric-{{fab_vsn}}
+    state: link 
+    force: true
+    mode: "a+rx"
+
