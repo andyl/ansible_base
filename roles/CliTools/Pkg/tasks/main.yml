@@ -12,6 +12,7 @@
     - unar                       # archive tool 
     - poppler-utils              # PDF viewer 
     - libpoppler-cpp-dev         # PDF libraries 
+    - moreutils                  # vipe and other utilities
 
 - name: install pip modules (python3)
   pip: name="{{item}}" state=latest executable=pip3
