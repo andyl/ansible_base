@@ -53,6 +53,7 @@
     - xsltproc                      # documentation 
     - fop                           # documentation
     - libxml2-utils                 # documentation 
+    - erlang-dev                    # needed by Nx
 
 # ----- Use cached version of erlang
 - name: create pkg dir
