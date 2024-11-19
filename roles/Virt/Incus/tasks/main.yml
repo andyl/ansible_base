@@ -20,7 +20,7 @@
   apt: 
     pkg: "{{item}}"
     state: latest
-    update_cache: false
+    update_cache: true
   become: true
   with_items:
     - incus 
