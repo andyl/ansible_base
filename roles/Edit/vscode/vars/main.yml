@@ -1,29 +1,30 @@
 ---
 # FIND VERSIONS IN ~/var/data/cblob/vscode
 #
-# vscode_vsn: 1.19.1    superseded 2018-02-19
-# vscode_vsn: 1.20.1    superseded 2018-03-17
-# vscode_vsn: 1.21.1    superseded 2018-06-15
-# vscode_vsn: 1.24.1    superseded 2018-07-10
-# vscode_vsn: 1.25.0    superseded 2018-07-16
-# vscode_vsn: 1.25.1    superseded 2018-09-16
-# vscode_vsn: 1.27.2    superseded 2018-10-10
-# vscode_vsn: 1.28.0    superseded 2018-11-08
-# vscode_vsn: 1.28.2    superseded 2018-11-21
-# vscode_vsn: 1.29.1    superseded 2018-12-14
-# vscode_vsn: 1.30.0    superseded 2019-01-08
-# vscode_vsn: 1.30.2    superseded 2019-02-15
-# vscode_vsn: 1.31.1    superseded 2019-03-07
-# vscode_vsn: 1.32.0    superseded 2019-03-23
-# vscode_vsn: 1.32.3    superseded 2019-05-16
-# vscode_vsn: 1.34.0    upserseded 2019-10-08
-# vscode_vsn: 1.38.1    superseded 2019-10-31
-# vscode_vsn: 1.39.2    superseded 2021-05-28
-# vscode_vsn: 1.56.2    superseded 2021-10-25
-# vscode_vsn: 1.61.2    superseded 2022-05-26
-# vscode_vsn: 1.67.2    superseded 2022-06-28 
-# vscode_vsn: 1.68.1    superseded 2022-09-09
-# vscode_vsn: 1.71.0    superseded 2022-11-08
-# vscode_vsn: 1.73.0    superseded 2023-12-22
+# vscode_vsn: 1.19.1    superseded 2018 Feb 18 Sun
+# vscode_vsn: 1.20.1    superseded 2018 Mar 16 Fri
+# vscode_vsn: 1.21.1    superseded 2018 Jun 14 Thu
+# vscode_vsn: 1.24.1    superseded 2018 Jul 09 Mon
+# vscode_vsn: 1.25.0    superseded 2018 Jul 15 Sun
+# vscode_vsn: 1.25.1    superseded 2018 Sep 15 Sat
+# vscode_vsn: 1.27.2    superseded 2018 Oct 09 Tue
+# vscode_vsn: 1.28.0    superseded 2018 Nov 07 Wed
+# vscode_vsn: 1.28.2    superseded 2018 Nov 20 Tue
+# vscode_vsn: 1.29.1    superseded 2018 Dec 13 Thu
+# vscode_vsn: 1.30.0    superseded 2019 Jan 07 Mon
+# vscode_vsn: 1.30.2    superseded 2019 Feb 14 Thu
+# vscode_vsn: 1.31.1    superseded 2019 Mar 06 Wed
+# vscode_vsn: 1.32.0    superseded 2019 Mar 22 Fri
+# vscode_vsn: 1.32.3    superseded 2019 May 15 Wed
+# vscode_vsn: 1.34.0    upserseded 2019 Oct 07 Mon
+# vscode_vsn: 1.38.1    superseded 2019 Oct 30 Wed
+# vscode_vsn: 1.39.2    superseded 2021 May 27 Thu
+# vscode_vsn: 1.56.2    superseded 2021 Oct 24 Sun
+# vscode_vsn: 1.61.2    superseded 2022 May 25 Wed
+# vscode_vsn: 1.67.2    superseded 2022 Jun 27 Mon
+# vscode_vsn: 1.68.1    superseded 2022 Sep 08 Thu
+# vscode_vsn: 1.71.0    superseded 2022 Nov 07 Mon
+# vscode_vsn: 1.73.0    superseded 2023 Dec 21 Thu
 # vscode_vsn: 1.85.1    superseded 2024 Jun 28 Fri
-vscode_vsn: 1.90.2 
+# vscode_vsn: 1.90.2    superseded 2024 Dec 19 Thu
+vscode_vsn: 1.96.1
