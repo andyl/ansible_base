@@ -1,0 +1,50 @@
+---
+
+# ghostty 
+
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get tar file
+  get_url:
+    url:  https://cblob-host/ghostty/ghostty-{{ghostty_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/ghostty-{{ghostty_vsn}}.tar
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar 
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/ghostty-{{ghostty_vsn}}.tar
+    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}
+    creates: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/bin
+    remote_src: yes
+
+- name: create executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/bin/ghostty
+    dest: /home/{{gen_user}}/.local/bin/ghostty
+    state: link 
+    force: yes
+
+- name: create resources symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share
+    dest: /home/{{gen_user}}/.local/share/ghostty
+    state: link 
+    force: yes
+
+- name: create icon symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/icons/hicolor
+    dest: /home/{{gen_user}}/.local/share/icons/hicolor
+    state: link 
+    force: yes
+
