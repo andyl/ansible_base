@@ -4,5 +4,6 @@
 
 # fab_vsn: 1.4.88  # superseded 2024 Nov 09 Sat
 # fab_vsn: 1.4.98  # superseded 2024 Dec 23 Mon 
-fab_vsn: 1.4.127
+# fab_vsn: 1.4.127 # superseded 2024 Dec 30 Mon
+fab_vsn: 1.4.128
 

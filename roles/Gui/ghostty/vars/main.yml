@@ -2,4 +2,6 @@
 
 # cblob-host:var/data/cblob/ghostty
 
-ghostty_vsn: 241228 
+# ghostty_vsn: 241228 superseded 2024 Dec 30 Mon
+# ghostty_vsn: 241230 superseded 2024 Dec 31 Tue
+ghostty_vsn: 241231 

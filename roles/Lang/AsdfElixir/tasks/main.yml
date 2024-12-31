@@ -81,7 +81,7 @@
   when: is_lanhost
 
   # -------------------------------------------------------
-  # tableau 
+  # tableau_new 
   # https://github.com/elixir-tools/tableau 
 - name: install tableau_new
   become_user: "{{gen_user}}"
@@ -89,6 +89,18 @@
   ignore_errors: true
   args:
     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_new-{{tblu_vsn}}
+    chdir: "/home/{{gen_user}}"
+  when: is_lanhost
+
+  # -------------------------------------------------------
+  # tableau_site 
+  # https://github.com/andyl/tableau_site
+- name: install tableau_site 
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install github andyl/tableau_site --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/tableau_site-{{tblu_vsn}}
     chdir: "/home/{{gen_user}}"
   when: is_lanhost
 
