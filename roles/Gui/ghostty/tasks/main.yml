@@ -13,6 +13,8 @@
     - /home/{{gen_user}}/.local/bin
     - /home/{{gen_user}}/.local/share/icons
     - /home/{{gen_user}}/.local/share/bash-completion/completions
+    - /home/{{gen_user}}/.local/share/man/man1
+    - /home/{{gen_user}}/.local/share/man/man5
 
 - name: remove existing directories 
   file: 
@@ -75,6 +77,16 @@
     state: link 
     force: yes
 
+- name: create manpage symlink
+  file:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/man/{{item}}
+    dest: /home/{{gen_user}}/.local/share/man/{{item}}
+    state: link 
+    force: yes
+  with_items: 
+    - man1/ghostty.1
+    - man5/ghostty.5
+
 - name: create current symlink
   file:
     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out
@@ -83,10 +95,12 @@
     force: yes
 
 - name: update desktop file 
-  lineinfile:
-    path:   /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/applications/{{item}}.desktop
-    regexp: '^Exec=ghostty'
-    line:   "Exec=/home/{{gen_user}}/.local/bin/ghostty"
+  # lineinfile: 
+  replace:
+    path:    /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/applications/{{item}}.desktop
+    regexp:  '^Exec=ghostty'
+    replace: "Exec=/home/{{gen_user}}/.local/bin/ghostty"
+    # line:   "Exec=/home/{{gen_user}}/.local/bin/ghostty"
   with_items: 
     - com.mitchellh.ghostty
 
