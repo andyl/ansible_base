@@ -95,12 +95,10 @@
     force: yes
 
 - name: update desktop file 
-  # lineinfile: 
   replace:
     path:    /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/applications/{{item}}.desktop
     regexp:  '^Exec=ghostty'
     replace: "Exec=/home/{{gen_user}}/.local/bin/ghostty"
-    # line:   "Exec=/home/{{gen_user}}/.local/bin/ghostty"
   with_items: 
     - com.mitchellh.ghostty
 
