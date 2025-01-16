@@ -118,4 +118,5 @@ exsrv_vsn: 0.2.0
 # igniter_vsn: 0.4.8  superseded 2024 Dec 11 Wed
 # igniter_vsn: 0.4.11 superseded 2024 Dec 19 Thu
 # igniter_vsn: 0.5.0  superseded 2025 Jan 03 Fri
-igniter_vsn: 0.5.3
+# igniter_vsn: 0.5.3  superseded 2025 Jan 15 Wed
+igniter_vsn: 0.5.6

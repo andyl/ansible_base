@@ -7,5 +7,6 @@
 # node_vsn: 18.2.0  superseded 2023 Dec 22 Fri 
 # node_vsn: 21.4.0  superseded 2024 May 27 Mon
 # node_vsn: 22.2.0  superseded 2024 Oct 07 Mon
-node_vsn: 22.9.0
+# node_vsn: 22.9.0  superseded 2025 Jan 15 Wed
+node_vsn: 23.6.0
 
