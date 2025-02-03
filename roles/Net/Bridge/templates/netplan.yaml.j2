@@ -1,0 +1,13 @@
+# Written by Ansible (Net/Bridge/templates/netplan.yaml.j2)
+
+network: 
+  version: 2
+  renderer: NetworkManager
+  ethernets: 
+    {{eth_interface}}: 
+      dhcp4: no
+      dhcp6: no
+  bridges: 
+    {{bridge_name}}: 
+      interfaces: [{{eth_interface}}] 
+      dhcp4: yes 
