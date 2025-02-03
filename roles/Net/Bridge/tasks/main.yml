@@ -23,6 +23,17 @@
   debug: 
     msg: "The eth_interface is: {{ eth_interface }}"
 
+# ----- Install Dependencies 
+
+- name: install networking packages
+  apt:
+    name:
+      - bridge-utils
+      - network-manager
+    state: present
+    update_cache: yes
+    become: yes
+
 # ----- Write config files 
 
 - name: create netconf directory
@@ -40,23 +51,30 @@
     group: root 
   become: true 
   
-- name: Look for the presence of NetworkManager (nmcli)
+- name: look for the presence of NetworkManager (nmcli)
   command: which nmcli
   register: nmcli_check
   ignore_errors: true
   changed_when: false
+
+- name: remove old config files 
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
 
 - name: Configure networking based on system type
   block:
     - name: Configure for NetworkManager
       template:
         src: netplan_gui.yaml.j2 
-        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
       when: nmcli_check.rc == 0
 
     - name: Configure for networkd 
       template:
         src: netplan_cli.yaml.j2 
-        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+        dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
       when: nmcli_check.rc != 0
 

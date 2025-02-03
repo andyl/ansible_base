@@ -1,5 +1,12 @@
 # Ansible Provisioning Notes for Linux Bridge
 
+## Network Types 
+
+|         | 2204 | 2404 |
+|---------|------|------|
+| Desktop |      |      |
+| Server  |      |      |
+
 ## Question 
 
 Show how to configure a bridge on the incus host that allows:
