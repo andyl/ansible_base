@@ -32,7 +32,7 @@
 # apt-get -y install erlang-wx xsltproc libglut3-dev libxml2-utils openssl libcrypto 
 
 - name: "install plugins for {{gen_user}}"
-  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  command: "bash -ilc 'asdf plugin add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"
@@ -98,7 +98,7 @@
 
 # ----- Install erlang from scratch 
 - name: install erlang from scratch 
-  command: "bash -ilc '.asdf/bin/asdf install erlang {{erlang_vsn}}'"
+  command: "bash -ilc 'asdf install erlang {{erlang_vsn}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/erlang/{{erlang_vsn}}"
     chdir: "/home/{{ gen_user }}"

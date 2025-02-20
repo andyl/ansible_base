@@ -22,7 +22,7 @@
 # Cblob utils at ~/var/data/cblob/asdf_ruby
 
 - name: "install plugins for {{gen_user}}"
-  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  command: "bash -ilc 'asdf plugin add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"
@@ -66,7 +66,7 @@
 
 # ----- Install ruby from scratch 
 - name: install ruby from scratch 
-  command: "bash -ilc '.asdf/bin/asdf install ruby {{ruby_vsn}}'"
+  command: "bash -ilc 'asdf install ruby {{ruby_vsn}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/ruby/{{ruby_vsn}}"
     chdir: "/home/{{ gen_user }}"

@@ -1,6 +1,9 @@
 ---
-# asdf_vsn: 0.72  superseded 2019-07-13
+# asdf_vsn: 0.7.2  superseded 2019-07-13
 # asdf_vsn: 0.7.3  superseded 2019-10-30
 # asdf_vsn: 0.7.4  superseded 2019-12-25
 # asdf_vsn: 0.7.6  superseded 2020-10-26
-asdf_vsn: 0.10.2
+# asdf_vsn: 0.10.2 superseded 2025 Feb 16 Sun 
+#
+# https://github.com/asdf-vm/asdf/releases
+asdf_vsn: 0.16.2

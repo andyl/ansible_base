@@ -22,7 +22,7 @@
 # R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib=yes' asdf install R 3.6.2
 
 - name: "install plugins for {{gen_user}}"
-  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  command: "bash -ilc 'asdf plugin add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"

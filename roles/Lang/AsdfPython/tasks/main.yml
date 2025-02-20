@@ -4,8 +4,19 @@
 
 # Set global version in ~/.tool-versions
 
+# ----- pipx - package installer 
+
+- name: "install pipx" 
+  apt: 
+    pkg: "{{item}}" 
+    state: latest 
+  with_items: 
+    - pipx
+
+# ----- install python 
+
 - name: "install plugins for {{gen_user}}"
-  command: "bash -ilc 'asdf plugin-add {{ item.name }} {{item.repo}}'"
+  command: "bash -ilc 'asdf plugin add {{ item.name }} {{item.repo}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/plugins/{{ item.name }}"
     chdir: "/home/{{gen_user}}"
@@ -19,7 +30,7 @@
   become_user: "{{ gen_user }}"
 
 - name: install asdf_python
-  command: "bash -ilc '.asdf/bin/asdf install python {{py_vsn}}'"
+  command: "bash -ilc 'asdf install python {{py_vsn}}'"
   args:
     creates: "/home/{{gen_user}}/.asdf/installs/python/{{py_vsn}}"
     chdir: "/home/{{ gen_user }}"
@@ -58,8 +69,8 @@
     state: latest
     virtualenv: "{{ ans_venv_dir }}"
 
-- name: Install or upgrade ansible in the venv
-  pip:
-    name: ansible
-    state: latest
-    virtualenv: "{{ ans_venv_dir }}"
+# - name: Install or upgrade ansible in the venv
+#   pip:
+#     name: ansible
+#     state: latest
+#     virtualenv: "{{ ans_venv_dir }}"

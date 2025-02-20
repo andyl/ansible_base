@@ -1,12 +1,35 @@
 ---
 
 # asdf
+# https://github.com/asdf-vm/asdf/releases
 
-- name: clone asdf repo
+- name: create pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get ASDF executable
   become_user: "{{gen_user}}"
-  git: 
-    repo: 'https://github.com/asdf-vm/asdf.git'
-    dest: /home/{{gen_user}}/.asdf
-    update: yes
-    version: "v{{asdf_vsn}}"
+  get_url:
+    url:  https://github.com/asdf-vm/asdf/releases/download/v{{asdf_vsn}}/asdf-v{{asdf_vsn}}-linux-amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}/linux-amd64.tar.gz
+
+- name: untar ASDF executable
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}/linux-amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}
+    creates: /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}/asdf
+    remote_src: true
+  
+- name: create release symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/asdf/{{asdf_vsn}}/asdf
+    dest:  /usr/local/bin/asdf
+    state: link
+    force: yes
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
 

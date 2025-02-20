@@ -33,12 +33,12 @@
     - libgtk-4-dev 
     - libadwaita-1-dev 
 
-- name: get tar file
-  get_url:
-    url:  http://cblob-host/ghostty/ghostty_{{ghostty_vsn}}.tar
-    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/ghostty_{{ghostty_vsn}}.tar
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+# - name: get tar file
+#   get_url:
+#     url:  http://cblob-host/ghostty/ghostty_{{ghostty_vsn}}.tar
+#     dest: /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/ghostty_{{ghostty_vsn}}.tar
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
 
 - name: untar 
   become_user: "{{gen_user}}"

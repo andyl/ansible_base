@@ -2,8 +2,14 @@
 
 # Aider - https://aider.chat/ 
 
-- name: Install/upgrade aider-chat package
-  pip:
-    name: aider-chat
-    state: latest
+# - name: Install/upgrade aider-chat package
+#   pip:
+#     name: aider-chat
+#     state: latest
+
+- name: Install/upgrade aider-chat using pipx
+  ansible.builtin.shell: |
+    pipx install aider-chat
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/aider"
 
