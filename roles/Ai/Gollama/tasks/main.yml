@@ -1,0 +1,38 @@
+---
+
+# gollama - ollama client
+# https://github.com/sammcj/gollama
+
+- name: create pkg directory
+  file: 
+    path: /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get gollama zip file 
+  get_url: 
+    url:  https://github.com/sammcj/gollama/releases/download/v{{gol_vsn}}/gollama-linux-amd64.zip
+    dest: /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}/gollama.zip 
+    validate_certs: false
+    force: no
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode: "a+rx"
+
+- name: expand gollama zip file 
+  become: false
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}/gollama.zip
+    dest: /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}
+    remote_src: true
+
+# - name: create executable symlink
+#   become: true
+#   file: 
+#     dest:  /usr/local/bin/gollama
+#     src:   /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}/gollama
+#     state: link 
+#     force: true
+#     mode: "a+rx"
+
