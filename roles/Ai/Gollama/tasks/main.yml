@@ -27,12 +27,12 @@
     dest: /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}
     remote_src: true
 
-# - name: create executable symlink
-#   become: true
-#   file: 
-#     dest:  /usr/local/bin/gollama
-#     src:   /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}/gollama
-#     state: link 
-#     force: true
-#     mode: "a+rx"
+- name: create executable symlink
+  become: true
+  file: 
+    dest:  /usr/local/bin/gollama
+    src:   /home/{{gen_user}}/.pkg/gollama/{{gol_vsn}}/dist/linux_amd64/gollama
+    state: link 
+    force: true
+    mode: "a+rx"
 
