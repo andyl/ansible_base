@@ -7,9 +7,10 @@
 #     name: aider-chat
 #     state: latest
 
-- name: Install/upgrade aider-chat using pipx
-  ansible.builtin.shell: |
-    pipx install aider-chat
-  args:
-    creates: "{{ ansible_env.HOME }}/.local/bin/aider"
+# - name: Install/upgrade aider-chat using pipx
+#   ansible.builtin.shell: |
+#     pipx install aider-chat
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.local/bin/aider"
 
+# NOTE: use `install_aider` ( 2025 Feb 22 Sat )

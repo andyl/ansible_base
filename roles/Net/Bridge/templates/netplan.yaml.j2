@@ -2,12 +2,12 @@
 
 network: 
   version: 2
-  renderer: NetworkManager
+  renderer: {{nw_renderer}}
   ethernets: 
-    {{eth_interface}}: 
+    {{nw_interface}}: 
       dhcp4: no
       dhcp6: no
   bridges: 
     {{bridge_name}}: 
-      interfaces: [{{eth_interface}}] 
+      interfaces: [{{nw_interface}}] 
       dhcp4: yes 

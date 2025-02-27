@@ -1,27 +1,59 @@
 ---
 
-# ----- exit if wired ethernet is not present 
+# ----- detect Network interface 
 
-- name: Detect wired Ethernet interface
+- name: Detect Network interface
   shell: |
-    ip -o link show | awk -F': ' '{print $2}' | grep -E '^(eno|eth|ens|enp)'
-  register: ethernet_detection
+    ip -o link show | awk -F': ' '{print $2}' | grep -E '^(wlp|eno|eth|ens|enp)'
+  register: interface_detection
   changed_when: false
   failed_when: false
 
-- name: Set detected Ethernet interface
+- name: Set detected Network interface
   set_fact:
-    eth_interface: "{{ ethernet_detection.stdout_lines[0] }}"
-  when: ethernet_detection.stdout_lines | length > 0
+    nw_interface: "{{ interface_detection.stdout_lines[0] }}"
+  when: interface_detection.stdout_lines | length > 0
 
-- name: Check if wired Ethernet is present
+- name: Check if Network interface is present
   fail:
-    msg: "No wired Ethernet interface detected. Exiting playbook."
-  when: ethernet_detection.stdout_lines | length == 0
+    msg: "No Network interface detected. Exiting playbook."
+  when: interface_detection.stdout_lines | length == 0
 
-- name: Echo ethernet interface 
+- name: Echo Network interface 
   debug: 
-    msg: "The eth_interface is: {{ eth_interface }}"
+    msg: "The nw_interface is: {{ nw_interface }}"
+
+# ----- detect Network renderer 
+
+- name: Detect system type and set Network renderer
+  block:
+
+    - name: Gather facts about the system
+      ansible.builtin.setup:
+        gather_subset:
+          - '!all'
+          - 'distribution'
+
+    - name: Check if system is Xubuntu Desktop
+      ansible.builtin.set_fact:
+        nw_renderer: "NetworkManager"
+      when: 
+        - ansible_distribution == "Ubuntu"
+        - ansible_lsb.description is defined
+        - "'Xubuntu' in ansible_lsb.description"
+
+    - name: Check if system is Ubuntu Server
+      ansible.builtin.set_fact:
+        nw_renderer: "networkd"
+      when: 
+        - ansible_distribution == "Ubuntu"
+        - ansible_lsb.description is defined
+        - "'Server' in ansible_lsb.description"
+
+    - name: Debug nw_renderer value
+      ansible.builtin.debug:
+        var: nw_renderer
+      when: nw_renderer is defined 
 
 # ----- Install Dependencies 
 
@@ -52,12 +84,6 @@
     group: root 
   become: true 
   
-# - name: look for the presence of NetworkManager (nmcli)
-#   command: which nmcli
-#   register: nmcli_check
-#   ignore_errors: true
-#   changed_when: false
-
 - name: remove old config files 
   file:
     path: "{{ item }}"
@@ -69,18 +95,4 @@
   template:
     src: netplan.yaml.j2 
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
-
-# - name: Configure networking based on system type
-#   block:
-#     - name: Configure for NetworkManager
-#       template:
-#         src: netplan_gui.yaml.j2 
-#         dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
-#       when: nmcli_check.rc == 0
-#
-#     - name: Configure for networkd 
-#       template:
-#         src: netplan_cli.yaml.j2 
-#         dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
-#       when: nmcli_check.rc != 0
 
