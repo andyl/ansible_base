@@ -1,0 +1,16 @@
+# Written by Ansible (Net/Bridge/templates/netplan_wireless.yaml.j2)
+
+network: 
+  version: 2
+  renderer: {{nw_renderer}}
+  wifis: 
+    {{nw_device}}: 
+      dhcp4: no
+      dhcp6: no
+      access-points: 
+        "YOUR-SSID": 
+          password: "YOUR-PASSWORD"
+  bridges: 
+    {{bridge_name}}: 
+      interfaces: [{{nw_interface}}] 
+      dhcp4: yes 

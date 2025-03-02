@@ -1,10 +1,10 @@
 ---
-- name: Restart networking 
-  systemd: 
-    name: networking 
-    state: restarted
-  become: true
-
-- name: Apply Netplan changes 
-  command: netplan apply 
-  become: true
+# - name: Restart networking 
+#   systemd: 
+#     name: networking 
+#     state: restarted
+#   become: true
+#
+# - name: Apply Netplan changes 
+#   command: netplan apply 
+#   become: true

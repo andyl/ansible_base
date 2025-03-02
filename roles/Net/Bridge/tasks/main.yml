@@ -1,17 +1,17 @@
 ---
 
-# ----- detect Network interface 
+# ----- detect Network interface and type 
 
 - name: Detect Network interface
   shell: |
     ip -o link show | awk -F': ' '{print $2}' | grep -E '^(wlp|eno|eth|ens|enp)'
-  register: interface_detection
+  register: device_detection
   changed_when: false
   failed_when: false
 
 - name: Set detected Network interface
   set_fact:
-    nw_interface: "{{ interface_detection.stdout_lines[0] }}"
+    nw_device: "{{ interface_detection.stdout_lines[0] }}"
   when: interface_detection.stdout_lines | length > 0
 
 - name: Check if Network interface is present
@@ -19,41 +19,35 @@
     msg: "No Network interface detected. Exiting playbook."
   when: interface_detection.stdout_lines | length == 0
 
-- name: Echo Network interface 
+- name: Echo Network device 
   debug: 
     msg: "The nw_interface is: {{ nw_interface }}"
 
+- name: Set nw_type based on nw_interface prefix
+  set_fact:
+    nw_type: "{{ 'wireless' if nw_device is match('^(wlp|xxx).*') else 'ethernet' }}"
+
+- name: Echo Network type
+  debug: 
+    msg: "The nw_type is: {{ nw_type }}"
+    
 # ----- detect Network renderer 
 
-- name: Detect system type and set Network renderer
+- name: Detect system type and set nw_renderer
   block:
-
-    - name: Gather facts about the system
-      ansible.builtin.setup:
-        gather_subset:
-          - '!all'
-          - 'distribution'
-
-    - name: Check if system is Xubuntu Desktop
-      ansible.builtin.set_fact:
+    - name: Set network renderer to NetworkManager for Xubuntu
+      set_fact:
         nw_renderer: "NetworkManager"
-      when: 
-        - ansible_distribution == "Ubuntu"
-        - ansible_lsb.description is defined
-        - "'Xubuntu' in ansible_lsb.description"
+      when: has_xfce
 
-    - name: Check if system is Ubuntu Server
-      ansible.builtin.set_fact:
+    - name: Set network renderer to networkd for Ubuntu Server
+      set_fact:
         nw_renderer: "networkd"
-      when: 
-        - ansible_distribution == "Ubuntu"
-        - ansible_lsb.description is defined
-        - "'Server' in ansible_lsb.description"
+      when: not has_xfce
 
-    - name: Debug nw_renderer value
-      ansible.builtin.debug:
-        var: nw_renderer
-      when: nw_renderer is defined 
+- name: Echo Network renderer
+  debug: 
+    msg: "The nw_renderer is: {{ nw_renderer }}"
 
 # ----- Install Dependencies 
 
@@ -69,12 +63,20 @@
 
 # ----- Write config files 
 
-- name: create netconf directory
+- name: create backup directory
   file: 
     path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/backup"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+
+- name: create wifi directory
+  file: 
+    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: nw_type is 'wireless'
 
 - name: create netplan directory 
   file: 
@@ -91,8 +93,14 @@
   loop:
     - /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
 
-- name: Write netplan configuration file 
+- name: Write netplan configuration file for ethernet 
   template:
-    src: netplan.yaml.j2 
+    src: netplan_ethernet.yaml.j2 
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
+  when: nw_type is 'ethernet'
 
+- name: Write netplan configuration file for wifi
+  template:
+    src: netplan_wireless.yaml.j2 
+    dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi/99-bridge.yaml
+  when: nw_type is 'wireless'

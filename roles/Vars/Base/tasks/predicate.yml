@@ -6,12 +6,22 @@
   local_action: stat path="~/.ssh/id_rsa.pub"
   register: hostkey
 
+- name: Check if xfce4_server process is running
+  ansible.builtin.shell: "pgrep -f xfce4_server"
+  register: xfce_process
+  ignore_errors: true  # Prevents task failure if process is not found
+
+- name: Set has_xfce variable
+  ansible.builtin.set_fact:
+    has_xfce: "{{ xfce_process.rc == 0 }}"
+
 - name: set cblob_host
   set_fact:
     cblob_host: "cblob-host:5000"
 
 - name: set base predicates
   set_fact:
+    is_xubuntu:     "'Xubuntu' in '{{ansible_distribution}}'"
     is_debian:      "'Debian' in '{{ansible_distribution}}'"
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
     is_arm7:        "'{{ansible_architecture}}' == 'armv7l'"
