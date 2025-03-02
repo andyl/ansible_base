@@ -99,7 +99,7 @@
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
   when: nw_type is 'ethernet'
 
-- name: Write netplan configuration file for wifi
+- name: Write netplan configuration file for wireless
   template:
     src: netplan_wireless.yaml.j2 
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi/99-bridge.yaml
