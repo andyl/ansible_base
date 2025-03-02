@@ -11,19 +11,19 @@
 
 - name: Set detected Network interface
   set_fact:
-    nw_device: "{{ interface_detection.stdout_lines[0] }}"
-  when: interface_detection.stdout_lines | length > 0
+    nw_device: "{{ device_detection.stdout_lines[0] }}"
+  when: device_detection.stdout_lines | length > 0
 
 - name: Check if Network interface is present
   fail:
     msg: "No Network interface detected. Exiting playbook."
-  when: interface_detection.stdout_lines | length == 0
+  when: device_detection.stdout_lines | length == 0
 
 - name: Echo Network device 
   debug: 
-    msg: "The nw_interface is: {{ nw_interface }}"
+    msg: "The nw_device is: {{ nw_device }}"
 
-- name: Set nw_type based on nw_interface prefix
+- name: Set nw_type based on nw_device prefix
   set_fact:
     nw_type: "{{ 'wireless' if nw_device is match('^(wlp|xxx).*') else 'ethernet' }}"
 
@@ -76,7 +76,7 @@
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-  when: nw_type is 'wireless'
+  when: nw_type == 'wireless'
 
 - name: create netplan directory 
   file: 
@@ -97,10 +97,10 @@
   template:
     src: netplan_ethernet.yaml.j2 
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
-  when: nw_type is 'ethernet'
+  when: nw_type == 'ethernet'
 
 - name: Write netplan configuration file for wireless
   template:
     src: netplan_wireless.yaml.j2 
     dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi/99-bridge.yaml
-  when: nw_type is 'wireless'
+  when: nw_type == 'wireless'
