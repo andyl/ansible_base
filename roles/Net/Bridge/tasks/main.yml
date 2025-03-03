@@ -65,14 +65,14 @@
 
 - name: create backup directory
   file: 
-    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/backup"
+    path: "/home/{{gen_user}}/.netplan/{{inventory_hostname}}/backup"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: create wifi directory
   file: 
-    path: "/home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi"
+    path: "/home/{{gen_user}}/.netplan/{{inventory_hostname}}/wifi"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -91,16 +91,16 @@
     path: "{{ item }}"
     state: absent
   loop:
-    - /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-ovs-bridge.yaml
+    - /home/{{gen_user}}/.netplan/{{inventory_hostname}}/99-ovs-bridge.yaml
 
 - name: Write netplan configuration file for ethernet 
   template:
     src: netplan_ethernet.yaml.j2 
-    dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/99-bridge.yaml
+    dest: /home/{{gen_user}}/.netplan/{{inventory_hostname}}/99-bridge.yaml
   when: nw_type == 'ethernet'
 
 - name: Write netplan configuration file for wireless
   template:
     src: netplan_wireless.yaml.j2 
-    dest: /home/{{gen_user}}/.netconf/{{inventory_hostname}}/wifi/99-bridge.yaml
+    dest: /home/{{gen_user}}/.netplan/{{inventory_hostname}}/wifi/99-bridge.yaml
   when: nw_type == 'wireless'

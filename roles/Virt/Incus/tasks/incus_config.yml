@@ -1,0 +1,11 @@
+# Incus Config 
+
+- name: Copy preseed file to remote server
+  copy:
+    src:  files/preseed.yml
+    dest: /tmp/preseed.yml
+
+- name: Initialize Incus with preseed file
+  command: incus admin init --preseed /tmp/preseed.yml
+  ignore_errors: true
+

@@ -1,0 +1,30 @@
+# distrobuilder 
+# https://linuxcontainers.org/distrobuilder/downloads/ 
+# https://linuxcontainers.org/distrobuilder/
+
+- name: create pkg directory
+  file: 
+    path:  /home/{{gen_user}}/.pkg/distrobuilder
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: get executable
+  get_url:
+    url:  http://{{cblob_host}}/distrobuilder/distrobuilder-{{dbld_vsn}} 
+    dest: /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
+    force: yes
+    mode: 'a+rx'
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    validate_certs: no
+
+- name: install symlink
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
+    dest:  /usr/local/bin/distrobuilder
+    state: link
+    force: yes
+    mode: 'a+rx'
+

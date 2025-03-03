@@ -1,0 +1,35 @@
+# incus-compose 
+# https://github.com/bketelsen/incus-compose
+# https://github.com/bketelsen/incus-compose/releases 
+
+- name: create pkg directory
+  file: 
+    path:  /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: get executable
+  get_url:
+    url:  https://github.com/bketelsen/incus-compose/releases/download/{{incom_vsn}}/incus-compose_Linux_x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: expand tarfile 
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
+    remote_src: true
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: install symlink
+  become: true
+  file: 
+    src:   /home/{{gen_user}}/.pkg/incus-compose/{{incom_vsn}}/incus-compose
+    dest:  /usr/local/bin/incus-compose
+    state: link
+    force: yes
+    mode: 'a+rx'
+

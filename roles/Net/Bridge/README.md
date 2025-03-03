@@ -2,8 +2,8 @@
 
 About: 
 
-- This Role just writes a netplan config file to ~/.netconf/<host> 
-- More details at ~/.netconf/README.md
+- This Role just writes a netplan config file to ~/.netplan/<host> 
+- More details at ~/.netplan/README.md
 
 Netplan: 
 

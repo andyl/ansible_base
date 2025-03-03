@@ -1,0 +1,41 @@
+- name: add incus apt key
+  apt_key: 
+    url: https://pkgs.zabbly.com/key.asc 
+    state: present
+
+- name: add incus repository
+  apt_repository: 
+    repo: 'deb https://pkgs.zabbly.com/incus/stable {{ ansible_distribution_release }} main'
+    state: present
+    update_cache: false
+
+- name: install incus packages 
+  apt: 
+    pkg: "{{item}}"
+    state: latest
+    update_cache: true
+  become: true
+  with_items:
+    - incus 
+    - incus-client
+    - incus-extra
+    - incus-ui-canonical
+    - zfsutils-linux
+    - debootstrap
+
+- name: create incus-admin group 
+  group: 
+    name: "{{item}}"
+    state: present
+  with_items: 
+    - incus 
+    - incus-admin
+
+- name: add user to incus-admin 
+  user: 
+    name: "{{gen_user}}" 
+    groups: "{{item}}"
+    append: yes
+  with_items: 
+    - incus 
+    - incus-admin

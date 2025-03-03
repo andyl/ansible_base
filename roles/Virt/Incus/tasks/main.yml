@@ -5,110 +5,15 @@
 # https://github.com/lxc/incus
 # https://github.com/zabbly/incus 
 
-- name: add incus apt key
-  apt_key: 
-    url: https://pkgs.zabbly.com/key.asc 
-    state: present
+- name: incus install
+  include_tasks: incus_install.yml
 
-- name: add incus repository
-  apt_repository: 
-    repo: 'deb https://pkgs.zabbly.com/incus/stable {{ ansible_distribution_release }} main'
-    state: present
-    update_cache: false
+- name: incus config
+  include_tasks: incus_config.yml
 
-- name: install incus packages 
-  apt: 
-    pkg: "{{item}}"
-    state: latest
-    update_cache: true
-  become: true
-  with_items:
-    - incus 
-    - incus-client
-    - incus-extra
-    - incus-ui-canonical
-    - zfsutils-linux
-    - debootstrap
+- name: install distrobuilder
+  include_tasks: distrobuilder.yml
 
-- name: create incus-admin group 
-  group: 
-    name: "{{item}}"
-    state: present
-  with_items: 
-    - incus 
-    - incus-admin
-
-- name: add user to incus-admin 
-  user: 
-    name: "{{gen_user}}" 
-    groups: "{{item}}"
-    append: yes
-  with_items: 
-    - incus 
-    - incus-admin
-
-# distrobuilder 
-# https://linuxcontainers.org/distrobuilder/downloads/ 
-# https://linuxcontainers.org/distrobuilder/
-
-- name: create pkg directory
-  file: 
-    path:  /home/{{gen_user}}/.pkg/distrobuilder
-    state: directory 
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-
-- name: get executable
-  get_url:
-    url:  http://{{cblob_host}}/distrobuilder/distrobuilder-{{dbld_vsn}} 
-    dest: /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
-    force: yes
-    mode: 'a+rx'
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-    validate_certs: no
-
-- name: install symlink
-  become: true
-  file: 
-    src:   /home/{{gen_user}}/.pkg/distrobuilder/distrobuilder-{{dbld_vsn}}
-    dest:  /usr/local/bin/distrobuilder
-    state: link
-    force: yes
-    mode: 'a+rx'
-
-# incus-compose 
-# https://github.com/bketelsen/incus-compose
-# https://github.com/bketelsen/incus-compose/releases 
-
-- name: create pkg directory
-  file: 
-    path:  /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
-    state: directory 
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-
-- name: get executable
-  get_url:
-    url:  https://github.com/bketelsen/incus-compose/releases/download/{{incom_vsn}}/incus-compose_Linux_x86_64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-
-- name: expand tarfile 
-  unarchive:
-    src:  /home/{{gen_user}}/.pkg/incus_compose/incus-compose-{{incom_vsn}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/incus_compose/{{incom_vsn}}
-    remote_src: true
-    group: "{{gen_user}}" 
-    owner: "{{gen_user}}"
-
-- name: install symlink
-  become: true
-  file: 
-    src:   /home/{{gen_user}}/.pkg/incus-compose/{{incom_vsn}}/incus-compose
-    dest:  /usr/local/bin/incus-compose
-    state: link
-    force: yes
-    mode: 'a+rx'
-
+# - name: install incus-compose
+#   include_tasks: incus_compose.yml
+  
