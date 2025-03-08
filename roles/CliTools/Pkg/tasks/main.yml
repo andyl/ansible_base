@@ -14,10 +14,10 @@
     - libpoppler-cpp-dev         # PDF libraries 
     - moreutils                  # vipe and other utilities
 
-- name: install pip modules (python3)
-  pip: name="{{item}}" state=latest executable=pip3
-  become: true
-  with_items:
-    - term-image   # displays images in kitty terminal 
+# - name: install pip modules (python3)
+#   pip: name="{{item}}" state=latest executable=pip3
+#   become: true
+#   with_items:
+#     - term-image   # displays images in kitty terminal 
   
 
