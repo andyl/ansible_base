@@ -1,7 +1,11 @@
 ---
-# fc_vsn: 1.0.0 - BUG see https://github.com/dprojects/Woodworking/issues/49
-fc_vsn: 0.21.2
+
+# https://github.com/FreeCAD/FreeCAD/releases/
+# fc_vsn: 0.21.2   superseded 2025 Mar 09 Sun
+fc_vsn: 1.0.0 
 
 # https://github.com/dprojects/Woodworking/releases 
+# BUG see https://github.com/dprojects/Woodworking/issues/49
 
-ww_vsn: 0.22
+# ww_vsn: 0.22  updated 2025 Mar 09 Sun
+# ww_vsn: 0.23

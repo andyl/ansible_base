@@ -31,41 +31,49 @@
 
 # ----- woodwork
 
-- name: create package dir
-  file: 
-    path:  "/home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}"
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+# - name: create package dir
+#   file: 
+#     path:  "/home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}"
+#     state: directory 
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
 
-- name: get zip file
-  get_url: 
-    url: https://github.com/dprojects/Woodworking/archive/refs/tags/{{ww_vsn}}.zip
-    dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
-    mode: "a+rx"
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
+# - name: get zip file
+#   get_url: 
+#     url: https://github.com/dprojects/Woodworking/archive/refs/tags/{{ww_vsn}}.zip
+#     dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
+#     mode: "a+rx"
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: unzip
+#   become_user: "{{gen_user}}"
+#   unarchive:
+#     src:  /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
+#     dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}
+#     creates: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
+#     remote_src: yes 
 
-- name: unzip
-  become_user: "{{gen_user}}"
-  unarchive:
-    src:  /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
-    dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}
-    creates: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
-    remote_src: yes 
+- name: remove plugin dir
 
-- name: create plugin dir
   file: 
     path:  "/home/{{gen_user}}/.local/share/FreeCad/Mod"
-    state: directory 
+    state: absent
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: create plugin symlink
-  become: true
-  file:
-    src:   /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
-    dest:  "/home/{{gen_user}}/.local/share/FreeCad/Mod/Woodworking"
-    state: link 
-    force: yes
+# - name: create plugin dir
+#   file: 
+#     path:  "/home/{{gen_user}}/.local/share/FreeCad/Mod"
+#     state: directory 
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#
+# - name: create plugin symlink
+#   become: true
+#   file:
+#     src:   /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
+#     dest:  "/home/{{gen_user}}/.local/share/FreeCad/Mod/Woodworking"
+#     state: link 
+#     force: yes
 
