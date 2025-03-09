@@ -1,18 +1,21 @@
 ---
 
 # freecad
-# https://github.com/FreeCAD/FreeCAD-Bundle/releases
+# https://github.com/FreeCAD/FreeCAD/releases
+# https://github.com/dprojects/Woodworking/releases
+
+# ----- freecad
 
 - name: create pkg dir
   file: 
-    path:  "/home/{{gen_user}}/.pkg/freecad"
+    path:  "/home/{{gen_user}}/.pkg/freecad/"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: get appimage file
   get_url: 
-    url: https://github.com/FreeCAD/FreeCAD-Bundle/releases/download/{{fc_vsn}}/FreeCAD_{{fc_vsn}}-conda-Linux-x86_64-py311.AppImage
+    url: https://github.com/FreeCAD/FreeCAD/releases/download/{{fc_vsn}}/FreeCAD-{{fc_vsn}}-Linux-x86_64.AppImage
     dest: /home/{{gen_user}}/.pkg/freecad/freecad-{{fc_vsn}}.appimage
     mode: "a+rx"
     group: "{{gen_user}}"
@@ -25,4 +28,44 @@
     state: link
     force: yes
     mode:  "a+rx"
+
+# ----- woodwork
+
+- name: create package dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get zip file
+  get_url: 
+    url: https://github.com/dprojects/Woodworking/archive/refs/tags/{{ww_vsn}}.zip
+    dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: unzip
+  become_user: "{{gen_user}}"
+  unarchive:
+    src:  /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/{{ww_vsn}}.zip
+    dest: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}
+    creates: /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
+    remote_src: yes 
+
+- name: create plugin dir
+  file: 
+    path:  "/home/{{gen_user}}/.local/share/FreeCad/Mod"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create plugin symlink
+  become: true
+  file:
+    src:   /home/{{gen_user}}/.pkg/freecad/woodwork/{{ww_vsn}}/Woodworking-{{ww_vsn}}
+    dest:  "/home/{{gen_user}}/.local/share/FreeCad/Mod/Woodworking"
+    state: link 
+    force: yes
 

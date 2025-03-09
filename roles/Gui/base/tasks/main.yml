@@ -30,8 +30,8 @@
     - bluetooth            # bluetooth servivce
     - rfkill               # bluetooth diagnostics
     - remmina              # remote desktop client 
-    - remmina-plugin-rdp   # RDP plugin for remmina 
     - remmina-plugin-vnc   # VNC plugin for remmina 
+    - x11vnc               # VNC server 
     - virt-viewer          # virtual desktop viewer 
 
 - name: remove Ubuntu packages

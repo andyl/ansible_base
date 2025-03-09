@@ -1,2 +1,7 @@
 ---
-fc_vsn: 1.0.0
+# fc_vsn: 1.0.0 - BUG see https://github.com/dprojects/Woodworking/issues/49
+fc_vsn: 0.21.2
+
+# https://github.com/dprojects/Woodworking/releases 
+
+ww_vsn: 0.22
