@@ -1,9 +1,7 @@
 ---
 
-# cblob-host:var/data/cblob/ghostty
+# https://github.com/mkasberg/ghostty-ubuntu/releases
 
-# ghostty_vsn: 241228 superseded 2024 Dec 30 Mon
-# ghostty_vsn: 241230 superseded 2024 Dec 31 Tue
-# ghostty_vsn: 241231 superseded 2025 Jan 02 Thu
-# ghostty_vsn: 250102 superseded 2025 Jan 31 Fri
-ghostty_vsn: 250131
+gho: 
+  vsn: 1.1.2-0
+  ppa: ppa1
