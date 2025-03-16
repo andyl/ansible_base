@@ -18,7 +18,7 @@
 
 - name: add PPA
   ansible.builtin.apt_repository: 
-    repo: ppa:kicad/kicad-{{kc-vsn}}-releases
+    repo: ppa:kicad/kicad-{{kc_vsn}}-releases
     update-cache: false 
 
 # this can fail if update-cache emits warnings ;-(
