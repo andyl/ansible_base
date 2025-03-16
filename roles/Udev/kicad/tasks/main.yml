@@ -4,14 +4,21 @@
 
 # see http://kicad.org/download/ubuntu/
 
-- name: remove old PPA
+- name: remove reynaud PPA
   apt_repository: 
     repo: ppa:js-reynaud/kicad-5.1
     state: absent
 
+- name: remove old PPA
+  apt_repository: 
+    repo: ppa:kicad/kicad-{{item}}-releases
+    state: absent
+  with_items: 
+    - 6.0
+
 - name: add PPA
   ansible.builtin.apt_repository: 
-    repo: ppa:kicad/kicad-6.0-releases
+    repo: ppa:kicad/kicad-{{kc-vsn}}-releases
     update-cache: false 
 
 # this can fail if update-cache emits warnings ;-(
