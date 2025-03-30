@@ -1,0 +1,33 @@
+---
+
+# windsurf 
+
+- name: Ensure required packages are installed
+  ansible.builtin.apt:
+    name:
+      - curl
+      - gnupg
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Add Windsurf GPG key
+  ansible.builtin.apt_key:
+    url: "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg"
+    keyring: /usr/share/keyrings/windsurf-stable-archive-keyring.gpg
+    state: present
+  become: true
+
+- name: Add Windsurf repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/windsurf-stable-archive-keyring.gpg arch=amd64] https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/apt stable main"
+    state: present
+    filename: windsurf
+    update_cache: yes
+  become: true
+
+- name: Install the latest version of Windsurf
+  ansible.builtin.apt:
+    name: windsurf
+    state: latest
+  become: true
