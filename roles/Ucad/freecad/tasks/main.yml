@@ -31,7 +31,7 @@
 
 - name: create desktop symlink
   file: 
-    src:   /home/{{gen_user}}/util/code_util/data/appimage/freecad.desktop
+    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.desktop
     dest:  /home/{{gen_user}}/.local/share/applications/freecad.desktop
     state: link
     force: yes
@@ -39,7 +39,7 @@
 
 - name: create icon symlink
   file: 
-    src:   /home/{{gen_user}}/util/code_util/data/appimage/freecad.svg
+    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.svg
     dest:  /home/{{gen_user}}/.local/share/icons/freecad.svg
     state: link
     force: yes
