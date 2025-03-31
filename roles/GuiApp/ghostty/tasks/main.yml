@@ -2,7 +2,7 @@
 
 # ghostty 
 
-- name: create important directories 
+- name: create pkg directories 
   file: 
     path: "/home/{{gen_user}}/.pkg/ghostty"
     state: directory 
@@ -42,14 +42,7 @@
 #     dest: /home/{{gen_user}}/.local/share/ghostty
 #     state: link 
 #     force: yes
-#
-# - name: create icon symlink
-#   file:
-#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/icons/hicolor
-#     dest: /home/{{gen_user}}/.local/share/icons/hicolor
-#     state: link 
-#     force: yes
-#
+
 # - name: create completions symlink
 #   file:
 #     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/bash-completion/completions/ghostty.bash
@@ -81,14 +74,21 @@
 #     replace: "Exec=/home/{{gen_user}}/.local/bin/ghostty"
 #   with_items: 
 #     - com.mitchellh.ghostty
-#
-# - name: create desktop file symlink 
-#   become: true
-#   file:
-#     src:   /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/applications/{{item}}.desktop 
-#     dest:  /home/{{gen_user}}/.local/share/applications/{{item}}.desktop
-#     state: link 
-#     force: yes
-#   with_items: 
-#     - com.mitchellh.ghostty
-#
+
+- name: create desktop file symlink 
+  become: true
+  file:
+    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.desktop
+    dest:  /home/{{gen_user}}/.local/share/applications/ghostty.desktop
+    state: link
+    force: yes
+    mode:  "a+r"
+
+- name: create icon symlink
+  file:
+    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.svg
+    dest:  /home/{{gen_user}}/.local/share/icons/ghostty.svg
+    state: link
+    force: yes
+    mode:  "a+r"
+
