@@ -13,8 +13,8 @@
   with_items: 
     - pipx
 
-# ----- install python 
-
+# ----- asdf plugins 
+     
 - name: "install plugins for {{gen_user}}"
   command: "bash -ilc 'asdf plugin add {{ item.name }} {{item.repo}}'"
   args:
@@ -23,11 +23,34 @@
   become_user: "{{ gen_user }}"
   ignore_errors: true
   with_items:
-    - { name: python , repo: ""}
+    - { name: python, repo: ""}
+    - { name: uv,     repo: ""}
 
-- name: update asdf python plugin 
-  command: "bash -ilc 'asdf plugin update python'"
+- name: update asdf plugin 
+  command: "bash -ilc 'asdf plugin update {{item}}'"
   become_user: "{{ gen_user }}"
+  with_items:
+    - python 
+    - uv
+
+# ----- install python 
+
+- name: install asdf_python
+  command: "bash -ilc 'asdf install python {{py_vsn}}'"
+  args:
+    creates: "/home/{{gen_user}}/.asdf/installs/python/{{py_vsn}}"
+    chdir: "/home/{{ gen_user }}"
+  become_user: "{{ gen_user }}"
+
+- name: Update .tool-versions 
+  lineinfile:
+    path: "/home/aleak/util/base_util/cfg/_tool-versions"
+    regexp: '^python '
+    line: "python {{ py_vsn }}"
+    create: yes
+  delegate_to: localhost
+
+# ----- install uv 
 
 - name: install asdf_python
   command: "bash -ilc 'asdf install python {{py_vsn}}'"
