@@ -84,10 +84,16 @@
     force: yes
     mode:  "a+r"
 
-- name: create icon symlink
+- name: remove svg icon
   file:
-    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.svg
     dest:  /home/{{gen_user}}/.local/share/icons/ghostty.svg
+    state: absent
+    force: yes
+
+- name: create png icon symlink
+  file:
+    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.png
+    dest:  /home/{{gen_user}}/.local/share/icons/ghostty.png
     state: link
     force: yes
     mode:  "a+r"
