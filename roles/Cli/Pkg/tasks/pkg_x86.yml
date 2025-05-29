@@ -70,4 +70,6 @@
     - exfat-fuse                 # read and write exFAT driver for FUSE
     - ssldump                    # ssh debug utility 
     - vnstat                     # traffic monitor 
+    - ethtool                    # NIC introspection 
+    - wakeonlan                  # wake on lan 
 
