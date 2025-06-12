@@ -56,14 +56,14 @@
   # -------------------------------------------------------
   # a web-app file server
   # https://github.com/akoutmos/ex_server 
-- name: install ex_server
-  become_user: "{{gen_user}}"
-  command: "bash -ilc 'mix archive.install hex ex_server {{exsrv_vsn}} --force'"
-  ignore_errors: true 
-  args:
-    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
-    chdir: "/home/{{gen_user}}"
-  when: is_lanhost
+  # - name: install ex_server
+  #   become_user: "{{gen_user}}"
+  #   command: "bash -ilc 'mix archive.install hex ex_server {{exsrv_vsn}} --force'"
+  #   ignore_errors: true 
+  #   args:
+  #     creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/ex_server-{{exsrv_vsn}}
+  #     chdir: "/home/{{gen_user}}"
+  #   when: is_lanhost
     
   # -------------------------------------------------------
   # phoenix
