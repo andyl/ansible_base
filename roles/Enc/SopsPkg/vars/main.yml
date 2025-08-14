@@ -9,4 +9,5 @@
 # sops_version: 3.6.1  superseded 2021-12-02
 # sops_version: 3.7.1  superseded 2023-02-19 
 # sops_version: 3.7.3  superseded 2024-05-12
-sops_version: 3.8.1
+# sops_version: 3.8.1  superseded 2025-08-13
+sops_version: 3.10.2
