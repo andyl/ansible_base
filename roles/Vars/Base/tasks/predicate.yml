@@ -22,6 +22,7 @@
 - name: set base predicates
   set_fact:
     is_xubuntu:     "'Xubuntu' in '{{ansible_distribution}}'"
+    is_xfce:        "{{ desktop_env.stdout | trim is search('XFCE') }}"
     is_debian:      "'Debian' in '{{ansible_distribution}}'"
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
     is_arm7:        "'{{ansible_architecture}}' == 'armv7l'"
