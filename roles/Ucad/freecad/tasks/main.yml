@@ -12,6 +12,7 @@
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: ansible_lsb.description is search('Xubuntu')
 
 - name: get appimage file
   get_url: 
@@ -20,6 +21,7 @@
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
+  when: ansible_lsb.description is search('Xubuntu')
 
 - name: create executable symlink
   file: 
@@ -28,20 +30,27 @@
     state: link
     force: yes
     mode:  "a+rx"
+  when: ansible_lsb.description is search('Xubuntu')
+  
+# - name: create desktop symlink
+#   file: 
+#     src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.desktop
+#     dest:  /home/{{gen_user}}/.local/share/applications/freecad.desktop
+#     state: link
+#     force: yes
+#     mode:  "a+r"
+#
+# - name: create icon symlink
+#   file: 
+#     src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.svg
+#     dest:  /home/{{gen_user}}/.local/share/icons/freecad.svg
+#     state: link
+#     force: yes
+#     mode:  "a+r"
 
-- name: create desktop symlink
-  file: 
-    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.desktop
-    dest:  /home/{{gen_user}}/.local/share/applications/freecad.desktop
-    state: link
-    force: yes
-    mode:  "a+r"
-
-- name: create icon symlink
-  file: 
-    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.svg
-    dest:  /home/{{gen_user}}/.local/share/icons/freecad.svg
-    state: link
-    force: yes
-    mode:  "a+r"
-
+- name: Update desktop database
+  command: update-desktop-database ~/.local/share/applications
+  args:
+    creates: none
+  changed_when: false
+  when: ansible_lsb.description is search('Xubuntu')
