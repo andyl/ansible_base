@@ -7,9 +7,10 @@
   register: hostkey
 
 - name: Check if xfce4_server process is running
-  ansible.builtin.shell: "pgrep -f xfce4_server"
+  ansible.builtin.command: "pgrep -f xfce4-session"
   register: xfce_process
-  ignore_errors: true  # Prevents task failure if process is not found
+  failed_when: false  # Prevents task failure on non-zero exit code
+  changed_when: false  # Avoid marking task as changed
 
 - name: Set has_xfce variable
   ansible.builtin.set_fact:
@@ -22,7 +23,6 @@
 - name: set base predicates
   set_fact:
     is_xubuntu:     "'Xubuntu' in '{{ansible_distribution}}'"
-    is_xfce:        "{{ desktop_env.stdout | trim is search('XFCE') }}"
     is_debian:      "'Debian' in '{{ansible_distribution}}'"
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
     is_arm7:        "'{{ansible_architecture}}' == 'armv7l'"

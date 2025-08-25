@@ -12,7 +12,7 @@
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-  when: ansible_lsb.description is search('Xubuntu')
+  when: has_xfce
 
 - name: get appimage file
   get_url: 
@@ -21,7 +21,7 @@
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
-  when: ansible_lsb.description is search('Xubuntu')
+  when: has_xfce
 
 - name: create executable symlink
   file: 
@@ -30,7 +30,7 @@
     state: link
     force: yes
     mode:  "a+rx"
-  when: ansible_lsb.description is search('Xubuntu')
+  when: has_xfce
   
 # - name: create desktop symlink
 #   file: 
@@ -49,8 +49,8 @@
 #     mode:  "a+r"
 
 - name: Update desktop database
-  command: update-desktop-database ~/.local/share/applications
+  command: update-desktop-database /home/{{gen_user}}/.local/share/applications
   args:
     creates: none
   changed_when: false
-  when: ansible_lsb.description is search('Xubuntu')
+  when: has_xfce
