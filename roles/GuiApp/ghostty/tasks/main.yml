@@ -9,16 +9,6 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: remove existing directories 
-  file: 
-    path: "{{item}}"
-    state: absent
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-  with_items: 
-    - /home/{{gen_user}}/.local/share/ghostty
-    - /home/{{gen_user}}/.local/share/icons/hicolor
-
 - name: install support packages 
   become: true
   apt:  pkg={{item}} state=latest install_recommends=yes
@@ -27,86 +17,44 @@
     - libadwaita-1-dev 
 
 # ----- DEBFILE METHOD -----
-#
-# ----- ghostty-ubuntu no longer produces debian files for Ubuntu 22.04 ( 2025 Sep 19 Fri ) 
-# ----- use APPIMAGE method (below)
-#
-# - name: get ghostty deb file
-#   get_url:
-#     url:  https://github.com/mkasberg/ghostty-ubuntu/releases/download/{{gho.vsn}}-{{gho.ppa}}/ghostty_{{gho.vsn}}.{{gho.ppa}}_amd64_{{ansible_distribution_version}}.deb
-#     dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
-#     group: "{{gen_user}}"
-#     owner: "{{gen_user}}"
-#
-# - name: install ghostty package 
-#   apt: deb=/home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
 
-# - name: create resources symlink
-#   file:
-#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share
-#     dest: /home/{{gen_user}}/.local/share/ghostty
-#     state: link 
-#     force: yes
+- name: get ghostty deb file
+  get_url:
+    url:  https://github.com/mkasberg/ghostty-ubuntu/releases/download/{{gho.vsn}}-{{gho.ppa}}/ghostty_{{gho.vsn}}.{{gho.ppa}}_amd64_{{ansible_distribution_version}}.deb
+    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
 
-# - name: create completions symlink
-#   file:
-#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/bash-completion/completions/ghostty.bash
-#     dest: /home/{{gen_user}}/.local/share/bash-completion/completions/ghostty.bash
-#     state: link 
-#     force: yes
-#
-# - name: create manpage symlink
-#   file:
-#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/man/{{item}}
-#     dest: /home/{{gen_user}}/.local/share/man/{{item}}
-#     state: link 
-#     force: yes
-#   with_items: 
-#     - man1/ghostty.1
-#     - man5/ghostty.5
-#
-# - name: create current symlink
-#   file:
-#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out
-#     dest: /home/{{gen_user}}/.pkg/ghostty/current
-#     state: link 
-#     force: yes
-#
-# - name: update desktop file 
-#   replace:
-#     path:    /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghostty_vsn}}/zig-out/share/applications/{{item}}.desktop
-#     regexp:  '^Exec=ghostty'
-#     replace: "Exec=/home/{{gen_user}}/.local/bin/ghostty"
-#   with_items: 
-#     - com.mitchellh.ghostty
+- name: install ghostty package 
+  apt: deb=/home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
 
 # ----- APPIMAGE METHOD -----
 
 # https://github.com/pkgforge-dev/ghostty-appimage 
 # https://github.com/pkgforge-dev/ghostty-appimage/releases
 
-- name: get ghostty appimage file
-  get_url:
-    url:  https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v{{ghovsn}}/Ghostty-{{ghovsn}}-x86_64.AppImage
-    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-    mode:  "a+rx"
-
-- name: remove old ghostty 
-  become: true
-  file:
-    dest:   /usr/bin/ghostty
-    state:  absent
-    force:  yes
-
-- name: create appimage symlink 
-  file:
-    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
-    dest: /usr/local/bin/ghostty
-    state: link 
-    force: yes
-    mode:  "a+rx"
+# - name: get ghostty appimage file
+#   get_url:
+#     url:  https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v{{ghovsn}}/Ghostty-{{ghovsn}}-x86_64.AppImage
+#     dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
+#     group: "{{gen_user}}"
+#     owner: "{{gen_user}}"
+#     mode:  "a+rx"
+#
+# - name: remove old ghostty 
+#   become: true
+#   file:
+#     dest:   /usr/bin/ghostty
+#     state:  absent
+#     force:  yes
+#
+# - name: create appimage symlink 
+#   file:
+#     src:  /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
+#     dest: /usr/local/bin/ghostty
+#     state: link 
+#     force: yes
+#     mode:  "a+rx"
 
 # ----- NOTES 
 #
