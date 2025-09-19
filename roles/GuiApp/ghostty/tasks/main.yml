@@ -108,28 +108,8 @@
     force: yes
     mode:  "a+rx"
 
-# ----- BASICS -----
-
-- name: create desktop file symlink 
-  become: true
-  file:
-    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.desktop
-    dest:  /home/{{gen_user}}/.local/share/applications/ghostty.desktop
-    state: link
-    force: yes
-    mode:  "a+r"
-
-- name: remove svg icon
-  file:
-    dest:  /home/{{gen_user}}/.local/share/icons/ghostty.svg
-    state: absent
-    force: yes
-
-- name: create png icon symlink
-  file:
-    src:   /home/{{gen_user}}/util/code_util/data/appdesktop/ghostty.png
-    dest:  /home/{{gen_user}}/.local/share/icons/ghostty.png
-    state: link
-    force: yes
-    mode:  "a+r"
+# ----- NOTES 
+#
+# - ghostty desktop file | ~/util/code_util/cfg/+local/share/^applications 
+# - ghostty icon file    | ~/util/code_util/cfg/+local/share/^icons
 
