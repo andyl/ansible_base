@@ -26,6 +26,11 @@
     - libgtk-4-dev 
     - libadwaita-1-dev 
 
+# ----- DEBFILE METHOD -----
+#
+# ----- ghostty-ubuntu no longer produces debian files for Ubuntu 22.04 ( 2025 Sep 19 Fri ) 
+# ----- use APPIMAGE method (below)
+#
 # - name: get ghostty deb file
 #   get_url:
 #     url:  https://github.com/mkasberg/ghostty-ubuntu/releases/download/{{gho.vsn}}-{{gho.ppa}}/ghostty_{{gho.vsn}}.{{gho.ppa}}_amd64_{{ansible_distribution_version}}.deb
@@ -74,6 +79,36 @@
 #     replace: "Exec=/home/{{gen_user}}/.local/bin/ghostty"
 #   with_items: 
 #     - com.mitchellh.ghostty
+
+# ----- APPIMAGE METHOD -----
+
+# https://github.com/pkgforge-dev/ghostty-appimage 
+# https://github.com/pkgforge-dev/ghostty-appimage/releases
+
+- name: get ghostty appimage file
+  get_url:
+    url:  https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v{{ghovsn}}/Ghostty-{{ghovsn}}-x86_64.AppImage
+    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    mode:  "a+rx"
+
+- name: remove old ghostty 
+  become: true
+  file:
+    dest:   /usr/bin/ghostty
+    state:  absent
+    force:  yes
+
+- name: create appimage symlink 
+  file:
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghovsn}}.appimage
+    dest: /usr/local/bin/ghostty
+    state: link 
+    force: yes
+    mode:  "a+rx"
+
+# ----- BASICS -----
 
 - name: create desktop file symlink 
   become: true
