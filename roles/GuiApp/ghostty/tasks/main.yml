@@ -102,7 +102,7 @@
 
 - name: create appimage symlink 
   file:
-    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty-{{ghovsn}}.appimage
+    src:  /home/{{gen_user}}/.pkg/ghostty/ghostty_{{ghovsn}}.appimage
     dest: /usr/local/bin/ghostty
     state: link 
     force: yes
