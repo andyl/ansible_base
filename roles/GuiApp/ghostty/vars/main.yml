@@ -5,9 +5,12 @@
 # gho:                 # superseded 2025 Mar 25 Tue
 #   vsn: 1.1.2-0
 #   ppa: ppa1
-gho:                 # superseded 2025 Sep 19 Fri
-  vsn: 1.1.3-0
-  ppa: ppa1
+# gho:                 # superseded 2025 Sep 19 Fri
+#   vsn: 1.1.3-0
+#   ppa: ppa1
+gho:        
+  vsn: 1.2.0-0
+  ppa: ppa2
 
 # https://github.com/pkgforge-dev/ghostty-appimage/releases 
 
