@@ -70,7 +70,8 @@
 # ex_vsn: 1.18.1-otp-27  superseded 2025 Mar 17 Mon
 # ex_vsn: 1.18.3-otp-27  superseded 2025 May 26 Mon
 # ex_vsn: 1.18.4-otp-27  superseded 2025 Jul 18 Fri
-ex_vsn: 1.18.4-otp-28
+# ex_vsn: 1.18.4-otp-28  superseded 2025 Oct 18 Sat
+ex_vsn: 1.19.0-otp-28
 
 # ----- PHOENIX / mix hex.info phx_new
 # https://github.com/phoenixframework/phoenix/tags
@@ -104,11 +105,8 @@ ex_vsn: 1.18.4-otp-28
 # phx_vsn: 1.7.17     superseded 2024 Dec 11 Wed
 # phx_vsn: 1.7.18     superseded 2025 Mar 17 Mon
 # phx_vsn: 1.7.20     superseded 2025 Apr 01 Tue
-# phx_vsn: 1.8.0-rc.0 superseded 2025 Apr 16 Wed
-# phx_vsn: 1.8.0-rc.1 superseded 2025 May 26 Mon
-# phx_vsn: 1.8.0-rc.3 superseded 2025 Jul 18 Fri
-# phx_vsn: 1.8.0-rc.4 superseded 2025 Aug 05 Tue
-phx_vsn: 1.8.0
+# phx_vsn: 1.8.0      superseded 2025 Oct 18 Sat
+phx_vsn: 1.8.1
 
 # ----- TABLEAU / mix hex.info tableau_new 
 # tblu_vsn: 1.0.2     superseded 2024 May 19 Sun 
