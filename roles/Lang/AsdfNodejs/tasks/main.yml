@@ -15,6 +15,14 @@
   with_items:
     - { name: nodejs , repo: ""}
 
+- name: install asdf_nodejs dependencies 
+  apt: pkg={{item}} state=latest force=yes
+  ignore_errors: true
+  with_items: 
+    - dirmngr 
+    - gpg 
+    - gawk
+
 - name: install asdf_nodejs
   command: "bash -ilc 'asdf install nodejs {{ node_vsn }}'"
   args:
@@ -37,5 +45,4 @@
 #     - tree-sitter-cli
 #     - fkill-cli 
 #     - graphqurl
-
 
