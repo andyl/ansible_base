@@ -71,7 +71,8 @@
 # ex_vsn: 1.18.3-otp-27  superseded 2025 May 26 Mon
 # ex_vsn: 1.18.4-otp-27  superseded 2025 Jul 18 Fri
 # ex_vsn: 1.18.4-otp-28  superseded 2025 Oct 18 Sat
-ex_vsn: 1.19.0-otp-28
+# ex_vsn: 1.19.0-otp-28  superseded 2025 Oct 20 Mon
+ex_vsn: 1.19.1-otp-28
 
 # ----- PHOENIX / mix hex.info phx_new
 # https://github.com/phoenixframework/phoenix/tags
