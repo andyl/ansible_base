@@ -46,8 +46,8 @@
   apt: pkg={{item}} state=latest force=yes
   ignore_errors: true
   with_items:
-    - libwxgtk-webview3.0-gtk3-0v5  # wxWidgets 
-    - libwxgtk-webview3.0-gtk3-dev  # wxWidgets
+    # - libwxgtk-webview3.0-gtk3-0v5  # wxWidgets 
+    # - libwxgtk-webview3.0-gtk3-dev  # wxWidgets
     - default-jdk                   # jdk 
     - unixodbc-dev                  # odbc 
     - xsltproc                      # documentation 
