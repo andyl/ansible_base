@@ -11,7 +11,10 @@
 # gho:                 # superseced 2025 Oct 08 Wed
 #   vsn: 1.2.0-0
 #   ppa: ppa2
+# gho:                 # superseded 2025 Oct 26 Sun
+#   vsn: 1.2.1-0
+#   ppa: ppa1
 gho:        
-  vsn: 1.2.1-0
+  vsn: 1.2.3-0
   ppa: ppa1
 
