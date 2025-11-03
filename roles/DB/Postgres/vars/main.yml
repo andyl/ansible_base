@@ -1,22 +1,25 @@
 ---
-# postgres_version: 9.4  superseded  2016 Jan 07 Thu 
-# postgres_version: 9.5  superseded  2017 Feb 27 Mon
-# postgres_version: 9.6  superseded  2017 Nov 21 Tue
-# postgres_version: 10   superseded  2018 Nov 07 Wed
-# postgres_version: 11   superseded  2019 Oct 09 Wed
-# postgres_version: 12   superseded  2020 Jun 01 Mon
-# postgres_version: 13   superseded  2021 Dec 05 Sun 
-# postgres_version: 14   superseded  2023 Feb 19 Sun 
-# postgres_version: 15   superseded  2024 Jun 04 Tue 
-# postgres_version: 16   superseded  2024 Oct 19 Sat
-postgres_version: 17 
+
+# https://pgpedia.info/postgresql-versions/index.html 
+
+# postgres_version: 9.4  superseded 2016 Jan 07 Thu 
+# postgres_version: 9.5  superseded 2017 Feb 27 Mon
+# postgres_version: 9.6  superseded 2017 Nov 21 Tue
+# postgres_version: 10   superseded 2018 Nov 07 Wed
+# postgres_version: 11   superseded 2019 Oct 09 Wed
+# postgres_version: 12   superseded 2020 Jun 01 Mon
+# postgres_version: 13   superseded 2021 Dec 05 Sun 
+# postgres_version: 14   superseded 2023 Feb 19 Sun 
+# postgres_version: 15   superseded 2024 Jun 04 Tue 
+# postgres_version: 16   superseded 2024 Oct 19 Sat
+# postgres_version: 17   superseded 2025 Oct 30 Thu
+postgres_version: 18 
 
 old_postgres_versions:
-  - 10
-  - 11 
   - 12
   - 13
   - 14
   - 15
   - 16
+  - 17
 

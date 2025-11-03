@@ -7,6 +7,7 @@
 - name: install postgres packages
   apt:  pkg={{item}} state=latest install_recommends=yes
   with_items:
+    - python3-psycopg2
     - libpq-dev 
     - postgresql-{{postgres_version}}
     - postgresql-contrib-{{postgres_version}}
