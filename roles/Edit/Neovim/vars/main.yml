@@ -1,26 +1,28 @@
 ---
-# nvim_vsn: v0.3.0  superseded 2018-07-18
-# nvim_vsn: v0.3.1  superseded 2019-01-05
-# nvim_vsn: v0.3.3  superseded 2019-01-31
-# nvim_vsn: v0.3.4  superseded 2019-10-08
-# nvim_vsn: v0.4.2  superseded 2020-02-14
-# nvim_vsn: v0.4.3  superseded 2020-10-22
-# nvim_vsn: v0.4.4  superseded 2021-05-26
-# nvim_vsn: v0.5.0  superseded 2021-10-13 
-# nvim_vsn: v0.5.1  superseded 2021-12-02
-# nvim_vsn: v0.6.0  superseded 2022-01-26
-# nvim_vsn: v0.7.0  superseded 2022-09-09
-# nvim_vsn: v0.7.2  superseded 2022-09-30
-# nvim_vsn: v0.8.0  superseded 2022-11-15
-# nvim_vsn: v0.8.1  superseded 2022-12-30
-# nvim_vsn: v0.8.2  superseded 2023-02-19 
-# nvim_vsn: v0.8.3  superseded 2023-04-07
-# nvim_vsn: v0.9.0  superseded 2023-05-30 
-# nvim_vsn: v0.9.1  superseded 2023-09-07
-# nvim_vsn: v0.9.2  superseded 2023-10-09 
-# nvim_vsn: v0.9.4  superseded 2024-01-03
-# nvim_vsn: v0.9.5  superseded 2024-05-16
-# nvim_vsn: v0.10.0 superseded 2024-07-24
+# see https://github.com/neovim/neovim/releases
+
+# nvim_vsn: v0.3.0  superseded 2018 Jul 18 Wed
+# nvim_vsn: v0.3.1  superseded 2019 Jan 05 Sat
+# nvim_vsn: v0.3.3  superseded 2019 Jan 31 Thu
+# nvim_vsn: v0.3.4  superseded 2019 Aug 08 Thu
+# nvim_vsn: v0.4.2  superseded 2020 Feb 14 Fri
+# nvim_vsn: v0.4.3  superseded 2020 Aug 22 Sat
+# nvim_vsn: v0.4.4  superseded 2021 May 26 Wed
+# nvim_vsn: v0.5.0  superseded 2021 Aug 13 Fri
+# nvim_vsn: v0.5.1  superseded 2021 Dec 02 Thu
+# nvim_vsn: v0.6.0  superseded 2022 Jan 26 Wed
+# nvim_vsn: v0.7.0  superseded 2022 Sep 09 Fri
+# nvim_vsn: v0.7.2  superseded 2022 Sep 30 Fri
+# nvim_vsn: v0.8.0  superseded 2022 Nov 15 Tue
+# nvim_vsn: v0.8.1  superseded 2022 Dec 30 Fri
+# nvim_vsn: v0.8.2  superseded 2023 Feb 19 Sun
+# nvim_vsn: v0.8.3  superseded 2023 Apr 07 Fri
+# nvim_vsn: v0.9.0  superseded 2023 May 30 Tue
+# nvim_vsn: v0.9.1  superseded 2023 Sep 07 Thu
+# nvim_vsn: v0.9.2  superseded 2023 Aug 09 Wed 
+# nvim_vsn: v0.9.4  superseded 2024 Jan 03 Wed
+# nvim_vsn: v0.9.5  superseded 2024 May 16 Thu
+# nvim_vsn: v0.10.0 superseded 2024 Jul 24 Wed
 # nvim_vsn: v0.10.1 superseded 2024 Oct 03 Thu
 # nvim_vsn: v0.10.2 superseded 2025 Mar 26 Wed
 # nvim_vsn: v0.10.4 superseded 2025 Apr 19 Sat
