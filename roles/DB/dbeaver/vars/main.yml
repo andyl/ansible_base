@@ -13,4 +13,5 @@
 # dbeaver_vsn: 7.1.0   superseded 2021 Apr 02
 # dbeaver_vsn: 21.0.1  superseded 2023 Mar 23
 # dbeaver_vsn: 23.0.0  superseded 2024 Jun 04 
-dbeaver_vsn: 24.1.0
+# dbeaver_vsn: 24.1.0
+dbeaver_vsn: 25.2.4
