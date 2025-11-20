@@ -17,9 +17,9 @@
     - lxc-docker
     - docker
 
-- name: remove old docker-compose
-  pip: name="docker-compose" state=absent executable=pip3
-  become: true
+# - name: remove old docker-compose
+#   pip: name="docker-compose" state=absent executable=pip3
+#   become: true
 
 - name: add repository key
   apt_key:
