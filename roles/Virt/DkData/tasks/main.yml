@@ -4,7 +4,7 @@
 
 # clone dks/base_util 
 # clone dks/code_util 
-# clone util/pdk_data 
+# clone util/app_data 
 
 - name: create pkg dir
   file: 
@@ -30,10 +30,10 @@
     dest: /home/{{gen_user}}/dks/code_dks
     update: yes
 
-- name: clone util/pdk_data
+- name: clone util/app_data
   become_user: "{{gen_user}}"
   git: 
-    repo: 'git-host:Git/Util/pdk_data.git' 
-    dest: /home/{{gen_user}}/util/pdk_data
+    repo: 'git-host:Git/Util/app_data.git' 
+    dest: /home/{{gen_user}}/util/app_data
     update: yes
 
