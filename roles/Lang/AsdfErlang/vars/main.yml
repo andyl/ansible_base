@@ -35,4 +35,5 @@
 # erlang_vsn: 28.0.1   superseded 2025 Jul 18 Fri
 # erlang_vsn: 28.0.2   superseded 2025 Sep 19 Fri
 # erlang_vsn: 28.1     superseded 2025 Nov 07 Fri 
-erlang_vsn: 28.1.1  
+# erlang_vsn: 28.1.1   superseded 2025 Nov 24 Mon
+erlang_vsn: 28.2
