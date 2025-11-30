@@ -110,7 +110,8 @@ ex_vsn: 1.19.4-otp-28
 # phx_vsn: 1.7.18     superseded 2025 Mar 17 Mon
 # phx_vsn: 1.7.20     superseded 2025 Apr 01 Tue
 # phx_vsn: 1.8.0      superseded 2025 Oct 18 Sat
-phx_vsn: 1.8.1
+# phx_vsn: 1.8.1      superseded 2025 Nov 29 Sat
+phx_vsn: 1.8.2
 
 # ----- TABLEAU / mix hex.info tableau_new 
 # tblu_vsn: 1.0.2     superseded 2024 May 19 Sun 
