@@ -6,7 +6,8 @@ ans_venv_dir: "~/.ansible_venv"
 # ----- PYTHON
 # py_vsn: 3.10.12  superseded 2025 Feb 03 Mon
 # py_vsn: 3.13.1   superseded 2025 Nov 19 Wed
-py_vsn: 3.14.0
+# py_vsn: 3.14.0   superseded 2025 Dec 04 Thu
+py_vsn: 3.12.7
 
 # ----- UV 
 # uv_vsn: 0.6.11   superseded 2025 Nov 19 Wed
