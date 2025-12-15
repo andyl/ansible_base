@@ -125,9 +125,6 @@ phx_vsn: 1.8.3
 # tblu_vsn: 1.5.1     superseded 2025 Oct 18 Sat
 tblu_vsn: 2.0.1
   
-# ----- EX_SERVER / mix hex.info ex_server
-exsrv_vsn: 0.2.0 
-
 # ----- IGNITER / mix hex.info igniter_new
 # igniter_vsn: 0.2.1  superseded 2024 Jul 25 Thu
 # igniter_vsn: 0.3.0  superseded 2024 Oct 05 Sat
