@@ -5,12 +5,15 @@ network:
   renderer: {{nw_renderer}}
   wifis: 
     {{nw_device}}: 
-      dhcp4: no
-      dhcp6: no
+      dhcp4: false
+      dhcp6: false
       access-points: 
         "YOUR-SSID": 
           password: "YOUR-PASSWORD"
   bridges: 
     {{bridge_name}}: 
       interfaces: [{{nw_device}}] 
-      dhcp4: yes 
+      dhcp4: true
+      parameters:
+        stp: false
+        forward-delay: 0

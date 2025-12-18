@@ -5,9 +5,12 @@ network:
   renderer: {{nw_renderer}}
   ethernets: 
     {{nw_device}}: 
-      dhcp4: no
-      dhcp6: no
+      dhcp4: false
+      dhcp6: false
   bridges: 
     {{bridge_name}}: 
       interfaces: [{{nw_device}}] 
-      dhcp4: yes 
+      dhcp4: true
+      parameters:
+        stp: false
+        forward-delay: 0
