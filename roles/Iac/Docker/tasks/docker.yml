@@ -9,6 +9,7 @@
   with_items:
     - apt-transport-https 
     - ca-certificates 
+    - fuse-overlayfs
 
 - name: remove old docker
   apt:  pkg={{item}} state=absent purge=true

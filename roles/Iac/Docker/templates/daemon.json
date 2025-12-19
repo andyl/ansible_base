@@ -1,1 +1,4 @@
-{ "insecure-registries": ["reg-host:555"] } 
+{ 
+  "insecure-registries": ["reg-host:555"], 
+  "storage-driver": "fuse-overlayfs" 
+} 
