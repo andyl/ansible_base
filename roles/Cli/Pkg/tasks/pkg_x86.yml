@@ -45,9 +45,7 @@
     - direnv                     # directory environment tools
     - libcurl4                   # development lib
     - libcurl4-openssl-dev       # development lib
-    - libcurses5-dev             # development lib
     - libevent-dev               # development lib
-    - libff4-dev                 # development lib 
     - liblzma-dev                # development lib
     - libncurses5-dev            # development lib
     - libgdbm-dev                # development lib 
