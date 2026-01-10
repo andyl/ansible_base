@@ -4,48 +4,34 @@
 # ex_vsn: 1.1.0          superseded 2015-09-29
 # ex_vsn: 1.1.1          superseded 2016-01-01
 # ex_vsn: 1.2.0          superseded 2016-05-07
-# ex_vsn: 1.2.5          superseded 2016-06-07
 # ex_vsn: 1.2.6          superseded 2016-06-21
 # ex_vsn: 1.3.0          superseded 2016-09-09
-# ex_vsn: 1.3.2          superseded 2016-09-19
-# ex_vsn: 1.3.3          superseded 2016-10-18
 # ex_vsn: 1.3.4          superseded 2017-01-04
 # ex_vsn: 1.4.0          superseded 2017-01-31
-# ex_vsn: 1.4.1          superseded 2017-06-22
 # ex_vsn: 1.4.5          superseded 2017-07-25
 # ex_vsn: 1.5.0          superseded 2017-12-05
 # ex_vsn: 1.5.2          superseded 2018-01-18
 # ex_vsn: 1.6.0          superseded 2018-02-28
-# ex_vsn: 1.6.2          superseded 2018-03-09
-# ex_vsn: 1.6.3          superseded 2018-03-16
-# ex_vsn: 1.6.5          superseded 2018-06-20
 # ex_vsn: 1.6.6          superseded 2018-07-25
 # ex_vsn: 1.7.0          superseded 2018-07-27
-# ex_vsn: 1.7.1          superseded 2018-08-24
-# ex_vsn: 1.7.2          superseded 2018-11-07
 # ex_vsn: 1.7.4          superseded 2019-01-14
 # ex_vsn: 1.8.0          superseded 2019-01-30
 # ex_vsn: 1.8.1          superseded 2019-05-15
-# ex_vsn: 1.8.2          superseded 2019-06-24
 # ex_vsn: 1.9.0          superseded 2019-10-12
 # ex_vsn: 1.9.2          superseded 2020-01-27
 # ex_vsn: 1.10.0         superseded 2020-03-04
 # ex_vsn: 1.10.2         superseded 2020-04-16
 # ex_vsn: 1.10.2-otp-22  superseded 2020-04-25
-# ex_vsn: 1.10.3-otp-22  superseded 2020-06-28
 # ex_vsn: 1.10.3-otp-23  superseded 2020-07-05
 # ex_vsn: 1.11.0-otp-23  superseded 2020-10-19
 # ex_vsn: 1.11.1-otp-23  superseded 2021-03-01
-# ex_vsn: 1.11.3-otp-23  superseded 2021-03-16
 # ex_vsn: 1.11.4-otp-23  superseded 2021-04-06
 # ex_vsn: 1.12.1-otp-24  superseded 2021-07-01
 # ex_vsn: 1.12.2-otp-24  superseded 2021-10-12
 # ex_vsn: 1.12.3-otp-24  superseded 2021-12-03
-# ex_vsn: 1.13.1-otp-24  superseded 2021-02-10 
 # ex_vsn: 1.13.3-otp-24  superseded 2022-09-09
 # ex_vsn: 1.14.0-otp-25  superseded 2022-11-07
 # ex_vsn: 1.14.1-otp-25  superseded 2022-11-23
-# ex_vsn: 1.14.3-otp-25  superseded 2023-04-16
 # ex_vsn: 1.14.4-otp-25  superseded 2023-05-15
 # ex_vsn: 1.15.0-otp-25  superseded 2023-06-30 
 # ex_vsn: 1.15.1-otp-26  superseded 2023-07-11
@@ -53,18 +39,17 @@
 # ex_vsn: 1.15.6-otp-26  superseded 2023-10-14
 # ex_vsn: 1.15.7-otp-26  superseded 2023-12-22
 # ex_vsn: 1.16.0-otp-26  superseded 2024-01-31
-# ex_vsn: 1.16.2-otp-26  superseded 2024-05-20 
 # ex_vsn: 1.16.3-otp-26  superseded 2024-06-12
 # ex_vsn: 1.17.1-otp-27  superseded 2024 Aug 02 Fri
 # ex_vsn: 1.17.2-otp-27  superseded 2024 Oct 05 Sat
 # ex_vsn: 1.18.0-otp-27  superseded 2025 Jan 03 Fri
 # ex_vsn: 1.18.1-otp-27  superseded 2025 Mar 17 Mon
-# ex_vsn: 1.18.4-otp-27  superseded 2025 Jul 18 Fri
 # ex_vsn: 1.18.4-otp-28  superseded 2025 Oct 18 Sat
 # ex_vsn: 1.19.1-otp-28  superseded 2025 Nov 02 Sun
 # ex_vsn: 1.19.2-otp-28  superseded 2025 Nov 13 Thu
 # ex_vsn: 1.19.3-otp-28  superseded 2025 Nov 27 Thu
-ex_vsn: 1.19.4-otp-28
+# ex_vsn: 1.19.4-otp-28  superseded 2026 Jan 09 Fri
+ex_vsn: 1.19.5-otp-28
 
 # ----- PHOENIX / mix hex.info phx_new
 # https://github.com/phoenixframework/phoenix/tags
@@ -72,28 +57,21 @@ ex_vsn: 1.19.4-otp-28
 # phx_vsn: 1.0.3      superseded 2015 Sep 29  
 # phx_vsn: 1.0.4      superseded 2015 Dec 16   
 # phx_vsn: 1.1.0      superseded 2016 Jan 08   
-# phx_vsn: 1.1.2      superseded 2016 Feb 21      
 # phx_vsn: 1.1.4      superseded 2016 Jun 23
 # phx_vsn: 1.3.0      superseded 2018 Nov 07
 # phx_vsn: 1.4.0      superseded 2019 Apr 29
 # phx_vsn: 1.4.3      superseded 2019 May 08
 # phx_vsn: 1.5.1      superseded 2021 Feb 17
-# phx_vsn: 1.5.7      superseded 2021 Mar 01
 # phx_vsn: 1.5.8      superseded 2021 Dec 14
 # phx_vsn: 1.6.4      superseded 2022 Jan 04
-# phx_vsn: 1.6.6      superseded 2022 Sep 09
 # phx_vsn: 1.6.12     superseded 2022 Nov 06
 # phx_vsn: 1.7.0      superseded 2023 Mar 11 Sat 
 # phx_vsn: 1.7.1      superseded 2023 Mar 20 Mon 
-# phx_vsn: 1.7.7      superseded 2023 Oct 09 Mon
-# phx_vsn: 1.7.8      superseded 2023 Oct 11 Wed
 # phx_vsn: 1.7.9      superseded 2023 Nov 13 Mon
 # phx_vsn: 1.7.10     superseded 2024 Feb 08 Thu 
-# phx_vsn: 1.7.11     superseded 2024 May 21 Tue
 # phx_vsn: 1.7.18     superseded 2025 Mar 17 Mon
 # phx_vsn: 1.7.20     superseded 2025 Apr 01 Tue
 # phx_vsn: 1.8.0      superseded 2025 Oct 18 Sat
-# phx_vsn: 1.8.1      superseded 2025 Nov 29 Sat
 # phx_vsn: 1.8.2      superseded 2025 Dec 11 Thu
 phx_vsn: 1.8.3
 
