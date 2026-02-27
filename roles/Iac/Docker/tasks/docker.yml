@@ -76,3 +76,45 @@
     dest: /usr/share/bash-completion/completions/dk
     state: link 
 
+# ----------------------------------------------------------------
+
+- name: Ensure drop-in directory for docker.service exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Create drop-in override to make Docker start after Incus
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/docker.service.d/10-after-incus.conf
+    content: |
+      [Unit]
+      Description=Ensure Docker starts after Incus
+      After=incus.service
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Reload systemd daemon
+
+- name: Reload systemd daemon to pick up the new drop-in
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: ansible_facts.services is changed or ansible_facts.services['docker.service'] is changed  # optional optimization
+
+- name: Restart Docker service to apply the new dependency (optional but recommended after change)
+  ansible.builtin.systemd_service:
+    name: docker
+    state: restarted
+  when: ansible_facts.services is changed   # only if drop-in was created/modified
+
+# Optional: Ensure both services are enabled (if not already)
+- name: Enable Incus and Docker services on boot
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+  loop:
+    - incus
+    - docker
+

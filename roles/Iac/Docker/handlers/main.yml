@@ -2,3 +2,7 @@
 - name: restart docker 
   service: name=docker state=restarted enabled=yes
   become: true
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
