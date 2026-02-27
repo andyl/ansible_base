@@ -11,7 +11,8 @@
 # lazydocker_vsn: 0.23.1 superseded 2024 Jun 11
 # lazydocker_vsn: 0.23.3 superseded 2025 Jun 14 Sat
 # lazydocker_vsn: 0.24.1 superseded 2025 Dec 19 Fri
-lazydocker_vsn: 0.24.2
+# lazydocker_vsn: 0.24.2 superseded 2026 Feb 26 Thu
+lazydocker_vsn: 0.24.4
  
 # dockergen_vsn:  0.7.4  superseded 2022 May 29
 dockergen_vsn:  0.9.0
