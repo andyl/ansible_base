@@ -11,8 +11,8 @@
 - name: incus config
   include_tasks: incus_config.yml
 
-- name: install distrobuilder
-  include_tasks: distrobuilder.yml
+# - name: install distrobuilder
+#   include_tasks: distrobuilder.yml
 
 # - name: install incus-compose
 #   include_tasks: incus_compose.yml
