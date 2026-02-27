@@ -1,4 +1,5 @@
 { 
   "insecure-registries": ["reg-host:555"], 
-  "storage-driver": "fuse-overlayfs" 
+  "storage-driver": "fuse-overlayfs",
+  "ip-forward-no-drop": true
 } 
