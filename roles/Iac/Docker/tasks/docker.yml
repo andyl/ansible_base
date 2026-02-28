@@ -98,16 +98,16 @@
     group: root
   notify: Reload systemd daemon
 
-- name: Reload systemd daemon to pick up the new drop-in
-  ansible.builtin.systemd:
-    daemon_reload: true
-  when: ansible_facts.services is changed or ansible_facts.services['docker.service'] is changed  # optional optimization
+# - name: Reload systemd daemon to pick up the new drop-in
+#   ansible.builtin.systemd:
+#     daemon_reload: true
+#   when: ansible_facts.services is changed or ansible_facts.services['docker.service'] is changed  # optional optimization
 
-- name: Restart Docker service to apply the new dependency (optional but recommended after change)
-  ansible.builtin.systemd_service:
-    name: docker
-    state: restarted
-  when: ansible_facts.services is changed   # only if drop-in was created/modified
+# - name: Restart Docker service to apply the new dependency (optional but recommended after change)
+#   ansible.builtin.systemd_service:
+#     name: docker
+#     state: restarted
+#   when: ansible_facts.services is changed   # only if drop-in was created/modified
 
 # Optional: Ensure both services are enabled (if not already)
 - name: Enable Incus and Docker services on boot
