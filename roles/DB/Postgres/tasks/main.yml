@@ -4,8 +4,8 @@
 # see http://wiki.postgresql.org/wiki/Apt
 # see http://wiki.postgresql.org/wiki/Apt/FAQ
 
-# - name: install python utilities
-#   include_tasks: python_util.yml
+- name: install python utilities
+  include_tasks: python_util.yml
 
 # ----- database cleanup 
 

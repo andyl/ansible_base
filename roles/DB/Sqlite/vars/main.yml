@@ -2,7 +2,8 @@
 # see ~/var/data/cblob/sqlite 
 
 # sqlite_vsn: 3440200   superseded 2024 Jan 15 Mon
-sqlite_vsn: 3450000
+# sqlite_vsn: 3450000   superseded 2026 Feb 28 Sat
+sqlite_vsn: 3510200
 
 # see https://github.com/asg017/sqlite-vss/releases
 

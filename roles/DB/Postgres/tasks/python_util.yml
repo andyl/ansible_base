@@ -1,10 +1,24 @@
 ---
 
+# - name: install utilities for python3
+#   become: true
+#   pip:
+#     name: "{{ item }}"
+#     executable: pip3
+#   with_items:
+#     - psycopg2-binary
+
+- name: Ensure packaging is present (needed for ansible pip module)
+  become: true
+  ansible.builtin.command:
+    cmd: "{{ ansible_python.executable | default('/home/aleak/.asdf/installs/python/3.12.7/bin/python3.12') }} -m pip install --user packaging"
+  changed_when: false
+  args:
+    creates: "{{ ansible_python.executable | default('/home/aleak/.asdf/installs/python/3.12.7/bin/python3.12') }} -m pip show packaging"   # rough idempotence
+
 - name: install utilities for python3
   become: true
-  pip:
-    name: "{{ item }}"
-    executable: pip3
-  with_items:
-    - psycopg2-binary
-
+  ansible.builtin.pip:
+    name: psycopg2-binary
+    executable: "{{ ansible_python.executable | dirname }}/pip{{ ansible_python.version.major }}"
+  register: pip_result

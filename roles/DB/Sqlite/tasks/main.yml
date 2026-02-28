@@ -57,14 +57,14 @@
 
 # https://github.com/asg017/sqlite-vss/releases
 
-- name: create pkg dir
+- name: create pkg dir for vss
   file: 
     path:  "/home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get tar file
+- name: get tar file for vss
   get_url: 
     url:  https://github.com/asg017/sqlite-vss/releases/download/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}-loadable-linux-x86_64.tar.gz
     dest: /home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}.tar.gz
@@ -72,13 +72,14 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: untar file
+- name: untar file for vss
   become: false
   unarchive:
     src:  /home/{{sys_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/sqlite-vss-{{sqlvss_vsn}}.tar.gz
     dest: /home/{{sys_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}
+    remote_src: true
 
-- name: create executable symlinks
+- name: create executable symlinks for vss
   file: 
     src:   /home/{{gen_user}}/.pkg/sqlite/vss/{{sqlvss_vsn}}/{{item}}
     dest:  /home/{{gen_user}}/.pkg/sqlite/{{item}}
