@@ -10,4 +10,4 @@ dbld_vsn: 3.1
 # https://github.com/bketelsen/incus-compose
 # https://github.com/bketelsen/incus-compose/releases 
 
-incom_vsn: dev 
+incom_vsn: 260508
