@@ -17,5 +17,6 @@
 # rust_vsn: 1.70.0    superseded 2023 Oct 20 Fri
 # rust_vsn: 1.73.0    superseded 2024 Jan 08 Mon
 # rust_vsn: 1.75.0    superseded 2024 Oct 09 Wed
-rust_vsn: 1.81.0
+# rust_vsn: 1.81.0    superseded 2026 May 19 Tue
+rust_vsn: 1.95.0
 
