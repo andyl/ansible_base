@@ -54,3 +54,6 @@ tblu_vsn: 2.0.2
 # igniter_vsn: 0.5.23 superseded 2025 Mar 27 Thu
 # igniter_vsn: 0.5.32 superseded 2026 Jan 21 Wed
 igniter_vsn: 0.5.33
+
+# ----- MOB / mix hex.info mob_new
+mob_vsn: 0.3.7
