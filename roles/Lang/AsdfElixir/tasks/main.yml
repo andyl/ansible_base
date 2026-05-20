@@ -117,6 +117,18 @@
   when: is_lanhost
 
   # -------------------------------------------------------
+  # mob
+  # https://hexdocs.pm/mob/readme.html
+- name: install mob_new
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install hex mob_new {{mob_vsn}} --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/igniter_new-{{igniter_vsn}}
+    chdir: "/home/{{gen_user}}"
+  when: is_lanhost
+
+  # -------------------------------------------------------
   # livescript 
   # https://github.com/thmsmlr/livescript
 - name: install livescript
