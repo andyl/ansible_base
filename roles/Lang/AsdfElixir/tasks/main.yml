@@ -105,6 +105,19 @@
   when: is_lanhost
 
   # -------------------------------------------------------
+  # francis 
+  # https://hex.pm/packages/francis
+  # https://hex.pm/packages/francis_htmx
+- name: install francis 
+  become_user: "{{gen_user}}"
+  shell: "bash -ilc 'mix archive.install hex francis {{francis_vsn}} --force'"
+  ignore_errors: true
+  args:
+    creates: /home/{{gen_user}}/.asdf/installs/elixir/{{ex_vsn}}/.mix/archives/francis-{{francis_vsn}}
+    chdir: "/home/{{gen_user}}"
+  when: is_lanhost
+
+  # -------------------------------------------------------
   # livescript 
   # https://github.com/thmsmlr/livescript
   # - name: install livescript
