@@ -35,6 +35,39 @@
   become: true
   when: is_lanhost
 
+# ----- tpack - plugin manager 
+# https://github.com/tmuxpack/tpack
+
+- name: create tpack pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  when: is_lanhost
+
+- name: download tpack executable
+  get_url:
+    url:  https://github.com/tmuxpack/tpack/releases/download/v{{tpack_vsn}}/tpack_{{tpack_vsn}}_linux_amd64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz
+    mode: "a+rx"
+  become: false
+  when: is_lanhost
+
+- name: expand tpack tarfile 
+  unarchive: 
+    src: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz
+    dest: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/
+
+- name: create tpack symlink 
+  file: 
+    src:   /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack 
+    dest:  /usr/bin/tpack 
+    state: link
+    force: yes
+  become: true
+  when: is_lanhost
+
 # ----- off-LAN hosts
 
 # - name: install tmux from APT
