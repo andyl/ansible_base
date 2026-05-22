@@ -51,18 +51,18 @@
 # https://github.com/owenthereal/upterm 
 # https://github.com/owenthereal/upterm/releases 
 
-- name: download upterm package
-  get_url:
-    url:   https://github.com/owenthereal/upterm/releases/download/v{{upterm_vsn}}/upterm_linux_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
-    mode: "a+rx"
-  become: true
-  when: is_x86_64
-
-- name: install upterm package
-  apt: 
-    deb:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
-    force: yes
-  become: true
-  when: is_x86_64
+# - name: download upterm package
+#   get_url:
+#     url:   https://github.com/owenthereal/upterm/releases/download/v{{upterm_vsn}}/upterm_linux_amd64.deb
+#     dest: /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
+#     mode: "a+rx"
+#   become: true
+#   when: is_x86_64
+# 
+# - name: install upterm package
+#   apt: 
+#     deb:   /home/{{gen_user}}/.pkg/tmux/upterm-{{upterm_vsn}}.deb
+#     force: yes
+#   become: true
+#   when: is_x86_64
 

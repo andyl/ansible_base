@@ -10,9 +10,9 @@
 # tmux_vsn: 3.1  superseded 2021-05-26
 # tmux_vsn: 3.2  superseded 2022-09-09 
 # tmux_vsn: 3.3  superseded 2022-10-26
-# tmux_vsn: 3.3a superseded 2024-05-08
 # tmux_vsn: 3.4  superseded 2024 Oct 04 Fri
-tmux_vsn: 3.5
+# tmux_vsn: 3.5  superseded 2026 May 22 Fri
+tmux_vsn: 3.6b
 
 # https://github.com/owenthereal/upterm/releases 
 upterm_vsn: 0.14.3 
