@@ -1,0 +1,18 @@
+---
+
+# pass - cli password manager
+# https://www.passwordstore.org/
+
+- name: Update apt-cache
+  apt:
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install tools 
+  become: true
+  apt:  pkg={{item}} state=latest install_recommends=yes
+  with_items:
+    - gpg 
+    - pass 
+
