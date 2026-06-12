@@ -26,6 +26,5 @@
     owner: "{{gen_user}}"
     remote_src: true
     validate_certs: false
-
-# expand tar file 
+    
 # make symlink 
