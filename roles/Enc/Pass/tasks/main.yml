@@ -15,4 +15,5 @@
   with_items:
     - gpg 
     - pass 
+    - suckless-tools
 
