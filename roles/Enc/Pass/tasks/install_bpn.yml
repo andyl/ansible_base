@@ -27,4 +27,22 @@
     remote_src: true
     validate_certs: false
     
-# make symlink 
+# install the package. refer to the documentation:
+# https://github.com/browserpass/browserpass-native#install-manually
+#
+# Idempotency: `make BIN=browserpass-linux64 install` copies the binary to
+# /usr/bin/browserpass-linux64 (PREFIX defaults to /usr). We use that as the
+# `creates:` marker so both make steps are skipped once installed.
+
+- name: configure bpn hosts json files
+  command: make BIN=browserpass-linux64 configure
+  args:
+    chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
+    creates: /usr/bin/browserpass-linux64
+
+- name: install bpn
+  become: true
+  command: make BIN=browserpass-linux64 install
+  args:
+    chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
+    creates: /usr/bin/browserpass-linux64
