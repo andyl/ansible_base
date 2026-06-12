@@ -12,7 +12,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg/tmux
+    path: "{{pkg_dir}}/tmux"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -20,16 +20,16 @@
 
 - name: install cached tmux executable
   get_url:
-    url:  http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}
-    dest: /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
+    url:  "http://{{cblob_host}}/tmux/tmux-{{host_arch}}-{{host_relname}}-{{tmux_vsn}}"
+    dest: "{{pkg_dir}}/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}"
     mode: "a+rx"
   become: false
   when: is_lanhost
 
 - name: create tmux symlink 
   file: 
-    src:   /home/{{gen_user}}/.pkg/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}
-    dest:  /usr/bin/tmux
+    src:   "{{pkg_dir}}/tmux/tmux_{{host_arch}}_{{host_relname}}_{{tmux_vsn}}"
+    dest:  "{{symlink_dir}}/tmux"
     state: link
     force: yes
   become: true
@@ -40,7 +40,7 @@
 
 - name: create tpack pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}
+    path: "{{pkg_dir}}/tpack/{{tpack_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -48,21 +48,21 @@
 
 - name: download tpack executable
   get_url:
-    url:  https://github.com/tmuxpack/tpack/releases/download/v{{tpack_vsn}}/tpack_{{tpack_vsn}}_linux_amd64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz
+    url:  "https://github.com/tmuxpack/tpack/releases/download/v{{tpack_vsn}}/tpack_{{tpack_vsn}}_linux_amd64.tar.gz"
+    dest: "{{pkg_dir}}/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz"
     mode: "a+rx"
   become: false
   when: is_lanhost
 
 - name: expand tpack tarfile 
   unarchive: 
-    src: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz
-    dest: /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/
+    src:  "{{pkg_dir}}/tpack/{{tpack_vsn}}/tpack_{{tpack_vsn}}.tar.gz"
+    dest: "{{pkg_dir}}/tpack/{{tpack_vsn}}/"
 
 - name: create tpack symlink 
   file: 
-    src:   /home/{{gen_user}}/.pkg/tpack/{{tpack_vsn}}/tpack 
-    dest:  /usr/bin/tpack 
+    src:   "{{pkg_dir}}/tpack/{{tpack_vsn}}/tpack"
+    dest:  "{{symlink_dir}}/tpack"
     state: link
     force: yes
   become: true

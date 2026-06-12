@@ -5,7 +5,7 @@
 
 - name: create pkg dir
   file: 
-    path: /home/{{gen_user}}/.pkg/sops
+    path: "{{pkg_dir}}/sops"
     state: directory 
     group: "{{gen_user}}" 
     owner: "{{gen_user}}"
@@ -13,12 +13,12 @@
 - name: get deb file
   become: false
   get_url: 
-    url:  https://github.com/mozilla/sops/releases/download/v{{sops_version}}/sops_{{sops_version}}_amd64.deb
-    dest: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}_amd64.deb
+    url:  "https://github.com/mozilla/sops/releases/download/v{{sops_version}}/sops_{{sops_version}}_amd64.deb"
+    dest: "{{pkg_dir}}/sops/sops_{{sops_version}}_amd64.deb"
     force: no
     validate_certs: false
 
 - name: install package
   become: true
   apt: 
-    deb: /home/{{gen_user}}/.pkg/sops/sops_{{sops_version}}_amd64.deb
+    deb: "{{pkg_dir}}/sops/sops_{{sops_version}}_amd64.deb"

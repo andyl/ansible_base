@@ -5,15 +5,15 @@
 
 - name: create age pkg dir
   file: 
-    path:  "/home/{{gen_user}}/.pkg/age/{{age_vsn}}"
+    path:  "{{pkg_dir}}/age/{{age_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: get age tar file
   get_url: 
-    url: https://github.com/FiloSottile/age/releases/download/v{{age_vsn}}/age-v{{age_vsn}}-linux-amd64.tar.gz
-    dest: /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age-amd64.tar.gz
+    url:  https://github.com/FiloSottile/age/releases/download/v{{age_vsn}}/age-v{{age_vsn}}-linux-amd64.tar.gz
+    dest: "{{pkg_dir}}/age/{{age_vsn}}/age-amd64.tar.gz"
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -30,8 +30,8 @@
 - name: create age executable symlinks
   become: true
   file: 
-    src:   /home/{{gen_user}}/.pkg/age/{{age_vsn}}/age/{{item}}
-    dest:  /usr/local/bin/{{item}} 
+    src:   "{{pkg_dir}}/age/{{age_vsn}}/age/{{item}}"
+    dest:  "{{symlink_dir}}/{{item}}"
     state: link
     force: yes
   with_items:
@@ -43,7 +43,7 @@
 
 - name: create agebox pkg dir
   file: 
-    path:  "/home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}"
+    path:  "{{pkg_dir}}/agebox/{{agebox_vsn}}"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -51,7 +51,7 @@
 - name: get agebox executable file
   get_url: 
     url: https://github.com/slok/agebox/releases/download/v{{agebox_vsn}}/agebox-linux-amd64
-    dest: /home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}/agebox
+    dest: "{{pkg_dir}}/agebox/{{agebox_vsn}}/agebox"
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -59,8 +59,8 @@
 - name: create agebox executable symlinks
   become: true
   file: 
-    src:   /home/{{gen_user}}/.pkg/agebox/{{agebox_vsn}}/{{item}}
-    dest:  /usr/local/bin/{{item}} 
+    src:   "{{pkg_dir}}/agebox/{{agebox_vsn}}/{{item}}"
+    dest:  "{{symlink_dir}}/{{item}}"
     state: link
     force: yes
   with_items:

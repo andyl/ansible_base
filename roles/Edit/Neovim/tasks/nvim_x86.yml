@@ -6,16 +6,16 @@
 
 - name: get appimage file
   get_url: 
-    url:  https://github.com/neovim/neovim/releases/download/{{nvim_vsn}}/nvim-linux-x86_64.appimage
-    dest: /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
+    url:  "https://github.com/neovim/neovim/releases/download/{{nvim_vsn}}/nvim-linux-x86_64.appimage"
+    dest: "{{pkg_dir}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage"
     mode: "a+rx"
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: create executable symlink
   file: 
-    src:   /home/{{gen_user}}/.pkg/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage
-    dest:  /usr/local/bin/nvim
+    src:   "{{pkg_dir}}/nvim/nvim-{{host_arch}}-{{nvim_vsn}}.appimage"
+    dest:  "{{symlink_dir}}/nvim"
     state: link
     force: yes
     mode:  "a+rx"
