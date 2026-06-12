@@ -1,0 +1,47 @@
+---
+
+- name: create pkg dir
+  file:
+    path:  "/home/{{gen_user}}/.pkg/freecad/"
+    state: directory
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get appimage file
+  get_url:
+    # url:  https://github.com/FreeCAD/FreeCAD/releases/download/{{fc_vsn}}/FreeCAD_{{fc_vsn}}-conda-Linux-x86_64-py311.AppImage
+    url:  https://github.com/FreeCAD/FreeCAD/releases/download/{{fc_vsn}}/FreeCAD_{{fc_vsn}}-Linux-x86_64-py311.AppImage
+    dest: /home/{{gen_user}}/.pkg/freecad/freecad-{{fc_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file:
+    src:   /home/{{gen_user}}/.pkg/freecad/freecad-{{fc_vsn}}.appimage
+    dest:  /usr/local/bin/freecad
+    state: link
+    force: yes
+    mode:  "a+rx"
+
+# - name: create desktop symlink
+#   file:
+#     src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.desktop
+#     dest:  /home/{{gen_user}}/.local/share/applications/freecad.desktop
+#     state: link
+#     force: yes
+#     mode:  "a+r"
+#
+# - name: create icon symlink
+#   file:
+#     src:   /home/{{gen_user}}/util/code_util/data/appdesktop/freecad.svg
+#     dest:  /home/{{gen_user}}/.local/share/icons/freecad.svg
+#     state: link
+#     force: yes
+#     mode:  "a+r"
+
+- name: Update desktop database
+  command: update-desktop-database /home/{{gen_user}}/.local/share/applications
+  args:
+    creates: none
+  changed_when: false

@@ -1,10 +1,12 @@
 ---
  
-# predicates
+# predicates and variables 
 
 - name: test for hostkey
   local_action: stat path="~/.ssh/id_rsa.pub"
   register: hostkey
+
+# -----
 
 - name: Check if xfce4_server process is running
   ansible.builtin.command: "pgrep -f xfce4-session"
@@ -16,14 +18,32 @@
   ansible.builtin.set_fact:
     has_xfce: "{{ xfce_process.rc == 0 }}"
 
-- name: set cblob_host
-  set_fact:
-    cblob_host: "cblob-host:5000"
-
 - name: stat /usr/bin/X
   stat:
     path: /usr/bin/X
   register: usr_bin_x
+
+- name: Set has_gui variable
+  ansible.builtin.set_fact:
+    has_gui: "{{ usr_bin_x.stat.exists }}"
+
+# -----
+
+- name: set cblob_host
+  set_fact:
+    cblob_host: "cblob-host:5000"
+
+# -----
+
+- name: set pkg_dir 
+  set_fact: 
+    pkg_dir: "/home/{{gen_user}}/.pkg"
+
+- name: set symlink_dir 
+  set_fact:
+    symlink_dir: "{{pkg_dir}}/Bin"
+
+# -----
 
 - name: set base predicates
   set_fact:
@@ -41,7 +61,6 @@
     ansible_local:  "'{{ansible_connection}}'   == 'local'"
     ansible_remote: "'{{ansible_connection}}'   != 'local'"
     gen_user_loop:  "{{gen_loop is defined}}"
-    has_gui:        "{{ usr_bin_x.stat.exists }}"
 
 - name: set dependent predicates
   set_fact:
