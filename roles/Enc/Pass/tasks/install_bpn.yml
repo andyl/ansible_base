@@ -1,0 +1,31 @@
+---
+
+# browserpass 
+# https://github.com/browserpass/browserpass-native 
+
+- name: create bpn pkg dir
+  file: 
+    path: "{{pkg_dir}}/bpn/{{bpn_vsn}}"
+    state: directory 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+
+- name: get bpn tar file
+  become: false
+  get_url: 
+    url:  "https://github.com/browserpass/browserpass-native/releases/download/v{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}.tar.gz"
+    dest: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpassnative_{{bpn_vsn}}.tar.gz"
+    force: no
+    validate_certs: false
+
+- name: expand bpn tar file
+  unarchive:
+    src:  "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpassnative_{{bpn_vsn}}.tar.gz" 
+    dest: "{{pkg_dir}}/bpn/{{bpn_vsn}}/" 
+    group: "{{gen_user}}" 
+    owner: "{{gen_user}}"
+    remote_src: true
+    validate_certs: false
+
+# expand tar file 
+# make symlink 

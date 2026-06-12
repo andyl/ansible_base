@@ -3,5 +3,14 @@
 # pass - cli password manager
 # https://www.passwordstore.org/
 
-- include_tasks: install.yml
+- include_tasks: install_pass.yml
   when: has_gui | bool
+
+# browserpass - browser plugin 
+# https://github.com/browserpass/browserpass-extension | MANUAL INSTALL
+# https://github.com/browserpass/browserpass-native    | REQUIRED
+# https://www.passwordstore.org/
+
+- include_tasks: install_bpn.yml
+  when: has_gui | bool
+
