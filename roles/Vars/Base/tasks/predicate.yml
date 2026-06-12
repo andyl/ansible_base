@@ -20,6 +20,11 @@
   set_fact:
     cblob_host: "cblob-host:5000"
 
+- name: stat /usr/bin/X
+  stat:
+    path: /usr/bin/X
+  register: usr_bin_x
+
 - name: set base predicates
   set_fact:
     is_xubuntu:     "'Xubuntu' in '{{ansible_distribution}}'"
@@ -36,6 +41,7 @@
     ansible_local:  "'{{ansible_connection}}'   == 'local'"
     ansible_remote: "'{{ansible_connection}}'   != 'local'"
     gen_user_loop:  "{{gen_loop is defined}}"
+    has_gui:        "{{ usr_bin_x.stat.exists }}"
 
 - name: set dependent predicates
   set_fact:
