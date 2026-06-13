@@ -35,34 +35,34 @@
 # only run when the binary is missing or reports a different version,
 # so bumping bpn_vsn in vars/main.yml triggers a real upgrade.
 
-# - name: stat installed bpn binary
-#   stat:
-#     path: /usr/bin/browserpass-linux64
-#   register: bpn_bin
-#
-# - name: read installed bpn version
-#   command: /usr/bin/browserpass-linux64 -version
-#   register: bpn_installed
-#   changed_when: false
-#   failed_when: false
-#   when: bpn_bin.stat.exists
-#
-# - name: decide whether bpn needs install
-#   set_fact:
-#     bpn_needs_install: "{{ not bpn_bin.stat.exists or bpn_vsn not in (bpn_installed.stdout | default('')) }}"
-#
-# - name: configure bpn hosts json files
-#   command: make BIN=browserpass-linux64 configure
-#   args:
-#     chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
-#   when: bpn_needs_install
-#
-# - name: install bpn
-#   become: true
-#   command: make BIN=browserpass-linux64 install
-#   args:
-#     chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
-#   when: bpn_needs_install
+- name: stat installed bpn binary
+  stat:
+    path: /usr/bin/browserpass-linux64
+  register: bpn_bin
+
+- name: read installed bpn version
+  command: /usr/bin/browserpass-linux64 -version
+  register: bpn_installed
+  changed_when: false
+  failed_when: false
+  when: bpn_bin.stat.exists
+
+- name: decide whether bpn needs install
+  set_fact:
+    bpn_needs_install: "{{ not bpn_bin.stat.exists or bpn_vsn not in (bpn_installed.stdout | default('')) }}"
+
+- name: configure bpn hosts json files
+  command: make BIN=browserpass-linux64 configure
+  args:
+    chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
+  when: bpn_needs_install
+
+- name: install bpn
+  become: true
+  command: make BIN=browserpass-linux64 install
+  args:
+    chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
+  when: bpn_needs_install
 
 # register the native host with the user's browser. these make targets
 # symlink the manifest into $XDG_CONFIG_HOME, so they MUST run as
