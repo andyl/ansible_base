@@ -64,22 +64,24 @@
     chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
   when: bpn_needs_install
 
-# register the native host with the user's browser. these make targets
-# symlink the manifest into $XDG_CONFIG_HOME, so they MUST run as
-# gen_user (not root) or the symlinks land in /root/.config and Brave
-# never finds them — leaving the popup stuck on "Loading available
-# logins...". the policies-* target pre-approves the extension ID.
+# maintain a 'current' symlink pointing at the active bpn makefile dir,
+# so pass_brave_cfg (called below, and any manual invocations) can
+# locate it without needing bpn_vsn threaded through.
+- name: link bpn current -> {{bpn_vsn}}
+  become: false
+  file:
+    src:   "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
+    dest:  "{{pkg_dir}}/bpn/current"
+    state: link
+    force: true
 
-# - name: register bpn native host with Brave (user)
-#   become: false
-#   command: make BIN=browserpass-linux64 hosts-brave-user
-#   args:
-#     chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
-#     creates: "/home/{{gen_user}}/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/com.github.browserpass.native.json"
-#
-# - name: register bpn policy with Brave (user)
-#   become: false
-#   command: make BIN=browserpass-linux64 policies-brave-user
-#   args:
-#     chdir: "{{pkg_dir}}/bpn/{{bpn_vsn}}/browserpass-linux64-{{bpn_vsn}}"
-#     creates: "/home/{{gen_user}}/.config/BraveSoftware/Brave-Browser/policies/managed/com.github.browserpass.native.json"
+# register the native host + policy with Brave. delegated to
+# ~/util/code_util/bin/pass_brave_cfg so the logic is reusable from a
+# shell (e.g. when debugging the "Loading available logins..." stall).
+# MUST run as gen_user (not root) — the make targets symlink the
+# manifest into $XDG_CONFIG_HOME, so root invocations would land in
+# /root/.config and Brave would never find them. The script's own
+# idempotency guards mirror the prior Ansible 'creates:' checks.
+- name: register bpn with Brave (user)
+  become: false
+  command: pass_brave_cfg
