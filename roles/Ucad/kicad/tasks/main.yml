@@ -5,4 +5,4 @@
 # see http://kicad.org/download/ubuntu/
 
 - include_tasks: install.yml
-  when: has_gui | bool
+  when: has_gui | bool and is_physical | bool

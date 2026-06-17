@@ -5,5 +5,4 @@
 # https://github.com/dprojects/Woodworking/releases
 
 - include_tasks: install.yml
-  # NOTE: We want "has_gui" and "is_physical"
-  when: has_gui | bool
+  when: has_gui | bool and is_physical | bool
