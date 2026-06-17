@@ -30,16 +30,9 @@
 # The has_gui is useful, but not always sufficient.
 # With some packages, we want to install if the host has_gui, but
 # only if the machine is a physical machine (server or laptop) 
-# Therefore we want a 'is_physical' predicate.
-# I'm not sure how to detect a 'virtual' instance vs a 'physical' instance.
-# Note that:
-# - all virtual machines run as 'Incus' system containers or virtual machines 
-# - the incus manager will be installed on many physical machines, but not all 
-# - incus will not be installed on a virtual machine 
-# Perhaps "ansible_virtualization_role" would be helpful...
 - name: Set is_physical variable
   ansible.builtin.set_fact:
-    is_physical: "TBD"
+    is_physical: "{{ ansible_virtualization_role != 'guest' }}"
     
 # -----
 
