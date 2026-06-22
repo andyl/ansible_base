@@ -1,13 +1,15 @@
 ---
-# https://github.com/swsnr/mdcat/releases
+# https://github.com/BIRSAx2/mdcat/releases
 
 # mdcat_vsn: 2.1.2  superseded 2024 Aug 17 Sat
-mdcat_vsn: 2.3.1
+# mdcat_vsn: 2.3.1  superseded 2026 Jun 22 Mon
+mdcat_vsn: 2.9.1
 
 # https://github.com/sxyazi/yazi/releases
 
 # yazi_vsn: 0.2.5 superseded 2024 Aug 17 Sat
-yazi_vsn: 0.3.1
+# yazi_vsn: 0.3.1 superseded 2026 Jun 22 Mon
+yazi_vsn: 26.5.6
 
 # https://github.com/direnv/direnv/releases 
 

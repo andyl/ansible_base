@@ -13,7 +13,7 @@
 
 - name: get tar file
   get_url:
-    url:  https://github.com/swsnr/mdcat/releases/download/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl.tar.gz
+    url: https://github.com/BIRSAx2/mdcat/releases/download/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl.tar.gz
     dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
@@ -29,7 +29,7 @@
   become: true
   file:
     src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
-    dest: /usr/bin/mdcat
+    dest: /home/{{gen_user}}/.pkg/Bin/mdcat
     state: link 
     force: yes
 
@@ -60,14 +60,14 @@
   become: true
   file:
     src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/{{item}}
-    dest: /usr/bin/{{item}}
+    dest: /home/{{gen_user}}/.pkg/Bin/{{item}}
     state: link 
     force: yes
   with_items: 
     - yazi 
     - ya
 
-# ----- direnv 
+# ----- direnv / env managager
 
 - name: create pkg dir
   file: 
@@ -88,7 +88,7 @@
   become: true
   file:
     src:  /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}/direnv.linux-amd64
-    dest: /usr/bin/direnv
+    dest: /home/{{gen_user}}/.pkg/Bin/direnv
     state: link 
     force: yes
     mode:  "a+rx"
