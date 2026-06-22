@@ -2,61 +2,71 @@
 
 # Ctools/Release
 
+# ----- 
+
+- name: create Bin dir
+  file:
+    path: /home/{{gen_user}}/.pkg/Bin
+    state: directory
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+    
 # ----- mdcat / markdown previewer 
 
-- name: create pkg dir
+- name: create mdcat pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get tar file
+- name: get mdcat tar file
   get_url:
-    url: https://github.com/BIRSAx2/mdcat/releases/download/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl.tar.gz
+    url: https://github.com/BIRSAx2/mdcat/releases/download/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-gnu.tar.gz
     dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: untar 
+- name: untar mdcat 
   become_user: "{{gen_user}}"
   unarchive:
     src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/release.tar.gz
     dest: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}
-    creates: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
+    creates: /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-gnu/mdcat
 
-- name: create executable symlink
+- name: create mdcat executable symlink
   become: true
   file:
-    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-musl/mdcat
+    src:  /home/{{gen_user}}/.pkg/mdcat/mdcat-{{mdcat_vsn}}/mdcat-{{mdcat_vsn}}-x86_64-unknown-linux-gnu/mdcat
     dest: /home/{{gen_user}}/.pkg/Bin/mdcat
     state: link 
     force: yes
 
 # ----- yazi / file manager 
 
-- name: create pkg dir
+- name: create yazi pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get tar file
+- name: get yazi zip file
   get_url:
     url:  https://github.com/sxyazi/yazi/releases/download/v{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu.zip
     dest: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/release.zip
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: untar 
+- name: unzip yazi 
   become_user: "{{gen_user}}"
   unarchive:
+    remote_src: yes
     src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/release.zip
     dest: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}
     creates: /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/yazi
 
-- name: create executable symlink
+- name: create yazi executable symlink
   become: true
   file:
     src:  /home/{{gen_user}}/.pkg/yazi/yazi-{{yazi_vsn}}/yazi-x86_64-unknown-linux-gnu/{{item}}
@@ -69,14 +79,14 @@
 
 # ----- direnv / env managager
 
-- name: create pkg dir
+- name: create direnv pkg dir
   file: 
     path: /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: get executable
+- name: get direnv executable
   get_url:
     url:  https://github.com/direnv/direnv/releases/download/v{{direnv_vsn}}/direnv.linux-amd64
     dest: /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}/direnv.linux-amd64
@@ -84,7 +94,7 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
-- name: create executable symlink
+- name: create direnv executable symlink
   become: true
   file:
     src:  /home/{{gen_user}}/.pkg/direnv/{{direnv_vsn}}/direnv.linux-amd64
