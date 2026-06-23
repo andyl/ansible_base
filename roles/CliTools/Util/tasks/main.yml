@@ -42,6 +42,38 @@
     state: link 
     force: yes
 
+# ----- resvg / SVG viewer
+
+- name: create resvg pkg dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get resvg tar file
+  get_url:
+    url:  https://github.com/linebender/resvg/releases/download/v{{resvg_vsn}}/resvg-linux-x86_64.tar.gz
+    dest: /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}/release.tar.gz
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: untar resvg 
+  become_user: "{{gen_user}}"
+  unarchive:
+    remote_src: yes
+    src:  /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}/release.tar.gz
+    dest: /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}
+    creates: /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}/resvg
+
+- name: create resvg executable symlink
+  become: true
+  file:
+    src:  /home/{{gen_user}}/.pkg/resvg/resvg-{{resvg_vsn}}/resvg
+    dest: /home/{{gen_user}}/.pkg/Bin/resvg
+    state: link 
+    force: yes
+
 # ----- yazi / file manager 
 
 - name: create yazi pkg dir
