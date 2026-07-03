@@ -11,7 +11,8 @@
 # lazygit_vsn: 0.44.1  superseded 2025 Jan 11 Sat
 # lazygit_vsn: 0.45.0  superseded 2025 Feb 22 Sat
 # lazygit_vsn: 0.47.1  superseded 2025 May 27 Tue
-lazygit_vsn: 0.51.1
+# lazygit_vsn: 0.51.1  superseded 2026 Jul 03 Fri
+lazygit_vsn: 0.62.2
 
 # https://github.com/nektos/act/releases 
 #
