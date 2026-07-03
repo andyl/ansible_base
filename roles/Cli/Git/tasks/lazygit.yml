@@ -30,5 +30,5 @@
   file: 
     state: link 
     force: true
-    dest:  /usr/local/bin/lazygit
     src:   /home/{{gen_user}}/.pkg/git/lazygit_{{lazygit_vsn}}/lazygit
+    dest:  /home/{{gen_user}}/.pkg/Bin/lazygit
