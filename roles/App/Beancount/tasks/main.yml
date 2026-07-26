@@ -1,17 +1,17 @@
 ---
 
-# ledger
+# beancount
 
-# see https://www.ledger-cli.org/download.html
+# see `install_beancount`
 
-- name: add PPA
-  apt_repository: repo=ppa:mbudde/ledger 
-
-- name: add ledger 
-  apt: pkg={{item}} state=latest force=yes
-  with_items:
-    - ledger
-    - hledger 
-    - hledger-ui
-    - hledger-web
+# - name: add PPA
+#   apt_repository: repo=ppa:mbudde/beancount 
+#
+# - name: add beancount 
+#   apt: pkg={{item}} state=latest force=yes
+#   with_items:
+#     - beancount
+#     - hbeancount 
+#     - hbeancount-ui
+#     - hbeancount-web
 
