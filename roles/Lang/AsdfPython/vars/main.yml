@@ -11,5 +11,6 @@ py_vsn: 3.12.7
 
 # ----- UV 
 # uv_vsn: 0.6.11   superseded 2025 Nov 19 Wed
-uv_vsn: 0.9.10
+# uv_vsn: 0.9.10   superseded 2026 Jul 26 Sun
+uv_vsn: 0.11.32
 
