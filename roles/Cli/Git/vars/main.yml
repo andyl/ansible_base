@@ -3,16 +3,15 @@
 # https://github.com/jesseduffield/lazygit/releases
 #
 # lazygit_vsn: 0.24.2  superseded 2022 Nov 01 Mon
-# lazygit_vsn: 0.35    superseded 2023 Nov 10 Mon  
 # lazygit_vsn: 0.40.2  superseded 2024 Jun 18 Tue
 # lazygit_vsn: 0.42.0  superseded 2024 Jul 31 Wed
 # lazygit_vsn: 0.43.1  superseded 2024 Sep 07 Sat
 # lazygit_vsn: 0.44.0  superseded 2024 Sep 26 Thu
-# lazygit_vsn: 0.44.1  superseded 2025 Jan 11 Sat
 # lazygit_vsn: 0.45.0  superseded 2025 Feb 22 Sat
 # lazygit_vsn: 0.47.1  superseded 2025 May 27 Tue
 # lazygit_vsn: 0.51.1  superseded 2026 Jul 03 Fri
-lazygit_vsn: 0.62.2
+# lazygit_vsn: 0.62.2  superseded 2026 Aug 04 Tue
+lazygit_vsn: 0.64.0
 
 # https://github.com/nektos/act/releases 
 #
