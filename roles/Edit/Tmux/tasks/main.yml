@@ -12,7 +12,7 @@
 
 - name: create pkg dir
   file: 
-    path: "{{pkg_dir}}/tmux"
+    path: "{{pkg_dir}}/tmux/Bin"
     state: directory 
     group: "{{gen_user}}"
     owner: "{{gen_user}}"

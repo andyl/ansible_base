@@ -15,16 +15,16 @@
       - software-properties-common
     state: present
 
-- name: add PPA
-  ansible.builtin.apt_repository: 
-    repo: ppa:git-core/ppa
-    update-cache: false 
-
-- name: update cache 
-  ignore_errors: true 
-  ansible.builtin.apt: 
-    update-cache: true
-    cache_valid_time: 3600 
+# - name: add PPA
+#   ansible.builtin.apt_repository: 
+#     repo: ppa:git-core/ppa
+#     update-cache: false 
+#
+# - name: update cache 
+#   ignore_errors: true 
+#   ansible.builtin.apt: 
+#     update-cache: true
+#     cache_valid_time: 3600 
 
 - name: base git packages
   become: true
@@ -33,10 +33,10 @@
     state: latest 
     install_recommends: yes
 
-- name: install lazygit
-  include_tasks: lazygit.yml
-  when: is_x86
+# - name: install lazygit
+#   include_tasks: lazygit.yml
+#   when: is_x86
 
-- name: install act
-  include_tasks: act.yml
-  when: is_x86
+# - name: install act
+#   include_tasks: act.yml
+#   when: is_x86

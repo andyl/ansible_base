@@ -61,7 +61,7 @@
     - libxslt1-dev               # development lib
     - libyaml-dev                # development lib 
     - zlib1g-dev                 # development lib
-    - wkhtmltopdf                # pdf generation
+    # - wkhtmltopdf                # pdf generation
     - ecryptfs-utils             # file system encryption
     - encfs                      # file system encryption
     - sshfs                      # file system encryption

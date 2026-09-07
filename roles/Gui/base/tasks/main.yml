@@ -22,7 +22,7 @@
     - libxmu-dev           # needed by ruby-wmctrl
     - libx11-dev           # needed by ruby-wmctrl
     - libglib2.0-dev       # needed by ruby-wmctrl
-    - ntpdate              # ntp date update
+    # - ntpdate              # ntp date update
     - python3-dbus         # dbus tools needed by terminator
     - seahorse             # gui for gnome-keyring
     - bluez                # bluetooth

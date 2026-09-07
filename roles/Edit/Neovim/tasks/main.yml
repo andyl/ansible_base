@@ -16,6 +16,13 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
+- name: create Bin dir
+  file: 
+    path:  "/home/{{gen_user}}/.pkg/Bin"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: nvim for x86 systems
   include_tasks: nvim_x86.yml
   when: is_x86
