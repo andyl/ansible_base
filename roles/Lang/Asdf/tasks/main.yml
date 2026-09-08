@@ -10,6 +10,13 @@
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
+- name: create Bin dir
+  file: 
+    path: /home/{{gen_user}}/.pkg/Bin
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
 - name: get ASDF executable
   become_user: "{{gen_user}}"
   get_url:
