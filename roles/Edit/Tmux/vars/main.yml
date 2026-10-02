@@ -12,12 +12,11 @@
 # tmux_vsn: 3.3  superseded 2022-10-26
 # tmux_vsn: 3.4  superseded 2024 Oct 04 Fri
 # tmux_vsn: 3.5  superseded 2026 May 22 Fri
-tmux_vsn: 3.6b
+# tmux_vsn: 3.6b superseded 2026 Oct 01 Thu
+tmux_vsn: 3.7c 
 
 # https://github.com/tmuxpack/tpack 
 # https://github.com/tmuxpack/tpack/releases
 tpack_vsn: 1.0.0
 
-# https://github.com/owenthereal/upterm/releases 
-# upterm_vsn: 0.14.3 
 
