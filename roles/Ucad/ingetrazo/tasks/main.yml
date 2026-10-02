@@ -1,0 +1,7 @@
+---
+
+# ingetrazo
+# https://github.com/ingetrazo/ingetrazo/releases
+
+- include_tasks: install.yml
+  when: has_gui | bool and is_physical | bool

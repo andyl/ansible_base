@@ -1,0 +1,25 @@
+---
+
+- name: create pkg dir
+  file:
+    path:  "/home/{{gen_user}}/.pkg/ingetrazo/"
+    state: directory
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get appimage file
+  get_url:
+    url:  https://github.com/ingelibre/ingetrazo/releases/download/v{{it_vsn}}/IngeTrazo-{{it_vsn}}-x86_64.AppImage
+    dest: /home/{{gen_user}}/.pkg/ingetrazo/ingetrazo-{{it_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file:
+    src:   /home/{{gen_user}}/.pkg/ingetrazo/ingetrazo-{{it_vsn}}.appimage
+    dest:  /home/.pkg/Bin/ingetrazo 
+    state: link
+    force: yes
+    mode:  "a+rx"
+
