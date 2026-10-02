@@ -1,0 +1,25 @@
+---
+
+- name: create pkg dir
+  file:
+    path:  "/home/{{gen_user}}/.pkg/opencadstudio/"
+    state: directory
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: get appimage file
+  get_url:
+    url:  https://github.com/HakanSeven12/OpenCADStudio/releases/download/v{{ocs_vsn}}/OpenCADStudio-v{{ocs_vsn}}-linux-x86_64.AppImage
+    dest: /home/{{gen_user}}/.pkg/opencadstudio/opencadstudio-{{ocs_vsn}}.appimage
+    mode: "a+rx"
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+
+- name: create executable symlink
+  file:
+    src:   /home/{{gen_user}}/.pkg/opencadstudio/opencadstudio-{{ocs_vsn}}.appimage
+    dest:  /home/{{gen_user}}/.pkg/Bin/opencadstudio 
+    state: link
+    force: yes
+    mode:  "a+rx"
+

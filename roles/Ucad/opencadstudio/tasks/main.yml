@@ -1,0 +1,7 @@
+---
+
+# opencadstudio
+# https://github.com/HakanSeven12/OpenCADStudio/releases
+
+- include_tasks: install.yml
+  when: has_gui | bool and is_physical | bool
