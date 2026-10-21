@@ -80,4 +80,6 @@
     - vnstat                     # traffic monitor 
     - ethtool                    # NIC introspection 
     - wakeonlan                  # wake on lan 
+    - shellcheck                 # lint tool for bash scripts 
+    - shfmt                      # formatter tool for bash scripts
 

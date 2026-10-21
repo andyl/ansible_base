@@ -8,7 +8,6 @@
 # erlang_vsn: 22.0     superseded 2019 May 27 Mon
 # erlang_vsn: 22.0.1   superseded 2019 Oct 39 Mon
 # erlang_vsn: 22.1.3   superseded 2020 Jan 27 Mon
-# erlang_vsn: 22.2.3   superseded 2020 Apr 24 Mon
 # erlang_vsn: 22.3.2   superseded 2020 Jun 28 Mon
 # erlang_vsn: 23.0.2   superseded 2020 Oct 24 Mon
 # erlang_vsn: 23.1.1   superseded 2021 May 12 Mon
@@ -22,19 +21,16 @@
 # erlang_vsn: 26.0.1   superseded 2023 Jun 30 Mon
 # erlang_vsn: 26.0.2   superseded 2023 Sep 21 Mon
 # erlang_vsn: 26.1     superseded 2024 Jan 18 Mon
-# erlang_vsn: 26.2.1   superseded 2024 May 24 Mon
 # erlang_vsn: 26.2.5   superseded 2024 Jun 24 Mon
 # erlang_vsn: 27.0     superseded 2024 Aug 02 Fri
-# erlang_vsn: 27.0.1   superseded 2024 Oct 05 Sat
 # erlang_vsn: 27.1.1   superseded 2025 May 26 Mon
 # erlang_vsn: 27.3.4   superseded 2025 Jun 15 Sun
 # erlang_vsn: 28.0     superseded 2025 Jun 16 Mon
-# erlang_vsn: 28.0.1   superseded 2025 Jul 18 Fri
 # erlang_vsn: 28.0.2   superseded 2025 Sep 19 Fri
 # erlang_vsn: 28.1     superseded 2025 Nov 07 Fri 
 # erlang_vsn: 28.1.1   superseded 2025 Nov 24 Mon
 # erlang_vsn: 28.2     superseded 2025 Dec 11 Thu
-# erlang_vsn: 28.3     superseded 2026 May 19 Tue
 # erlang_vsn: 28.5     superseded 2026 Jun 03 Wed
 # erlang_vsn: 29.0.1   superseded 2026 Jun 11 Thu
-erlang_vsn: 29.0.2
+# erlang_vsn: 29.0.2   superseded 2026 Oct 03 Sat
+erlang_vsn: 29.1.1

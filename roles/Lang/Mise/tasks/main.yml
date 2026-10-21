@@ -1,0 +1,28 @@
+---
+
+# mise
+# https://mise.jdx.dev/installing-mise.html#linux
+
+- name: support tools
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - extrepo
+
+- name: Enable mise repository
+  ansible.builtin.command: extrepo enable mise
+  args:
+    creates: /etc/apt/sources.list.d/extrepo_mise.sources
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: install packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - mise
+
