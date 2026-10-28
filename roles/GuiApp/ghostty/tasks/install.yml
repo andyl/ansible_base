@@ -19,12 +19,12 @@
 - name: get ghostty deb file
   get_url:
     url:  https://github.com/mkasberg/ghostty-ubuntu/releases/download/{{gho.vsn}}-{{gho.ppa}}/ghostty_{{gho.vsn}}.{{gho.ppa}}_amd64_{{ansible_distribution_version}}.deb
-    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
+    dest: /home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{gho.ppa}}_{{ansible_distribution_version}}.deb
     group: "{{gen_user}}"
     owner: "{{gen_user}}"
 
 - name: install ghostty package
-  apt: deb=/home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{ansible_distribution_version}}.deb
+  apt: deb=/home/{{gen_user}}/.pkg/ghostty/ghostty_{{gho.vsn}}_{{gho.ppa}}_{{ansible_distribution_version}}.deb
 
 # ----- APPIMAGE METHOD -----
 
