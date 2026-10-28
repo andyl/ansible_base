@@ -3,7 +3,8 @@
 # ---
 # mdcat_vsn: 2.1.2  superseded 2024 Aug 17 Sat
 # mdcat_vsn: 2.3.1  superseded 2026 Jun 22 Mon
-mdcat_vsn: 2.9.1
+# mdcat_vsn: 2.9.1  superseded 2026 Oct 28 Wed
+mdcat_vsn: 2.19.0
 
 # https://github.com/linebender/resvg/releases
 # ---
@@ -11,10 +12,13 @@ resvg_vsn: 0.47.0
 
 # https://github.com/sxyazi/yazi/releases
 # ---
-# yazi_vsn: 0.2.5 superseded 2024 Aug 17 Sat
-# yazi_vsn: 0.3.1 superseded 2026 Jun 22 Mon
-yazi_vsn: 26.5.6
+# yazi_vsn: 0.2.5   superseded 2024 Aug 17 Sat
+# yazi_vsn: 0.3.1   superseded 2026 Jun 22 Mon
+# yazi_vsn: 26.5.6  superseded 2026 Oct 28 Wed
+yazi_vsn: 26.9.1
 
 # https://github.com/direnv/direnv/releases 
 # ---
-direnv_vsn: 2.34.0 
+# direnv_vsn: 2.34.0   superseded 2026 Oct 28 Wed
+direnv_vsn: 2.38.2
+
