@@ -4,19 +4,20 @@
 # see http://wiki.postgresql.org/wiki/Apt
 # see http://wiki.postgresql.org/wiki/Apt/FAQ
 
-- name: install python utilities
-  include_tasks: python_util.yml
+# ----- database cleanup
 
-# ----- database cleanup 
+# apt-key was removed from newer distros; pgdg.list references this keyring
+- name: import postgres repository key
+  get_url:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    dest: /usr/share/keyrings/pgdg.asc
+    mode: "0644"
+  notify:
+    - apt-cache update
 
 - name: add postgres repository
   template: src=pgdg.list dest=/etc/apt/sources.list.d/pgdg.list
-  notify: 
-    - apt-cache update
-
-- name: import postgres repository key
-  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
-  notify: 
+  notify:
     - apt-cache update
 
 - name: remove outdated packages
@@ -36,7 +37,11 @@
 - name: flush all outstanding handlers
   meta: flush_handlers
 
-# ----- binary installation 
+# runs after the repo is fixed: apt update fails on an unsigned pgdg.list
+- name: install python utilities
+  include_tasks: python_util.yml
+
+# ----- binary installation
 
 - name: postgres for x86
   include_tasks: pg_x86.yml
