@@ -8,17 +8,11 @@
 #   with_items:
 #     - psycopg2-binary
 
-- name: Ensure packaging is present (needed for ansible pip module)
-  become: true
-  ansible.builtin.command:
-    cmd: "{{ ansible_python.executable | default('/home/aleak/.asdf/installs/python/3.12.7/bin/python3.12') }} -m pip install --user packaging"
-  changed_when: false
-  args:
-    creates: "{{ ansible_python.executable | default('/home/aleak/.asdf/installs/python/3.12.7/bin/python3.12') }} -m pip show packaging"   # rough idempotence
-
+# apt, not pip: system python is externally managed (PEP 668)
 - name: install utilities for python3
   become: true
-  ansible.builtin.pip:
-    name: psycopg2-binary
-    executable: "{{ ansible_python.executable | dirname }}/pip{{ ansible_python.version.major }}"
-  register: pip_result
+  ansible.builtin.apt:
+    name: python3-psycopg2
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
