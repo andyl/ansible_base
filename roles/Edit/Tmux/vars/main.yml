@@ -18,6 +18,7 @@ tmux_vsn: 3.8
 
 # https://github.com/tmuxpack/tpack 
 # https://github.com/tmuxpack/tpack/releases
-tpack_vsn: 1.0.0
+# tpack_vsn: 1.0.0   superseded 2026 Nov 11 Wed
+tpack_vsn: 2.0.7
 
 
