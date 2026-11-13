@@ -41,6 +41,7 @@
     - binutils                   # build tool
     - libtool                    # build tool
     - bison                      # build tool
+    - just                       # build tool
     - rlwrap                     # readline wrap - command history
     - direnv                     # directory environment tools
     - libcurl4                   # development lib
