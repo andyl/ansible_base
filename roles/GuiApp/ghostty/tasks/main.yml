@@ -1,6 +1,7 @@
 ---
 
-# ghostty
+# ghostty 
+# https://github.com/mkasberg/ghostty-ubuntu
 
 - include_tasks: install.yml
   when: has_gui | bool
