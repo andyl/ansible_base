@@ -40,7 +40,8 @@
 - name: install shims for keyboard accelerators
   copy:
     src:  "{{item}}"
-    dest: /home/{{sys_user}}/.pkg/Bin/{{item}}
+    # dest: /home/{{sys_user}}/.pkg/Bin/{{item}}
+    dest: /usr/local/bin/{{item}}
     mode: 'a+rx'
   with_items: 
     - asdf_xftile 
