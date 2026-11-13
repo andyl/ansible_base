@@ -19,15 +19,22 @@
 
 # ----- PPA METHOD -----
 
-# CLAUDE: we will migrate from the "DEBFILE METHOD" to the "PPA METHOD"
-# CLAUDE: fill in the ansible blocks below, to install ghostty from PPA
 # sudo add-apt-repository ppa:mkasberg/ghostty-ubuntu
 # sudo apt update
 # sudo apt install ghostty
 
-- name: setup ghostty PPA 
+- name: setup ghostty PPA
+  become: true
+  apt_repository:
+    repo: ppa:mkasberg/ghostty-ubuntu
+    state: present
+    update_cache: yes
 
-- name: install latest ghostty  
+- name: install latest ghostty
+  become: true
+  apt:
+    pkg: ghostty
+    state: latest
 
 # ----- DEBFILE METHOD -----
 
