@@ -42,6 +42,12 @@
     update_cache: true
   become: true
 
+# Ubuntu creates an 'lxd' group by default; Incus replaces LXD, so drop it.
+- name: remove lxd group
+  group:
+    name: lxd
+    state: absent
+
 - name: create incus groups
   group:
     name: "{{item}}"
