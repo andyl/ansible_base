@@ -10,6 +10,7 @@
 
 - name: incus install
   include_tasks: incus_install.yml
+  when: is_physical | bool
 
 # - name: incus config
 #   include_tasks: incus_config.yml
