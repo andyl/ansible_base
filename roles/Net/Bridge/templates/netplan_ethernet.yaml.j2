@@ -1,15 +1,17 @@
 # Written by Ansible (Net/Bridge/templates/netplan_ethernet.yaml.j2)
 
-network: 
+network:
   version: 2
-  renderer: {{nw_renderer}}
-  ethernets: 
-    {{nw_device}}: 
+  renderer: NetworkManager
+  ethernets:
+    {{nw_device}}:
       dhcp4: false
       dhcp6: false
-  bridges: 
-    {{bridge_name}}: 
-      interfaces: [{{nw_device}}] 
+  bridges:
+    {{bridge_name}}:
+      interfaces: [{{nw_device}}]
+      # keep the NIC's MAC so the DHCP lease/reservation doesn't change
+      macaddress: "{{nw_mac}}"
       dhcp4: true
       parameters:
         stp: false

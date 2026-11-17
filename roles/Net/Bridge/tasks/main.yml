@@ -1,106 +1,34 @@
 ---
 
-# ----- detect Network interface and type 
+# Linux bridge for Incus hosts - Xubuntu 26.04 only (physical desktops/laptops)
+#
+# NB: Ansible reports Xubuntu as ansible_distribution == 'Ubuntu', so we
+# detect Xubuntu by the xubuntu-default-settings package.  The has_xfce
+# predicate is not used because it depends on a logged-in XFCE session.
 
-- name: Detect Network interface
-  shell: |
-    ip -o link show | awk -F': ' '{print $2}' | grep -E '^(wlp|eno|eth|ens|enp)'
-  register: device_detection
+- name: check for Xubuntu desktop package
+  command: dpkg-query -W -f='${Status}' xubuntu-default-settings
+  register: xubuntu_pkg
   changed_when: false
   failed_when: false
 
-- name: Set detected Network interface
+- name: set bridge_host predicate
   set_fact:
-    nw_device: "{{ device_detection.stdout_lines[0] }}"
-  when: device_detection.stdout_lines | length > 0
+    bridge_host: >-
+      {{ ansible_distribution == 'Ubuntu'
+         and ansible_distribution_version == '26.04'
+         and 'install ok installed' in xubuntu_pkg.stdout
+         and ansible_virtualization_role != 'guest' }}
 
-- name: Check if Network interface is present
-  fail:
-    msg: "No Network interface detected. Exiting playbook."
-  when: device_detection.stdout_lines | length == 0
+- name: skip non-Xubuntu-26.04 hosts
+  debug:
+    msg: >-
+      Skipping Net/Bridge on {{ ansible_hostname }}
+      ({{ ansible_distribution }} {{ ansible_distribution_version }},
+      virtualization role {{ ansible_virtualization_role }})
+      - role only runs on physical Xubuntu 26.04 hosts
+  when: not bridge_host | bool
 
-- name: Echo Network device 
-  debug: 
-    msg: "The nw_device is: {{ nw_device }}"
-
-- name: Set nw_type based on nw_device prefix
-  set_fact:
-    nw_type: "{{ 'wireless' if nw_device is match('^(wlp|xxx).*') else 'ethernet' }}"
-
-- name: Echo Network type
-  debug: 
-    msg: "The nw_type is: {{ nw_type }}"
-    
-# ----- detect Network renderer 
-
-- name: Detect system type and set nw_renderer
-  block:
-    - name: Set network renderer to NetworkManager for Xubuntu
-      set_fact:
-        nw_renderer: "NetworkManager"
-      when: has_xfce
-
-    - name: Set network renderer to networkd for Ubuntu Server
-      set_fact:
-        nw_renderer: "networkd"
-      when: not has_xfce
-
-- name: Echo Network renderer
-  debug: 
-    msg: "The nw_renderer is: {{ nw_renderer }}"
-
-# ----- Install Dependencies 
-
-- name: install networking packages
-  become: true
-  apt:
-    name:
-      - bridge-utils
-      - network-manager
-      - net-tools
-    state: present
-    update_cache: yes
-
-# ----- Write config files 
-
-- name: create backup directory
-  file: 
-    path: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/backup"
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-
-- name: create wifi directory
-  file: 
-    path: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/wifi"
-    state: directory 
-    group: "{{gen_user}}"
-    owner: "{{gen_user}}"
-  when: nw_type == 'wireless'
-
-- name: create netplan directory 
-  file: 
-    path: /etc/netplan 
-    state: directory
-    owner: root 
-    group: root 
-  become: true 
-  
-- name: remove old config files 
-  file:
-    path: "{{ item }}"
-    state: absent
-  loop:
-    - /home/{{gen_user}}/.netplan/{{ansible_hostname}}/99-ovs-bridge.yaml
-
-- name: Write netplan configuration file for ethernet 
-  template:
-    src: netplan_ethernet.yaml.j2 
-    dest: /home/{{gen_user}}/.netplan/{{ansible_hostname}}/99-bridge.yaml
-  when: nw_type == 'ethernet'
-
-- name: Write netplan configuration file for wireless
-  template:
-    src: netplan_wireless.yaml.j2 
-    dest: /home/{{gen_user}}/.netplan/{{ansible_hostname}}/wifi/99-bridge.yaml
-  when: nw_type == 'wireless'
+- name: configure bridge
+  include_tasks: bridge.yml
+  when: bridge_host | bool

@@ -1,0 +1,79 @@
+---
+
+# ----- select the wired interface to bridge
+#
+# Order of precedence:
+# 1. bridge_device - set in host_vars to override detection
+# 2. bridge already applied - default route is on the bridge, use its member
+# 3. default route is on a wired interface (en*, eth*) - use it
+# Otherwise (WiFi-only / undocked laptop) no bridge file is written.
+# WiFi can't be bridged in client mode; Incus keeps its NAT network there.
+
+- name: select wired interface
+  set_fact:
+    nw_device: >-
+      {%- set dflt = ansible_default_ipv4.interface | default('') -%}
+      {%- if bridge_device is defined -%}
+      {{ bridge_device }}
+      {%- elif dflt == bridge_name -%}
+      {{ (ansible_facts[bridge_name].interfaces | default([])
+          | select('match', '^(en|eth)') | list + [''])[0] }}
+      {%- elif dflt is match('^(en|eth)') -%}
+      {{ dflt }}
+      {%- endif -%}
+
+- name: no wired interface - skip bridge
+  debug:
+    msg: >-
+      No wired default-route interface on {{ ansible_hostname }}
+      (default route: {{ ansible_default_ipv4.interface | default('none') }}).
+      WiFi can't be bridged - no netplan bridge file written.
+      Set bridge_device in host_vars to force an interface.
+  when: nw_device == ''
+
+- name: write bridge config
+  when: nw_device != ''
+  block:
+
+    - name: echo network device
+      debug:
+        msg: "Bridging {{ nw_device }} ({{ nw_mac }}) into {{ bridge_name }}"
+      vars:
+        nw_mac: "{{ ansible_facts[nw_device].macaddress | default('unknown') }}"
+
+    # ----- install dependencies
+
+    - name: install networking packages
+      become: true
+      apt:
+        name:
+          - netplan.io
+          - network-manager
+          - bridge-utils
+          - net-tools
+        state: present
+        update_cache: yes
+
+    # ----- write config files (applied manually with ~/.netplan/setup)
+
+    - name: create netplan host directories
+      file:
+        path: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/{{ item }}"
+        state: directory
+        owner: "{{gen_user}}"
+        group: "{{gen_user}}"
+      loop:
+        - ""
+        - backup
+
+    - name: remove old config files
+      file:
+        path: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/99-ovs-bridge.yaml"
+        state: absent
+
+    - name: write netplan bridge config
+      template:
+        src: netplan_ethernet.yaml.j2
+        dest: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/99-bridge.yaml"
+      vars:
+        nw_mac: "{{ ansible_facts[nw_device].macaddress }}"
