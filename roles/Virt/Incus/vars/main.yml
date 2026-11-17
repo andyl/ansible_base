@@ -6,8 +6,8 @@
 
 dbld_vsn: 3.1
 
-# incus-compose 
-# https://github.com/bketelsen/incus-compose
-# https://github.com/bketelsen/incus-compose/releases 
+# lazyincus 
+# https://github.com/tallica/lazyincus/releases 
 
-incom_vsn: 260508
+lzinc_vsn: 0.17.1 
+
