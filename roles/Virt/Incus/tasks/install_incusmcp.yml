@@ -3,4 +3,34 @@
 # - https://github.com/fredmj/incus-mcp-server 
 #
  
-# CLAUDE: find the install instructions on the README, write the ansible blocks necessary to install the tool 
+# No release binaries are published - the README install is `go install ...@latest`.
+# Requires the Lang/AsdfGolang role (go >= 1.25.6, per the project's go.mod).
+# GOBIN puts the binary in ~/.pkg/incmcp instead of ~/go/bin.
+# No `creates:` guard, so every run picks up the latest version.
+
+- name: create incus-mcp pkg dirs
+  file: 
+    path:  "{{item}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  loop:
+    - /home/{{gen_user}}/.pkg
+    - /home/{{gen_user}}/.pkg/Bin
+    - /home/{{gen_user}}/.pkg/incmcp
+
+- name: go install incus-mcp-server
+  command: "bash -ilc 'GOBIN=/home/{{gen_user}}/.pkg/incmcp go install github.com/fredmj/incus-mcp-server@latest'"
+  args:
+    chdir: /home/{{gen_user}}
+  become_user: "{{gen_user}}"
+
+- name: create incus-mcp-server executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/incmcp/incus-mcp-server
+    dest:  /home/{{gen_user}}/.pkg/Bin/incus-mcp-server
+    state: link
+    force: true
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+

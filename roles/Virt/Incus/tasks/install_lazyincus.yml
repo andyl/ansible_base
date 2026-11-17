@@ -4,15 +4,41 @@
 # - https://github.com/tallica/lazyincus 
 #
 
-# CLAUDE: read the install instructions on the lazyincus README.  
-#
-# - I believe the executable will have to be sourced from the release page https://github.com/tallica/lazyincus/releases 
-# - use the variable "lzinc_vsn" to get the right version 
-# - follow other roles in this repo to learn my pattern for installing a release executable - the steps are generally:
-# - create a ~/.pkg directory 
-# - create a ~/.pkg/lzinc directory 
-# - get the tar file into ~/.pkg/lzinc 
-# - expand the tar file into ~/.pkg/lzinc/<version> 
-# - make a sym link ~/.pkg/Bin/lazyincus  to ~/.pkg/lzinc/<version>/bin/lazyincus 
-#
-# Append the ansible blocks to this file that are necessary for a complete install of the lazyincus executable
+- name: create lazyincus pkg dirs
+  file: 
+    path:  "{{item}}"
+    state: directory 
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  loop:
+    - /home/{{gen_user}}/.pkg
+    - /home/{{gen_user}}/.pkg/Bin
+    - /home/{{gen_user}}/.pkg/lzinc
+    - /home/{{gen_user}}/.pkg/lzinc/{{lzinc_vsn}}
+
+- name: get lazyincus tar file 
+  get_url: 
+    url:      https://github.com/tallica/lazyincus/releases/download/v{{lzinc_vsn}}/lazyincus_{{lzinc_vsn}}_linux_amd64.tar.gz
+    checksum: sha256:https://github.com/tallica/lazyincus/releases/download/v{{lzinc_vsn}}/checksums.txt
+    dest:     /home/{{gen_user}}/.pkg/lzinc/lazyincus_{{lzinc_vsn}}.tar.gz
+    mode:     "a+r"
+    group:    "{{gen_user}}"
+    owner:    "{{gen_user}}"
+
+- name: expand lazyincus tar file 
+  unarchive:
+    src:        /home/{{gen_user}}/.pkg/lzinc/lazyincus_{{lzinc_vsn}}.tar.gz
+    dest:       /home/{{gen_user}}/.pkg/lzinc/{{lzinc_vsn}}
+    creates:    /home/{{gen_user}}/.pkg/lzinc/{{lzinc_vsn}}/lazyincus
+    remote_src: true
+    group:      "{{gen_user}}"
+    owner:      "{{gen_user}}"
+
+- name: create lazyincus executable symlink
+  file: 
+    src:   /home/{{gen_user}}/.pkg/lzinc/{{lzinc_vsn}}/lazyincus
+    dest:  /home/{{gen_user}}/.pkg/Bin/lazyincus
+    state: link
+    force: true
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"

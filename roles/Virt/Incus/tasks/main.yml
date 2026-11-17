@@ -28,11 +28,11 @@
   when: is_physical | bool
 
 - name: install lazyincus 
-  include_tasks: install_incus.yml
+  include_tasks: install_lazyincus.yml
   when: is_physical | bool
 
 - name: install incus mcp
-  include_tasks: install_incus.yml
+  include_tasks: install_incusmcp.yml
   when: is_physical | bool
 
 # - name: incus config
