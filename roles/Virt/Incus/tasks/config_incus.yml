@@ -1,4 +1,4 @@
-# Incus Config 
+# Config Incus 
 
 - name: Copy preseed file to remote server
   copy:
