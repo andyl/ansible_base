@@ -18,7 +18,7 @@
   with_items:
     - incus 
     - incus-client
-    - incus-extra
+    - incus-extra               # includes incus-compose
     - incus-ui-canonical
     - zfsutils-linux
     - debootstrap

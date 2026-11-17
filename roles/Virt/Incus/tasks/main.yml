@@ -5,12 +5,12 @@
 # https://github.com/lxc/incus
 # https://github.com/zabbly/incus 
 
-- name: install incus-compose
-  include_tasks: incus_compose.yml
+# - name: install incus-compose
+#   include_tasks: incus_compose.yml
 
-# - name: incus install
-#   include_tasks: incus_install.yml
-#
+- name: incus install
+  include_tasks: incus_install.yml
+
 # - name: incus config
 #   include_tasks: incus_config.yml
 
