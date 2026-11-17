@@ -50,11 +50,20 @@
     - incus
     - incus-admin
 
+# The incus socket (/var/lib/incus/unix.socket) is root:incus-admin 0660.
+# Group changes only take effect in NEW login sessions - an existing shell
+# gets "You don't have the needed permissions to talk to the incus daemon"
+# until the user logs out and back in (or runs `newgrp incus-admin`).
 - name: add user to incus groups
   user:
     name: "{{gen_user}}"
-    groups: "{{item}}"
+    groups: [incus, incus-admin]
     append: yes
-  loop:
-    - incus
-    - incus-admin
+  register: incus_user_groups
+
+- name: incus group membership needs a new login
+  debug:
+    msg: >-
+      {{ gen_user }} was added to the incus and incus-admin groups. Log out
+      and back in (or run `newgrp incus-admin`) before using the incus CLI.
+  when: incus_user_groups is changed
