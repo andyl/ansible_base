@@ -52,9 +52,17 @@
 
 # -----
 
+# Ansible reports Xubuntu as ansible_distribution == 'Ubuntu',
+# so detect Xubuntu by its default-settings package
+- name: check for Xubuntu desktop package
+  ansible.builtin.command: dpkg-query -W -f='${Status}' xubuntu-default-settings
+  register: xubuntu_pkg
+  failed_when: false
+  changed_when: false
+
 - name: set base predicates
   set_fact:
-    is_xubuntu:     "'Xubuntu' in '{{ansible_distribution}}'"
+    is_xubuntu:     "{{ 'install ok installed' in (xubuntu_pkg.stdout | default('')) }}"
     is_debian:      "'Debian' in '{{ansible_distribution}}'"
     is_ubuntu:      "'Ubuntu' in '{{ansible_distribution}}'"
     is_arm7:        "{{ ansible_architecture == 'armv7l' }}"

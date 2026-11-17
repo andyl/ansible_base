@@ -13,7 +13,7 @@ Scope:
 - The role only runs on physical Xubuntu 26.04 hosts; all other hosts are skipped
 - Ansible reports Xubuntu as `ansible_distribution == 'Ubuntu'`, so Xubuntu is
   detected by the `xubuntu-default-settings` package
-    * NB: the `is_xubuntu` predicate in Vars/Base is therefore always false
+    * the `is_xubuntu` predicate in Vars/Base uses the same check
 - `has_xfce` is not used - it only works while someone is logged into XFCE
 
 About: 
