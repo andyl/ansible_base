@@ -7,6 +7,8 @@
 # Requires the Lang/AsdfGolang role (go >= 1.25.6, per the project's go.mod).
 # GOBIN puts the binary in ~/.pkg/incmcp instead of ~/go/bin.
 # No `creates:` guard, so every run picks up the latest version.
+# `command go` is required: `bash -i` expands aliases, and the user's
+# shell rc has `alias go='pushdp ~/ops'`, which silently no-ops the install.
 
 - name: create incus-mcp pkg dirs
   file: 
@@ -20,10 +22,22 @@
     - /home/{{gen_user}}/.pkg/incmcp
 
 - name: go install incus-mcp-server
-  command: "bash -ilc 'GOBIN=/home/{{gen_user}}/.pkg/incmcp go install github.com/fredmj/incus-mcp-server@latest'"
+  command: "bash -ilc 'GOBIN=/home/{{gen_user}}/.pkg/incmcp command go install github.com/fredmj/incus-mcp-server@latest'"
   args:
     chdir: /home/{{gen_user}}
   become_user: "{{gen_user}}"
+
+- name: stat incus-mcp-server binary
+  stat:
+    path: /home/{{gen_user}}/.pkg/incmcp/incus-mcp-server
+  register: incmcp_bin
+
+- name: assert incus-mcp-server binary was built
+  assert:
+    that:
+      - incmcp_bin.stat.exists
+      - incmcp_bin.stat.executable
+    fail_msg: "go install did not produce /home/{{gen_user}}/.pkg/incmcp/incus-mcp-server"
 
 - name: create incus-mcp-server executable symlink
   file: 
