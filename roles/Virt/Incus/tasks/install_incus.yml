@@ -42,6 +42,21 @@
     update_cache: true
   become: true
 
+# Older versions of this role downloaded incus-compose into ~/.pkg and
+# symlinked it into /usr/local/bin, which shadows the incus-extra package's
+# /usr/bin/incus-compose on PATH. Remove those leftovers so the packaged
+# version (upgraded with apt) is the only one.
+- name: remove manually installed incus-compose
+  file:
+    path: "{{item}}"
+    state: absent
+  loop:
+    - /usr/local/bin/incus-compose
+    - /home/{{gen_user}}/.pkg/incus
+    - /home/{{gen_user}}/.pkg/incus_compose
+    - /home/{{gen_user}}/.pkg/incus-compose
+  become: true
+
 # Ubuntu creates an 'lxd' group by default; Incus replaces LXD, so drop it.
 - name: remove lxd group
   group:

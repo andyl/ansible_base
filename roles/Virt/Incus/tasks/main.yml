@@ -17,6 +17,7 @@
 # https://github.com/marshalfevzi/skills/tree/main/skills/incus-lxc
 #
 # incus-compose and distrobuilder come with the incus-extra package.
+# Don't install incus-compose separately; install_incus.yml removes old copies.
 # Run Net/Bridge before this role so the 'bridged' profile can be created
 # (see config_incus.yml).
 
