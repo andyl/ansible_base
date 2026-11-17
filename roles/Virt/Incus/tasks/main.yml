@@ -16,8 +16,9 @@
 # https://github.com/marshalfevzi/skills
 # https://github.com/marshalfevzi/skills/tree/main/skills/incus-lxc
 #
-# incus-compose and distrobuilder come with the incus-extra package.
-# Don't install incus-compose separately; install_incus.yml removes old copies.
+# distrobuilder comes with the incus-extra package. So does incus-compose,
+# but Zabbly's build lags upstream, so install_incus_compose.yml installs a
+# pinned upstream release (inccmp_vsn) into ~/.pkg/Bin, ahead of /usr/bin.
 # Run Net/Bridge before this role so the 'bridged' profile can be created
 # (see config_incus.yml).
 
@@ -27,6 +28,10 @@
 
 - name: config incus
   include_tasks: config_incus.yml
+  when: is_physical | bool
+
+- name: install incus-compose
+  include_tasks: install_incus_compose.yml
   when: is_physical | bool
 
 - name: install lazyincus

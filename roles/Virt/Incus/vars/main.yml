@@ -11,3 +11,7 @@ dbld_vsn: 3.1
 
 lzinc_vsn: 0.17.1 
 
+# incus-compose
+# https://github.com/lxc/incus-compose/releases
+
+inccmp_vsn: 1.4.1

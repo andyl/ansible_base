@@ -34,7 +34,7 @@
     name:
       - incus
       - incus-client
-      - incus-extra               # includes incus-compose and distrobuilder
+      - incus-extra               # distrobuilder (+ an older incus-compose)
       - incus-ui-canonical
       - zfsutils-linux
       - debootstrap
@@ -43,9 +43,8 @@
   become: true
 
 # Older versions of this role downloaded incus-compose into ~/.pkg and
-# symlinked it into /usr/local/bin, which shadows the incus-extra package's
-# /usr/bin/incus-compose on PATH. Remove those leftovers so the packaged
-# version (upgraded with apt) is the only one.
+# symlinked it into /usr/local/bin. Remove those leftovers; the current
+# install lives in ~/.pkg/inccmp (see install_incus_compose.yml).
 - name: remove manually installed incus-compose
   file:
     path: "{{item}}"

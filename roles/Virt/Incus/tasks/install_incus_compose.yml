@@ -1,0 +1,48 @@
+# Install incus-compose from the upstream GitHub releases
+#
+# - https://incus-compose.org/
+# - https://github.com/lxc/incus-compose/releases
+#
+# The incus-extra package also ships incus-compose (/usr/bin/incus-compose),
+# but Zabbly's build lags upstream. This copy is pinned by inccmp_vsn and
+# symlinked into ~/.pkg/Bin, which is ahead of /usr/bin on PATH, so it
+# shadows the packaged one. The packaged copy stays in /opt/incus/bin.
+
+- name: create incus-compose pkg dirs
+  file:
+    path:  "{{item}}"
+    state: directory
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
+  loop:
+    - /home/{{gen_user}}/.pkg
+    - /home/{{gen_user}}/.pkg/Bin
+    - /home/{{gen_user}}/.pkg/inccmp
+    - /home/{{gen_user}}/.pkg/inccmp/{{inccmp_vsn}}
+
+- name: get incus-compose tar file
+  get_url:
+    url:      https://github.com/lxc/incus-compose/releases/download/v{{inccmp_vsn}}/incus-compose_{{inccmp_vsn}}_linux_amd64.tar.gz
+    checksum: sha256:https://github.com/lxc/incus-compose/releases/download/v{{inccmp_vsn}}/checksums.txt
+    dest:     /home/{{gen_user}}/.pkg/inccmp/incus-compose_{{inccmp_vsn}}.tar.gz
+    mode:     "a+r"
+    group:    "{{gen_user}}"
+    owner:    "{{gen_user}}"
+
+- name: expand incus-compose tar file
+  unarchive:
+    src:        /home/{{gen_user}}/.pkg/inccmp/incus-compose_{{inccmp_vsn}}.tar.gz
+    dest:       /home/{{gen_user}}/.pkg/inccmp/{{inccmp_vsn}}
+    creates:    /home/{{gen_user}}/.pkg/inccmp/{{inccmp_vsn}}/incus-compose
+    remote_src: true
+    group:      "{{gen_user}}"
+    owner:      "{{gen_user}}"
+
+- name: create incus-compose executable symlink
+  file:
+    src:   /home/{{gen_user}}/.pkg/inccmp/{{inccmp_vsn}}/incus-compose
+    dest:  /home/{{gen_user}}/.pkg/Bin/incus-compose
+    state: link
+    force: true
+    group: "{{gen_user}}"
+    owner: "{{gen_user}}"
