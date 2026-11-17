@@ -1,0 +1,6 @@
+---
+
+# Host bridge created by this role.
+# NB: Virt/Incus/defaults/main.yml has the same default - keep them in sync,
+# or set bridge_name once in group_vars.
+bridge_name: "bridge1"

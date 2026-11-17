@@ -1,44 +1,37 @@
 ---
 
 # incus
-# https://linuxcontainers.org/incus/introduction/ 
+# https://linuxcontainers.org/incus/introduction/
 # https://github.com/lxc/incus
-# https://github.com/zabbly/incus 
+# https://github.com/zabbly/incus
 #
-# https://incus-compose.org/ 
+# https://incus-compose.org/
 # https://github.com/lxc/incus-compose
 #
-# https://discuss.linuxcontainers.org/t/lazyincus-a-lazydocker-style-terminal-ui-for-incus/27283 
-# https://github.com/tallica/lazyincus 
+# https://discuss.linuxcontainers.org/t/lazyincus-a-lazydocker-style-terminal-ui-for-incus/27283
+# https://github.com/tallica/lazyincus
 #
-# https://github.com/fredmj/incus-mcp-server 
+# https://github.com/fredmj/incus-mcp-server
 #
-# https://github.com/marshalfevzi/skills 
-# https://github.com/marshalfevzi/skills/tree/main/skills/incus-lxc 
+# https://github.com/marshalfevzi/skills
+# https://github.com/marshalfevzi/skills/tree/main/skills/incus-lxc
+#
+# incus-compose and distrobuilder come with the incus-extra package.
+# Run Net/Bridge before this role so the 'bridged' profile can be created
+# (see config_incus.yml).
 
-# - name: install incus-compose
-#   include_tasks: incus_compose.yml
-
-- name: install incus 
+- name: install incus
   include_tasks: install_incus.yml
   when: is_physical | bool
 
-- name: config incus 
+- name: config incus
   include_tasks: config_incus.yml
   when: is_physical | bool
 
-- name: install lazyincus 
+- name: install lazyincus
   include_tasks: install_lazyincus.yml
   when: is_physical | bool
 
 - name: install incus mcp
   include_tasks: install_incusmcp.yml
   when: is_physical | bool
-
-# - name: incus config
-#   include_tasks: incus_config.yml
-
-# - name: install distrobuilder
-#   include_tasks: distrobuilder.yml
-
-  

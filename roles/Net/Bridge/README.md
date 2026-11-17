@@ -46,3 +46,13 @@ Laptop WIFI:
     * `iw list` showing "AP" means the card can act as an access point - that's not the same thing
 - Laptops are bridged only when on wired ethernet (eg docked); WiFi-only laptops
   keep the default Incus NAT network (incusbr0)
+
+Incus wiring: 
+
+- Playbooks run `Net/Bridge` before `Virt/Incus` (see svr.yml)
+- `bridge_name` defaults to `bridge1` in both roles (defaults/main.yml)
+- Incus init (preseed) keeps the default profile on the NAT network `incusbr0`
+- Once the bridge is applied, `Virt/Incus` creates a `bridged` profile whose
+  eth0 is on `bridge1` - re-run the role after applying the bridge
+- Launch LAN-addressed instances with
+  `incus launch <image> <name> --profile default --profile bridged`

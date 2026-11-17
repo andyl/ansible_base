@@ -1,0 +1,6 @@
+---
+
+# Host bridge written by Net/Bridge - used by the 'bridged' Incus profile.
+# NB: Net/Bridge/defaults/main.yml has the same default - keep them in sync,
+# or set bridge_name once in group_vars.
+bridge_name: "bridge1"

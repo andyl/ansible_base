@@ -1,11 +1,53 @@
-# Config Incus 
+# Config Incus
 
-- name: Copy preseed file to remote server
-  copy:
-    src:  files/preseed.yml
-    dest: /tmp/preseed.yml
+# ----- initialize once (the default storage pool exists after init)
 
-- name: Initialize Incus with preseed file
-  command: incus admin init --preseed /tmp/preseed.yml
-  ignore_errors: true
+- name: check if incus is initialized
+  command: incus storage show default
+  register: incus_pool
+  changed_when: false
+  failed_when: false
 
+- name: initialize incus with preseed file
+  command: incus admin init --preseed
+  args:
+    stdin: "{{ lookup('file', 'preseed.yml') }}"
+  when: incus_pool.rc != 0
+
+# ----- 'bridged' profile - LAN IP from network DHCP via the Net/Bridge bridge
+#
+# Only created once the bridge has been applied (~/.netplan/setup + apply).
+# Use with:  incus launch <image> <name> --profile default --profile bridged
+
+- name: check for host bridge
+  set_fact:
+    host_bridge_up: "{{ bridge_name in ansible_interfaces }}"
+
+- name: check for bridged profile
+  command: incus profile show bridged
+  register: bridged_profile
+  changed_when: false
+  failed_when: false
+  when: host_bridge_up | bool
+
+- name: create bridged profile
+  command: incus profile create bridged
+  when:
+    - host_bridge_up | bool
+    - bridged_profile.rc != 0
+
+- name: add bridged nic to profile
+  command: >-
+    incus profile device add bridged eth0 nic
+    nictype=bridged parent={{ bridge_name }} name=eth0
+  when:
+    - host_bridge_up | bool
+    - "'parent: ' ~ bridge_name not in bridged_profile.stdout | default('')"
+
+- name: host bridge not applied yet
+  debug:
+    msg: >-
+      {{ bridge_name }} not found on {{ ansible_hostname }} - skipping the
+      'bridged' profile. Apply ~/.netplan/{{ ansible_hostname }}/99-bridge.yaml
+      and re-run this role.
+  when: not host_bridge_up | bool

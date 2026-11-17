@@ -75,5 +75,7 @@
       template:
         src: netplan_ethernet.yaml.j2
         dest: "/home/{{gen_user}}/.netplan/{{ansible_hostname}}/99-bridge.yaml"
+        owner: "{{gen_user}}"
+        group: "{{gen_user}}"
       vars:
         nw_mac: "{{ ansible_facts[nw_device].macaddress }}"

@@ -1,17 +1,19 @@
 ---
+# Applied once by config_incus.yml, only if Incus is not yet initialized.
+# The default profile uses the NAT network (incusbr0), which works on every
+# host.  Instances that should get a LAN IP also use the 'bridged' profile.
 config:
-  core.https_address: 192.0.2.1:9999
+  core.https_address: "[::]:8443"
   images.auto_update_interval: 15
 networks:
   - config:
       ipv4.address: auto
       ipv6.address: none
-    description: "Incus bridge"
+    description: "Incus NAT bridge"
     name: incusbr0
     type: bridge
 storage_pools:
-  - config:
-      size: 10GB
+  - config: {}
     driver: dir
     name: default
 profiles:
@@ -23,8 +25,7 @@ profiles:
         pool: default
         type: disk
       eth0:
-        nictype: bridged
-        parent: incusbr0
+        name: eth0
+        network: incusbr0
         type: nic
     name: default
-
